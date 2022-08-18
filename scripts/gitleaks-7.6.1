@@ -1,0 +1,40 @@
+#! /bin/bash
+set -euo pipefail
+
+cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/gitleaks"
+gitleaks_version="7.6.1"
+gitleaks_bin_checksum="ab3d667982b2bfb00e846bd7b751c640216d2bbe0f71e2c53c4514ca415d99ec"
+gitleaks_bin_path="${cache_dir}/gitleaks-${gitleaks_version}"
+
+function log {
+  echo "$(date --iso-8601=seconds) [$1] $2" >&2
+}
+
+function error {
+  log "ERROR" "$1"
+}
+
+function info {
+  log "INFO" "$1"
+}
+
+mkdir -p "${cache_dir}"
+
+# Fetch the right version of gitleaks
+if [[ ! -f "${gitleaks_bin_path}" ]]
+then
+  info "Fetching gitleaks-${gitleaks_version}"
+  curl -Lo "${gitleaks_bin_path}" "https://github.com/zricethezav/gitleaks/releases/download/v${gitleaks_version}/gitleaks-linux-amd64" &> /dev/null
+
+  if echo "${gitleaks_bin_checksum} ${gitleaks_bin_path}" | sha256sum -c - &> /dev/null
+  then
+    chmod +x "${gitleaks_bin_path}"
+  else
+    error "Could not validate checksum of ${gitleaks_bin_path}"
+    info "Removing ${gitleaks_bin_path}"
+    rm ${gitleaks_bin_path}
+    exit 1
+  fi
+fi
+
+exec "${gitleaks_bin_path}" $@
