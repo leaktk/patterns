@@ -4,34 +4,46 @@ Leak patterns for LeakTK tools to use
 
 ## Status
 
-Work in progress. Currently cleaning and open sourcing patterns from an
-internal tool.
+Currently cleaning and open sourcing patterns from an
+internal tool. There are plans to migrate these patterns to the
+latest version of gitleaks.
 
 ## Structure
 
-The patterns folder is structured `patterns/{tool}/{version}/{patterns_files}`
+### patterns folder
+
+The patterns folder is structured `patterns/{tool}/{version}/{patterns_files}`.
 
 Currently the only supported tool is
-[gitleaks](https://github.com/zricethezav/gitleaks).
-And the only supported version is 7.6.1, but there are plans to translate these
-patterns to the latest version.
+[gitleaks](https://github.com/zricethezav/gitleaks),
+and for the moment the only supported version is 7.6.1. If multiple versions
+support the same patterns format, the version folder may be a symlink.
 
-There is also a `tests` folder that follows a similar structure. Use `make test`
-to run the tests.
+Pattern files are broken into separate files and merged together by `make all`
+command. The reason for this is to it make it easier to merge these patterns
+with existing internal patterns.
+
+### tests folder
+
+There is also a tests folder that follows a structure similar to patterns.
+Use `make test` to run the tests.
+
+### scripts folder
 
 The `scripts` folder is for various scripts used to maintain the project.
 
-More info to come as the patterns are moved over. It's likely that the patterns
-files will be broken into separate files and merged together by build command.
-The reason for this is so that it makes it easier to merge these patterns with
-existing internal only patterns in the future, but we'll see!
+### target folder
+
+The result of running `make all` and follows a similar format to the patterns
+folder with the exception that all of the patterns for a specific version have
+been merged into a single file (e.g. `target/gitleaks/7.6.1/all.toml`).
 
 ## Tags
 
 All tags on these patterns should be lower case and multi-word tags should be
 `separated-by-dashes`.
 
-Also there are special meta data tags that the tooling will consume that should
+Also there are special metadata tags that the tooling will consume that should
 be formatted `type:tag-name`.
 
 Here's an overview of the "special" tags that the tooling will leverage:
@@ -49,3 +61,18 @@ production use (i.e. they may be very spammy).
 In the future there may be additional tag types added, so assume that tags
 containing a colon are meant to provide metadata to other LeakTK tools about
 how to handle certain leaks.
+
+## Make targets
+
+### all
+
+Builds all of the patterns under a `target` folder.
+
+### clean
+
+Clears out built files.
+
+### test
+
+Runs tests to validate the patterns. This requires python3 and it pulls (and
+checksums) its own version of the scanner tools to use in the tests.
