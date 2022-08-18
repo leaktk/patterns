@@ -428,7 +428,7 @@
   # Secrets/Passwords with quotes are already handled
   # this is to see what else exists out there
   regex = '''(?i)(secret((-|_)key)?|password)=([^;\<\&\"\'\s\n]{5,})'''
-  # Don't alert during the tuning phase and set for pwnedalert only
+  # Don't alert during the tuning phase
   tags = ["group:leaktk-testing", "key", "secret", "general", "unquoted"]
 
   [[rules.entropies]]

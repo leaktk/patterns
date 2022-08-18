@@ -2,4 +2,5 @@
 description = "Global Allowlist"
 paths = [
   '''patterns/gitleaks''',
+  '''tests/gitleaks''',
 ]
