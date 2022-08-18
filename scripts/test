@@ -1,0 +1,4 @@
+#! /bin/bash
+set -euo pipefail
+
+echo "Coming soon after more patterns are moved over!"
