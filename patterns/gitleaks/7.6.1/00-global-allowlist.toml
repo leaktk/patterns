@@ -1,0 +1,20 @@
+[allowlist]
+  description = "Global Allowlist"
+  paths = [
+    '''Godeps''',
+    '''gems\/''',
+    '''node_modules''',
+    '''vendor''',
+    # Quickstarts are FP heavy
+    '''quickstart''',
+    # Handle a lot of the github/docs cases
+    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+    # Ignore checked-in python packages
+    '''lib/python[^/]+/site-packages''',
+  ]
+  files = [
+    '''(.*?)(png|jpg|gif|doc|docx|pdf|bin|xls|pyc|zip|css)$''',
+    '''(go.mod|go.sum)$''',
+    '''^\.?gitleaks.toml$''',
+    '''^\.?secrets.baseline$''',
+  ]
