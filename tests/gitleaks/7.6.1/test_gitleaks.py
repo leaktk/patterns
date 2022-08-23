@@ -1161,8 +1161,8 @@ SHOULD_NOT_MATCH = [
 
 class TestGitLeaks(TestCase):
     test_dir = Path(__file__).resolve().parent
-    all_toml_path = test_dir.joinpath(
-        "..", "..", "..", "target", "gitleaks", "7.6.1", "all.toml"
+    patterns_path = test_dir.joinpath(
+        "..", "..", "..", "target", "patterns", "gitleaks", "7.6.1",
     )
     maxDiff = 10000
 
@@ -1199,9 +1199,9 @@ class TestGitLeaks(TestCase):
             with open(custom_file_path, "a+") as custom_file:
                 custom_file.write(entry["example"] + "\n")
 
-    def test_all_toml(self):
+    def test_patterns(self):
         """
-        Run gitleaks against the general test contents using the latest all.toml
+        Run gitleaks against the general test contents using the latest patterns
         """
         completed_process = subprocess.run(
             [
@@ -1209,7 +1209,7 @@ class TestGitLeaks(TestCase):
                 "--quiet",
                 "--no-git",
                 "--format=json",
-                f"--config-path={self.all_toml_path}",
+                f"--config-path={self.patterns_path}",
                 f"--path={self.test_pattern_dir}",
             ],
             capture_output=True,

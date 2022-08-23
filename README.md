@@ -36,7 +36,7 @@ The `scripts` folder is for various scripts used to maintain the project.
 
 The result of running `make all` and follows a similar format to the patterns
 folder with the exception that all of the patterns for a specific version have
-been merged into a single file (e.g. `target/gitleaks/7.6.1/all.toml`).
+been merged into a single file (e.g. `target/patterns/gitleaks/7.6.1`).
 
 ## Tags
 
