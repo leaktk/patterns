@@ -97,8 +97,8 @@
   # This replaces HTTP Basic Auth after the testing period is over
   description = "Basic Auth Password"
   regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
-  tags = ["group:leaktk-testing", "password", "basic-auth"]
   # Update alert tags and remove "testing" tag when ready
+  tags = ["group:leaktk-testing", "password", "basic-auth"]
   # May set this up to never alert users directly but instead feed it
   # to a cred checker tool if we can't get a higher number of true positives.
 
@@ -428,7 +428,7 @@
   # Secrets/Passwords with quotes are already handled
   # this is to see what else exists out there
   regex = '''(?i)(secret((-|_)key)?|password)=([^;\<\&\"\'\s\n]{5,})'''
-  # Don't alert during the tuning phase
+  # Update alert tags and remove "testing" tag when ready
   tags = ["group:leaktk-testing", "key", "secret", "general", "unquoted"]
 
   [[rules.entropies]]
