@@ -1,3 +1,5 @@
+# Global Allowlist Rules
+
 [allowlist]
   description = "Global Allowlist"
   paths = [
