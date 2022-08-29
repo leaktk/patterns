@@ -361,6 +361,30 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "secret=00000000-0000-0000-0000-000000000000",
+        "comment": "Not a real secret",
+    },
+    {
+        "example": "Secret=true|false",
+        "comment": "Not a real secret",
+    },
+    {
+        "example": " b/drivers/media/platform/bcm2835/Kconfig",
+        "comment": "Meets the criteria for a potential aws secret key",
+    },
+    {
+        "example": "schema://user:keylime@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
+        "example": "schema://user:postgres@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
+        "example": "mysql://username:userpass@host:port/fasdfasdfasdf",
+        "comment": "Things ending in 'pass' are probably placeholders'",
+    },
+    {
         "example": "# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)",
         "comment": "comment in a htpasswd file",
         "filename": "foo.htpasswd",
@@ -592,6 +616,10 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": 'password="some_placeholder_pwd"',
+        "comment": "allow list check",
+    },
+    {
+        "example": 'password="some_placeholder-pwd"',
         "comment": "allow list check",
     },
     {
