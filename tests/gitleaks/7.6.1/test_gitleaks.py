@@ -600,6 +600,10 @@ SHOULD_NOT_MATCH = [
         "comment": "allow list check",
     },
     {
+        "example": 'password="some_placeholder-pwd"',
+        "comment": "allow list check",
+    },
+    {
         "example": 'password="passwort_to_replace"',
         "comment": "allow list check (spelling error)",
     },
