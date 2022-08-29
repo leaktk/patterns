@@ -1,3 +1,5 @@
+# Genearal Potential Leak Patterns
+
 [[rules]]
   description = "Asymmetric Private Key"
   regex = '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----'''
