@@ -361,6 +361,14 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "secret=00000000-0000-0000-0000-000000000000",
+        "comment": "Not a real secret",
+    },
+    {
+        "example": "Secret=true|false",
+        "comment": "Not a real secret",
+    },
+    {
         "example": " b/drivers/media/platform/bcm2835/Kconfig",
         "comment": "Meets the criteria for a potential aws secret key",
     },
