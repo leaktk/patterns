@@ -1,3 +1,5 @@
+# Global Allowlist Rules
+
 [allowlist]
   description = "Global Allowlist"
   paths = [
@@ -18,6 +20,8 @@
     '''^\.?gitleaks.toml$''',
     '''^\.?secrets.baseline$''',
   ]
+
+# Genearal Potential Leak Patterns
 
 [[rules]]
   description = "Asymmetric Private Key"
@@ -156,7 +160,7 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
       '''(?i):\/\/([^:\/\s\"\']+)?:(\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -197,7 +201,7 @@
       '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(?-i)\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
       '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
+      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -304,7 +308,7 @@
       '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?["\']''',
       # Various words at the start and end that signify a placeholder
       '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'](\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?["\']''',
-      '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)["\']''',
+      '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)["\']''',
     ]
 
   [[rules.entropies]]
@@ -334,7 +338,7 @@
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>\{.+?\}<\/''',
       # Various words at the start and end that signify a placeholder
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
-      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
     ]
 
   [[rules.entropies]]
@@ -400,7 +404,7 @@
       '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?["\']''',
       # Various words at the start and end that signify a placeholder
       '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'](\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?["\']''',
-      '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)["\']''',
+      '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)["\']''',
       # Avoid things that look like UUIDs in secrets
       '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}["\']''',
     ]
@@ -432,7 +436,7 @@
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>\{.+?\}<\/''',
       # Various words at the start and end that signify a placeholder
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
-      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
+      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
       # UUIDs
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}<\/''',
     ]
@@ -497,7 +501,7 @@
       '''(?i)(secret((-|_)key)?|password)=(?-i)[a-z\._\-]{8,}''',
       # Various words at the start and end that signify a placeholder
       '''(?i)(secret((-|_)key)?|password)=(\.\*|\/path\/|(\/var)?\/run\/|(0)?123456789|abcdef|admin|ansible|app|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|ec2_|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|str:|(my)?t(e)?mp|test|this|update|value|your_)([^;\<\&\"\'\s\n]+)?''',
-      '''(?i)(secret((-|_)key)?|password)=[^\"\'\s\n]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass(w)?(o|0)?(r)?(d|t)(\!)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)([;\<\&\"\'\s\n]|$)''',
+      '''(?i)(secret((-|_)key)?|password)=[^\"\'\s\n]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|_pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)([;\<\&\"\'\s\n]|$)''',
     ]
 
 [[rules]]

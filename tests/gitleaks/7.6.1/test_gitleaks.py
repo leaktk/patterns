@@ -361,6 +361,11 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "mysql://username:userpass@host:port/fasdfasdfasdf",
+        "offender": "://username:userpass@host",
+        "comment": "Things ending in 'pass' are probably placeholders'",
+    },
+    {
         "example": "# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)",
         "comment": "comment in a htpasswd file",
         "filename": "foo.htpasswd",
