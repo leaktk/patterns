@@ -361,8 +361,15 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "schema://user:keylime@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
+        "example": "schema://user:postgres@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
         "example": "mysql://username:userpass@host:port/fasdfasdfasdf",
-        "offender": "://username:userpass@host",
         "comment": "Things ending in 'pass' are probably placeholders'",
     },
     {
