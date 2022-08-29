@@ -84,6 +84,10 @@
       '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
       # Things then end in == often seem to be just base64 encoded values or keys not realted to AWS
       '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{38}==([^A-Za-z0-9\/+=\.\-<>_]|$)''',
+      # Ignore things with 3 or more slashes in it. So far most keys don't have this.
+      # (This rule might be able to replace a lot of the other ones here, need to
+      # go back and run this against older matches)
+      '''(?i)[^a-z0-9\/+=\.\-<>_;](.+\/.+){3}([^a-z0-9\/+=\.\-<>_]|$)''',
       # Ignore placeholders
       # Note: this runs the risk of missing real keys if everything is one line and there's a match elsewhere
       # but it cuts out so many FPs it may be worth it.

@@ -361,6 +361,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": " b/drivers/media/platform/bcm2835/Kconfig",
+        "comment": "Meets the criteria for a potential aws secret key",
+    },
+    {
         "example": "schema://user:keylime@host:port/",
         "comment": "Common placeholder account",
     },
