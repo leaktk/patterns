@@ -4,7 +4,7 @@ export PATH="$(pwd)/scripts:${PATH}"
 
 echo "Testng the-valid-tag-format..."
 echo
-if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/7.6.1/' | sed 's/.*:.*tags.*=.*\[//g' | sed 's/\].*//g' | grep -vP  '^[0-9a-z\s:\",-]+$$'
+if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/' | sed 's/.*:.*tags.*=.*\[//g' | sed 's/\].*//g' | grep -vP  '^[0-9a-z\s:\",-]+$$'
 then
   echo
   echo "^^^ A line was found with an invalid character"
@@ -14,6 +14,8 @@ else
   echo "OK"
 fi
 
-make target/patterns/gitleaks/7.6.1
-cd tests/gitleaks/7.6.1/
-python3 -m unittest test_gitleaks.py
+for version in $(./scripts/versions)
+do
+  make "target/patterns/gitleaks/${version}"
+  (cd "tests/gitleaks/${version}" && python3 -m unittest test_gitleaks.py)
+done

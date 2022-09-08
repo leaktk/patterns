@@ -1,0 +1,6 @@
+# Global Allowlist Rules
+
+[allowlist]
+  description = "Global Allowlist"
+  # TODO: this is just stubbed out so the file exists
+  # patterns still need to be ported over

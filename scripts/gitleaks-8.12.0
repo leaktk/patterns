@@ -1,0 +1,44 @@
+#! /bin/bash
+set -euo pipefail
+
+cache_dir="${XDG_CACHE_HOME:-${HOME}/.cache}/gitleaks"
+gitleaks_version="8.12.0"
+gitleaks_tar_gz_checksum="2a8c667828603c5fa6673995168a4019e6ca95aa8a595efed211bec387a78a79"
+gitleaks_bin_path="${cache_dir}/gitleaks-${gitleaks_version}"
+gitleaks__path="${cache_dir}/gitleaks-${gitleaks_version}"
+
+function log {
+  echo "$(date --iso-8601=seconds) [$1] $2" >&2
+}
+
+function error {
+  log "ERROR" "$1"
+}
+
+function info {
+  log "INFO" "$1"
+}
+
+mkdir -p "${cache_dir}"
+
+# Fetch the right version of gitleaks
+if [[ ! -f "${gitleaks_bin_path}" ]]
+then
+  info "Fetching gitleaks-${gitleaks_version}"
+  tmpdir="$(mktemp -d)"
+  archive="${tmpdir}/gitleaks-${gitleaks_version}.tar.gz"
+  curl -Lo "${archive}" "https://github.com/zricethezav/gitleaks/releases/download/v${gitleaks_version}/gitleaks_${gitleaks_version}_linux_x64.tar.gz" &> /dev/null
+
+  if echo "${gitleaks_tar_gz_checksum} ${archive}" | sha256sum -c - &> /dev/null
+  then
+    (cd "${tmpdir}" && tar -xzf "${archive}" && cp ./gitleaks "${gitleaks_bin_path}")
+    chmod +x "${gitleaks_bin_path}"
+  else
+    error "Could not validate checksum of ${archive}"
+    info "Removing ${archive}"
+    rm "${archive}"
+    exit 1
+  fi
+fi
+
+exec "${gitleaks_bin_path}" $@

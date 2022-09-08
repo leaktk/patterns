@@ -36,6 +36,8 @@ import shutil
 from pathlib import Path
 from unittest import TestCase
 
+VERSION = "7.6.1"
+
 SHOULD_MATCH = [
     {
         "description": "General Secret",
@@ -1190,12 +1192,12 @@ SHOULD_NOT_MATCH = [
 class TestGitLeaks(TestCase):
     test_dir = Path(__file__).resolve().parent
     patterns_path = test_dir.joinpath(
-        "..", "..", "..", "target", "patterns", "gitleaks", "7.6.1",
+        "..", "..", "..", "target", "patterns", "gitleaks", VERSION,
     )
     maxDiff = 10000
 
     def setUp(self):
-        self.test_pattern_dir = Path("/tmp/leaktk-patterns")
+        self.test_pattern_dir = Path(f"/tmp/leaktk-patterns-{VERSION}")
 
         # Start fresh
         if self.test_pattern_dir.is_dir():
@@ -1233,7 +1235,7 @@ class TestGitLeaks(TestCase):
         """
         completed_process = subprocess.run(
             [
-                "gitleaks-7.6.1",
+                f"gitleaks-{VERSION}",
                 "--quiet",
                 "--no-git",
                 "--format=json",

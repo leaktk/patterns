@@ -18,6 +18,7 @@ Currently the only supported tool is
 [gitleaks](https://github.com/zricethezav/gitleaks),
 and for the moment the only supported version is 7.6.1. If multiple versions
 support the same patterns format, the version folder may be a symlink.
+8.12.0 support is planned.
 
 Pattern files are broken into separate files and merged together by `make all`
 command. The reason for this is to it make it easier to merge these patterns
