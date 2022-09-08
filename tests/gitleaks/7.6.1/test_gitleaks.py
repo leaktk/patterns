@@ -347,8 +347,8 @@ SHOULD_MATCH = [
     },
     {
         "description": "SendGrid API Key",
-        "example": "SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
-        "offender": "SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
+        "example": "key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'",
+        "offender": "'SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
         "comment": "Should capture a SG api key",
     },
     {
@@ -360,6 +360,38 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE #gitleaks:allow",
+        "comment": "Allowed by gitleaks:allow",
+    },
+    {
+        "example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE // gitleaks:allow",
+        "comment": "Allowed by gitleaks:allow different comment type",
+    },
+    {
+        "example": 'WithSG.InterfacePropertiesFormat.IPConfigurations',
+        "comment": "Looks really close to a SendGrid API Key's format",
+    },
+    {
+        "example": 'requiredSecret="[SOME_RANDOM_SECRET]"',
+        "comment": "Placeholder secret",
+    },
+    {
+        "example": "xoxp-some-slack-access-token-these-are-very-long-and-start-with-xo",
+        "comment": "Placeholder slack token",
+    },
+    {
+        "example": "'token': 'xoxa-123456789abcdef',",
+        "comment": "Placeholder slack token",
+    },
+    {
+        "example": '.secret": "spec.some.path[*].secretRef",',
+        "comment": "Path to a secret and not a real secret",
+    },
+    {
+        "example": 'PASSWORD="&lt;password_for_some_account&gt;"',
+        "comment": "Placeholder with markup",
+    },
     {
         "example": "secret=00000000-0000-0000-0000-000000000000",
         "comment": "Not a real secret",
