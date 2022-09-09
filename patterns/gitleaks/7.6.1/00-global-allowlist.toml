@@ -2,6 +2,11 @@
 
 [allowlist]
   description = "Global Allowlist"
+  regexes = [
+    # Mimic the behavior of newer gitleaks versions
+    # https://github.com/zricethezav/gitleaks/blob/96eed6aa0f507fe0c21bb46bec32637dc4cb1a9f/detect/detect.go#L226
+    '''gitleaks:allow''',
+  ]
   paths = [
     '''Godeps''',
     '''gems\/''',
