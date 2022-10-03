@@ -87,8 +87,8 @@
       '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z]{40}|[a-z]{0,39}\d[a-z]{0,39})([^a-z0-9\/+=\.\-<>_]|$)''',
       # It must have at least 1 upper and lower case character
       '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Things then end in == often seem to be just base64 encoded values or keys not realted to AWS
-      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{38}==([^A-Za-z0-9\/+=\.\-<>_]|$)''',
+      # Things then end in = often seem to be just base64 encoded values or keys not realted to AWS
+      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{39}=([^A-Za-z0-9\/+=\.\-<>_]|$)''',
       # Ignore things with 3 or more slashes in it. So far most keys don't have this.
       # (This rule might be able to replace a lot of the other ones here, need to
       # go back and run this against older matches)

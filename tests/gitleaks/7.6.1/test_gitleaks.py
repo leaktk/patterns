@@ -363,6 +363,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": " Af80f1/2+53=df0xc1e/d892b5768f3easefasz= ",
+        "comment": "Avoid matching things ending with = due to the high FP count",
+    },
+    {
         "example": 'jq \'.spec.identityProviders += [{"htpasswd":{"fileData":{"name":"htpass-secret"}}...',
         "filename": "htpasswd-commands.sh",
         "comment": "Not a htpasswd match",
