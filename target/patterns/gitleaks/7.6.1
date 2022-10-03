@@ -87,8 +87,8 @@
       '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z]{40}|[a-z]{0,39}\d[a-z]{0,39})([^a-z0-9\/+=\.\-<>_]|$)''',
       # It must have at least 1 upper and lower case character
       '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Things then end in == often seem to be just base64 encoded values or keys not realted to AWS
-      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{38}==([^A-Za-z0-9\/+=\.\-<>_]|$)''',
+      # Things then end in = often seem to be just base64 encoded values or keys not related to AWS
+      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{39}=([^A-Za-z0-9\/+=\.\-<>_]|$)''',
       # Ignore things with 3 or more slashes in it. So far most keys don't have this.
       # (This rule might be able to replace a lot of the other ones here, need to
       # go back and run this against older matches)
@@ -128,13 +128,9 @@
     Group = "4"
 
 [[rules]]
-  # This replaces HTTP Basic Auth after the testing period is over
-  description = "Basic Auth Password"
+  description = "URL User and Password"
   regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
-  # Update alert tags and remove "testing" tag when ready
-  tags = ["group:leaktk-testing", "password", "basic-auth"]
-  # May set this up to never alert users directly but instead feed it
-  # to a cred checker tool if we can't get a higher number of true positives.
+  tags = ["alert:repo-owner", "password", "basic-auth"]
 
   [[rules.entropies]]
     Min = "2.4"
@@ -152,6 +148,8 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
       # Things like: https://user:%pass%@host
       '''(?i):\/\/([^:\/\s\"\']+)?:%[^@\/\s]+%@[\w\.\-]+''',
+      # Things like: https://user:$pass$@host
+      '''(?i):\/\/([^:\/\s\"\']+)?:\$[^@\/\s]+\$@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
       # Things like: https://user:{pass}@host
@@ -166,53 +164,12 @@
       # Things like: https://user:#{pass}@host
       '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
       # Common spammy placeholder creds
-      '''(?i):\/\/([^:\/\s\"\']+)?:(keylime|postgres|gitops|telemetry)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(keylime|postgres|prisma|gitops|telemetry|x-oath-basic)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
       '''(?i):\/\/([^:\/\s\"\']+)?:(\/path\/|(\/var)?\/run\/|(0)?12345|abcd|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
       '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|(_|-)pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
-    ]
-
-[[rules]]
-  description = "HTTP Basic Auth Password"
-  regex = '''http(s)?:\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
-  tags = ["alert:repo-owner", "password", "http-basic-auth"]
-
-  [[rules.entropies]]
-    Min = "2.4"
-    Max = "8"
-    Group = "3"
-
-  [rules.allowlist]
-    paths = [
-      # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-cli/',
-    ]
-    regexes = [
-      # Things like: https://user:<pass>@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
-      # Things like: https://user:%pass%@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:%[^@\/\s]+%@[\w\.\-]+''',
-      # Things like: https://user:${pass}@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
-      # Things like: https://user:{pass}@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:\{[^@\/\s]+\}@[\w\.\-]+''',
-      # Things like: https://user:[pass]@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:\[[^@\/\s]+\]@[\w\.\-]+''',
-      # Things like: https://user:${pass}@host
-      # Things like: https://user:\${pass}@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(\\)?\$\{[^@\/\s]+\}@[\w\.\-]+''',
-      # Things like: https://user:$(pass)@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:\$\([^@\/\s]+\)@[\w\.\-]+''',
-      # Things like: https://user:#{pass}@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
-      # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(?-i)\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?@[\w\.\-]+''',
-      # Various words at the start and end that signify a placeholder
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:(\/path\/|(\/var)?\/run\/|(0)?12345|abcd|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|demo|dict|django-insecure-|example|enter_|file:|grub|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i)http(s)?:\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|example(.com|key)?|here|json|(_|-)pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -248,7 +205,7 @@
     ]
     files = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?).(c|go|java|js|py|rb|yml|yaml)$''',
+      '''(.+?).(c|go|java|js|py|rb|sh|yml|yaml)$''',
     ]
 
   [[rules.entropies]]

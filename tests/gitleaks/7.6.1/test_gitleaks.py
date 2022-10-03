@@ -318,31 +318,19 @@ SHOULD_MATCH = [
         "filename": "settings.py",
     },
     {
-        "description": "HTTP Basic Auth Password",
+        "description": "URL User and Password",
         "example": "http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz",
-        "offender": "http://username:1d902de68e4113f5855a6c88314cec6a@host",
-        "comment": "Should capture basic auth for http",
-    },
-    {
-        "description": "Basic Auth Password",
-        "example": "example comes from one of the HTTP Basic Auth Password rule above",
         "offender": "://username:1d902de68e4113f5855a6c88314cec6a@host",
         "comment": "Should capture basic auth for http",
     },
     {
-        "description": "HTTP Basic Auth Password",
+        "description": "URL User and Password",
         "example": "https://username:2d902de68e4113f5855a6c88314cec6a@host",
-        "offender": "https://username:2d902de68e4113f5855a6c88314cec6a@host",
-        "comment": "Should capture basic auth for https",
-    },
-    {
-        "description": "Basic Auth Password",
-        "example": "example comes from one of the HTTP Basic Auth Password rule above",
         "offender": "://username:2d902de68e4113f5855a6c88314cec6a@host",
         "comment": "Should capture basic auth for https",
     },
     {
-        "description": "Basic Auth Password",
+        "description": "URL User and Password",
         "example": "rsync://username:9d902de68e4113f5855a6c88314cec6a@host",
         "offender": "://username:9d902de68e4113f5855a6c88314cec6a@host",
         "comment": "Should catch protocols other than http",
@@ -362,6 +350,27 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "example": 'mongodb://root:prisma@localhost',
+        "comment": "Placeholder values",
+    },
+    {
+        "example": 'https://user:"$TOKEN"@foo.com',
+        "comment": "Placeholder values",
+    },
+    {
+        "example": "https://$encrypted$:$encrypted$@foo.com",
+        "comment": "Placeholder values",
+    },
+    {
+        "example": " Af80f1/2+53=df0xc1e/d892b5768f3easefasz= ",
+        "comment": "Avoid matching things ending with = due to the high FP count",
+    },
+    {
+        "example": 'jq \'.spec.identityProviders += [{"htpasswd":{"fileData":{"name":"htpass-secret"}}...',
+        "filename": "htpasswd-commands.sh",
+        "comment": "Not a htpasswd match",
+    },
     {
         "example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE #gitleaks:allow",
         "comment": "Allowed by gitleaks:allow",
