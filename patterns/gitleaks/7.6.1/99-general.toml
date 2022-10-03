@@ -220,7 +220,7 @@
     ]
     files = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?).(c|go|java|js|py|rb|yml|yaml)$''',
+      '''(.+?).(c|go|java|js|py|rb|sh|yml|yaml)$''',
     ]
 
   [[rules.entropies]]

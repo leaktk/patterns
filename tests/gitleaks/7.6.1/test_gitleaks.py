@@ -363,6 +363,11 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'jq \'.spec.identityProviders += [{"htpasswd":{"fileData":{"name":"htpass-secret"}}...',
+        "filename": "htpasswd-commands.sh",
+        "comment": "Not a htpasswd match",
+    },
+    {
         "example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE #gitleaks:allow",
         "comment": "Allowed by gitleaks:allow",
     },
