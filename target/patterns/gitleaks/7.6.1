@@ -66,38 +66,41 @@
   regex = '''amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
   tags = ["alert:repo-owner", "key", "aws", "mws"]
 
-[[rules]]
-  # Might merge this with AWS Secret Key if the quality is good
-  # (other rule|this new rule)
-  description = "Potential AWS Secret Key"
-  regex = '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)'''
-  # Update alert tags and remove "testing" tag when ready
-  # May set this up to never alert users directly but instead feed it
-  # to a cred checker tool if we can't get a higher number of true positives.
-  tags = ["group:leaktk-testing", "key", "aws"]
-
-  [[rules.entropies]]
-    Min = "4.2"
-    Max = "8"
-    Group = "1"
-
-  [rules.allowlist]
-    regexes = [
-      # kind of a sanity check to cut down fps in the initial round of testing
-      '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z]{40}|[a-z]{0,39}\d[a-z]{0,39})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # It must have at least 1 upper and lower case character
-      '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Things then end in = often seem to be just base64 encoded values or keys not related to AWS
-      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{39}=([^A-Za-z0-9\/+=\.\-<>_]|$)''',
-      # Ignore things with 3 or more slashes in it. So far most keys don't have this.
-      # (This rule might be able to replace a lot of the other ones here, need to
-      # go back and run this against older matches)
-      '''(?i)[^a-z0-9\/+=\.\-<>_;](.+\/.+){3}([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Ignore placeholders
-      # Note: this runs the risk of missing real keys if everything is one line and there's a match elsewhere
-      # but it cuts out so many FPs it may be worth it.
-      '''(?i)[^a-z0-9\/+=\.\-<>_;][a-z0-9\/+=]{0,40}(example|abcd|1234|org|java|algo|repo|exec|share|param|temp|path|dist|linux|test|base|com|api|name|type|attr|xxx|auth)[a-z0-9\/+=]{0,40}([^a-z0-9\/+=\.\-<>_]|$)''',
-    ]
+# Commenting this out because of potential issue found with it causing the scanner
+# to not report
+#
+# [[rules]]
+#   # Might merge this with AWS Secret Key if the quality is good
+#   # (other rule|this new rule)
+#   description = "Potential AWS Secret Key"
+#   regex = '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)'''
+#   # Update alert tags and remove "testing" tag when ready
+#   # May set this up to never alert users directly but instead feed it
+#   # to a cred checker tool if we can't get a higher number of true positives.
+#   tags = ["group:leaktk-testing", "key", "aws"]
+#
+#   [[rules.entropies]]
+#     Min = "4.2"
+#     Max = "8"
+#     Group = "1"
+#
+#   [rules.allowlist]
+#     regexes = [
+#       # kind of a sanity check to cut down fps in the initial round of testing
+#       '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z]{40}|[a-z]{0,39}\d[a-z]{0,39})([^a-z0-9\/+=\.\-<>_]|$)''',
+#       # It must have at least 1 upper and lower case character
+#       '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
+#       # Things then end in = often seem to be just base64 encoded values or keys not related to AWS
+#       '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{39}=([^A-Za-z0-9\/+=\.\-<>_]|$)''',
+#       # Ignore things with 3 or more slashes in it. So far most keys don't have this.
+#       # (This rule might be able to replace a lot of the other ones here, need to
+#       # go back and run this against older matches)
+#       '''(?i)[^a-z0-9\/+=\.\-<>_;](.+\/.+){3}([^a-z0-9\/+=\.\-<>_]|$)''',
+#       # Ignore placeholders
+#       # Note: this runs the risk of missing real keys if everything is one line and there's a match elsewhere
+#       # but it cuts out so many FPs it may be worth it.
+#       '''(?i)[^a-z0-9\/+=\.\-<>_;][a-z0-9\/+=]{0,40}(example|abcd|1234|org|java|algo|repo|exec|share|param|temp|path|dist|linux|test|base|com|api|name|type|attr|xxx|auth)[a-z0-9\/+=]{0,40}([^a-z0-9\/+=\.\-<>_]|$)''',
+#     ]
 
 [[rules]]
   description = "AWS Secret Key"
