@@ -14,20 +14,20 @@ entries as a reference.
 
 Fields:
 
-"description" - the rule description that it's matching against
-"example" - an example of the leak line
-"offender" - what should be matched
-"comment" - (optional) rational on why it's there
-"filename" - (optional) if the rule matches a specific filename
+"RuleID" - the rule description that it's matching against
+"Example" - an example of the leak line
+"Secret" - what should be matched
+"Comment" - (optional) rational on why it's there
+"File" - (optional) if the rule matches a specific filename
 
 SHOULD_NOT_MATCH
 
 These items will also be added to the file but should not turn up in the
 results
 
-"example" - an example of the leak line
-"comment" - (optional) rational on why it's there
-"filename" - (optional) if the rule matches a specific filename
+"Example" - an example of the leak line
+"Comment" - (optional) rational on why it's there
+"File" - (optional) if the rule matches a specific filename
 """
 import json
 import subprocess
@@ -39,22 +39,54 @@ from unittest import TestCase
 VERSION = "8.12.0"
 
 SHOULD_MATCH = [
-    # TODO: add these back as 8.12.0 patterns are added
+    # Very WIP just here to unblock testing
+    {
+        "RuleID": "asymmetric-private-key",
+        "Example": "-----BEGIN PGP PRIVATE KEY-----",
+        "Secret": "-----BEGIN PGP PRIVATE KEY-----",
+        "Comment": "Should capture private key headers",
+    },
+    {
+        "RuleID": "asymmetric-private-key",
+        "Example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "Secret":   "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "Comment": "Should capture private key headers",
+    },
 ]
 
 SHOULD_NOT_MATCH = [
-    # TODO: add these back as 8.12.0 patterns are added
+    # Very WIP just here to unblock testing
+    # {
+    #     "Example": "-----BEGIN PGP PRIVATE KEY-----",
+    #     "File": "test/testec-p112r1.pem",
+    #     "Comment": "Common test files in the open ssl project and others",
+    # },
+    # {
+    #     "Example": "-----BEGIN EC PRIVATE KEY-----\\nkey\\n-----END EC PRIVATE KEY-----",
+    #     "Comment": "Shouldn't match such a short key",
+    # },
+    # {
+    #     "Example": "-----BEGIN RSA PRIVATE KEY-----\\nREPLACE_ME\\n-----END RSA PRIVATE KEY-----",
+    #     "Comment": "Shouldn't match such a short key",
+    # },
+    # {
+    #     "Example": "-----BEGIN PRIVATE KEY-----\\nMII.....RSA KEY WITHOUT LINEBREAKS\\n-----END PRIVATE KEY-----",
+    #     "Comment": "Shouldn't match an inline key with spaces in it",
+    # },
 ]
 
 
 class TestGitLeaks(TestCase):
     test_dir = Path(__file__).resolve().parent
-    patterns_path = test_dir.joinpath(
-        "..", "..", "..", "target", "patterns", "gitleaks", VERSION,
-    )
+    patterns_path = Path("/tmp/leaktk-patterns-{VERSION}-patterns.toml")
     maxDiff = 10000
 
     def setUp(self):
+        build_patterns = self.test_dir.joinpath(
+            "..", "..", "..", "target", "patterns", "gitleaks", VERSION,
+        )
+        shutil.copy(build_patterns, self.patterns_path)
+
         self.test_pattern_dir = Path(f"/tmp/leaktk-patterns-{VERSION}")
 
         # Start fresh
@@ -68,57 +100,51 @@ class TestGitLeaks(TestCase):
         with open(general_test_file_path, "w+") as general_test_file:
             general_test_file.write(
                 "\n".join(
-                    entry["example"]
+                    entry["Example"]
                     for entry in SHOULD_NOT_MATCH + SHOULD_MATCH
-                    if not "filename" in entry
+                    if not "File" in entry
                 )
             )
 
         # Handle ones with custom filenames
         for entry in SHOULD_NOT_MATCH + SHOULD_MATCH:
-            if "filename" not in entry:
+            if "File" not in entry:
                 continue
 
-            custom_file_path = self.test_pattern_dir.joinpath(entry["filename"])
+            custom_file_path = self.test_pattern_dir.joinpath(entry["File"])
 
             if not custom_file_path.parent.is_dir():
                 custom_file_path.parent.mkdir(parents=True)
 
             with open(custom_file_path, "a+") as custom_file:
-                custom_file.write(entry["example"] + "\n")
+                custom_file.write(entry["Example"] + "\n")
 
-    # TODO: pending writing some patterns and tests
-    # def test_patterns(self):
-    #     """
-    #     Run gitleaks against the general test contents using the latest patterns
-    #     """
-    #     completed_process = subprocess.run(
-    #         [
-    #             f"gitleaks-{VERSION}",
-    #             "detect"
-    #             "--no-git",
-    #             "--report-format=json",
-    #             "--report-path=/dev/stdout",
-    #             f"--config={self.patterns_path}",
-    #             f"--path={self.test_pattern_dir}",
-    #         ],
-    #         capture_output=True,
-    #         check=False,
-    #     )
-    #     self.assertEqual(completed_process.stderr.decode("UTF-8"), "")
+    def test_patterns(self):
+        """
+        Run gitleaks against the general test contents using the latest patterns
+        """
+        cmd = [
+            f"gitleaks-{VERSION}",
+            "detect",
+            "--no-git",
+            "--report-format=json",
+            "--report-path=/dev/stdout",
+            f"--config={self.patterns_path}",
+            f"--source={self.test_pattern_dir}",
+        ]
 
-    #     raw_lines = completed_process.stdout.splitlines()
-    #     leaks = [json.loads(line) for line in raw_lines]
+        completed_process = subprocess.run(cmd, capture_output=True, check=False)
+        leaks = json.loads(completed_process.stdout)
 
-    #     # These are the offenders found above. This will need to be updated
-    #     # when adding a new item to test.
-    #     matches = {(m["description"], m["offender"]) for m in SHOULD_MATCH}
+        # These are the Secrets found above. This will need to be updated
+        # when adding a new item to test.
+        matches = {(m["RuleID"], m["Secret"]) for m in SHOULD_MATCH}
 
-    #     for leak in leaks:
-    #         leak_key = (leak["rule"], leak["offender"])
+        for leak in leaks:
+            leak_key = (leak["RuleID"], leak["Secret"])
 
-    #         self.assertIn(leak_key, matches)
-    #         matches.remove(leak_key)
+            self.assertIn(leak_key, matches)
+            matches.remove(leak_key)
 
-    #     # Make sure everything's been accounted for
-    #     self.assertEqual(matches, set())
+        # Make sure everything's been accounted for
+        self.assertEqual(matches, set())

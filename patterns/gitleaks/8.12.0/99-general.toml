@@ -2,3 +2,27 @@
 
 # TODO: this is just stubbed out so that the files exist
 # pattenrs still need to be moved over
+
+# Very WIP just here to unblock some testing
+[[rules]]
+  id = "asymmetric-private-key"
+  description = "Asymmetric Private Key"
+  regex = '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----'''
+  tags = ["alert:repo-owner", "key", "asymmetric-private-key"]
+
+  keywords = [
+    "-----begin",
+  ]
+
+  [rules.allowlist]
+    paths = [
+      # Ignore common test certs
+      '''test(s)?\/[\w\-]+.pem$''',
+    ]
+
+    regexes = [
+      # Anything less than 15 characters
+      '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+      # The key has spaces in it so it's probably a placeholder
+      '''PRIVATE KEY( BLOCK)?-----.*(\s).*-----END''',
+    ]
