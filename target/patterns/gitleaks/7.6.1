@@ -37,6 +37,8 @@
     paths = [
       # Ignore common test certs
       '''test(s)?\/[\w\-]+.pem$''',
+      # Ignore openssl tests
+      '''test\/recipes\/\d+-\w+\/.+(txt|der|key|pem)''',
     ]
 
     regexes = [
