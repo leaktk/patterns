@@ -41,6 +41,12 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     {
         "description": "General Secret",
+        "example": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "offender": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "comment": "Even though this looks like it has a variable at the end, it still has a secret contained in it",
+    },
+    {
+        "description": "General Secret",
         "example": "secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'",
         "offender": "secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'",
         "comment": "Even though this looks like it has a variable at the end, it still has a secret contained in it",
@@ -351,6 +357,14 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "example": 'secret="/some/Path:${foo.bar.baz}"',
+        "comment": "Placeholder values",
+    },
+    {
+        "example": 'password="/tmp/${pull_secret_filename}"',
+        "comment": "Placeholder values",
+    },
     {
         "example": 'mongodb://root:prisma@localhost',
         "comment": "Placeholder values",

@@ -229,7 +229,8 @@
       # Things like: password = "(optional char)${PLACEHOLDER}(optional text)"
       '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'](.)?\$\{.+?\}(.+)?["\']''',
       # Things like: password = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
-      '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\'](?-i)[A-Z_]{9,}\$\{.{4,}?\}["\']''',
+      # Things like: password = "/SOME/path:${PLACEHOLDER}"
+      '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?[\"\'][a-z\_\/\:]{4,}\$\{[a-z\_\.]{4,}?\}[\"\']''',
       # Things like: password = "#{PLACEHOLDER}"
       '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\']#\{.+?\}["\']''',
       # Things like: password = "$(PLACEHOLDER)"
@@ -327,7 +328,8 @@
       # Things like: secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
       '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\']((?-i)[A-Z_]{6,})?(.)?(\$|#)\{.+?\}(.+)?["\']''',
       # Things like: secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
-      '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'](?-i)[A-Z_]{9,}\$\{.{4,}?\}["\']''',
+      # Things like: secret = "/SOME/path:${PLACEHOLDER}"
+      '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?[\"\'][a-z\_\/\:]{4,}\$\{[a-z\_\.]{4,}?\}[\"\']''',
       # Things like: secret = "$(PLACEHOLDER..."
       # Or like: secret = "\$(PLACEHOLDER..."
       '''(?i)["\']?secret((-|_)key)?["\']?(\s+)?[:=](\s+)?["\'](\\)?\$\(.*''',
