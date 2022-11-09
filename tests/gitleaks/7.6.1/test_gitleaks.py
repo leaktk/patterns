@@ -358,6 +358,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'rabbit://user:redhat@example.com',
+        "comment": "Placeholder password",
+    },
+    {
         "example": 'secret="/some/Path:${foo.bar.baz}"',
         "comment": "Placeholder values",
     },
