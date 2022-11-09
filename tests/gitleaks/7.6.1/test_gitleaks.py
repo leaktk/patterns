@@ -41,6 +41,12 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     {
         "description": "General Secret",
+        "example": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "offender": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "comment": "Even though this looks like it has a variable at the end, it still has a secret contained in it",
+    },
+    {
+        "description": "General Secret",
         "example": "secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'",
         "offender": "secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'",
         "comment": "Even though this looks like it has a variable at the end, it still has a secret contained in it",
@@ -351,6 +357,40 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "example": 'awslb/podsvc.yaml": testExtendedTestdataRouterAwslbPodsvcYaml',
+        "comment": "Looks similar to a AWS secret key",
+    },
+    {
+        "example": 'SECRET_KEY = "DEFAULT_APP_SECRET_DEFAULT"',
+        "comment": "Placeholder password",
+    },
+    {
+        "example": 'secret="vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg==" # noqa: E501',
+        "comment": "Placeholder password",
+    },
+    {
+        "example": '-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----',
+        "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
+        "comment": "OpenSSL Test File",
+    },
+    {
+        "example": '-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----',
+        "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
+        "comment": "OpenSSL Test File",
+    },
+    {
+        "example": 'rabbit://user:redhat@example.com',
+        "comment": "Placeholder password",
+    },
+    {
+        "example": 'secret="/some/Path:${foo.bar.baz}"',
+        "comment": "Placeholder values",
+    },
+    {
+        "example": 'password="/tmp/${pull_secret_filename}"',
+        "comment": "Placeholder values",
+    },
     {
         "example": 'mongodb://root:prisma@localhost',
         "comment": "Placeholder values",
