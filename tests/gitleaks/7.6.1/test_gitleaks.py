@@ -358,6 +358,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'SECRET_KEY = "DEFAULT_APP_SECRET_DEFAULT"',
+        "comment": "Placeholder password",
+    },
+    {
         "example": 'secret="vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg==" # noqa: E501',
         "comment": "Placeholder password",
     },
