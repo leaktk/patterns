@@ -242,6 +242,8 @@
     regexes = [
       # Things like: password = "asdfasdfas" # nosec (used by bandit)
       '''#(\s+)?nosec(\s+|$)''',
+      # Things like: password = "asdfasdfas" # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
       # Things like: password = ""
       '''(?i)["\']?password["\']?(\s+)?[:=](\s+)?["\']["\']''',
       # Things like: password = "<PLACEHOLDER>"
@@ -336,6 +338,8 @@
     regexes = [
       # Things like: secret = "asdfasdfas" # nosec (used by bandit)
       '''#(\s+)?nosec(\s+|$)''',
+      # Things like: secret = "asdfasdfas" # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
       # Things like: secret = "asdfasdfas" //nolint:gosec
       '''\/\/(\s+)?nolint:gosec(\s+|$)''',
       # aws.* is already covered by a different rule
