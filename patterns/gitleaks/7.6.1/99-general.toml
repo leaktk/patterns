@@ -78,14 +78,14 @@
 
 [[rules]]
   description = "AWS Secret Key"
-  regex = '''(?i)aws([^:=(,\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
+  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
   tags = ["alert:repo-owner", "key", "aws"]
 
   [rules.allowlist]
     regexes = [
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws([^:=(,\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?.*(EXAMPLE|ABCDEF|abcdef).*['\"]?''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?.*(EXAMPLE|ABCDEF|abcdef).*['\"]?''',
     ]
 
   [[rules.entropies]]

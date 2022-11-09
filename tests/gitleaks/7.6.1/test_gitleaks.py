@@ -358,6 +358,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'awslb/podsvc.yaml": testExtendedTestdataRouterAwslbPodsvcYaml',
+        "comment": "Looks similar to a AWS secret key",
+    },
+    {
         "example": 'SECRET_KEY = "DEFAULT_APP_SECRET_DEFAULT"',
         "comment": "Placeholder password",
     },
