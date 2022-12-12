@@ -358,6 +358,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYGE/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
+        "comment": "This is a presigned AWS URL",
+    },
+    {
         "example": 'awslb/podsvc.yaml": testExtendedTestdataRouterAwslbPodsvcYaml',
         "comment": "Looks similar to a AWS secret key",
     },
@@ -370,17 +374,17 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder password",
     },
     {
-        "example": '-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----',
+        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
         "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
         "comment": "OpenSSL Test File",
     },
     {
-        "example": '-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----',
+        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
         "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
         "comment": "OpenSSL Test File",
     },
     {
-        "example": 'rabbit://user:redhat@example.com',
+        "example": "rabbit://user:redhat@example.com",
         "comment": "Placeholder password",
     },
     {
@@ -392,7 +396,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder values",
     },
     {
-        "example": 'mongodb://root:prisma@localhost',
+        "example": "mongodb://root:prisma@localhost",
         "comment": "Placeholder values",
     },
     {
@@ -421,7 +425,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Allowed by gitleaks:allow different comment type",
     },
     {
-        "example": 'WithSG.InterfacePropertiesFormat.IPConfigurations',
+        "example": "WithSG.InterfacePropertiesFormat.IPConfigurations",
         "comment": "Looks really close to a SendGrid API Key's format",
     },
     {
@@ -1274,7 +1278,13 @@ SHOULD_NOT_MATCH = [
 class TestGitLeaks(TestCase):
     test_dir = Path(__file__).resolve().parent
     patterns_path = test_dir.joinpath(
-        "..", "..", "..", "target", "patterns", "gitleaks", VERSION,
+        "..",
+        "..",
+        "..",
+        "target",
+        "patterns",
+        "gitleaks",
+        VERSION,
     )
     maxDiff = 10000
 
