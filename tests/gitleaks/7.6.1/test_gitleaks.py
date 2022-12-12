@@ -358,7 +358,6 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
-<<<<<<< HEAD
         "example": 'PASSWORD="some.property.password=\"$SOME_PASSWORD_VARIABLE\""',
         "comment": "Placeholder value",
     },
@@ -366,6 +365,10 @@ SHOULD_NOT_MATCH = [
         "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
         "filename": "src/ukify/test/example.signing.key",
         "comment": "Example keys should be ignored",
+    },
+    {
+        "example": 'imagePullSecret = "for-cicd-${some.placeholder.VALUE_REF}${some.placeholder.VALUE_REF}"',
+        "comment": "This is a placeholder",
     },
     {
         "example": '"password":"$Abc12345678"',
