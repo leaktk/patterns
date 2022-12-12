@@ -40,6 +40,24 @@ VERSION = "7.6.1"
 
 SHOULD_MATCH = [
     {
+        "description": "Unquoted Secret",
+        "example": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
+        "description": "Unquoted Secret",
+        "example": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
+        "description": "Unquoted Secret",
+        "example": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
         "description": "General Secret",
         "example": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
@@ -1292,6 +1310,10 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": "secret=@(some_client_secret)",
+        "comment": "Unquoted secret placeholder",
+    },
+    {
+        "example": "secret=/data/stuff.auth",
         "comment": "Unquoted secret placeholder",
     },
     {
