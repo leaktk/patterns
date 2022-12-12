@@ -56,7 +56,12 @@
   tags = ["alert:repo-owner", "key", "aws"]
 
   [rules.allowlist]
-    regexes = ['''EXAMPLE''']
+    regexes = [
+      # Ingore example keys
+      '''EXAMPLE''',
+      # Ignore presigned URLs
+      '''X-Amz-Signature''',
+    ]
 
   [[rules.entropies]]
     Min = "3.2"
