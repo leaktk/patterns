@@ -40,6 +40,24 @@ VERSION = "7.6.1"
 
 SHOULD_MATCH = [
     {
+        "description": "Unquoted Secret",
+        "example": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
+        "description": "Unquoted Secret",
+        "example": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
+        "description": "Unquoted Secret",
+        "example": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "offender": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
+        "comment": "Some unquoted secret value",
+    },
+    {
         "description": "General Secret",
         "example": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
@@ -358,13 +376,45 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
+        "filename": "src/ukify/test/example.signing.key",
+        "comment": "Example keys should be ignored",
+    },
+    {
+        "example": "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker",
+        "comment": "This is code",
+    },
+    {
+        "example": '"smtpSecret": "INSTALLATION_PREFIX-smtp",',
+        "comment": "Placeholder value",
+    },
+    {
         "example": 'PASSWORD="some.property.password=\"$SOME_PASSWORD_VARIABLE\""',
         "comment": "Placeholder value",
     },
     {
-        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "filename": "src/ukify/test/example.signing.key",
-        "comment": "Example keys should be ignored",
+        "example": "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName",
+        "comment": "This is code",
+    },
+    {
+        "example": 'SECRET_KEY = "ONLYFORDEVELOPMENT"',
+        "comment": "This is a placeholder",
+    },
+    {
+        "example": 'imagePullSecret = "for-cicd-${some.placeholder.VALUE_REF}${some.placeholder.VALUE_REF}"',
+        "comment": "This is a placeholder",
+    },
+    {
+        "example": '"password":"$Abc12345678"',
+        "comment": "This is a placeholder",
+    },
+    {
+        "example": '"secret": "$CREDENTIAL_PLACEHOLDER$"',
+        "comment": "This is a placeholder",
+    },
+    {
+        "example": '"password":"\\u201cfakepasswd#\\u201d"',
+        "comment": "This is a ",
     },
     {
         "example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYGE/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
@@ -385,6 +435,11 @@ SHOULD_NOT_MATCH = [
     {
         "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
         "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
+        "comment": "OpenSSL Test File",
+    },
+    {
+        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIx4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
+        "filename": "test/smime-certs/smrsa1024.pem",
         "comment": "OpenSSL Test File",
     },
     {
@@ -1259,6 +1314,10 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": "secret=@(some_client_secret)",
+        "comment": "Unquoted secret placeholder",
+    },
+    {
+        "example": "secret=/data/stuff.auth",
         "comment": "Unquoted secret placeholder",
     },
     {
