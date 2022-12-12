@@ -367,6 +367,10 @@ SHOULD_NOT_MATCH = [
         "comment": "Example keys should be ignored",
     },
     {
+        "example": '"password":"\\u201cfakepasswd#\\u201d"',
+        "comment": "This is a presigned AWS URL",
+    },
+    {
         "example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYGE/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
         "comment": "This is a presigned AWS URL",
     },
