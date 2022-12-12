@@ -49,7 +49,7 @@ SHOULD_MATCH = [
     {
         "RuleID": "asymmetric-private-key",
         "Example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
-        "Secret":   "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "Secret": "-----BEGIN OPENSSH PRIVATE KEY-----",
         "Comment": "Should capture private key headers",
     },
 ]
@@ -83,7 +83,13 @@ class TestGitLeaks(TestCase):
 
     def setUp(self):
         build_patterns = self.test_dir.joinpath(
-            "..", "..", "..", "target", "patterns", "gitleaks", VERSION,
+            "..",
+            "..",
+            "..",
+            "target",
+            "patterns",
+            "gitleaks",
+            VERSION,
         )
         shutil.copy(build_patterns, self.patterns_path)
 
