@@ -367,6 +367,18 @@ SHOULD_NOT_MATCH = [
         "comment": "Example keys should be ignored",
     },
     {
+        "example": "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker",
+        "comment": "This is code",
+    },
+    {
+        "example": "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName",
+        "comment": "This is code",
+    },
+    {
+        "example": 'SECRET_KEY = "ONLYFORDEVELOPMENT"',
+        "comment": "This is a placeholder",
+    },
+    {
         "example": 'imagePullSecret = "for-cicd-${some.placeholder.VALUE_REF}${some.placeholder.VALUE_REF}"',
         "comment": "This is a placeholder",
     },
