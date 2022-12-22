@@ -125,6 +125,7 @@ SHOULD_NOT_MATCH = [
         "Comment": "This is not an AWS secret key",
     },
     # TODO: not sure how to ignore this one in gitleaks >=8.12
+    # Ticket for more info: https://github.com/zricethezav/gitleaks/issues/1064
     # {
     #     "Example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYG1/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
     #     "Comment": "This is a presigned AWS URL",
