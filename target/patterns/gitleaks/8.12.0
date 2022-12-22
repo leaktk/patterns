@@ -53,6 +53,8 @@ paths = [
     regexes = [
       # Anything less than 15 characters
       '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+      # An inline key that has spaces in it
+      '''PRIVATE KEY( BLOCK)?-----.+\s.+-----END''',
     ]
 
 [[rules]]

@@ -39,11 +39,16 @@ from unittest import TestCase
 VERSION = "8.12.0"
 
 SHOULD_MATCH = [
-    # Very WIP just here to unblock testing
     {
         "RuleID": "private-key",
         "Example": "-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
         "Secret": "-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+        "Comment": "Should capture private keys",
+    },
+    {
+        "RuleID": "private-key",
+        "Example": "-----BEGIN EC PRIVATE KEY-----\nMIGkAgEBBDBzBY5zU8bo6nwkJuENhlwaQBnTWVgA59eg9OfggbYu4NAYvMbNapPykinda\n-----END EC PRIVATE KEY-----",
+        "Secret": "-----BEGIN EC PRIVATE KEY-----\nMIGkAgEBBDBzBY5zU8bo6nwkJuENhlwaQBnTWVgA59eg9OfggbYu4NAYvMbNapPykinda\n-----END EC PRIVATE KEY-----",
         "Comment": "Should capture private keys",
     },
     {
@@ -55,24 +60,38 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
-    # Very WIP just here to unblock testing
-    # {
-    #     "Example": "-----BEGIN PGP PRIVATE KEY-----",
-    #     "File": "test/testec-p112r1.pem",
-    #     "Comment": "Common test files in the open ssl project and others",
-    # },
-    # {
-    #     "Example": "-----BEGIN EC PRIVATE KEY-----\\nkey\\n-----END EC PRIVATE KEY-----",
-    #     "Comment": "Shouldn't match such a short key",
-    # },
-    # {
-    #     "Example": "-----BEGIN RSA PRIVATE KEY-----\\nREPLACE_ME\\n-----END RSA PRIVATE KEY-----",
-    #     "Comment": "Shouldn't match such a short key",
-    # },
-    # {
-    #     "Example": "-----BEGIN PRIVATE KEY-----\\nMII.....RSA KEY WITHOUT LINEBREAKS\\n-----END PRIVATE KEY-----",
-    #     "Comment": "Shouldn't match an inline key with spaces in it",
-    # },
+    {
+        "Example": "-----BEGIN EC PRIVATE KEY-----\\nshort\\n-----END EC PRIVATE KEY-----",
+        "Comment": "Shouldn't match such a short key",
+    },
+    {
+        "Example": "-----BEGIN RSA PRIVATE KEY-----\\nREPLACE_ME\\n-----END RSA PRIVATE KEY-----",
+        "Comment": "Shouldn't match such a short key",
+    },
+    {
+        "Example": "-----BEGIN PRIVATE KEY-----\\nMII.....RSA KEY WITHOUT LINEBREAKS\\n-----END PRIVATE KEY-----",
+        "Comment": "Shouldn't match an inline key with spaces in it",
+    },
+    {
+        "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
+        "File": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
+        "Comment": "OpenSSL Test File",
+    },
+    {
+        "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIx4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
+        "File": "test/smime-certs/smrsa1024.pem",
+        "Comment": "OpenSSL Test File",
+    },
+    {
+        "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
+        "File": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
+        "Comment": "OpenSSL Test File",
+    },
+    {
+        "Example": "-----BEGIN EC PRIVATE KEY-----XIGkAgEBBDBzBY5zU8bo6nwkJuENhlwaQBnTWVgA59eg9OfggbYu4NAYvMbNapPykinda-----END EC PRIVATE KEY-----",
+        "File": "test/testec-p112r1.pem",
+        "Comment": "Common test files in the open ssl project and others",
+    },
 ]
 
 
