@@ -41,16 +41,16 @@ VERSION = "8.12.0"
 SHOULD_MATCH = [
     # Very WIP just here to unblock testing
     {
-        "RuleID": "asymmetric-private-key",
-        "Example": "-----BEGIN PGP PRIVATE KEY-----",
-        "Secret": "-----BEGIN PGP PRIVATE KEY-----",
-        "Comment": "Should capture private key headers",
+        "RuleID": "private-key",
+        "Example": "-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+        "Secret": "-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+        "Comment": "Should capture private keys",
     },
     {
-        "RuleID": "asymmetric-private-key",
+        "RuleID": "private-key",
         "Example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
-        "Secret": "-----BEGIN OPENSSH PRIVATE KEY-----",
-        "Comment": "Should capture private key headers",
+        "Secret": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "Comment": "Should capture private keys",
     },
 ]
 
@@ -78,31 +78,24 @@ SHOULD_NOT_MATCH = [
 
 class TestGitLeaks(TestCase):
     test_dir = Path(__file__).resolve().parent
-    patterns_path = Path("/tmp/leaktk-patterns-{VERSION}-patterns.toml")
     maxDiff = 10000
+    test_pattern_dir = Path(f"/tmp/leaktk-patterns-{VERSION}/test")
+    patterns_path = Path(f"/tmp/leaktk-patterns-{VERSION}/patterns.toml")
 
     def setUp(self):
         build_patterns = self.test_dir.joinpath(
-            "..",
-            "..",
-            "..",
-            "target",
-            "patterns",
-            "gitleaks",
-            VERSION,
+            "..", "..", "..", "target", "patterns", "gitleaks", VERSION
         )
-        shutil.copy(build_patterns, self.patterns_path)
-
-        self.test_pattern_dir = Path(f"/tmp/leaktk-patterns-{VERSION}")
 
         # Start fresh
         if self.test_pattern_dir.is_dir():
             shutil.rmtree(self.test_pattern_dir)
 
         self.test_pattern_dir.mkdir(parents=True)
+        shutil.copy(build_patterns, self.patterns_path)
 
         # Write everything (including the specific ones) to the test file)
-        general_test_file_path = self.test_pattern_dir.joinpath("general-test")
+        general_test_file_path = self.test_pattern_dir.joinpath("general")
         with open(general_test_file_path, "w+") as general_test_file:
             general_test_file.write(
                 "\n".join(

@@ -1,10 +1,31 @@
 title = "Gitleaks Config"
-# Global Allowlist Rules
 
 [allowlist]
 description = "Global Allowlist"
-# TODO: this is just stubbed out so the file exists
-# patterns still need to be ported over
+paths = [
+    # Ignore common binary file types
+    '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+    # Ignore go.mod and go.sum files
+    '''\/go\.(mod|sum)$''',
+    # Ignore checked-in go packages
+    '''Godeps\/''',
+    # Ignore checked-in ruby packages
+    '''gems\/''',
+    # Ignore gitleaks.toml files
+    '''gitleaks.toml$''',
+    # Ignore checked-in python packages
+    '''lib\/python[^/]+\/site-packages''',
+    # Handle a lot of the github/docs cases
+    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+    # Ignore things under node modules
+    '''node_modules\/''',
+    # Ignore most quickstarts
+    '''quickstart''',
+    # Ignore aws secrets
+    '''secrets.baseline$''',
+    # Ignore vendor code
+    '''vendor''',
+]
 
 # Genearal Potential Leak Patterns
 
@@ -13,25 +34,54 @@ description = "Global Allowlist"
 
 # Very WIP just here to unblock some testing
 [[rules]]
-  id = "asymmetric-private-key"
-  description = "Asymmetric Private Key"
-  regex = '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----'''
-  tags = ["alert:repo-owner", "key", "asymmetric-private-key"]
-
-  keywords = [
-    "-----begin",
-  ]
+  id = "private-key"
+  description = "Private Key"
+  tags = ["alert:repo-owner", "type:secret"]
+  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----'''
+  keywords = ["-----begin"]
 
   [rules.allowlist]
     paths = [
       # Ignore common test certs
       '''test(s)?\/[\w\-]+.pem$''',
+      # Ignore common example keys
+      '''example.*(key|pem)''',
+      # Ignore common openssl tests
+      '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
     ]
 
     regexes = [
       # Anything less than 15 characters
       '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
-      # The key has spaces in it so it's probably a placeholder
-      '''PRIVATE KEY( BLOCK)?-----.*(\s).*-----END''',
+    ]
+
+[[rules]]
+  id = "aws-access-key"
+  description = "AWS Access Key"
+  tags = ["alert:repo-owner", "type:secret"]
+  regex = '''[^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})'''
+  secretGroup = 1
+  keywords = ["akia", "agpa", "aida", "aroa", "aipa", "anpa", "anva", "asia"]
+  entropy = 3.2
+
+  [rules.allowlist]
+    regexes = [
+      # Ingore example keys
+      '''EXAMPLE''',
+      # Ignore presigned URLs
+      '''X-Amz-Signature''',
+    ]
+
+[[rules]]
+  description = "AWS Secret Key"
+  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
+  tags = ["alert:repo-owner", "type:secret"]
+  entropy = 4
+
+  [rules.allowlist]
+    regexes = [
+      '''arn:aws:iam:''',
+      # Ignore common placeholders
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
     ]
 

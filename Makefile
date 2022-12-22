@@ -8,6 +8,9 @@ all: $(PATTERN_FILES)
 clean:
 	rm -rf target
 
+format:
+	black .
+
 .PHONY: test
 test:
 	@./scripts/$@

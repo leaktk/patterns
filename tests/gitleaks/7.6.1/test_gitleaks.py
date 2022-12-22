@@ -389,7 +389,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder value",
     },
     {
-        "example": 'PASSWORD="some.property.password=\"$SOME_PASSWORD_VARIABLE\""',
+        "example": 'PASSWORD="some.property.password="$SOME_PASSWORD_VARIABLE""',
         "comment": "Placeholder value",
     },
     {

@@ -1,7 +1,28 @@
 title = "Gitleaks Config"
-# Global Allowlist Rules
 
 [allowlist]
 description = "Global Allowlist"
-# TODO: this is just stubbed out so the file exists
-# patterns still need to be ported over
+paths = [
+    # Ignore common binary file types
+    '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+    # Ignore go.mod and go.sum files
+    '''\/go\.(mod|sum)$''',
+    # Ignore checked-in go packages
+    '''Godeps\/''',
+    # Ignore checked-in ruby packages
+    '''gems\/''',
+    # Ignore gitleaks.toml files
+    '''gitleaks.toml$''',
+    # Ignore checked-in python packages
+    '''lib\/python[^/]+\/site-packages''',
+    # Handle a lot of the github/docs cases
+    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+    # Ignore things under node modules
+    '''node_modules\/''',
+    # Ignore most quickstarts
+    '''quickstart''',
+    # Ignore aws secrets
+    '''secrets.baseline$''',
+    # Ignore vendor code
+    '''vendor''',
+]
