@@ -18,7 +18,7 @@ Fields:
 "Example" - an example of the leak line
 "Secret" - what should be matched
 "Comment" - (optional) rational on why it's there
-"File" - (optional) if the rule matches a specific filename
+"FileName" - (optional) if the rule matches a specific filename
 
 SHOULD_NOT_MATCH
 
@@ -27,7 +27,7 @@ results
 
 "Example" - an example of the leak line
 "Comment" - (optional) rational on why it's there
-"File" - (optional) if the rule matches a specific filename
+"FileName" - (optional) if the rule matches a specific filename
 """
 import json
 import subprocess
@@ -74,22 +74,22 @@ SHOULD_NOT_MATCH = [
     },
     {
         "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "File": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
+        "FileName": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
         "Comment": "OpenSSL Test File",
     },
     {
         "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIx4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "File": "test/smime-certs/smrsa1024.pem",
+        "FileName": "test/smime-certs/smrsa1024.pem",
         "Comment": "OpenSSL Test File",
     },
     {
         "Example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "File": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
+        "FileName": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
         "Comment": "OpenSSL Test File",
     },
     {
         "Example": "-----BEGIN EC PRIVATE KEY-----XIGkAgEBBDBzBY5zU8bo6nwkJuENhlwaQBnTWVgA59eg9OfggbYu4NAYvMbNapPykinda-----END EC PRIVATE KEY-----",
-        "File": "test/testec-p112r1.pem",
+        "FileName": "test/testec-p112r1.pem",
         "Comment": "Common test files in the open ssl project and others",
     },
 ]
@@ -120,16 +120,16 @@ class TestGitLeaks(TestCase):
                 "\n".join(
                     entry["Example"]
                     for entry in SHOULD_NOT_MATCH + SHOULD_MATCH
-                    if not "File" in entry
+                    if not "FileName" in entry
                 )
             )
 
         # Handle ones with custom filenames
         for entry in SHOULD_NOT_MATCH + SHOULD_MATCH:
-            if "File" not in entry:
+            if "FileName" not in entry:
                 continue
 
-            custom_file_path = self.test_pattern_dir.joinpath(entry["File"])
+            custom_file_path = self.test_pattern_dir.joinpath(entry["FileName"])
 
             if not custom_file_path.parent.is_dir():
                 custom_file_path.parent.mkdir(parents=True)
