@@ -50,14 +50,13 @@
   secretGroup = 4
   entropy = 4
   tags = ["group:leaktk-testing", "alert:repo-owner", "type:secret"]
+  keywords = ["aws"]
 
   [rules.allowlist]
     regexes = [
       # Ignore common placeholders
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
     ]
-
-
 
 [[rules]]
   id = "adafruit-api-key"
