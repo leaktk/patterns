@@ -63,26 +63,25 @@ paths = [
   tags = ["alert:repo-owner", "type:secret"]
   regex = '''[^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})'''
   secretGroup = 1
-  keywords = ["akia", "agpa", "aida", "aroa", "aipa", "anpa", "anva", "asia"]
+  keywords = ["a3t", "akia", "agpa", "aida", "aroa", "aipa", "anpa", "anva", "asia"]
   entropy = 3.2
 
   [rules.allowlist]
     regexes = [
       # Ingore example keys
       '''EXAMPLE''',
-      # Ignore presigned URLs
-      '''X-Amz-Signature''',
     ]
 
 [[rules]]
+  id = "aws-secret-key"
   description = "AWS Secret Key"
   regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
+  secretGroup = 4
   tags = ["alert:repo-owner", "type:secret"]
   entropy = 4
 
   [rules.allowlist]
     regexes = [
-      '''arn:aws:iam:''',
       # Ignore common placeholders
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
     ]

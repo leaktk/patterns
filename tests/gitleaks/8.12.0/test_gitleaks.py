@@ -57,6 +57,30 @@ SHOULD_MATCH = [
         "Secret": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
         "Comment": "Should capture private keys",
     },
+    {
+        "RuleID": "aws-access-key",
+        "Example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE",
+        "Secret": "A3TGOBTGY4DIMRXMIYGE",
+        "Comment": "Should capture AWS access keys",
+    },
+    {
+        "RuleID": "aws-secret-key",
+        "Example": "  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar",
+        "Secret": "af60f112a534df0cc1e4d892b5768f3easefasza",
+        "Comment": "Should capture AWS secret keys",
+    },
+    {
+        "RuleID": "aws-secret-key",
+        "Example": '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar',
+        "Secret": "Af60f112a534df0cc1e4d892b5768f3easef/+zc",
+        "Comment": "Should capture AWS secret keys",
+    },
+    {
+        "RuleID": "aws-secret-key",
+        "Example": '  AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb" foo=bar',
+        "Secret": "aF6/f1+2a534df0cc1e4d892b5768f3easefaszb",
+        "Comment": "Should capture AWS secret keys",
+    },
 ]
 
 SHOULD_NOT_MATCH = [
@@ -92,6 +116,55 @@ SHOULD_NOT_MATCH = [
         "FileName": "test/testec-p112r1.pem",
         "Comment": "Common test files in the open ssl project and others",
     },
+    {
+        "Example": "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker",
+        "Comment": "This is not an AWS secret key",
+    },
+    {
+        "Example": "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName",
+        "Comment": "This is not an AWS secret key",
+    },
+    # TODO: not sure how to ignore this one in gitleaks >=8.12
+    # {
+    #     "Example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYG1/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
+    #     "Comment": "This is a presigned AWS URL",
+    # },
+    {
+        "Example": 'awslb/podsvc.yaml": testExtendedTestdataRouterAwslbPodsvcYaml',
+        "Comment": "This is not an AWS secret key",
+    },
+    {
+        "Example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYG2 #gitleaks:allow",
+        "Comment": "Allowed by gitleaks:allow",
+    },
+    {
+        "Example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYG3 // gitleaks:allow",
+        "Comment": "Allowed by gitleaks:allow different comment type",
+    },
+    {
+        "Example": " b/drivers/media/platform/bcm2835/Kconfig",
+        "Comment": "Meets the criteria for a potential AWS secret key",
+    },
+    {
+        "Example": "_Somef0lder/or/Somepath/that0snotakeyyepa.sh",
+        "Comment": "Meets the criteria for a potential AWS secret key",
+    },
+    {
+        "Example": "http://mirror.centos.org/centos/8-stream/BaseOS/aarch64/os/Packages/libffi-3.1-23.el8.aarch64.rpm",
+        "Comment": "Happens to have the right number of characters for an AWS key inside part of the URL",
+    },
+    {
+        "Example": 'if awsEnvVars[i].Name == RegistryStorageS3RegionendpointEnvVarKey && bsl.Spec.Config[S3URL] != "" {',
+        "Comment": "This is not an AWS secret key",
+    },
+    {
+        "Example": "administration_role_arn: arn:aws:iam::1234567890:role/AWSCloudFormationStackSetAdministrationRole",
+        "Comment": "This is not an AWS secret key",
+    },
+    {
+        "Example": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+        "Comment": "This is not an AWS secret key",
+    },
 ]
 
 
@@ -122,6 +195,7 @@ class TestGitLeaks(TestCase):
                     for entry in SHOULD_NOT_MATCH + SHOULD_MATCH
                     if not "FileName" in entry
                 )
+                + "\n"
             )
 
         # Handle ones with custom filenames
