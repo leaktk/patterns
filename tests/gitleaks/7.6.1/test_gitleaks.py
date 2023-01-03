@@ -376,6 +376,26 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "fake_cert = '-----BEGIN OPENSSH PRIVATE KEY-----",
+        "comment": "Test Cert",
+    },
+    {
+        "example": "exampleCert = '-----BEGIN PRIVATE KEY-----",
+        "comment": "Test Cert",
+    },
+    {
+        "example": "testCert = '-----BEGIN RSA PRIVATE KEY-----",
+        "comment": "Test Cert",
+    },
+    {
+        "example": '"secret": "__GITLAB_OAUTH_SECRET__"',
+        "comment": "These are placeholder values",
+    },
+    {
+        "example": '"mongoUri": "mongodb://__MONGO_USER__:__MONGO_PASSWORD__@__MONGO_HOST__:__MONGO_PORT__"',
+        "comment": "These are placeholder values",
+    },
+    {
         "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
         "filename": "src/ukify/test/example.signing.key",
         "comment": "Example keys should be ignored",

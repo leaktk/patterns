@@ -20,6 +20,9 @@
       '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
       # The key has spaces in it so it's probably a placeholder
       '''PRIVATE KEY( BLOCK)?-----.*(\s).*-----END''',
+      # Ignore some keys assigned to test vars
+      # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
+      '''(?i)[\w]*(fake|example|test)\w*(\s+)?[:=]+(\s+)?(\[)?(\s+)?(\"\"\"|\"|\'|`)?-----BEGIN''',
     ]
 
 [[rules]]
@@ -130,6 +133,8 @@
     regexes = [
       # Things like: https://user:<pass>@host
       '''(?i):\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
+      # Things like: https://user:__pass__@host
+      '''(?i):\/\/([^:\/\s\"\']+)?:__[^@\/\s]+__@[\w\.\-]+''',
       # Things like: https://user:%pass%@host
       '''(?i):\/\/([^:\/\s\"\']+)?:%[^@\/\s]+%@[\w\.\-]+''',
       # Things like: https://user:$pass$@host
@@ -225,6 +230,8 @@
       '''#(\s+)?noqa(:[\s\w]+)?$''',
       # Things like: password = ""
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
+      # Things like: password = "__PLACEHOLDER__"
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']__.+?__[\"\']''',
       # Things like: password = "<PLACEHOLDER>"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: password = "@@PLACEHOLDER@@"
@@ -328,6 +335,8 @@
       '''(?i)[\"\']?aws(.{1,15})secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
       # Things like: secret = ""
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
+      # Things like: secret = "__PLACEHOLDER__"
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']__.+?__[\"\']''',
       # Things like: secret = "<PLACEHOLDER>"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: secret = "@@PLACEHOLDER@@"
@@ -431,6 +440,8 @@
     regexes = [
       # Things like: secret==
       '''(?i)(secret((-|_)key)?|password)==''',
+      # Things like: secret=__PLACEHOLDER__
+      '''(?i)(secret((-|_)key)?|password)=__[^;\<\&\"\'\s\n]{5,}__''',
       # Things like: secret=<PLACEHOLDER>
       '''(?i)(secret((-|_)key)?|password)=<[^;\<\&\"\'\s\n]{5,}>''',
       # Things like: secret=%PLACEHOLDER%
