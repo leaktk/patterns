@@ -84,6 +84,20 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    # TODO: not sure how to ignore this one in gitleaks >=8.12
+    # Ticket for more info: https://github.com/zricethezav/gitleaks/issues/1064
+    # {
+    #     "Example": "fake_cert = '-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+    #     "Comment": "Test Cert",
+    # },
+    # {
+    #     "Example": "exampleCert = '-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+    #     "Comment": "Test Cert",
+    # },
+    # {
+    #     "Example": "someTestCert = '-----BEGIN PGP PRIVATE KEY BLOCK-----\nnwTJg6FqyyJl9gTXZoe8TYZ6TXFBfH...somekey...nwTJg6FqyyJl9gTXZoe8TYZ6TXFBfHmHeS1Q4\n-----END PGP PRIVATE KEY BLOCK-----",
+    #     "Comment": "Test Cert",
+    # },
     {
         "Example": "-----BEGIN EC PRIVATE KEY-----\\nshort\\n-----END EC PRIVATE KEY-----",
         "Comment": "Shouldn't match such a short key",

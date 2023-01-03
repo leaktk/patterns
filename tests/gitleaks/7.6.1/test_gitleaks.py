@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "password=USER_PASSWORD,",
+        "comment": "Placeholder ending in a comma",
+    },
+    {
         "example": '"password": "Contrase\\u00f1a"',
         "comment": "Password in spanish",
     },

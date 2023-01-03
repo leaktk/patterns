@@ -87,6 +87,15 @@ paths = [
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
     ]
 
+# These patterns were pulled from gitleaks without much altering
+
+# TODO:
+# Set up some automation that pulls these automatically, retags them and
+# ignores the ones where the id already exists in the repo and logs which
+# ones were skipped.
+
+# Just to make the process of updating this file easier.
+
 [[rules]]
   id = "adafruit-api-key"
   description = "Adafruit API Key"
