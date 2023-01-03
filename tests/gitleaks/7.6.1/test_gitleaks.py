@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": '"password": "Contrase\\u00f1a"',
+        "comment": "Password in spanish",
+    },
+    {
         "example": "fake_cert = '-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Test Cert",
     },
