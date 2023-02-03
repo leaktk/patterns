@@ -68,9 +68,10 @@ how to handle certain leaks.
 predefined tags:
 
 * `type:secret` - secrets that should never be exposed somewhere the scanner should be able to reach
-* `type:vulnerability` - a CVE, vulnerable dep, or known flaw
+* `type:infra` - information about infrastructure, host names, etc
+* `type:ioc` - indicator of compromise
 * `type:pii` - personally identifiable information
-* `type:infrastructure` - information about infrastructure, host names, etc
+* `type:vuln` - a CVE, vulnerable dep, or known flaw
 
 If defining custom tags, namespace them to avoid collisions with future tags.
 For example if you were writing tags for a company called WidgetCorp and you
