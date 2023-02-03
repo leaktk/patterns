@@ -3,7 +3,7 @@
 [[rules]]
   description = "Asymmetric Private Key"
   regex = '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----'''
-  tags = ["alert:repo-owner", "key", "asymmetric-private-key"]
+  tags = ["alert:repo-owner", "key", "asymmetric-private-key", "type:secret"]
 
   [rules.allowlist]
     paths = [
@@ -30,7 +30,7 @@
   # Assumes there's at least one non uppercase letter or number before the key
   # to help avoid thinking things in the middle of hashes are keys.
   regex = '''[^A-Z0-9](A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)([A-Z0-9]{16})'''
-  tags = ["alert:repo-owner", "key", "aws"]
+  tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
     regexes = [
@@ -48,7 +48,7 @@
 [[rules]]
   description = "AWS MWS Key"
   regex = '''amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
-  tags = ["alert:repo-owner", "key", "aws", "mws"]
+  tags = ["alert:repo-owner", "key", "aws", "mws", "type:secret"]
 
 # Commenting this out because of potential issue found with it causing the scanner
 # to not report
@@ -61,7 +61,7 @@
 #   # Update alert tags and remove "testing" tag when ready
 #   # May set this up to never alert users directly but instead feed it
 #   # to a cred checker tool if we can't get a higher number of true positives.
-#   tags = ["group:leaktk-testing", "key", "aws"]
+#   tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
 #
 #   [[rules.entropies]]
 #     Min = "4.2"
@@ -89,7 +89,7 @@
 [[rules]]
   description = "AWS Secret Key"
   regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
-  tags = ["alert:repo-owner", "key", "aws"]
+  tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
     regexes = [
@@ -107,7 +107,7 @@
   description = "Container Registry Authentication"
   # Example match: registry.New("registry", "username", "password")
   regex = '''registry\.New\((\s+)?\"[^\"]+\",(\s+)?\"[^\"]+\",(\s+)?(\"[^\"]+\")(\s+)?\)'''
-  tags = ["alert:repo-owner", "key", "container-registry"]
+  tags = ["alert:repo-owner", "key", "container-registry", "type:secret"]
 
   [[rules.entropies]]
     Min = "0"
@@ -117,7 +117,7 @@
 [[rules]]
   description = "URL User and Password"
   regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
-  tags = ["alert:repo-owner", "password", "basic-auth"]
+  tags = ["alert:repo-owner", "password", "basic-auth", "type:secret"]
 
   [[rules.entropies]]
     Min = "2.4"
@@ -164,28 +164,28 @@
 [[rules]]
   description = "Dynatrace Token"
   regex = '''dt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}'''
-  tags = ["alert:repo-owner", "key", "dynatrace"]
+  tags = ["alert:repo-owner", "key", "dynatrace", "type:secret"]
 
 [[rules]]
   description = "Facebook Secret Key"
   regex = '''(?i)(facebook)([0-9A-Za-z_-]{0,20})?(\s+)?[:|=|(](\s+)?(?-i)['\"]?[0-9a-f]{32}['\"]?'''
-  tags = ["alert:repo-owner", "key", "facebook"]
+  tags = ["alert:repo-owner", "key", "facebook", "type:secret"]
 
 [[rules]]
   description = "Google API Key"
   regex = '''AIza[0-9A-Za-z\\-_]{35}([^0-9A-Za-z\\-_]|$)'''
-  tags = ["alert:repo-owner", "key", "google"]
+  tags = ["alert:repo-owner", "key", "google", "type:secret"]
 
 [[rules]]
   description = "Heroku API Key"
   regex = '''(?i)heroku(.{0,20})?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
-  tags = ["alert:repo-owner", "key", "heroku"]
+  tags = ["alert:repo-owner", "key", "heroku", "type:secret"]
 
 [[rules]]
   description = "Htpasswd Files"
   file = '''htpasswd'''
   regex = '''.+?:([^\s]+)'''
-  tags = ["alert:repo-owner", "key", "password", "general"]
+  tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
 
   [rules.allowlist]
     regexes = [
@@ -205,17 +205,17 @@
 [[rules]]
   description = "MailChimp API Key"
   regex = '''(?i)(mailchimp|mc)(.{0,20})?[0-9a-f]{32}-us[0-9]{1,2}'''
-  tags = ["alert:repo-owner", "key", "mailchimp"]
+  tags = ["alert:repo-owner", "key", "mailchimp", "type:secret"]
 
 [[rules]]
   description = "Mailgun API Key"
   regex = '''((?i)(mailgun|mg)(.{0,20})?)key-[0-9a-z]{32}'''
-  tags = ["alert:repo-owner", "key", "mailgun"]
+  tags = ["alert:repo-owner", "key", "mailgun", "type:secret"]
 
 [[rules]]
   description = "General Secret"
   regex = '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-  tags = ["alert:repo-owner", "key", "password", "general"]
+  tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
 
   [rules.allowlist]
     paths = [
@@ -286,7 +286,7 @@
 [[rules]]
   description = "General Secret"
   regex = '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>([^\"\s]+?)<\/'''
-  tags = ["alert:repo-owner", "key", "password", "general"]
+  tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
 
   [rules.allowlist]
     paths = [
@@ -316,7 +316,7 @@
 [[rules]]
   description = "General Secret"
   regex = '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-  tags = ["alert:repo-owner", "key", "secret", "general"]
+  tags = ["alert:repo-owner", "key", "secret", "general", "type:secret"]
 
   [rules.allowlist]
     paths = [
@@ -392,7 +392,7 @@
 [[rules]]
   description = "General Secret"
   regex = '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>([^\"\s]+?)<\/'''
-  tags = ["alert:repo-owner", "key", "secret", "general"]
+  tags = ["alert:repo-owner", "key", "secret", "general", "type:secret"]
 
   [rules.allowlist]
     paths = [
@@ -429,7 +429,7 @@
   # this is to see what else exists out there
   regex = '''(?i)(secret((-|_)key)?|password)=([^;,\<\&\"\'\s\n]{5,})'''
   # Update alert tags and remove "testing" tag when ready
-  tags = ["group:leaktk-testing", "key", "secret", "general", "unquoted"]
+  tags = ["group:leaktk-testing", "key", "secret", "general", "unquoted", "type:secret"]
 
   [[rules.entropies]]
     Min = "3"
@@ -488,7 +488,7 @@
 [[rules]]
   description = "GitHub personal access token"
   regex = '''(ghp_[0-9A-Za-z]{36,})'''
-  tags = ["alert:repo-owner", "key", "github", "personal", "token"]
+  tags = ["alert:repo-owner", "key", "github", "personal", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
@@ -498,7 +498,7 @@
 [[rules]]
   description = "GitHub oauth access token"
   regex = '''(gho_[0-9A-Za-z]{36,})'''
-  tags = ["alert:repo-owner", "key", "github", "oauth", "token"]
+  tags = ["alert:repo-owner", "key", "github", "oauth", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
@@ -508,7 +508,7 @@
 [[rules]]
   description = "GitHub user-to-server token"
   regex = '''(ghu_[0-9A-Za-z]{36,})'''
-  tags = ["alert:repo-owner", "key", "github", "user-to-server", "token"]
+  tags = ["alert:repo-owner", "key", "github", "user-to-server", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
@@ -518,7 +518,7 @@
 [[rules]]
   description = "GitHub server-to-server token"
   regex = '''(ghs_[0-9A-Za-z]{36,})'''
-  tags = ["alert:repo-owner", "key", "github", "server-to-server", "token"]
+  tags = ["alert:repo-owner", "key", "github", "server-to-server", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
@@ -528,7 +528,7 @@
 [[rules]]
   description = "GitHub refresh token"
   regex = '''(ghr_[0-9A-Za-z]{36,})'''
-  tags = ["alert:repo-owner", "key", "github", "refresh", "token"]
+  tags = ["alert:repo-owner", "key", "github", "refresh", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
@@ -538,47 +538,47 @@
 [[rules]]
   description = "PayPal Braintree Access Token"
   regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
-  tags = ["alert:repo-owner", "key", "paypal"]
+  tags = ["alert:repo-owner", "key", "paypal", "type:secret"]
 
 [[rules]]
   description = "Picatic API Key"
   regex = '''sk_live_[0-9a-z]{32}'''
-  tags = ["alert:repo-owner", "key", "picatic"]
+  tags = ["alert:repo-owner", "key", "picatic", "type:secret"]
 
 [[rules]]
   description = "PyPI Upload Token"
   regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
-  tags = ["alert:repo-owner", "key", "pypi"]
+  tags = ["alert:repo-owner", "key", "pypi", "type:secret"]
 
 [[rules]]
   description = "SendGrid API Key"
   regex = '''[^\w]SG\.[\w\-]{16,32}\.[\w\-]{16,64}'''
-  tags = ["alert:repo-owner", "key", "sendgrid"]
+  tags = ["alert:repo-owner", "key", "sendgrid", "type:secret"]
 
 [[rules]]
   description = "Shopify Access Token"
   regex = '''shpat_[a-fA-F0-9]{32}'''
-  tags = ["alert:repo-owner", "key", "shopify"]
+  tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
   description = "Shopify Custom App Access Token"
   regex = '''shpca_[a-fA-F0-9]{32}'''
-  tags = ["alert:repo-owner", "key", "shopify"]
+  tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
   description = "Shopify Private App Access Token"
   regex = '''shppa_[a-fA-F0-9]{32}'''
-  tags = ["alert:repo-owner", "key", "shopify"]
+  tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
   description = "Shopify Shared Secret"
   regex = '''shpss_[a-fA-F0-9]{32}'''
-  tags = ["alert:repo-owner", "key", "shopify"]
+  tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
   description = "Slack Token"
   regex = '''xox[baprs]-([0-9a-zA-Z-]{10,48})?'''
-  tags = ["alert:repo-owner", "key", "slack"]
+  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
@@ -594,7 +594,7 @@
 [[rules]]
   description = "Slack Webhook"
   regex = '''https://hooks.slack.com/services/(T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8,12}/[a-zA-Z0-9_]{24})'''
-  tags = ["alert:repo-owner", "key", "slack"]
+  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
 
   [[rules.entropies]]
     Min = "3.2"
@@ -604,27 +604,27 @@
 [[rules]]
   description = "Square Access Token"
   regex = '''sq0atp-[0-9A-Za-z\-_]{22}'''
-  tags = ["alert:repo-owner", "key", "square"]
+  tags = ["alert:repo-owner", "key", "square", "type:secret"]
 
 [[rules]]
   description = "Square OAuth Secret"
   regex = '''sq0csp-[0-9A-Za-z\\-_]{43}'''
-  tags = ["alert:repo-owner", "key", "square"]
+  tags = ["alert:repo-owner", "key", "square", "type:secret"]
 
 [[rules]]
   description = "Stripe API Key"
   regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
-  tags = ["alert:repo-owner", "key", "stripe"]
+  tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
 
 [[rules]]
   description = "Twilio API Key"
   regex = '''(?i)twilio(.{0,20})?SK[0-9a-f]{32}'''
-  tags = ["alert:repo-owner", "key", "twilio"]
+  tags = ["alert:repo-owner", "key", "twilio", "type:secret"]
 
 [[rules]]
   description = "WP-Config"
   regex='''define(\s+)?\((\s+)?[\"\'](DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\'](\s+)?,(\s+)?[\"\'](.+?)[\"\'](\s+)?\)'''
-  tags = ["alert:repo-owner", "key", "credential", "wordpress"]
+  tags = ["alert:repo-owner", "key", "credential", "wordpress", "type:secret"]
 
   [rules.allowlist]
     regexes = [
