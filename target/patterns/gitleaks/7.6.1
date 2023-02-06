@@ -144,7 +144,7 @@
 
 [[rules]]
   description = "URL User and Password"
-  regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
+  regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@[\w\.\-]+'''
   tags = ["alert:repo-owner", "password", "basic-auth", "type:secret"]
 
   [[rules.entropies]]

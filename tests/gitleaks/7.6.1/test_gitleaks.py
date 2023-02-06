@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "https://some.testing.server:443\".\\u0000[xxx\\r\\n[user@host",
+        "comment": "Contains a host later on so it looks like basic auth",
+    },
+    {
         "example": "password=USER_PASSWORD,",
         "comment": "Placeholder ending in a comma",
     },
