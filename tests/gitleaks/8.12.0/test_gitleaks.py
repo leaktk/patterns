@@ -84,6 +84,10 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "Example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
+        "Comment": "Contains EXAMPLE base64 encoded",
+    },
     # TODO: not sure how to ignore this one in gitleaks >=8.12
     # Ticket for more info: https://github.com/zricethezav/gitleaks/issues/1064
     # {

@@ -376,6 +376,30 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
+        "comment": "Contains EXAMPLE base64 encoded",
+    },
+    {
+        "example": "postgresql://my-user:&lt;password&gt;@host:1111/",
+        "comment": "Placeholder password",
+    },
+    {
+        "example": "Sample:<pre>AGPAIDCX94X8GQXML0OX</pre>",
+        "comment": "Ignore AWS access keys marked as samples",
+    },
+    {
+        "example": "YCu38AvUpJs01zHxja7Z9qhZWVAfjxP5H/A3TE8SENGWR1ZFQ206BR+Q06phGgStkRWAHCQ",
+        "comment": "Contains something that looks like an AWS access key",
+    },
+    {
+        "example": "amqp://rabbitmq:rabbitmq@rabbitmq:5672",
+        "comment": "Default password",
+    },
+    {
+        "example": 'https://some.testing.server:443".\\u0000[xxx\\r\\n[user@host',
+        "comment": "Contains a host later on so it looks like basic auth",
+    },
+    {
         "example": "password=USER_PASSWORD,",
         "comment": "Placeholder ending in a comma",
     },

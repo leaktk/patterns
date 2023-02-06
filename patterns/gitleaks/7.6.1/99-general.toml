@@ -29,13 +29,16 @@
   description = "AWS Access Key"
   # Assumes there's at least one non uppercase letter or number before the key
   # to help avoid thinking things in the middle of hashes are keys.
-  regex = '''[^A-Z0-9](A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)([A-Z0-9]{16})'''
+  regex = '''[^A-Z0-9\/](A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)([A-Z0-9]{16})'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ingore example keys
       '''EXAMPLE''',
+      # Ingore sample keys (range limit added to ensure the key has some
+      # proximity to "sample:")
+      '''(S|s)ample:.{0,1000}(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)''',
       # Ignore presigned URLs
       '''X-Amz-Signature''',
     ]
@@ -96,6 +99,8 @@
       '''arn:aws:iam:''',
       # Ignore common placeholders
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
+      # Ignore EXAMPLE base64 encoded
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*['\"]?''',
     ]
 
   [[rules.entropies]]
@@ -116,7 +121,7 @@
 
 [[rules]]
   description = "URL User and Password"
-  regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s]{3,})@[\w\.\-]+'''
+  regex = ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@[\w\.\-]+'''
   tags = ["alert:repo-owner", "password", "basic-auth", "type:secret"]
 
   [[rules.entropies]]
@@ -133,6 +138,8 @@
     regexes = [
       # Things like: https://user:<pass>@host
       '''(?i):\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
+      # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
+      '''(?i):\/\/([^:\/\s\"\']+)?:&lt;[^@\/\s]+&gt;@[\w\.\-]+''',
       # Things like: https://user:__pass__@host
       '''(?i):\/\/([^:\/\s\"\']+)?:__[^@\/\s]+__@[\w\.\-]+''',
       # Things like: https://user:%pass%@host
@@ -155,7 +162,7 @@
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
       # Common spammy placeholder creds
-      '''(?i):\/\/([^:\/\s\"\']+)?:(keylime|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
       '''(?i):\/\/([^:\/\s\"\']+)?:(\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|file:|grub|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
       '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|changeme|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
