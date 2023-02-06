@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "amqp://rabbitmq:rabbitmq@rabbitmq:5672",
+        "comment": "Default password",
+    },
+    {
         "example": "https://some.testing.server:443\".\\u0000[xxx\\r\\n[user@host",
         "comment": "Contains a host later on so it looks like basic auth",
     },
