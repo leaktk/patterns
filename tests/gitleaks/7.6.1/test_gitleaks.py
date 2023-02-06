@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "YCu38AvUpJs01zHxja7Z9qhZWVAfjxP5H/A3TE8SENGWR1ZFQ206BR+Q06phGgStkRWAHCQ",
+        "comment": "Contains something that looks like an AWS access key",
+    },
+    {
         "example": "amqp://rabbitmq:rabbitmq@rabbitmq:5672",
         "comment": "Default password",
     },

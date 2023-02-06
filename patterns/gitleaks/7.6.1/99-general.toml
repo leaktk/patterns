@@ -29,7 +29,7 @@
   description = "AWS Access Key"
   # Assumes there's at least one non uppercase letter or number before the key
   # to help avoid thinking things in the middle of hashes are keys.
-  regex = '''[^A-Z0-9](A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)([A-Z0-9]{16})'''
+  regex = '''[^A-Z0-9\/](A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)([A-Z0-9]{16})'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
