@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "Sample:<pre>AGPAIDCX94X8GQXML0OX</pre>",
+        "comment": "Ignore AWS access keys marked as samples",
+    },
+    {
         "example": "YCu38AvUpJs01zHxja7Z9qhZWVAfjxP5H/A3TE8SENGWR1ZFQ206BR+Q06phGgStkRWAHCQ",
         "comment": "Contains something that looks like an AWS access key",
     },
@@ -384,7 +388,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Default password",
     },
     {
-        "example": "https://some.testing.server:443\".\\u0000[xxx\\r\\n[user@host",
+        "example": 'https://some.testing.server:443".\\u0000[xxx\\r\\n[user@host',
         "comment": "Contains a host later on so it looks like basic auth",
     },
     {

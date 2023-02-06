@@ -36,6 +36,9 @@
     regexes = [
       # Ingore example keys
       '''EXAMPLE''',
+      # Ingore sample keys (range limit added to ensure the key has some
+      # proximity to "sample:")
+      '''(S|s)ample:.{0,1000}(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AIPA|ANPA|ANVA|ASIA)''',
       # Ignore presigned URLs
       '''X-Amz-Signature''',
     ]
