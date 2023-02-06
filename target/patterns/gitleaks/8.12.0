@@ -85,6 +85,8 @@ paths = [
     regexes = [
       # Ignore common placeholders
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
+      # Ignore EXAMPLE base64 encoded
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*['\"]?''',
     ]
 
 # These patterns were pulled from gitleaks without much altering
