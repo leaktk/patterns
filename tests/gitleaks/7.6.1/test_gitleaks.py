@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
+        "comment": "Contains EXAMPLE base64 encoded",
+    },
+    {
         "example": "postgresql://my-user:&lt;password&gt;@host:1111/",
         "comment": "Placeholder password",
     },
