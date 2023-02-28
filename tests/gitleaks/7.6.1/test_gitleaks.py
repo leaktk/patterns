@@ -376,6 +376,39 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "password=YOURGENERATEDAPPLICATIONPASSWORD\\n",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "{{ lookup('hashi_vault', 'secret=kv/foo:username token={{ token_var }} url=http://host:8200')}}",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "SECRET=`kubectl...`",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "password=FIXME!px1",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "PASSWORD=PW_PLACEHOLDER",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "secret=FAKE.thing()",
+        "comment": "Not a secret",
+    },
+    {
+        "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
+        "comment": "Data in a is skipped due to high FP rate",
+        "filename": "htpasswd.md",
+    },
+    {
+        "example": 'jq -rj \'"password: ",.some_password,"\\n"\'',
+        "comment": "Part of a jq lookup",
+    },
+    {
         "example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
         "comment": "Contains EXAMPLE base64 encoded",
     },
