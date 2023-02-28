@@ -376,6 +376,11 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
+        "comment": "Data in a markdown is skipped due to high FP rate",
+        "filename": "htpasswd.md",
+    },
+    {
         "example": 'jq -rj \'"password: ",.some_password,"\\n"\'',
         "comment": "Part of a jq lookup",
     },
