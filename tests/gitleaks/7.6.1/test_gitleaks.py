@@ -376,6 +376,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'jq -rj \'"password: ",.some_password,"\\n"\'',
+        "comment": "Part of a jq lookup",
+    },
+    {
         "example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
         "comment": "Contains EXAMPLE base64 encoded",
     },

@@ -283,6 +283,8 @@
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
       # Things like: password = "(optional char)${PLACEHOLDER}(optional text)"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](.)?\$\{.+?\}(.+)?[\"\']''',
+      # jq lookups
+      '''jq\s+([\w\-\s]+)?.*\.\w*password''',
       # Things like: password = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
       # Things like: password = "/SOME/path:${PLACEHOLDER}"
       # Things like: password = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
@@ -386,6 +388,8 @@
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']%.+?%[\"\']''',
       # Things like: secret = "$PLACEHOLDER$"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
+      # jq lookups
+      '''jq\s+([\w\-\s]+)?.*\.\w*secret''',
       # Things like: secret = "(optional char)($|#){PLACEHOLDER}(optional text)"
       # Things like: secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?(\$|#)\{.+?\}(.+)?[\"\']''',
