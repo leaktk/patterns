@@ -40,6 +40,20 @@ VERSION = "7.6.1"
 
 SHOULD_MATCH = [
     {
+        "description": "Potentially Malicious Python Package",
+        "example": "adad",
+        "offender": "adad",
+        "filename": "requirements.txt",
+        "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
+    },
+    {
+        "description": "Potentially Malicious Python Package",
+        "example": '"adcandy>=0.0.0"',
+        "offender": '"adcandy>',
+        "filename": "setup.py",
+        "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
+    },
+    {
         "description": "Unquoted Secret",
         "example": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
         "offender": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
@@ -375,6 +389,16 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    {
+        "example": "adcraft-jk-its-not-real",
+        "comment": "This package name contains a malicous package name but isn't one",
+        "filename": "requirements.txt"
+    },
+    {
+        "example": "adhttpfakenotreal",
+        "comment": "This package name contains a malicous package name but isn't one",
+        "filename": "requirements.txt"
+    },
     {
         "example": "password=YOURGENERATEDAPPLICATIONPASSWORD\\n",
         "comment": "Not a secret",

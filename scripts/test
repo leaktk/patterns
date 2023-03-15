@@ -16,7 +16,7 @@ fi
 
 echo 'Checking for type tags...'
 echo
-if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/' | grep -v '"type:secret"'
+if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/' | grep -Pv '"type:(secret|infra|ioc|pii|vuln)"'
 then
   echo
   echo '^^^ Missing "type:" tags detected'
