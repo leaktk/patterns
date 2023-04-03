@@ -390,6 +390,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "schema://user:default@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
         "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
         "comment": "This is just code looking for headers",
     },
