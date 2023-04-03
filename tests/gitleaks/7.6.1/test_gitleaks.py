@@ -390,14 +390,18 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "password='/etc/app-settings/password-file'",
+        "comment": "This is a path, not a password",
+    },
+    {
         "example": "adcraft-jk-its-not-real",
         "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt"
+        "filename": "requirements.txt",
     },
     {
         "example": "adhttpfakenotreal",
         "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt"
+        "filename": "requirements.txt",
     },
     {
         "example": "password=YOURGENERATEDAPPLICATIONPASSWORD\\n",
