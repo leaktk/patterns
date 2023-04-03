@@ -390,6 +390,14 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": '"password": "https://secret_dsn",',
+        "comment": "This is a URL not a secret",
+    },
+    {
+        "example": '"secret": "http://secret_dsn",',
+        "comment": "This is a URL not a secret",
+    },
+    {
         "example": "password='/etc/app-settings/password-file'",
         "comment": "This is a path, not a password",
     },
