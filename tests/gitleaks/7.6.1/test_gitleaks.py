@@ -390,14 +390,44 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "schema://user:default@host:port/",
+        "comment": "Common placeholder account",
+    },
+    {
+        "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
+        "comment": "This is just code looking for headers",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "dummy.key",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "dummy.pem",
+    },
+    {
+        "example": '"password": "https://secret_dsn",',
+        "comment": "This is a URL not a secret",
+    },
+    {
+        "example": '"secret": "http://secret_dsn",',
+        "comment": "This is a URL not a secret",
+    },
+    {
+        "example": "password='/etc/app-settings/password-file'",
+        "comment": "This is a path, not a password",
+    },
+    {
         "example": "adcraft-jk-its-not-real",
         "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt"
+        "filename": "requirements.txt",
     },
     {
         "example": "adhttpfakenotreal",
         "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt"
+        "filename": "requirements.txt",
     },
     {
         "example": "password=YOURGENERATEDAPPLICATIONPASSWORD\\n",
