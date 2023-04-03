@@ -390,6 +390,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
+        "comment": "This is just code looking for headers",
+    },
+    {
         "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
         "comment": "Should ignore based on the filename",
         "filename": "dummy.key",
