@@ -10,7 +10,7 @@
       # Ignore common test keys
       '''test(s)?\/[\w\-]+.pem$''',
       # Ignore common example keys
-      '''example.*(key|pem)''',
+      '''(dummy|example).*(key|pem)''',
       # Ignore common openssl tests
       '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
     ]

@@ -390,6 +390,16 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "dummy.key",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "dummy.pem",
+    },
+    {
         "example": '"password": "https://secret_dsn",',
         "comment": "This is a URL not a secret",
     },
