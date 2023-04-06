@@ -39,7 +39,7 @@
 
   [rules.allowlist]
     regexes = [
-      # Ingore example keys
+      # Ignore example keys
       '''EXAMPLE''',
     ]
 

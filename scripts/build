@@ -1,0 +1,62 @@
+#! /usr/bin/python3
+
+import os
+
+import yaml
+
+from yaml import SafeLoader as Loader
+
+from libpatterns import targets
+
+
+def supported(mapper_key, patterns):
+    """
+    Only return supported patterns
+    """
+    return (pattern for pattern in patterns if mapper_key in pattern["supports"])
+
+
+def patched(mapper_key, patterns):
+    """
+    Include version specific patches to the pattern and its tests
+    """
+    return (
+        pattern
+        | {
+            # Patch the tests if they need patching
+            "tests": [
+                test | test.get("patches", {}).get(mapper_key, {}) | {
+                    "id": pattern["id"],
+                    "name": pattern["name"],
+                } for test in pattern.get("tests", [])
+            ],
+            # Patch the pattern if it needs patching
+            **pattern.get("patches", {}).get(mapper_key, {}),
+        }
+        for pattern in patterns
+    )
+
+
+
+
+if __name__ == "__main__":
+    patterns = []
+
+    for file_name in os.listdir("patterns"):
+        if not file_name.endswith(".yaml"):
+            continue
+
+        patterns_path = os.path.join("patterns", file_name)
+        with open(patterns_path, encoding="UTF-8") as patterns_file:
+            patterns += yaml.load(patterns_file, Loader=Loader)
+
+    for key, target in targets.items():
+        patched_patterns = list(patched(key, supported(key, patterns)))
+        output_path = os.path.join("target", "patterns", key)
+        output_dir = os.path.dirname(output_path)
+        os.makedirs(output_dir, exist_ok=True)
+
+        with open(output_path, "wb") as output_file:
+            output_file.write(target.to_string(patched_patterns))
+
+        target.test(patched_patterns, output_path)

@@ -1,0 +1,137 @@
+# This is a source file for ./scripts/build and is not meant to be used directly
+# The format may change and is not considered stable.
+#
+# This file currently contains all of the patterns all of the gitleaks
+# versions. In the future as other scanners are added, the way these rules
+# are broken up may change. Each .yaml file here contains a list of objects
+# that that will be joined together and parsed to create the various config
+# files needed for the different scanners.
+#
+# Format
+# - kind: {rule,allowlist}
+#   name: The name or short description
+#   supports: [<scanners>]
+#   <fields>
+#   patches:  # optional
+#     <scanner>:  # optional
+#       <scanner specific patches to the fields> # optional
+#   tests:
+#     - example: some secret
+#       path: foo/cert.jwt
+#       # if match is None or doesn't exist the test will be that the value
+#       # shouldn't be in the results
+#       match: secret
+#       patches:
+#         <scanner>:  # optional
+#           <scanner specific patches to the fields> # optional
+---
+- kind: 'allowlist'
+  id: "global-allowlist"
+  name: 'Global Allowlist'
+  supports: ['gitleaks/7.6.1', 'gitleaks/8.16.2']
+
+  regexes:
+    - >- # Ignore lines containing gitleaks:allow
+      gitleaks:allow
+
+  paths:
+    - >- # Ignore checked-in go packages
+      Godeps
+    - >- # Ignore checked-in ruby packages
+      gems\/
+    - >- # Ignore checked-in nodejs packages
+      node_modules
+    - >- # Ignore checked-in misc vendored files
+      vendor
+    - >- # Quickstarts are FP heavy
+      quickstart
+    - >- # Handle a lot of the github/docs cases
+      lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)
+    - >- # Ignore checked-in python packages
+      lib/python[^/]+/site-packages
+
+  files:
+    - >- # Ignore binary files
+      (.*?)(png|jpg|gif|doc|docx|pdf|bin|xls|pyc|zip|css)$'
+    - >- # Ignore go project files
+      (go.mod|go.sum)$
+    - >- # Ignore a gitleaks.toml
+      ^\.?gitleaks.toml$
+    - >- # Ignore aws-secrets file
+      ^\.?secrets.baseline$
+
+  # TODO add tests
+
+- kind: 'rule'
+  name: 'Private Key'
+  supports: ['gitleaks/7.6.1', 'gitleaks/8.16.2']
+  id: 'private-key'
+  tags: ['group:leaktk-testing', 'alert:repo-owner', 'type:secret']
+  keywords: ['-----begin']
+
+  regex: >-
+    (?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----
+
+  allowlist:
+    paths:
+      - >- # Ignore common test certs
+        test(s)?\/[\w\-]+.pem$
+      - >- # Ignore common example keys
+        example.*(key|pem)
+      - >- # Ignore common openssl tests
+        test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)
+
+    regexes:
+      - >- # Anything less than 15 characters
+        PRIVATE KEY( BLOCK)?-----.{0,15}-----END
+
+      - >- # An inline key that has spaces in it
+        PRIVATE KEY( BLOCK)?-----.+\s.+-----END
+
+  # TODO add tests
+
+- kind: 'rule'
+  name: 'AWS Access Key'
+  supports: ['gitleaks/7.6.1', 'gitleaks/8.16.2']
+
+  id: 'aws-access-key'
+  secretGroup: 1
+  entropy: 3.2
+  tags: ['group:leaktk-testing', 'alert:repo-owner', 'type:secret']
+
+  regex: >-
+    [^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})
+
+  keywords:  ['a3t', 'akia', 'agpa', 'aida', 'aroa', 'aipa', 'anpa', 'anva', 'asia']
+
+  allowlist:
+    regexes:
+      - >- # Ignore example keys
+        EXAMPLE
+
+  tests:
+    - example: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
+      match: =A3TGOBTGY4DIMRXMIYGE
+    # TODO add tests
+
+- kind: 'rule'
+  name: 'AWS Secret Key'
+  supports: ['gitleaks/7.6.1', 'gitleaks/8.16.2']
+
+  id: 'aws-secret-key'
+  secretGroup: 4
+  entropy: 4
+  tags: ['group:leaktk-testing', 'alert:repo-owner', 'type:secret']
+  keywords: ['aws']
+
+  regex: >-
+    (?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)[\'\"]?([A-Za-z0-9\/+]{40})[\'\"]?
+
+  allowlist:
+    regexes:
+      - >- # Ignore common placeholders
+        (?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?[\'\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*[\'\"]?
+      - >- # Ignore EXAMPLE base64 encoded
+        (?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?[\'\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*[\'\"]?
+
+  # TODO add tests

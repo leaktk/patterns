@@ -1,24 +1,32 @@
 [[rules]]
+id = "private-key"
 description = "Private Key"
 regex = "(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\\s\\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----"
 tags = [ "group:leaktk-testing", "alert:repo-owner", "type:secret",]
+keywords = [ "-----begin",]
 
 [rules.allowlist]
 paths = [ "test(s)?\\/[\\w\\-]+.pem$", "example.*(key|pem)", "test\\/(recipes|smime-certs|certs)\\/.+\\.(txt|der|key|pem)",]
 regexes = [ "PRIVATE KEY( BLOCK)?-----.{0,15}-----END", "PRIVATE KEY( BLOCK)?-----.+\\s.+-----END",]
 [[rules]]
+id = "aws-access-key"
 description = "AWS Access Key"
 regex = "[^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})"
+secretGroup = 1
 entropy = 3.2
 tags = [ "group:leaktk-testing", "alert:repo-owner", "type:secret",]
+keywords = [ "a3t", "akia", "agpa", "aida", "aroa", "aipa", "anpa", "anva", "asia",]
 
 [rules.allowlist]
 regexes = [ "EXAMPLE",]
 [[rules]]
+id = "aws-secret-key"
 description = "AWS Secret Key"
 regex = "(?i)aws([^:=(,\\/\\s]{0,20})?(\\s+)?[:=(](\\s+)?(?-i)[\\'\\\"]?([A-Za-z0-9\\/+]{40})[\\'\\\"]?"
+secretGroup = 4
 entropy = 4
 tags = [ "group:leaktk-testing", "alert:repo-owner", "type:secret",]
+keywords = [ "aws",]
 
 [rules.allowlist]
 regexes = [ "(?i)aws([^:=(,\\/\\s]{0,20})?(\\s+)?[:=(](\\s+)?[\\'\\\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*[\\'\\\"]?", "(?i)aws([^:=(,\\/\\s]{0,20})?(\\s+)?[:=(](\\s+)?[\\'\\\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*[\\'\\\"]?",]
