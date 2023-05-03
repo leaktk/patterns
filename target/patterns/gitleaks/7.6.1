@@ -501,6 +501,8 @@
       '''(?i)(secret((-|_)key)?|password)==''',
       # Things like: secret=_PLACEHOLDER_
       '''(?i)(secret((-|_)key)?|password)=_[^;,\<\&\"\'\s\n]{5,}_''',
+      # Things like: secret=(password), secret=LookUpPassword(, etc
+      '''(?i)(secret((-|_)key)?|password)=((\(|\)\w+)|(\w+\(|\)))''',
       # Things like: secret=<PLACEHOLDER>
       '''(?i)(secret((-|_)key)?|password)=<[^;,\<\&\"\'\s\n]{5,}>''',
       # Things like: secret=%PLACEHOLDER%

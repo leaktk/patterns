@@ -390,6 +390,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "access_token_client_secret=VaultSecret(**access_token_client_secret),",
+        "comment": "Function call",
+    },
+    {
         "example": "<Password>$SomePlaceholderForAdminPassword$</Password>",
         "comment": "Placeholder",
     },
