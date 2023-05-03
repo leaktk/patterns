@@ -136,7 +136,7 @@
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it
-      '/azure-cli/',
+      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
     ]
     regexes = [
       # Things like: https://user:<pass>@host
@@ -231,7 +231,7 @@
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it
-      '/azure-cli/',
+      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
     ]
     regexes = [
       # Things like: password = "asdfasdfas" # nosec (used by bandit)
@@ -240,8 +240,8 @@
       '''#(\s+)?noqa(:[\s\w]+)?$''',
       # Things like: password = ""
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
-      # Things like: password = "__PLACEHOLDER__"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']__.+?__[\"\']''',
+      # Things like: password = "_PLACEHOLDER_"
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
       # Things like: password = "<PLACEHOLDER>"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: password = "@@PLACEHOLDER@@"
@@ -304,13 +304,15 @@
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it
-      '/azure-cli/',
+      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
     ]
     regexes = [
       # Things like <password>$SOME_ENV_VARIABLE</password>
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(?-i)\$[A-Z][0-9A-Z_]+<\/''',
       # Things like <password>${SOME_VARIABLE}</password>
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>\$\{.+?\}<\/''',
+      # Things like <password>$SomeVariable$</password>
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?\$\w+?\$(\]\]>)?<\/''',
       # Things like <password>$(SOME_VARIABLE)</password>
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>\$\(.+?\)<\/''',
       # Things like <password>{SOME_VARIABLE}</password>
@@ -334,7 +336,7 @@
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it
-      '/azure-cli/',
+      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
     ]
     regexes = [
       # Things like: secret = "asdfasdfas" # nosec (used by bandit)
@@ -348,7 +350,8 @@
       # Things like: secret = ""
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
       # Things like: secret = "__PLACEHOLDER__"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']__.+?__[\"\']''',
+      # Things like: secret = "_PLACEHOLDER_"
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
       # Things like: secret = "<PLACEHOLDER>"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: secret = "@@PLACEHOLDER@@"
@@ -412,7 +415,7 @@
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it
-      '/azure-cli/',
+      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
     ]
     regexes = [
       # Things like <secret>$SOME_ENV_VARIABLE</secret>
@@ -454,8 +457,8 @@
     regexes = [
       # Things like: secret==
       '''(?i)(secret((-|_)key)?|password)==''',
-      # Things like: secret=__PLACEHOLDER__
-      '''(?i)(secret((-|_)key)?|password)=__[^;,\<\&\"\'\s\n]{5,}__''',
+      # Things like: secret=_PLACEHOLDER_
+      '''(?i)(secret((-|_)key)?|password)=_[^;,\<\&\"\'\s\n]{5,}_''',
       # Things like: secret=<PLACEHOLDER>
       '''(?i)(secret((-|_)key)?|password)=<[^;,\<\&\"\'\s\n]{5,}>''',
       # Things like: secret=%PLACEHOLDER%

@@ -390,6 +390,14 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "<Password>$SomePlaceholderForAdminPassword$</Password>",
+        "comment": "Placeholder",
+    },
+    {
+        "example": "<Password><![CDATA[$SomePlaceholderForAdminPassword$]]></Password>",
+        "comment": "Placeholder",
+    },
+    {
         "example": "adad",
         "filename": "some-file.txt",
         "comment": "Looks like a malicious package but the filename is wrong",
