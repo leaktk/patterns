@@ -390,6 +390,29 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "access_token_client_secret=VaultSecret(**access_token_client_secret),",
+        "comment": "Function call",
+    },
+    {
+        "example": "<Password>$SomePlaceholderForAdminPassword$</Password>",
+        "comment": "Placeholder",
+    },
+    {
+        "example": "<Password><![CDATA[$SomePlaceholderForAdminPassword$]]></Password>",
+        "comment": "Placeholder",
+    },
+    {
+        "example": "adad",
+        "filename": "some-file.txt",
+        "comment": "Looks like a malicious package but the filename is wrong",
+    },
+    {
+        "example": '"adcandy>=0.0.0"',
+        "offender": '"adcandy>',
+        "filename": "app.py",
+        "comment": "Looks like a malicious package but the filename is wrong",
+    },
+    {
         "example": "schema://user:default@host:port/",
         "comment": "Common placeholder account",
     },
