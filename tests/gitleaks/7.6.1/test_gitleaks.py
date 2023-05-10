@@ -389,29 +389,45 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    *[
+        {
+            "example": f"-----BEGIN {key_type} PRIVATE KEY-----",
+            "comment": "Should ignore based on the filename",
+            "filename": filename,
+        }
+        for key_type in ["EC", "PGP", "DSA", "RSA", "OPENSSH"]
+        for filename in [
+            "diff/usr/lib64/libssh.so.4.8.7",
+            "diff/usr/share/mime/magic",
+            "diff/usr/share/mime/mime.cache",
+            "diff/usr/share/mime/packages/freedesktop.org.xml",
+            "diff/usr/share/misc/magic.mgc",
+            "dummy.key",
+            "dummy.pem",
+            "foo/bar/bin/ssh-add",
+            "foo/bar/usr/bin/ssh",
+            "foo/usr/libexec/cockpit-certificate-ensure" "lib64/libgnutls.so.30.30.0",
+            "src/ukify/test/example.signing.key",
+            "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
+            "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
+            "test/smime-certs/smrsa1024.pem",
+            "test/testec-p112r1.pem",
+            "usr/libexec/openssh/ssh-keysign",
+            "usr/libexec/openssh/ssh-pkcs11-helper",
+            "usr/sbin/sshd",
+            "usr/share/mime/magic",
+            "usr/share/mime/mime.cache",
+            "usr/share/mime/packages/freedesktop.org.xml",
+        ]
+    ],
+    {
+        "example": "password=V1tXb7WBGlKIVAWqGw==",
+        "comment": "Should ignore based on the filename",
+        "filename": "foo/libexec/sudo/sudoers.so",
+    },
     {
         "example": "https://test:adfa;dkj;aek;j@example.com",
         "comment": "Just an example",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "lib64/libgnutls.so.30.30.0",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "foo/bar/diff/usr/lib64/libssh.so.4.8.7",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "foo/bar/usr/bin/ssh",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "foo/bar/bin/ssh-add",
     },
     {
         "example": "access_token_client_secret=VaultSecret(**access_token_client_secret),",
@@ -443,16 +459,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
         "comment": "This is just code looking for headers",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "dummy.key",
-    },
-    {
-        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
-        "comment": "Should ignore based on the filename",
-        "filename": "dummy.pem",
     },
     {
         "example": '"password": "https://secret_dsn",',
@@ -567,11 +573,6 @@ SHOULD_NOT_MATCH = [
         "comment": "These are placeholder values",
     },
     {
-        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "filename": "src/ukify/test/example.signing.key",
-        "comment": "Example keys should be ignored",
-    },
-    {
         "example": "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker",
         "comment": "This is code",
     },
@@ -622,21 +623,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'secret="vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg==" # noqa: E501',
         "comment": "Placeholder password",
-    },
-    {
-        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
-        "comment": "OpenSSL Test File",
-    },
-    {
-        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIx4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "filename": "test/smime-certs/smrsa1024.pem",
-        "comment": "OpenSSL Test File",
-    },
-    {
-        "example": "-----BEGIN RSA PRIVATE KEY-----lIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1DdglIIfuIxMjU4YsZt2ZanI2TdTxArtaMdVpkeJagVNtjvk8TX/Fy4jxnVIUiMDE4YhA1Vx7TDJr5pT1A7iME1Ddg==-----END RSA PRIVATE KEY-----",
-        "filename": "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
-        "comment": "OpenSSL Test File",
     },
     {
         "example": "rabbit://user:redhat@example.com",
@@ -735,11 +721,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'oc login $(oc whoami --show-server) --insecure-skip-tls-verify --username=kubeadmin --password="\$KUBEADMIN_PASS" ',
         "comment": "env variable",
-    },
-    {
-        "example": "-----BEGIN PGP PRIVATE KEY-----",
-        "filename": "test/testec-p112r1.pem",
-        "comment": "Common test files in the open ssl project and others",
     },
     {
         "example": 'root_password: "PROVIDE-A-PASSWORD-SALT"',
