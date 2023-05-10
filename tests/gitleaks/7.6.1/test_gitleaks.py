@@ -390,6 +390,10 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "https://test:adfa;dkj;aek;j@example.com",
+        "comment": "Just an example",
+    },
+    {
         "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Should ignore based on the filename",
         "filename": "foo/bar/usr/bin/ssh",

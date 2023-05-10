@@ -166,6 +166,8 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
+      # Example.Com
+      ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@example.com''',
       # Common spammy placeholder creds
       '''(?i):\/\/([^:\/\s\"\']+)?:(default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
