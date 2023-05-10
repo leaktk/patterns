@@ -13,6 +13,8 @@
       '''(dummy|example).*(key|pem)''',
       # Ignore common openssl tests
       '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
+      # Ignore ssh utilities that might have key headers in them
+      '''\/bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request)?$''',
     ]
 
     regexes = [

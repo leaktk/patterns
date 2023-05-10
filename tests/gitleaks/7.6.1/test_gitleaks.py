@@ -390,6 +390,16 @@ SHOULD_MATCH = [
 
 SHOULD_NOT_MATCH = [
     {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "foo/bar/usr/bin/ssh",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "foo/bar/bin/ssh-add",
+    },
+    {
         "example": "access_token_client_secret=VaultSecret(**access_token_client_secret),",
         "comment": "Function call",
     },
