@@ -55,6 +55,14 @@
       '''(dummy|example).*(key|pem)''',
       # Ignore common openssl tests
       '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
+      # Ignore ssh utilities that might have key headers in them
+      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+      # Ignore libs that might have key headers in them
+      '''\/lib\w+\/lib(gnutls|ssh).so''',
+      # Ignore utils that might have key headers in them
+      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+      # Data dirs that contain key headers to identify them
+      '''\/usr\/share\/(mime|misc)''',
     ]
 
     regexes = [
@@ -206,6 +214,8 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
+      # Example.Com
+      ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@example.com''',
       # Common spammy placeholder creds
       '''(?i):\/\/([^:\/\s\"\']+)?:(default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
@@ -246,7 +256,7 @@
     ]
     files = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?).(c|go|java|js|md|py|rb|sh|yml|yaml)$''',
+      '''(.+?)\.(c|go|java|js(\.map)?|md|py|rb|sh|yml|yaml)$''',
     ]
 
   [[rules.entropies]]
@@ -496,6 +506,11 @@
     Group = "4"
 
   [rules.allowlist]
+    paths = [
+      # Ignore libs that might have things that look like unquoted secrets
+      '''\/lib\w*\/(sudo|sssd|systemd)''',
+    ]
+
     regexes = [
       # Things like: secret==
       '''(?i)(secret((-|_)key)?|password)==''',
