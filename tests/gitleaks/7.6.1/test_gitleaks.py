@@ -396,6 +396,16 @@ SHOULD_NOT_MATCH = [
     {
         "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Should ignore based on the filename",
+        "filename": "lib64/libgnutls.so.30.30.0",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
+        "filename": "foo/bar/diff/usr/lib64/libssh.so.4.8.7",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----",
+        "comment": "Should ignore based on the filename",
         "filename": "foo/bar/usr/bin/ssh",
     },
     {
