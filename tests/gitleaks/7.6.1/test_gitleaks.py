@@ -482,6 +482,11 @@ SHOULD_NOT_MATCH = [
         "filename": "htpasswd.md",
     },
     {
+        "example": '{"version":8,"file":"htpasswd-chunk.min.js","sources":["webpack:///htpasswd-chunk.min.js"],"mappings":"AAAA","sourceRoot":""}',
+        "comment": "Not a htpassword file",
+        "filename": "htpasswd-page.js.map",
+    },
+    {
         "example": 'jq -rj \'"password: ",.some_password,"\\n"\'',
         "comment": "Part of a jq lookup",
     },
