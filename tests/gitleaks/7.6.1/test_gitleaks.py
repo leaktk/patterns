@@ -421,6 +421,19 @@ SHOULD_NOT_MATCH = [
             "usr/share/mime/packages/freedesktop.org.xml",
         ]
     ],
+    *[
+        {
+            "example": f"{keyword}='{value}'",
+            "comment": "Likely encrypted values",
+        }
+        for keyword in ("secret", "secret_key", "password")
+        for value in [
+            "ENC[RSA,tUf83Ex0oSbDGa8vaU1hGqesODG9J4j40EgLClQYrwNT]",
+            "RU5DW1JTQSx0VWY4M0V4MG9TYkRHYTh2YVUxaEdxZXNPREc5SjRqNDBFZ0xDbFFZcndOVF0=",
+            "ENC[AES256_GCM,tUf83Ex0oSbDGa8vaU1hGqesODG9J4j40EgLClQYrwNT]",
+            "RU5DW0FFUzI1Nl9HQ00sdFVmODNFeDBvU2JER2E4dmFVMWhHcWVzT0RHOUo0ajQwRWdMQ2xRWXJ3TlRd",
+        ]
+    ],
     {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
