@@ -522,7 +522,7 @@
     ]
 
 [[rules]]
-  description = "GitHub personal access token"
+  description = "GitHub Personal Access Token"
   regex = '''(ghp_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "personal", "token", "type:secret"]
 
@@ -532,7 +532,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub oauth access token"
+  description = "GitHub OAuth Access Token"
   regex = '''(gho_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "oauth", "token", "type:secret"]
 
@@ -542,7 +542,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub user-to-server token"
+  description = "GitHub User to Server Token"
   regex = '''(ghu_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "user-to-server", "token", "type:secret"]
 
@@ -552,7 +552,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub server-to-server token"
+  description = "GitHub Server to Server Token"
   regex = '''(ghs_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "server-to-server", "token", "type:secret"]
 
@@ -562,7 +562,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub refresh token"
+  description = "GitHub Refresh Token"
   regex = '''(ghr_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "refresh", "token", "type:secret"]
 
@@ -574,7 +574,7 @@
 [[rules]]
   # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
   # alert:repo-owner
-  description = "GitLab access token"
+  description = "GitLab Access Token"
   regex = '''(glpat-[\w\-]{20})'''
   tags = ["group:leaktk-testing", "key", "gitlab", "access", "token", "type:secret"]
 
@@ -586,7 +586,7 @@
 [[rules]]
   # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
   # alert:repo-owner
-  description = "GitLab pipeline trigger token"
+  description = "GitLab Pipeline Trigger Token"
   regex = '''(glptt-[0-9a-f]{40})'''
   tags = ["group:leaktk-testing", "key", "gitlab", "pipeline", "trigger", "token", "type:secret"]
 
