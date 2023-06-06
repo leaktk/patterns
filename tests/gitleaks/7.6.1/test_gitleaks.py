@@ -356,6 +356,18 @@ SHOULD_MATCH = [
         "comment": "From gitlab.com",
     },
     {
+        "description": "GitLab Runner Registration Token",
+        "example": "runner_sec=glrt-64NXmvdxFL_9cliRha7y",
+        "offender": "glrt-64NXmvdxFL_9cliRha7y",
+        "comment": "From gitlab.com",
+    },
+    {
+        "description": "GitLab Runner Registration Token",
+        "example": "runner_sec=GR134894164NXmvdxFL_9cliRha7y",
+        "offender": "GR134894164NXmvdxFL_9cliRha7y",
+        "comment": "From gitlab.com",
+    },
+    {
         "description": "PyPI Upload Token",
         "example": "Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc foo",
         "offender": "pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc",
