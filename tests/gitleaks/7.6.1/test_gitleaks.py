@@ -344,6 +344,18 @@ SHOULD_MATCH = [
         "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
     },
     {
+        "description": "GitLab access token",
+        "example": "my_cred=glpat-LwnfdsSHX1aSGxsqsPUX",
+        "offender": "glpat-LwnfdsSHX1aSGxsqsPUX",
+        "comment": "From gitlab.com",
+    },
+    {
+        "description": "GitLab pipeline trigger token",
+        "example": "trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9",
+        "offender": "glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9",
+        "comment": "From gitlab.com",
+    },
+    {
         "description": "PyPI Upload Token",
         "example": "Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc foo",
         "offender": "pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc",

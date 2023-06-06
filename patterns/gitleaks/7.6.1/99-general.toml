@@ -572,6 +572,30 @@
     Group = "1"
 
 [[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitLab access token"
+  regex = '''(glpat-[\w\-]{20})'''
+  tags = ["group:leaktk-testing", "key", "gitlab", "access", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitLab pipeline trigger token"
+  regex = '''(glptt-[0-9a-f]{40})'''
+  tags = ["group:leaktk-testing", "key", "gitlab", "pipeline", "trigger", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   description = "PayPal Braintree Access Token"
   regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
   tags = ["alert:repo-owner", "key", "paypal", "type:secret"]
