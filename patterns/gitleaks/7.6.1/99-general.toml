@@ -522,6 +522,18 @@
     ]
 
 [[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitHub Fine-Grained Personal Access Token"
+  regex = '''(github_pat_\w{82})'''
+  tags = ["group:leaktk-testing", "key", "github", "fine-grained", "access", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   description = "GitHub Personal Access Token"
   regex = '''(ghp_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "personal", "token", "type:secret"]
