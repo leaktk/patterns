@@ -73,6 +73,13 @@ SHOULD_MATCH = [
     },
     {
         "description": "General Secret",
+        "example": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "offender": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "filename": "src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml",
+        "comment": "Detect things in the aro module",
+    },
+    {
+        "description": "General Secret",
         "example": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "comment": "Even though this looks like it has a variable at the end, it still has a secret contained in it",
@@ -1262,13 +1269,13 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": 'Password = "$A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
-        "comment": "Ignore general passwords in in the azure-cli repos",
-        "filename": "azure-cli/test",
+        "comment": "Ignore general secrets in portions of the azure-cli repo",
+        "filename": "src/azure-cli/azure/cli/command_modules/appservice/tests/latest/recordings/foo.yml",
     },
     {
         "example": 'secret = "$A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS", some = "other value"',
-        "comment": "Ignore general secrets in in the azure-cli repos",
-        "filename": "azure-cli/test",
+        "comment": "Ignore general secrets in portions of the azure-cli repo",
+        "filename": "src/azure-cli/azure/cli/command_modules/appservice/tests/latest/recordings/foo.yml",
     },
     {
         "example": '"hashed_secret": "972edb79d7c2e4374689572fb6c4ee7b",',

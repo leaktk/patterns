@@ -143,8 +143,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: https://user:<pass>@host
@@ -240,8 +240,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: password = "asdfasdfas" # nosec (used by bandit)
@@ -313,8 +313,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like <password>$SOME_ENV_VARIABLE</password>
@@ -345,8 +345,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: secret = "asdfasdfas" # nosec (used by bandit)
@@ -424,8 +424,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like <secret>$SOME_ENV_VARIABLE</secret>
