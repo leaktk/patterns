@@ -625,6 +625,10 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder ending in a comma",
     },
     {
+        "example": "Secret = 'foo/bar.baz.yaml.tmpl'",
+        "comment": "File path",
+    },
+    {
         "example": '"password": "Contrase\\u00f1a"',
         "comment": "Password in spanish",
     },
