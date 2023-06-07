@@ -474,6 +474,36 @@ SHOULD_NOT_MATCH = [
             "RU5DW0FFUzI1Nl9HQ00sdFVmODNFeDBvU2JER2E4dmFVMWhHcWVzT0RHOUo0ajQwRWdMQ2xRWXJ3TlRd",
         ]
     ],
+    *[
+        {
+            "example": f"scheme://user:{password}@localhost:443",
+            "comment": "URL default passwords or placeholders",
+        }
+        for password in [
+            "$(TOKEN)",
+            "$TOKEN",
+            "$encrypted$",
+            "${TOKEN}",
+            "%q",
+            "&lt;password&gt;",
+            "[TOKEN]",
+            "\${GHTOKEN}",
+            "__MONGO_PASSWORD__",
+            "candlepin",
+            "default",
+            "keylime",
+            "password",
+            "password-foo-bar-baz",
+            "postgres",
+            "prisma",
+            "rabbitmq",
+            "redhat",
+            "some-placeholder-token",
+            "userpass",
+            "{TOKEN}",
+            '"$TOKEN"',
+        ]
+    ],
     {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
@@ -509,10 +539,6 @@ SHOULD_NOT_MATCH = [
         "offender": '"adcandy>',
         "filename": "app.py",
         "comment": "Looks like a malicious package but the filename is wrong",
-    },
-    {
-        "example": "schema://user:default@host:port/",
-        "comment": "Common placeholder account",
     },
     {
         "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
@@ -583,20 +609,12 @@ SHOULD_NOT_MATCH = [
         "comment": "Contains EXAMPLE base64 encoded",
     },
     {
-        "example": "postgresql://my-user:&lt;password&gt;@host:1111/",
-        "comment": "Placeholder password",
-    },
-    {
         "example": "Sample:<pre>AGPAIDCX94X8GQXML0OX</pre>",
         "comment": "Ignore AWS access keys marked as samples",
     },
     {
         "example": "YCu38AvUpJs01zHxja7Z9qhZWVAfjxP5H/A3TE8SENGWR1ZFQ206BR+Q06phGgStkRWAHCQ",
         "comment": "Contains something that looks like an AWS access key",
-    },
-    {
-        "example": "amqp://rabbitmq:rabbitmq@rabbitmq:5672",
-        "comment": "Default password",
     },
     {
         "example": 'https://some.testing.server:443".\\u0000[xxx\\r\\n[user@host',
@@ -624,10 +642,6 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": '"secret": "__GITLAB_OAUTH_SECRET__"',
-        "comment": "These are placeholder values",
-    },
-    {
-        "example": '"mongoUri": "mongodb://__MONGO_USER__:__MONGO_PASSWORD__@__MONGO_HOST__:__MONGO_PORT__"',
         "comment": "These are placeholder values",
     },
     {
@@ -683,27 +697,11 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder password",
     },
     {
-        "example": "rabbit://user:redhat@example.com",
-        "comment": "Placeholder password",
-    },
-    {
         "example": 'secret="/some/Path:${foo.bar.baz}"',
         "comment": "Placeholder values",
     },
     {
         "example": 'password="/tmp/${pull_secret_filename}"',
-        "comment": "Placeholder values",
-    },
-    {
-        "example": "mongodb://root:prisma@localhost",
-        "comment": "Placeholder values",
-    },
-    {
-        "example": 'https://user:"$TOKEN"@foo.com',
-        "comment": "Placeholder values",
-    },
-    {
-        "example": "https://$encrypted$:$encrypted$@foo.com",
         "comment": "Placeholder values",
     },
     {
@@ -758,18 +756,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": " b/drivers/media/platform/bcm2835/Kconfig",
         "comment": "Meets the criteria for a potential aws secret key",
-    },
-    {
-        "example": "schema://user:keylime@host:port/",
-        "comment": "Common placeholder account",
-    },
-    {
-        "example": "schema://user:postgres@host:port/",
-        "comment": "Common placeholder account",
-    },
-    {
-        "example": "mysql://username:userpass@host:port/fasdfasdfasdf",
-        "comment": "Things ending in 'pass' are probably placeholders'",
     },
     {
         "example": "# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)",
@@ -1431,38 +1417,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Just a URL - no username or pass",
     },
     {
-        "example": "https://%q:%q@github.com",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$(USER):$(TOKEN)@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://${USER}:${TOKEN}@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://{USER}:{TOKEN}@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:$TOKEN@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "PROJECT_URL=https://user:[TOKEN]@example.com",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:some-placeholder-token@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:password-foo-bar-baz@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
         "example": "GENERATED_PASSWORD=$(openssl rand -hex 16)",
         "comment": "generated password",
     },
@@ -1525,10 +1479,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'password: "SomeSecretPasswd"',
         "comment": "Password placeholder",
-    },
-    {
-        "example": "https://\${GHUSER}:\${GHTOKEN}@github.com",
-        "comment": "Basic auth placeholder",
     },
     {
         "example": "password=\$MIRROR_OS_PASS&#34;",
