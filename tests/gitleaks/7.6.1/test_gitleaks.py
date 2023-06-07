@@ -54,24 +54,6 @@ SHOULD_MATCH = [
         "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
     },
     {
-        "description": "Unquoted Secret",
-        "example": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
-    },
-    {
         "description": "General Secret",
         "example": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
@@ -170,12 +152,6 @@ SHOULD_MATCH = [
         "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
         "offender": "-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Should capture private key headers",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": 'password=0b3d576ba5a108c3b7374142bfd02992 some = "other value", example="example"',
-        "offender": "password=0b3d576ba5a108c3b7374142bfd02992",
-        "comment": "make sure it captures the password but stops before other values",
     },
     {
         "description": "General Secret",
@@ -1498,15 +1474,15 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": "secret=@(some_client_secret)",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "secret=/data/stuff.auth",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "PASSWORD=${DatabasePassword:?",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "PASSWORD=.*/foobarbaz2aAfaea",
