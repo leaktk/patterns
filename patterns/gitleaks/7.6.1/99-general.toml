@@ -144,7 +144,7 @@
     ]
     regexes = [
       # Things like: https://user:<pass>@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(\[)?(_)?<[^@\/\s]+>(_)?(\])?@[\w\.\-]+''',
       # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
       '''(?i):\/\/([^:\/\s\"\']+)?:&lt;[^@\/\s]+&gt;@[\w\.\-]+''',
       # Things like: https://user:__pass__@host

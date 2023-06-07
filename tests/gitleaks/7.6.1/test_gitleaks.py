@@ -480,6 +480,10 @@ SHOULD_NOT_MATCH = [
         "filename": "foo/libexec/sudo/sudoers.so",
     },
     {
+        "example": "https?://_<username>_[:_<password>_]@_<hostname>_/_<path>_",
+        "comment": "Placeholder value",
+    },
+    {
         "example": "https://test:adfa;dkj;aek;j@example.com",
         "comment": "Just an example",
     },
