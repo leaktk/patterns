@@ -54,22 +54,11 @@ SHOULD_MATCH = [
         "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
     },
     {
-        "description": "Unquoted Secret",
-        "example": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "secret=neF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "secret_key=xeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "offender": "password=LeF4h7SFeIjBHB+SnXt8et3/RWRV8K63Ex/wfcYPY+Fd4zexcriNL4goiiG2ZqRrJgoGV1tXb7WBGlKIVAWqGw==",
-        "comment": "Some unquoted secret value",
+        "description": "General Secret",
+        "example": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "offender": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
+        "filename": "src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml",
+        "comment": "Detect things in the aro module",
     },
     {
         "description": "General Secret",
@@ -163,12 +152,6 @@ SHOULD_MATCH = [
         "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\\n-----END OPENSSH PRIVATE KEY-----",
         "offender": "-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Should capture private key headers",
-    },
-    {
-        "description": "Unquoted Secret",
-        "example": 'password=0b3d576ba5a108c3b7374142bfd02992 some = "other value", example="example"',
-        "offender": "password=0b3d576ba5a108c3b7374142bfd02992",
-        "comment": "make sure it captures the password but stops before other values",
     },
     {
         "description": "General Secret",
@@ -314,34 +297,64 @@ SHOULD_MATCH = [
         "offender": "define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')",
     },
     {
-        "description": "GitHub personal access token",
+        "description": "GitHub Fine-Grained Personal Access Token",
+        "example": "<access-token>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</access-token>",
+        "offender": "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",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
+    },
+    {
+        "description": "GitHub Personal Access Token",
         "example": "<access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>",
         "offender": "ghp_16C7e42F292c6912E7710c838347Ae178B4a",
-        "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
     },
     {
-        "description": "GitHub oauth access token",
+        "description": "GitHub OAuth Access Token",
         "example": "token='gho_16C7e42F292c6912E7710c838347Ae178B4a'",
         "offender": "gho_16C7e42F292c6912E7710c838347Ae178B4a",
-        "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
     },
     {
-        "description": "GitHub user-to-server token",
+        "description": "GitHub User to Server Token",
         "example": "'gt-token': 'ghu_16C7e42F292c6912E7710c838347Ae178B4a'",
         "offender": "ghu_16C7e42F292c6912E7710c838347Ae178B4a",
-        "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
     },
     {
-        "description": "GitHub server-to-server token",
+        "description": "GitHub Server to Server Token",
         "example": "ghs_16C7e42F292c6912E7710c838347Ae178B4a",
         "offender": "ghs_16C7e42F292c6912E7710c838347Ae178B4a",
-        "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
     },
     {
-        "description": "GitHub refresh token",
+        "description": "GitHub Refresh Token",
         "example": "ghr_16C7e42F292c6912E7710c838347Ae178B4a",
         "offender": "ghr_16C7e42F292c6912E7710c838347Ae178B4a",
-        "comment": "See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats/",
+        "comment": "See https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#githubs-token-formats",
+    },
+    {
+        "description": "GitLab Access Token",
+        "example": "my_cred=glpat-LwnfdsSHX1aSGxsqsPUX",
+        "offender": "glpat-LwnfdsSHX1aSGxsqsPUX",
+        "comment": "From gitlab.com",
+    },
+    {
+        "description": "GitLab Pipeline Trigger Token",
+        "example": "trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9",
+        "offender": "glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9",
+        "comment": "From gitlab.com",
+    },
+    {
+        "description": "GitLab Runner Registration Token",
+        "example": "runner_sec=glrt-64NXmvdxFL_9cliRha7y",
+        "offender": "glrt-64NXmvdxFL_9cliRha7y",
+        "comment": "From gitlab.com",
+    },
+    {
+        "description": "GitLab Runner Registration Token",
+        "example": "runner_sec=GR134894164NXmvdxFL_9cliRha7y",
+        "offender": "GR134894164NXmvdxFL_9cliRha7y",
+        "comment": "From gitlab.com",
     },
     {
         "description": "PyPI Upload Token",
@@ -404,6 +417,9 @@ SHOULD_NOT_MATCH = [
             "diff/usr/share/misc/magic.mgc",
             "dummy.key",
             "dummy.pem",
+            "some.test.key",
+            "tests/smime-certs/baz.key",
+            "tests/baz.key",
             "foo/bar/bin/ssh-add",
             "foo/bar/usr/bin/ssh",
             "foo/usr/libexec/cockpit-certificate-ensure",
@@ -421,10 +437,57 @@ SHOULD_NOT_MATCH = [
             "usr/share/mime/packages/freedesktop.org.xml",
         ]
     ],
+    *[
+        {
+            "example": f"{keyword}='{value}'",
+            "comment": "Likely encrypted values",
+        }
+        for keyword in ("secret", "secret_key", "password")
+        for value in [
+            "ENC[RSA,tUf83Ex0oSbDGa8vaU1hGqesODG9J4j40EgLClQYrwNT]",
+            "RU5DW1JTQSx0VWY4M0V4MG9TYkRHYTh2YVUxaEdxZXNPREc5SjRqNDBFZ0xDbFFZcndOVF0=",
+            "ENC[AES256_GCM,tUf83Ex0oSbDGa8vaU1hGqesODG9J4j40EgLClQYrwNT]",
+            "RU5DW0FFUzI1Nl9HQ00sdFVmODNFeDBvU2JER2E4dmFVMWhHcWVzT0RHOUo0ajQwRWdMQ2xRWXJ3TlRd",
+        ]
+    ],
+    *[
+        {
+            "example": f"scheme://user:{password}@localhost:443",
+            "comment": "URL default passwords or placeholders",
+        }
+        for password in [
+            "$(TOKEN)",
+            "$TOKEN",
+            "$encrypted$",
+            "${TOKEN}",
+            "%q",
+            "&lt;password&gt;",
+            "[TOKEN]",
+            "\${GHTOKEN}",
+            "__MONGO_PASSWORD__",
+            "candlepin",
+            "default",
+            "keylime",
+            "password",
+            "password-foo-bar-baz",
+            "postgres",
+            "prisma",
+            "rabbitmq",
+            "redhat",
+            "some-placeholder-token",
+            "userpass",
+            "{TOKEN}",
+            '"$TOKEN"',
+        ]
+    ],
     {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
         "filename": "foo/libexec/sudo/sudoers.so",
+    },
+    {
+        "example": "https?://_<username>_[:_<password>_]@_<hostname>_/_<path>_",
+        "comment": "Placeholder value",
     },
     {
         "example": "https://test:adfa;dkj;aek;j@example.com",
@@ -452,10 +515,6 @@ SHOULD_NOT_MATCH = [
         "offender": '"adcandy>',
         "filename": "app.py",
         "comment": "Looks like a malicious package but the filename is wrong",
-    },
-    {
-        "example": "schema://user:default@host:port/",
-        "comment": "Common placeholder account",
     },
     {
         "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
@@ -526,10 +585,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Contains EXAMPLE base64 encoded",
     },
     {
-        "example": "postgresql://my-user:&lt;password&gt;@host:1111/",
-        "comment": "Placeholder password",
-    },
-    {
         "example": "Sample:<pre>AGPAIDCX94X8GQXML0OX</pre>",
         "comment": "Ignore AWS access keys marked as samples",
     },
@@ -538,16 +593,16 @@ SHOULD_NOT_MATCH = [
         "comment": "Contains something that looks like an AWS access key",
     },
     {
-        "example": "amqp://rabbitmq:rabbitmq@rabbitmq:5672",
-        "comment": "Default password",
-    },
-    {
         "example": 'https://some.testing.server:443".\\u0000[xxx\\r\\n[user@host',
         "comment": "Contains a host later on so it looks like basic auth",
     },
     {
         "example": "password=USER_PASSWORD,",
         "comment": "Placeholder ending in a comma",
+    },
+    {
+        "example": "Secret = 'foo/bar.baz.yaml.tmpl'",
+        "comment": "File path",
     },
     {
         "example": '"password": "Contrase\\u00f1a"',
@@ -567,10 +622,6 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": '"secret": "__GITLAB_OAUTH_SECRET__"',
-        "comment": "These are placeholder values",
-    },
-    {
-        "example": '"mongoUri": "mongodb://__MONGO_USER__:__MONGO_PASSWORD__@__MONGO_HOST__:__MONGO_PORT__"',
         "comment": "These are placeholder values",
     },
     {
@@ -626,27 +677,11 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder password",
     },
     {
-        "example": "rabbit://user:redhat@example.com",
-        "comment": "Placeholder password",
-    },
-    {
         "example": 'secret="/some/Path:${foo.bar.baz}"',
         "comment": "Placeholder values",
     },
     {
         "example": 'password="/tmp/${pull_secret_filename}"',
-        "comment": "Placeholder values",
-    },
-    {
-        "example": "mongodb://root:prisma@localhost",
-        "comment": "Placeholder values",
-    },
-    {
-        "example": 'https://user:"$TOKEN"@foo.com',
-        "comment": "Placeholder values",
-    },
-    {
-        "example": "https://$encrypted$:$encrypted$@foo.com",
         "comment": "Placeholder values",
     },
     {
@@ -701,18 +736,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": " b/drivers/media/platform/bcm2835/Kconfig",
         "comment": "Meets the criteria for a potential aws secret key",
-    },
-    {
-        "example": "schema://user:keylime@host:port/",
-        "comment": "Common placeholder account",
-    },
-    {
-        "example": "schema://user:postgres@host:port/",
-        "comment": "Common placeholder account",
-    },
-    {
-        "example": "mysql://username:userpass@host:port/fasdfasdfasdf",
-        "comment": "Things ending in 'pass' are probably placeholders'",
     },
     {
         "example": "# GNU General Public License v3.0+ (see LICENSES/GPL-3.0-or-later.txt or https://www.gnu.org/licenses/gpl-3.0.txt)",
@@ -1219,13 +1242,13 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": 'Password = "$A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
-        "comment": "Ignore general passwords in in the azure-cli repos",
-        "filename": "azure-cli/test",
+        "comment": "Ignore general secrets in portions of the azure-cli repo",
+        "filename": "src/azure-cli/azure/cli/command_modules/appservice/tests/latest/recordings/foo.yml",
     },
     {
         "example": 'secret = "$A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS", some = "other value"',
-        "comment": "Ignore general secrets in in the azure-cli repos",
-        "filename": "azure-cli/test",
+        "comment": "Ignore general secrets in portions of the azure-cli repo",
+        "filename": "src/azure-cli/azure/cli/command_modules/appservice/tests/latest/recordings/foo.yml",
     },
     {
         "example": '"hashed_secret": "972edb79d7c2e4374689572fb6c4ee7b",',
@@ -1343,7 +1366,7 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": "GITHUB_PERSONAL_ACCESS_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        "comment": "Placeholder value for an access token",
+        "comment": "Placeholder value for an Access Token",
     },
     {
         "example": "#https://example.com/look/some/docs?cHViOnJlZGhhdA==\nuser: {{new_pass}}",
@@ -1372,38 +1395,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "https://examle.com/foo:current@Cacheable",
         "comment": "Just a URL - no username or pass",
-    },
-    {
-        "example": "https://%q:%q@github.com",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$(USER):$(TOKEN)@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://${USER}:${TOKEN}@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://{USER}:{TOKEN}@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:$TOKEN@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "PROJECT_URL=https://user:[TOKEN]@example.com",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:some-placeholder-token@quay.io",
-        "comment": "Basic Auth Placeholder",
-    },
-    {
-        "example": "https://$USER:password-foo-bar-baz@quay.io",
-        "comment": "Basic Auth Placeholder",
     },
     {
         "example": "GENERATED_PASSWORD=$(openssl rand -hex 16)",
@@ -1470,10 +1461,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Password placeholder",
     },
     {
-        "example": "https://\${GHUSER}:\${GHTOKEN}@github.com",
-        "comment": "Basic auth placeholder",
-    },
-    {
         "example": "password=\$MIRROR_OS_PASS&#34;",
         "comment": "Placeholder",
     },
@@ -1487,15 +1474,15 @@ SHOULD_NOT_MATCH = [
     },
     {
         "example": "secret=@(some_client_secret)",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "secret=/data/stuff.auth",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "PASSWORD=${DatabasePassword:?",
-        "comment": "Unquoted secret placeholder",
+        "comment": "Secret placeholder",
     },
     {
         "example": "PASSWORD=.*/foobarbaz2aAfaea",

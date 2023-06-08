@@ -49,12 +49,8 @@
 
   [rules.allowlist]
     paths = [
-      # Ignore common test keys
-      '''test(s)?\/[\w\-]+.pem$''',
       # Ignore common example keys
-      '''(dummy|example).*(key|pem)''',
-      # Ignore common openssl tests
-      '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
+      '''(test|dummy|example).*(key|pem)''',
       # Ignore ssh utilities that might have key headers in them
       '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
       # Ignore libs that might have key headers in them
@@ -185,12 +181,12 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: https://user:<pass>@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:<[^@\/\s]+>@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(\[)?(_)?<[^@\/\s]+>(_)?(\])?@[\w\.\-]+''',
       # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
       '''(?i):\/\/([^:\/\s\"\']+)?:&lt;[^@\/\s]+&gt;@[\w\.\-]+''',
       # Things like: https://user:__pass__@host
@@ -217,10 +213,10 @@
       # Example.Com
       ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@example.com''',
       # Common spammy placeholder creds
-      '''(?i):\/\/([^:\/\s\"\']+)?:(default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
-      '''(?i):\/\/([^:\/\s\"\']+)?:(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -282,8 +278,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: password = "asdfasdfas" # nosec (used by bandit)
@@ -338,8 +334,8 @@
       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)[\"\']''',
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)[\"\']''',
     ]
 
   [[rules.entropies]]
@@ -355,8 +351,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like <password>$SOME_ENV_VARIABLE</password>
@@ -370,8 +366,8 @@
       # Things like <password>{SOME_VARIABLE}</password>
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>\{.+?\}<\/''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
-      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
     ]
 
   [[rules.entropies]]
@@ -387,8 +383,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like: secret = "asdfasdfas" # nosec (used by bandit)
@@ -447,8 +443,8 @@
       # A common false positive for passwords and secrets (e.g. secret = "update-your-postgres-pass-here")
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)[\"\']''',
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)[\"\']''',
       # Avoid things that look like UUIDs in secrets
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
     ]
@@ -466,8 +462,8 @@
   [rules.allowlist]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it
-      '/azure-(cli|sdk-for-python|rest-api-specs|docs)/',
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
     regexes = [
       # Things like <secret>$SOME_ENV_VARIABLE</secret>
@@ -479,8 +475,8 @@
       # Things like <secret>{SOME_VARIABLE}</secret>
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>\{.+?\}<\/''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
-      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
+      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(&lt;|\\u201c|\$)?(\/etc\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?<\/''',
+      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)<\/''',
       # UUIDs
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}<\/''',
     ]
@@ -490,81 +486,20 @@
     Max = "8"
     Group = "4"
 
-# This rule is currently being tested
 [[rules]]
-  # Give this a new name after testing, probably "General Secret"
-  description = "Unquoted Secret"
-  # Secrets/Passwords with quotes are already handled
-  # this is to see what else exists out there
-  regex = '''(?i)(secret((-|_)key)?|password)=([^;,\<\&\"\'\s\n]{5,})'''
-  # Update alert tags and remove "testing" tag when ready
-  tags = ["group:leaktk-testing", "key", "secret", "general", "unquoted", "type:secret"]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitHub Fine-Grained Personal Access Token"
+  regex = '''(github_pat_\w{82})'''
+  tags = ["group:leaktk-testing", "key", "github", "fine-grained", "access", "token", "type:secret"]
 
   [[rules.entropies]]
-    Min = "3"
+    Min = "0" # 2 will probably be a good default once tuned
     Max = "8"
-    Group = "4"
-
-  [rules.allowlist]
-    paths = [
-      # Ignore libs that might have things that look like unquoted secrets
-      '''\/lib\w*\/(sudo|sssd|systemd)''',
-    ]
-
-    regexes = [
-      # Things like: secret==
-      '''(?i)(secret((-|_)key)?|password)==''',
-      # Things like: secret=_PLACEHOLDER_
-      '''(?i)(secret((-|_)key)?|password)=_[^;,\<\&\"\'\s\n]{5,}_''',
-      # Things like: secret=(password), secret=LookUpPassword(, etc
-      '''(?i)(secret((-|_)key)?|password)=((\(|\)\w+)|(\w+\(|\)))''',
-      # Things like: secret=<PLACEHOLDER>
-      '''(?i)(secret((-|_)key)?|password)=<[^;,\<\&\"\'\s\n]{5,}>''',
-      # Things like: secret=%PLACEHOLDER%
-      '''(?i)(secret((-|_)key)?|password)=%[^;,\<\&\"\'\s\n]{5,}%''',
-      # Things like: secret=#PLACEHOLDER#
-      '''(?i)(secret((-|_)key)?|password)=#[^;,\<\&\"\'\s\n]{5,}#''',
-      # Things like: secret=`some-command`
-      '''(?i)(secret((-|_)key)?|password)=`[^;,\<\&\"\'\s\n]{5,}`''',
-      # Things like: secret=${PLACEHOLDER} or secret=#{PLACEHOLDER}
-      '''(?i)(secret((-|_)key)?|password)=(\$|#)\{[^;,\<\&\"\'\s\n]{5,}\}''',
-      # Things like: secret=@(PLACEHOLDER) or secret=\(PLACEHOLDER)
-      '''(?i)(secret((-|_)key)?|password)=(\@|\\)\([^;,\<\&\"\'\s\n]{5,}\)''',
-      # Things like: secret={PLACEHOLDER}
-      '''(?i)(secret((-|_)key)?|password)=\{[^;,\<\&\"\'\s\n]{5,}\}''',
-      # Things like: secret=[PLACEHOLDER]
-      '''(?i)(secret((-|_)key)?|password)=\[[^;,\<\&\"\'\s\n]{5,}\]''',
-      # Things like: secret=$(cmd ...
-      # Or like: secret=\$(cmd ...
-      '''(?i)(secret((-|_)key)?|password)=(\\)?\$\(.+([\s\n]|$)''',
-      # Things like: secret=${var...
-      # Or like: secret=\${var ...
-      '''(?i)(secret((-|_)key)?|password)=(\\)?\$\{.+([\s\n]|$)''',
-      # Things that look like unicode for now
-      '''(?i)(secret((-|_)key)?|password)=.{0,15}(\\u[A-Za-z0-9]{4}){2}.+([\s\n]|$)''',
-      # Things like secret=$SOME_ENV_VARIABLE
-      '''(?i)(secret((-|_)key)?|password)=(?-i)[\\]*\$[A-Za-z][\w]+[^;,\<\&\"\'\s\n]''',
-      # Things like secret=/data/stuff
-      '''(?i)(secret((-|_)key)?|password)=\/\w+\/''',
-      # hcvault lookups
-      '''lookup\(\s*'hashi_vault'.*secret=''',
-      # Things like secret=&lt.... (likely documentation resulting in a lot of FPs)
-      '''(?i)(secret((-|_)key)?|password)=(\\u0026|&)(#|amp|lt|quot)''',
-      # Things like secret=os.environ.get("PASSWORD")
-      '''(?i)(secret((-|_)key)?|password)=(?-i)[a-z\._]+[\(\[]''',
-      # A common false positive for passwords and secrets (e.g. secret=update-your-postgres-pass-here)
-      '''(?i)(secret((-|_)key)?|password)=(?-i)[a-z]{2,}-[a-z]{2,}([a-z])?([;,\<\&\"\'\s\n]|$)''',
-      # A common false positive for passwords and secrets (e.g. secret=foo.bar.baz_bop)
-      '''(?i)(secret((-|_)key)?|password)=(?-i)[a-z\._\-]{8,}''',
-      # Various words at the start and end that signify a placeholder
-      '''(?i)(secret((-|_)key)?|password)=(\.\*|\/etc\/|\/path\/|(\/var)?\/run\/|00000|(0)?12345|abc(d|12)|admin|ansible|app|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ec2_|example|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(\!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|true|update|user|value|your_)([^;,\<\&\"\'\s\n]+)?''',
-      '''(?i)(secret((-|_)key)?|password)=[^\"\'\s\n]+?(\.((jp(e)?g)|png|svg|txt)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|value|y(a)?ml)(\\n)?([;,\<\&\"\'\s\n]|$)''',
-      # Common Placeholder Passwords
-      '''(?i)(secret((-|_)key)?|password)=(r3dh4t1!|FTAaro@Hack\$randomNum)''',
-    ]
+    Group = "1"
 
 [[rules]]
-  description = "GitHub personal access token"
+  description = "GitHub Personal Access Token"
   regex = '''(ghp_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "personal", "token", "type:secret"]
 
@@ -574,7 +509,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub oauth access token"
+  description = "GitHub OAuth Access Token"
   regex = '''(gho_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "oauth", "token", "type:secret"]
 
@@ -584,7 +519,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub user-to-server token"
+  description = "GitHub User to Server Token"
   regex = '''(ghu_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "user-to-server", "token", "type:secret"]
 
@@ -594,7 +529,7 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub server-to-server token"
+  description = "GitHub Server to Server Token"
   regex = '''(ghs_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "server-to-server", "token", "type:secret"]
 
@@ -604,12 +539,48 @@
     Group = "1"
 
 [[rules]]
-  description = "GitHub refresh token"
+  description = "GitHub Refresh Token"
   regex = '''(ghr_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "refresh", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitLab Access Token"
+  regex = '''(glpat-[\w\-]{20})'''
+  tags = ["group:leaktk-testing", "key", "gitlab", "access", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitLab Pipeline Trigger Token"
+  regex = '''(glptt-[0-9a-f]{40})'''
+  tags = ["group:leaktk-testing", "key", "gitlab", "pipeline", "trigger", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  # TODO: Once tuned, update min entropy and swap out group:leaktk-testing for
+  # alert:repo-owner
+  description = "GitLab Runner Registration Token"
+  regex = '''((glrt-|GR1348941)[\w\-]{20})'''
+  tags = ["group:leaktk-testing", "key", "gitlab", "runner", "registration", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "0" # 2 will probably be a good default once tuned
     Max = "8"
     Group = "1"
 
