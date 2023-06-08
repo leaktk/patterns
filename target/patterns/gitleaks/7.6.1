@@ -49,8 +49,12 @@
 
   [rules.allowlist]
     paths = [
+      # Ignore common test keys
+      '''test(s)?\/[\w\-]+.pem$''',
       # Ignore common example keys
-      '''(test|dummy|example).*(key|pem)''',
+      '''(dummy|example).*(key|pem)''',
+      # Ignore common openssl tests
+      '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
       # Ignore ssh utilities that might have key headers in them
       '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
       # Ignore libs that might have key headers in them
