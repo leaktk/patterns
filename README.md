@@ -56,7 +56,9 @@ In the context of this repo `group` mainly serves as a way to mark tags for
 testing. Open sourcing the pattern-server is on the road map and
 it will be the main consumer of these group tags.
 
-Patterns tagged `group:leaktk-testing` are not ready for production use.
+Patterns tagged `group:leaktk-testing` are not ready for production use and
+should be placed in the 99-testing.toml. Please read the comments at the top of
+that file for further instructions regarding testing patterns.
 
 These are the supported, predefined `type` tags:
 
