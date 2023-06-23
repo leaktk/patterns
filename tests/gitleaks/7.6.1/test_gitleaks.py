@@ -39,6 +39,27 @@ from unittest import TestCase
 VERSION = "7.6.1"
 
 SHOULD_MATCH = [
+    *[
+        {
+            "description": "General Secret",
+            "example": f'password = "{password}" {notsecretformat}',
+            "offender": f'password = "{password}"',
+            "comment": "Invalid use of notsecret",
+        }
+
+        for (password, notsecretformat) in (
+            # Invalid tag
+            ("1b3d576ba5a108c3b7374142bfd02992", "notasecret"),
+            # Doesn't start correctly
+            ("2b3d576ba5a108c3b7374142bfd02992", "yonotsecret"),
+            # Doesn't start correctly
+            ("3b3d576ba5a108c3b7374142bfd02992", "'notsecret"),
+            # Doesn't end correctly
+            ("4b3d576ba5a108c3b7374142bfd02992", "notsecret'"),
+            # Doesn't end correctly
+            ("5b3d576ba5a108c3b7374142bfd02992", "notsecretyo"),
+        )
+    ],
     {
         "description": "Potentially Malicious Python Package",
         "example": "adad",
@@ -1284,6 +1305,26 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'const someSecret = "SomeStubbedOutThing"    // #nosec G101 -- This is a false positive',
         "comment": "Support #nosec tag",
+    },
+    {
+        "example": 'nexus_proxy_password = "A3QuDLm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  # notsecret',
+        "comment": "Support # notsecret tag",
+    },
+    {
+        "example": 'nexus_proxy_password = "G3QuDGm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  //notsecret',
+        "comment": "Support //notsecret tag",
+    },
+    {
+        "example": 'nexus_proxy_password = "G3QuDLm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  #notsecret',
+        "comment": "Support #notsecret tag",
+    },
+    {
+        "example": 'const someSecret = "SomeStubbedOutThing"    // notsecret - This is a false positive',
+        "comment": "Support notsecret with comments after tag",
+    },
+    {
+        "example": 'const someSecret = "SomeStubbedOutThing" notsecret',
+        "comment": "Support notsecret not in a comment",
     },
     {
         "example": 'password":"material/form-textbox-password.svg"',

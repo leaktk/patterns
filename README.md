@@ -4,7 +4,7 @@ Patterns leveraged by LeakTK
 
 ## Status
 
-* gitleaks-7.6.1 patterns open sourced and activly maintained
+* gitleaks-7.6.1 patterns open sourced and actively maintained
 * > gitleaks-8 patterns are a work in progress (and no longer blocked as of 8.16.0)
 * considering patterns to include for other types of scans
 
@@ -70,6 +70,19 @@ Custom `type` tags should be namespaced to avoid collisions with future tags.
 For example if you were writing tags for a company called WidgetCorp and you
 wanted to search for internal only information, you could create a
 `type:widgetcorp-internal` tag.
+
+## Ignoring false positives
+
+The standard LeakTK ignore tag is `notsecret`. Since the LeakTK scanner may
+leverage multiple scanners, their ignore tags may also work in certain cases,
+but `notsecret` will be supported across all of them.
+
+For the scanner to pick it up it must:
+
+* Start with comment characters, a space, or be at the beginning of the line
+* End with a space or be at the end of the line
+
+Search the patterns for `notsecret` to see the exact regex pattern.
 
 ## Make targets
 
