@@ -497,6 +497,10 @@ SHOULD_NOT_MATCH = [
         ]
     ],
     {
+        "example": 'Path to Secret: "data/my_root/my_folder"',
+        "comment": "File path",
+    },
+    {
         "example": "password='27BZdTpuIl9u...pE+SpU4C2vQSY='"
         "comment"
         "password was partially redacted"
