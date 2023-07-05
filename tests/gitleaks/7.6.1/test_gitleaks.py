@@ -444,6 +444,8 @@ SHOULD_NOT_MATCH = [
             "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
             "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
             "test/smime-certs/smrsa1024.pem",
+            "test/smime-certs/smrsa1024.der",
+            "test/smime-certs/smrsa1024.key",
             "test/testec-p112r1.pem",
             "usr/libexec/openssh/ssh-keysign",
             "usr/libexec/openssh/ssh-pkcs11-helper",
@@ -496,6 +498,41 @@ SHOULD_NOT_MATCH = [
             '"$TOKEN"',
         ]
     ],
+    {
+        "example": "secret_key = 'rescue_disk_ephemeral_encryption_secret_uuid'",
+        "comment": "placeholder value",
+    },
+    {
+        "example": "<password><![CDATA[${password}]]></password>",
+        "comment": "placeholder wrappet in cdata tags",
+    },
+    {
+        "example": 'Path to Secret: "data/my_root/my_folder"',
+        "comment": "File path",
+    },
+    {
+        "example": "password='27BZdTpuIl9u...pE+SpU4C2vQSY='"
+        "comment"
+        "password was partially redacted"
+    },
+    {
+        "example": "https://f4c38c5:27BZdTpuIl9u...pE+SpU4C2vQSY=@github.com"
+        "comment"
+        "password was partially redacted"
+    },
+    {
+        "example": "https://f4c38c5:$githubpac@github.com"
+        "comment"
+        "password is a variable"
+    },
+    {
+        "example": "SECRET: 'APPLICATION_RESOURCES',",
+        "comment": "placeholder value",
+    },
+    {
+        "example": "password='APPLICATION_RESOURCES',",
+        "comment": "placeholder value",
+    },
     {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
