@@ -497,6 +497,10 @@ SHOULD_NOT_MATCH = [
         ]
     ],
     {
+        "example": "<password><![CDATA[${password}]]></password>",
+        "comment": "placeholder wrappet in cdata tags",
+    },
+    {
         "example": 'Path to Secret: "data/my_root/my_folder"',
         "comment": "File path",
     },
