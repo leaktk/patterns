@@ -497,6 +497,14 @@ SHOULD_NOT_MATCH = [
         ]
     ],
     {
+        "example": "SECRET: 'APPLICATION_RESOURCES',",
+        "comment": "placeholder value",
+    },
+    {
+        "example": "password='APPLICATION_RESOURCES',",
+        "comment": "placeholder value",
+    },
+    {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
         "filename": "foo/libexec/sudo/sudoers.so",

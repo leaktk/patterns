@@ -230,6 +230,8 @@
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']%.+?%[\"\']''',
       # Things like: password = "$PLACEHOLDER$"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
+      # Things like: password = "ALL_UPPER_LETTERS_OR_UNDERSCORS"
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+[\"\']''',
       # Things like: password = "(optional char)${PLACEHOLDER}(optional text)"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](.)?\$\{.+?\}(.+)?[\"\']''',
       # jq lookups
@@ -340,6 +342,8 @@
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']%.+?%[\"\']''',
       # Things like: secret = "$PLACEHOLDER$"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
+      # Things like: secret = "ALL_UPPER_LETTERS_OR_UNDERSCORS"
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+[\"\']''',
       # jq lookups
       '''jq\s+([\w\-\s]+)?.*\.\w*secret''',
       # Things like: secret = "(optional char)($|#){PLACEHOLDER}(optional text)"
