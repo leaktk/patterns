@@ -154,6 +154,8 @@
       # Things like: https://user:$pass$@host
       # Things like: https://user:$pass@host
       '''(?i):\/\/([^:\/\s\"\']+)?:\$[a-z][a-z\_\-]+(\$)?@[\w\.\-]+''',
+      # Things like: https://user:afacae....adsfae@host
+      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*\.\.\.[^@\/\s\"]*@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
       # Things like: https://user:{pass}@host
@@ -249,6 +251,8 @@
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
       # Things like: password = "_PLACEHOLDER_"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
+      # Things like: password = "Some...placeholder"
+      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*\.\.\.[^\"\']*[\"\']''',
       # Things like: password = "<PLACEHOLDER>"
       '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: password = "@@PLACEHOLDER@@"
@@ -361,6 +365,8 @@
       # Things like: secret = "__PLACEHOLDER__"
       # Things like: secret = "_PLACEHOLDER_"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
+      # Things like: secret = "Some...placeholder"
+      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*\.\.\.[^\"\']*[\"\']''',
       # Things like: secret = "<PLACEHOLDER>"
       '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
       # Things like: secret = "@@PLACEHOLDER@@"

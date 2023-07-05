@@ -497,8 +497,19 @@ SHOULD_NOT_MATCH = [
         ]
     ],
     {
+        "example": "password='27BZdTpuIl9u...pE+SpU4C2vQSY='"
+        "comment"
+        "password was partially redacted"
+    },
+    {
+        "example": "https://f4c38c5:27BZdTpuIl9u...pE+SpU4C2vQSY=@github.com"
+        "comment"
+        "password was partially redacted"
+    },
+    {
         "example": "https://f4c38c5:$githubpac@github.com"
-        "comment" "password is a variable"
+        "comment"
+        "password is a variable"
     },
     {
         "example": "SECRET: 'APPLICATION_RESOURCES',",
