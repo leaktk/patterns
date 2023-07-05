@@ -412,6 +412,15 @@
     Max = "8"
     Group = "4"
 
+[[rules]]
+  description = "GitHub Fine-Grained Personal Access Token"
+  regex = '''(github_pat_\w{82})'''
+  tags = ["alert:repo-owner", "key", "github", "fine-grained", "access", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "2"
+    Max = "8"
+    Group = "1"
 
 [[rules]]
   description = "GitHub Personal Access Token"
@@ -457,6 +466,36 @@
   description = "GitHub Refresh Token"
   regex = '''(ghr_[0-9A-Za-z]{36,})'''
   tags = ["alert:repo-owner", "key", "github", "refresh", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "GitLab Access Token"
+  regex = '''(glpat-[\w\-]{20})'''
+  tags = ["alert:repo-owner", "key", "gitlab", "access", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "GitLab Pipeline Trigger Token"
+  regex = '''(glptt-[0-9a-f]{40})'''
+  tags = ["alert:repo-owner", "key", "gitlab", "pipeline", "trigger", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "GitLab Runner Registration Token"
+  regex = '''((glrt-|GR1348941)[\w\-]{20})'''
+  tags = ["alert:repo-owner", "key", "gitlab", "runner", "registration", "token", "type:secret"]
 
   [[rules.entropies]]
     Min = "2"
