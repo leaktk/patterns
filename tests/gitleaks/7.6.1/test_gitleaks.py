@@ -444,6 +444,8 @@ SHOULD_NOT_MATCH = [
             "test/recipes/30-test_evp_data/evppkey_rsa_common.pem",
             "test/recipes/30-test_evp_data/evppkey_rsa_common.txt",
             "test/smime-certs/smrsa1024.pem",
+            "test/smime-certs/smrsa1024.der",
+            "test/smime-certs/smrsa1024.key",
             "test/testec-p112r1.pem",
             "usr/libexec/openssh/ssh-keysign",
             "usr/libexec/openssh/ssh-pkcs11-helper",
@@ -496,6 +498,10 @@ SHOULD_NOT_MATCH = [
             '"$TOKEN"',
         ]
     ],
+    {
+        "example": "secret_key = 'rescue_disk_ephemeral_encryption_secret_uuid'",
+        "comment": "placeholder value",
+    },
     {
         "example": "<password><![CDATA[${password}]]></password>",
         "comment": "placeholder wrappet in cdata tags",
