@@ -497,6 +497,10 @@ SHOULD_NOT_MATCH = [
         ]
     ],
     {
+        "example": "https://f4c38c5:$githubpac@github.com"
+        "comment" "password is a variable"
+    },
+    {
         "example": "SECRET: 'APPLICATION_RESOURCES',",
         "comment": "placeholder value",
     },
