@@ -5,7 +5,7 @@ Patterns leveraged by LeakTK
 ## Status
 
 * gitleaks-7.6.1 patterns open sourced and actively maintained
-* > gitleaks-8 patterns are a work in progress (and no longer blocked as of 8.16.0)
+* gitleaks-8 patterns are a work in progress (and no longer blocked as of 8.16.0)
 * considering patterns to include for other types of scans
 
 ## Structure
