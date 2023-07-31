@@ -59,6 +59,19 @@ SHOULD_MATCH = [
             ("5b3d576ba5a108c3b7374142bfd02992", "notsecretyo"),
         )
     ],
+    *[
+        {
+            "description": "ArgoCD JWT",
+            "example": jwt,
+            "offender": jwt,
+            "comment": 'this searches for "iss":"argocd"',
+        }
+        for jwt in (
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0",
+        )
+    ],
     {
         "description": "Potentially Malicious Python Package",
         "example": "adad",

@@ -58,6 +58,19 @@
 # [file:99-general.toml]
 
 [[rules]]
+  description="ArgoCD JWT"
+  # Based on shifted b64 encoded portions of '"iss":"argocd"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ["group:leaktk-testing", "argocd", "jwt", "type:secret"]
+
+  [[rules.entropies]]
+    # This can probably be removed, if this rule has a low false positive rate
+    # but this is here just to gather the entropy data for testing.
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"
