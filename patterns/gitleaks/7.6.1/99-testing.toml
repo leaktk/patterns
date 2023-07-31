@@ -71,6 +71,19 @@
     Group = "1"
 
 [[rules]]
+  description="Kubernetes Service Account JWT"
+  # Based on shifted b64 encoded portions of '"iss":"kubernetes/serviceaccount"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bn|Jpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50|iaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3Vud)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ["group:leaktk-testing", "kubernetes", "service-account", "jwt", "type:secret"]
+
+  [[rules.entropies]]
+    # This can probably be removed, if this rule has a low false positive rate
+    # but this is here just to gather the entropy data for testing.
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"
