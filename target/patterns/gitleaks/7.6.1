@@ -729,6 +729,53 @@
     Group = "1"
 
 [[rules]]
+  # This handles unquoted values in YAML files
+  # Once this is production ready take off the "(YAML) bit so it gets sent with
+  # other general secret matches.
+  description="(YAML) General Secret"
+  path='''\.y(a)?ml$'''
+  regex = '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(.+)'''
+  tags = ["group:leaktk-testing", "yaml", "key", "secret", "general", "type:secret"]
+
+  [[rules.entropies]]
+    # This will probably go 3.35 but setting to zero to test
+    Min = "0"
+    Max = "8"
+    Group = "6"
+
+  [rules.allowlist]
+    regexes = [
+      # Things like:
+      #   - secret: <PLACEHOLDER>
+      #   - secret: @@PLACEHOLDER@@
+      #   - secret: %PLACEHOLDER%
+      #   - secret: $PLACEHOLDER$
+      #   - secret: __PLACEHOLDER__
+      #   - secret: _PLACEHOLDER_
+      #   - secret: ALL_UPPER_LETTERS_OR_UNDERSCORS
+      #   - secret: {PLACEHOLDER}
+      #   - secret: ${PLACEHOLDER}
+      #   - secret: %{PLACEHOLDER}
+      #   - secret: update-your-postgres-pass-here # a common placeholder setup
+      #   - secret: Some...placeholder
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(@@.+@@|<.+>|%.+%|\$.+\$|_.+_|(?-i)[A-Z_]+|(\$|%)?\{.+\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      #   - secret: [%PLACEHOLDER%]"
+      #   - secret: [PLACEHOLDER]
+      #   - secret: $(PLACEHOLDER...
+      #   - secret: \$(PLACEHOLDER...
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(\[%.+%\]|\[.+\]|(\\)?\$\(.*)''',
+      #   - secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   - secret: /SOME/path:${PLACEHOLDER}...
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
+      #   - secret: $SOME_ENV_VARIABLE-optional-text
+      #   - secret: \$SOME_ENV_VARIABLE-optional-text
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
+      # Various words at the start and end that signify a placeholder
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?.*(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']?''',
+    ]
+
+[[rules]]
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"

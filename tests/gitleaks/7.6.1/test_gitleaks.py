@@ -85,6 +85,47 @@ SHOULD_MATCH = [
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ",
         )
     ],
+    *[
+        {
+            "description": "(YAML) General Secret",
+            "example": example,
+            "offender": offender,
+            "comment": "General secret tests for yaml rules",
+            "filename": f"yaml-test.{ext}",
+        }
+        for (example, offender, ext) in (
+            (
+                "secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}",
+                "secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}",
+                "yml",
+            ),
+            (
+                "secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}",
+                "secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}",
+                "yaml",
+            ),
+            (
+                "secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "yml",
+            ),
+            (
+                "secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "yaml",
+            ),
+            (
+                "accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}",
+                "yml",
+            ),
+            (
+                "clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}",
+                "Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}",
+                "yaml",
+            ),
+        )
+    ],
     {
         "description": "Potentially Malicious Python Package",
         "example": "adad",
@@ -447,6 +488,36 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
+    *[
+        {
+            "example": example,
+            "comment": "placeholder value",
+            "filename": "yaml-test.yaml",
+        }
+        for example in (
+            r"secret: auth-test-password",
+            r"secret: <PLACEHOLDER>",
+            r"secret: @@PLACEHOLDER@@",
+            r"secret: %PLACEHOLDER%",
+            r"secret: $PLACEHOLDER$",
+            r"secret: __PLACEHOLDER__",
+            r"secret: _PLACEHOLDER_",
+            r"secret: ALL_UPPER_LETTERS_OR_UNDERSCORS",
+            r"secret: {PLACEHOLDER}",
+            r"secret: ${PLACEHOLDER}",
+            r"secret: %{PLACEHOLDER}",
+            r"secret: update-your-postgres-pass-here # a common placeholder setup",
+            r"secret: Some...placeholder",
+            r"secret: [%PLACEHOLDER%]",
+            r"secret: [PLACEHOLDER]",
+            r"secret: $(ls -l abcedafaca;lkj;lk)",
+            r"secret: \$(ls -l aclkaj;ria;ka;ek;jrakj)",
+            r"secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}",
+            r"secret: /SOME/path:${PLACEHOLDER}",
+            r"secret: $SOME_ENV_VARIABLE-optional-text",
+            r"secret: \$SOME_ENV_VARIABLE-optional-text",
+        )
+    ],
     *[
         {
             "example": f"-----BEGIN {key_type} PRIVATE KEY-----",
