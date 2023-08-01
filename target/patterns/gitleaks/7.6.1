@@ -39,8 +39,10 @@
 
   [rules.allowlist]
     paths = [
-      # Ignore common test keys
+      # Ignore keys in a test(s) folder
       '''test(s)?\/.*.(txt|der|key|pem)$''',
+      # Ignore keys with test in their name
+      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
       # Ignore common example keys
       '''(dummy|example).*(key|pem)''',
       # Ignore ssh utilities that might have key headers in them

@@ -526,6 +526,7 @@ SHOULD_NOT_MATCH = [
         }
         for key_type in ["EC", "PGP", "DSA", "RSA", "OPENSSH"]
         for filename in [
+            "some.test.ecdsa_key",
             "diff/usr/lib64/libssh.so.4.8.7",
             "diff/usr/share/mime/magic",
             "diff/usr/share/mime/mime.cache",
