@@ -778,6 +778,7 @@ SHOULD_NOT_MATCH = [
             f"{prefix}placeholder-password.12345{suffix}",
             f"{prefix}SomeSecretPassw0rd{suffix}",
             f"{prefix}https://www.example.com{suffix}",
+            f"{prefix}\\u003cpassword\\u003e{suffix}",
         )
     ],
     {
