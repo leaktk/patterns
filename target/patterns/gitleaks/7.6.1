@@ -157,7 +157,7 @@
       # Things like: https://user:$pass@host
       '''(?i):\/\/([^:\/\s\"\']+)?:\$[a-z][a-z\_\-]+(\$)?@[\w\.\-]+''',
       # Things like: https://user:afacae....adsfae@host
-      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*\.\.\.[^@\/\s\"]*@[\w\.\-]+''',
+      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*(\.\.\.|\*\*\*)[^@\/\s\"]*@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
       # Things like: https://user:{pass}@host
