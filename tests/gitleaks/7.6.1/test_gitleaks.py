@@ -833,6 +833,10 @@ SHOULD_NOT_MATCH = [
         "comment": "This is just code looking for headers",
     },
     {
+        "example": 'where("-----BEGIN RSA PRIVATE KEY-----")',
+        "comment": "This is just code looking for headers",
+    },
+    {
         "example": '"password": "https://secret_dsn",',
         "comment": "This is a URL not a secret",
     },

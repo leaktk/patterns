@@ -32,8 +32,10 @@
       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
       '''(?i)\w*(fake|example|test)\w*(\s+)?[:=]+(\s+)?(\[)?(\s+)?(\"\"\"|\"|\'|`)?-----BEGIN''',
       # Things that look like code looking for headers
-      # like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
+      #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
       '''if.*==\s*[\"|\']-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
+      #   like: "-----BEGIN RSA PRIVATE KEY-----")
+      '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"\']?\)''',
     ]
 
 [[rules]]
