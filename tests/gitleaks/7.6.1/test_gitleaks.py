@@ -837,6 +837,14 @@ SHOULD_NOT_MATCH = [
         "comment": "This is just code looking for headers",
     },
     {
+        "example": "-----BEGIN PRIVATE KEY-----*******************************************************************************-----END PRIVATE KEY-----",
+        "comment": "Redacted value",
+    },
+    {
+        "example": "-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBg...W17oy4Qgj7OLNB\\n-----END PRIVATE",
+        "comment": "Redacted value",
+    },
+    {
         "example": '"password": "https://secret_dsn",',
         "comment": "This is a URL not a secret",
     },

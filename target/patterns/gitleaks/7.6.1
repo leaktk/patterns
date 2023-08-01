@@ -60,6 +60,8 @@
       '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
       # The key has spaces in it so it's probably a placeholder
       '''PRIVATE KEY( BLOCK)?-----.*(\s).*-----END''',
+      # The key has a redacted portion so it's probably a placeholder
+      '''PRIVATE KEY( BLOCK)?-----.*(\.\.\.|\*\*\*).*-----END''',
       # Ignore some keys assigned to test vars
       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
       '''(?i)\w*(fake|example|test)\w*(\s+)?[:=]+(\s+)?(\[)?(\s+)?(\"\"\"|\"|\'|`)?-----BEGIN''',
