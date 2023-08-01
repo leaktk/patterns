@@ -113,12 +113,12 @@
       #   - secret: %{PLACEHOLDER}
       #   - secret: update-your-postgres-pass-here # a common placeholder setup
       #   - secret: Some...placeholder
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(@@.+@@|<.+>|%.+%|\$.+\$|_.+_|(?-i)[A-Z_]+|(\$|%)?\{.+\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(@@.+?@@|<.+?>|%.+?%|\$.+?\$|_.+?_|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
       #   - secret: [%PLACEHOLDER%]"
       #   - secret: [PLACEHOLDER]
       #   - secret: $(PLACEHOLDER...
       #   - secret: \$(PLACEHOLDER...
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(\[%.+%\]|\[.+\]|(\\)?\$\(.*)''',
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
       #   - secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
       #   - secret: /SOME/path:${PLACEHOLDER}...
       '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',

@@ -260,7 +260,7 @@ SHOULD_MATCH = [
     {
         "description": "General Secret",
         "example": '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}',
-        "offender": '"password": "3ae68d9f8ccfc898ee2555a5f8f228b9"',
+        "offender": 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"',
         "comment": "make sure it captures the password but stops at the quote",
     },
     {
@@ -302,7 +302,7 @@ SHOULD_MATCH = [
     {
         "description": "General Secret",
         "example": '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}',
-        "offender": '"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"',
+        "offender": 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"',
         "comment": "make sure it captures the secret but stops at the quote",
     },
     {
@@ -595,22 +595,194 @@ SHOULD_NOT_MATCH = [
             '"$TOKEN"',
         ]
     ],
-    {
-        "example": "secret_key = 'rescue_disk_ephemeral_encryption_secret_uuid'",
-        "comment": "placeholder value",
-    },
+    *[
+        {
+            "example": example,
+            "comment": "General Secret placeholder or non-secret value",
+        }
+        for prefix, suffix in (
+            ("secret='", "'"),
+            ("secret:'", "'"),
+            ("'secret':'", "'"),
+            ("password='", "'"),
+            ("PASSWORD='", "'"),
+            ("secret_key='", "'"),
+            ("SECRET_KEY='", "'"),
+            ("secret-key='", "'"),
+            ('imagePullSecret="', '"'),
+            ("secretkey='", "'"),
+            ("secretkey='", "', some = 'other value'"),
+            ("secret_access_key='", "'"),
+            ('Path to Secret: "', '"'),
+            ('"secret": "', '"'),
+            ('"password": "', '"'),
+        )
+        for example in (
+            f"{prefix}{suffix}",
+            f"{prefix}auth-test-password{suffix}",
+            f"{prefix}<PASSWORD_PLACEHOLDER_123>{suffix}",
+            f"{prefix}@@PASSWORD_PLACEHOLDER_123@@{suffix}",
+            f"{prefix}@@FILE:/some/file/path@@{suffix}",
+            f"{prefix}%PASSWORD_PLACEHOLDER_123%{suffix}",
+            f"{prefix}$PASSWORD_PLACEHOLDER_123${suffix}",
+            f"{prefix}__GITLAB_OAUTH_SECRET__{suffix}",
+            f"{prefix}_GITLAB_OAUTH_SECRET_{suffix}",
+            f"{prefix}ALL_UPPER_LETTERS_OR_UNDERSCORS{suffix}",
+            f"{prefix}$(PASSWORD_PLACEHOLDER_123){suffix},",
+            f"{prefix}{{PASSWORD_PLACEHOLDER_123}}{suffix}",
+            f"{prefix}${{PASSWORD_PLACEHOLDER_123}}{suffix}",
+            f"{prefix}%{{PLACEHOLDER}}{suffix}",
+            f"{prefix}update-your-postgres-pass-here # a common placeholder setup{suffix}",
+            f"{prefix}Some...placeholder{suffix}",
+            f"{prefix}[%PASSWORD_PLACEHOLDER_123%]{suffix}",
+            f"{prefix}[SOME_RANDOM_SECRET]{suffix}",
+            f"{prefix}$(ls -l abcedafaca;lkj;lk){suffix}",
+            f"{prefix}\\$(ls -l aclkaj;ria;ka;ek;jrakj){suffix}",
+            f"{prefix}SOME_CONSTANT_PREFIX_${{PLACEHOLDER}}{suffix}",
+            f"{prefix}/SOME/path:${{PLACEHOLDER}}{suffix}",
+            f"{prefix}$SOME_ENV_VARIABLE-optional-text{suffix}",
+            f"{prefix}\\$SOME_ENV_VARIABLE-optional-text{suffix}",
+            f"{prefix}rescue_disk_ephemeral_encryption_secret_uuid{suffix}",
+            f"{prefix}data/my_root/my_folder{suffix}",
+            f"{prefix}27BZdTpuIl9u...pE+SpU4C2vQSY={suffix}",
+            f"{prefix}APPLICATION_RESOURCES{suffix}",
+            f"{prefix}http://secret_dsn{suffix}",
+            f"{prefix}/etc/app-settings/password-file{suffix}",
+            f"{prefix}YOURGENERATEDAPPLICATIONPASSWORD{suffix}",
+            f"{prefix}{{{{ lookup('hashi_vault', 'secret=kv/foo:username token={{{{ token_var }}}} url=http://host:8200')}}}}{suffix}",
+            f"{prefix}`kubectl get`{suffix}",
+            f"{prefix}FIXME!px1{suffix}",
+            f"{prefix}PW_PLACEHOLDER{suffix}",
+            f"{prefix}FAKE.thing(){suffix}",
+            # Contains EXAMPLE in base64
+            f"{prefix}RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg=={suffix}",
+            f"{prefix}USER_PASSWORD,{suffix}",
+            f"{prefix}foo/bar.baz.yaml.tmpl{suffix}",
+            # Password in spanish
+            f"{prefix}Contrase\\u00f1a{suffix}",
+            f'{prefix}some.property.password="$SOME_PASSWORD_VARIABLE"{suffix}',
+            f"{prefix}ONLYFORDEVELOPMENT{suffix}",
+            f"{prefix}for-cicd-${{some.placeholder.VALUE_REF}}${{some.placeholder.VALUE_REF}}{suffix}",
+            f"{prefix}$Abc12345678{suffix}",
+            f"{prefix}$CREDENTIAL_PLACEHOLDER${suffix}",
+            f"{prefix}\\u201cfakepasswd#\\u201d{suffix}",
+            f"{prefix}DEFAULT_APP_SECRET_DEFAULT{suffix}",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg=={suffix} # noqa: E501",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB9=={suffix} # nosec",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB8=={suffix} # gitleaks:allow",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB7=={suffix} # notsecret ",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB5=={suffix} #notsecret ",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB4=={suffix} //notsecret ",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB3=={suffix} # notsecret - this is a false positive",
+            f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB2=={suffix} notsecret ",
+            f"{prefix}/some/Path:${{foo.bar.baz}}{suffix}",
+            f"{prefix}/tmp/${{pull_secret_filename}}{suffix}",
+            f"{prefix}spec.some.path[*].secretRef{suffix}",
+            f"{prefix}&lt;password_for_some_account&gt;{suffix}",
+            f"{prefix}00000000-0000-0000-0000-000000000000{suffix}",
+            f"{prefix}true|false{suffix}",
+            f"{prefix}\\$KUBEADMIN_PASS{suffix}",
+            f"{prefix}PROVIDE-A-PASSWORD-SALT{suffix}",
+            f"{prefix}NamespaceOpenshiftResourceVaultSecret_v1{suffix}",
+            f'{prefix}"&secretKey=RAW(" + s3_secretKey + ")"{suffix}',
+            f"{prefix}some-secret-CHANGEME{suffix}",
+            f"{prefix}GITHUB_TOKEN=${{GITHUB_TOKEN}}{suffix}",
+            f'{prefix}$(KUBECONFIG="$target" kubectl get sa "$sa" -n "$namespace" -o json |{suffix}',
+            f"{prefix}[[.Some.Build.Secret]]{suffix}",
+            f"{prefix}\(password){suffix}",
+            f"{prefix}#{{password}}{suffix}",
+            f"{prefix}#{{password}}{suffix}",
+            f"{prefix}`generate-password`{suffix}",
+            f"{prefix}#REPLACE_ME#{suffix}",
+            f"{prefix}${{PASSWORD_PLACEHOLDER_123}}{suffix}",
+            f"{prefix}SuperSecretPassword!{suffix}",
+            f"{prefix}#{{File.exists?('/some/path') ? open('/some/path','r') do |f|f.read end : ''}}{suffix}",
+            f"{prefix}example-9b5a699bc0dc8211f103a9a305b01a51{suffix}",
+            f"{prefix}quickstart-9b5a699bc0dc8211f103a9a305b01a51{suffix}",
+            f"{prefix}9b5a699bc0dc8211f103a9a305b01a51-example{suffix}",
+            f"{prefix}path={{.spec.databasePassword}}{suffix}",
+            f"{prefix}samplepwd{suffix}",
+            f"{prefix}the-thing-is-required{suffix}",
+            f"{prefix}update-your-postgres-pass-here{suffix}",
+            f"{prefix}autogenerated_stuff{suffix}",
+            f"{prefix}this-is-not-real!{suffix}",
+            f"{prefix}NotActuallyApplied!{suffix}",
+            f"{prefix}ADMIN_PASSWORD_HERE!{suffix}",
+            f"{prefix}\$(POSTGRESQL_PASSWORD){suffix}",
+            f'{prefix}+privateDataPlaceholder()+"&{suffix}',
+            f"{prefix}foo{suffix}",
+            f"{prefix}.odc-multiple-key-selector button{suffix}",
+            f"{prefix}, listKeys(resourceId({suffix}",
+            f'{prefix}exp_password" or "{{{{ example_password }}}}{suffix}',
+            f"{prefix}secret12345{suffix}",
+            f"{prefix}password_to_replace{suffix}",
+            f"{prefix}some_placeholder_passwd{suffix}",
+            f"{prefix}some_placeholder_pwd{suffix}",
+            f"{prefix}some_placeholder-pwd{suffix}",
+            f"{prefix}passwort_to_replace{suffix}",
+            f"{prefix}passord_to_replace{suffix}",
+            f"{prefix}base64string{suffix}",
+            f"{prefix}GITHUB_ACCESS_TOKEN{suffix}",
+            f"{prefix}foo_client_id{suffix}",
+            f"{prefix}foo_key_private{suffix}",
+            f"{prefix}%{{pull_secret}}{suffix}",
+            f"{prefix}HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/bPxRfiCY{suffix} //nolint:gosec",
+            f"{prefix}HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/EXAMPLEKEY{suffix}",
+            f"{prefix}$SOME_ENV_VAR-value{suffix}",
+            f"{prefix}c007cd12-1fe7-4843-947e-ddecfc0d8913{suffix}",
+            f"{prefix}${{SESSION_SECRET}}={suffix}",
+            f"{prefix}abcdef0123456789{suffix}",
+            f"{prefix}foo-credentials{suffix}",
+            f"{prefix}k8s-infra-key{suffix}",
+            f"{prefix}insert user Secret{suffix}",
+            f"{prefix}please-insert-abc123-Secret{suffix}",
+            f"{prefix}adfasdfasdfadfa-abc123.json{suffix}",
+            f"{prefix}adfasdfasdfadfa-abc123-data{suffix}",
+            f"{prefix}adfasdfasdfadfa-abc123-kubeconfig{suffix}",
+            f"{prefix}please-insert-abc123.Secret{suffix}",
+            f"{prefix}secret{suffix}",
+            f"{prefix}secret_to_replace{suffix}",
+            f"{prefix}password{suffix}",
+            f"{prefix}password_to_replace{suffix}",
+            f"{prefix}client-secret-for-service-principal{suffix}",
+            f"{prefix}SUPER-SECRET-123{suffix}",
+            f"{prefix}insert-user-PasSworD{suffix}",
+            f"{prefix}awx-postgres-configuration{suffix}",
+            f"{prefix}multicluster-mongodb-client-cert{suffix}",
+            f"{prefix}multicluster-mongodb-client-certification{suffix}",
+            f"{prefix}multicluster-mongodb-client-auth{suffix}",
+            f"{prefix}multicluster-mongodb-client-authentication{suffix}",
+            f"{prefix}reposure-registry{suffix}",
+            f"{prefix}reposure-registry-secrets{suffix}",
+            f"{prefix}foobar{suffix}",
+            f"{prefix}/var/run/secret/secret.yml{suffix}",
+            f"{prefix}),d?_.a.createElement({suffix}",
+            f"{prefix}).append(toIndentedString(password)).append({suffix}",
+            f"{prefix}django-insecure-zeu#xlk35rk7$b0o_hg7bfr@60A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS{suffix}",
+            f"{prefix}material/form-textbox-password.svg{suffix}",
+            f"{prefix}material/form-textbox-password.png{suffix}",
+            f"{prefix}material/form-textbox-password.jpeg{suffix}",
+            f"{prefix}material/form-textbox-password.txt{suffix}",
+            # make sure lower case with dashes is NOT caught
+            f"{prefix}lol-ikr-those-kids-r-krazy{suffix}",
+            # some numbers and upper case are fine as long as a good portion is lower with dashes
+            f"{prefix}K8s-lol-ikr-those-kids-r-krazy{suffix}",
+            f"{prefix}/run/kubernetes/secrets/oscontainer-registry/dockercfg{suffix}",
+            f"{prefix}/var/run/secrets/atomic-reactor/v2-registry-dockercfg{suffix}",
+            f"{prefix}/path/to/password/file{suffix}",
+            f"{prefix}ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{suffix}",
+            f"{prefix}ghp_************************************{suffix}",
+            f"{prefix}ghp_....................................{suffix}",
+            f"{prefix}$(openssl rand -hex 16){suffix}",
+            f"{prefix}SOME_PREFIX_WITH_A_${{variable}}{suffix}",
+            f"{prefix}placeholder-password.12345{suffix}",
+            f"{prefix}SomeSecretPassw0rd{suffix}",
+            f"{prefix}https://www.example.com{suffix}",
+        )
+    ],
     {
         "example": "<password><![CDATA[${password}]]></password>",
         "comment": "placeholder wrappet in cdata tags",
-    },
-    {
-        "example": 'Path to Secret: "data/my_root/my_folder"',
-        "comment": "File path",
-    },
-    {
-        "example": "password='27BZdTpuIl9u...pE+SpU4C2vQSY='"
-        "comment"
-        "password was partially redacted"
     },
     {
         "example": "https://f4c38c5:27BZdTpuIl9u...pE+SpU4C2vQSY=@github.com"
@@ -621,14 +793,6 @@ SHOULD_NOT_MATCH = [
         "example": "https://f4c38c5:$githubpac@github.com"
         "comment"
         "password is a variable"
-    },
-    {
-        "example": "SECRET: 'APPLICATION_RESOURCES',",
-        "comment": "placeholder value",
-    },
-    {
-        "example": "password='APPLICATION_RESOURCES',",
-        "comment": "placeholder value",
     },
     {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
@@ -642,10 +806,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "https://test:adfa;dkj;aek;j@example.com",
         "comment": "Just an example",
-    },
-    {
-        "example": "access_token_client_secret=VaultSecret(**access_token_client_secret),",
-        "comment": "Function call",
     },
     {
         "example": "<Password>$SomePlaceholderForAdminPassword$</Password>",
@@ -675,14 +835,6 @@ SHOULD_NOT_MATCH = [
         "comment": "This is a URL not a secret",
     },
     {
-        "example": '"secret": "http://secret_dsn",',
-        "comment": "This is a URL not a secret",
-    },
-    {
-        "example": "password='/etc/app-settings/password-file'",
-        "comment": "This is a path, not a password",
-    },
-    {
         "example": "adcraft-jk-its-not-real",
         "comment": "This package name contains a malicous package name but isn't one",
         "filename": "requirements.txt",
@@ -691,30 +843,6 @@ SHOULD_NOT_MATCH = [
         "example": "adhttpfakenotreal",
         "comment": "This package name contains a malicous package name but isn't one",
         "filename": "requirements.txt",
-    },
-    {
-        "example": "password=YOURGENERATEDAPPLICATIONPASSWORD\\n",
-        "comment": "Not a secret",
-    },
-    {
-        "example": "{{ lookup('hashi_vault', 'secret=kv/foo:username token={{ token_var }} url=http://host:8200')}}",
-        "comment": "Not a secret",
-    },
-    {
-        "example": "SECRET=`kubectl...`",
-        "comment": "Not a secret",
-    },
-    {
-        "example": "password=FIXME!px1",
-        "comment": "Not a secret",
-    },
-    {
-        "example": "PASSWORD=PW_PLACEHOLDER",
-        "comment": "Not a secret",
-    },
-    {
-        "example": "secret=FAKE.thing()",
-        "comment": "Not a secret",
     },
     {
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
@@ -747,18 +875,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Contains a host later on so it looks like basic auth",
     },
     {
-        "example": "password=USER_PASSWORD,",
-        "comment": "Placeholder ending in a comma",
-    },
-    {
-        "example": "Secret = 'foo/bar.baz.yaml.tmpl'",
-        "comment": "File path",
-    },
-    {
-        "example": '"password": "Contrase\\u00f1a"',
-        "comment": "Password in spanish",
-    },
-    {
         "example": "fake_cert = '-----BEGIN OPENSSH PRIVATE KEY-----",
         "comment": "Test Cert",
     },
@@ -783,32 +899,8 @@ SHOULD_NOT_MATCH = [
         "comment": "Placeholder value",
     },
     {
-        "example": 'PASSWORD="some.property.password="$SOME_PASSWORD_VARIABLE""',
-        "comment": "Placeholder value",
-    },
-    {
         "example": "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName",
         "comment": "This is code",
-    },
-    {
-        "example": 'SECRET_KEY = "ONLYFORDEVELOPMENT"',
-        "comment": "This is a placeholder",
-    },
-    {
-        "example": 'imagePullSecret = "for-cicd-${some.placeholder.VALUE_REF}${some.placeholder.VALUE_REF}"',
-        "comment": "This is a placeholder",
-    },
-    {
-        "example": '"password":"$Abc12345678"',
-        "comment": "This is a placeholder",
-    },
-    {
-        "example": '"secret": "$CREDENTIAL_PLACEHOLDER$"',
-        "comment": "This is a placeholder",
-    },
-    {
-        "example": '"password":"\\u201cfakepasswd#\\u201d"',
-        "comment": "This is a ",
     },
     {
         "example": "https://s3.amazonaws.com/examplebucket/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=A3TGOBTGY4DIMRXMIYGE/20130721/us-east-1/s3/aws4_request&X-Amz-Date=20130721T201207Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=%3Csignature-value%3E",
@@ -817,22 +909,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'awslb/podsvc.yaml": testExtendedTestdataRouterAwslbPodsvcYaml',
         "comment": "Looks similar to a AWS secret key",
-    },
-    {
-        "example": 'SECRET_KEY = "DEFAULT_APP_SECRET_DEFAULT"',
-        "comment": "Placeholder password",
-    },
-    {
-        "example": 'secret="vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg==" # noqa: E501',
-        "comment": "Placeholder password",
-    },
-    {
-        "example": 'secret="/some/Path:${foo.bar.baz}"',
-        "comment": "Placeholder values",
-    },
-    {
-        "example": 'password="/tmp/${pull_secret_filename}"',
-        "comment": "Placeholder values",
     },
     {
         "example": " Af80f1/2+53=df0xc1e/d892b5768f3easefasz= ",
@@ -856,32 +932,12 @@ SHOULD_NOT_MATCH = [
         "comment": "Looks really close to a SendGrid API Key's format",
     },
     {
-        "example": 'requiredSecret="[SOME_RANDOM_SECRET]"',
-        "comment": "Placeholder secret",
-    },
-    {
         "example": "xoxp-some-slack-access-token-these-are-very-long-and-start-with-xo",
         "comment": "Placeholder slack token",
     },
     {
         "example": "'token': 'xoxa-123456789abcdef',",
         "comment": "Placeholder slack token",
-    },
-    {
-        "example": '.secret": "spec.some.path[*].secretRef",',
-        "comment": "Path to a secret and not a real secret",
-    },
-    {
-        "example": 'PASSWORD="&lt;password_for_some_account&gt;"',
-        "comment": "Placeholder with markup",
-    },
-    {
-        "example": "secret=00000000-0000-0000-0000-000000000000",
-        "comment": "Not a real secret",
-    },
-    {
-        "example": "Secret=true|false",
-        "comment": "Not a real secret",
     },
     {
         "example": " b/drivers/media/platform/bcm2835/Kconfig",
@@ -893,60 +949,8 @@ SHOULD_NOT_MATCH = [
         "filename": "foo.htpasswd",
     },
     {
-        "example": 'oc login $(oc whoami --show-server) --insecure-skip-tls-verify --username=kubeadmin --password="\$KUBEADMIN_PASS" ',
-        "comment": "env variable",
-    },
-    {
-        "example": 'root_password: "PROVIDE-A-PASSWORD-SALT"',
-        "comment": "placeholder",
-    },
-    {
-        "example": '"vault-secret": "NamespaceOpenshiftResourceVaultSecret_v1"',
-        "comment": "secret ref",
-    },
-    {
-        "example": 'String secret = "&secretKey=RAW(" + s3_secretKey + ")"',
-        "comment": "placeholder",
-    },
-    {
-        "example": '"secret":"some-secret-CHANGEME"',
-        "comment": "placeholder",
-    },
-    {
-        "example": 'secret="GITHUB_TOKEN=${GITHUB_TOKEN}"',
-        "comment": "setting a variable",
-    },
-    {
-        "example": 'token_secret="$(KUBECONFIG="$target" kubectl get sa "$sa" -n "$namespace" -o json |',
-        "comment": "part of a sub command",
-    },
-    {
         "example": "asdfasdfaeaAIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZasdfasmlajasdfasdfasdf",
         "comment": "contains a substring that looks like a google api key",
-    },
-    {
-        "example": 'secret: "[[.Some.Build.Secret]]"',
-        "comment": "Placeholder",
-    },
-    {
-        "example": "password=\(password)",
-        "comment": "Placeholder",
-    },
-    {
-        "example": "password=#{password}",
-        "comment": "Placeholder",
-    },
-    {
-        "example": "password=`generate-password`",
-        "comment": "Shell command",
-    },
-    {
-        "example": "password=#REPLACE_ME#",
-        "comment": "Placeholder",
-    },
-    {
-        "example": "'-s klmnopqrstuvwxyz12345ABCD987654321efghij'",
-        "comment": "Placeholder",
     },
     {
         "example": "http://mirror.centos.org/centos/8-stream/BaseOS/aarch64/os/Packages/libffi-3.1-23.el8.aarch64.rpm",
@@ -969,120 +973,8 @@ SHOULD_NOT_MATCH = [
         "comment": "Shouldn't match an inline key with spaces in it",
     },
     {
-        "example": 'password = "${PASSWORD_PLACEHOLDER_123}", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password: "SuperSecretPassword!"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": "auth.password = \"#{File.exists?('/some/path') ? open('/some/path','r') do |f|f.read end : ''}\"",
-        "comment": "placeholder value with quotes and code",
-    },
-    {
-        "example": 'password = "example-9b5a699bc0dc8211f103a9a305b01a51", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "quickstart-9b5a699bc0dc8211f103a9a305b01a51", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "9b5a699bc0dc8211f103a9a305b01a51-example", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": "service.binding/db_password: 'path={.spec.databasePassword}'",
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'databasePassword: "samplepwd"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password:  "the-thing-is-required",',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "update-your-postgres-pass-here"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'admin_password: "autogenerated_stuff"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'admin_password = "this-is-not-real!"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'admin_password = "NotActuallyApplied!"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "[%PASSWORD_PLACEHOLDER_123%]", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "$(PASSWORD_PLACEHOLDER_123)", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
         "example": 'cps.Data["metadata"] = []byte("password: " + tokenValue + "\nusername: NEW_VALUE")',
         "comment": "placeholder value",
-    },
-    {
-        "example": 'password="`+yaml.GetConfig().Password+`"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "{PASSWORD_PLACEHOLDER_123}", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": '{"password": "${PASSWORD_PLACEHOLDER_123}", "foo": "bar"}',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "<SOME_PLACEHOLDER>", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "%SOME_PLACEHOLDER_123%", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": "admin_password='ADMIN_PASSWORD_HERE'",
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'export PGPASSWORD="\$(POSTGRESQL_PASSWORD)"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'Password: "@@FILE:/some/file/path@@"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": '"password="+privateDataPlaceholder()+"&"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'password = "foo", some = "other value"',
-        "comment": "entropy check",
-    },
-    {
-        "example": 'password: ".odc-multiple-key-selector button"',
-        "comment": "most likely not a password, has a space in it",
-    },
-    {
-        "example": "password=', listKeys(resourceId('",
-        "comment": "most likely not a password, has a space in it",
-    },
-    {
-        "example": 'password: "exp_password" or "{{ example_password }}"',
-        "comment": "allow list check",
     },
     {
         "example": '<FooPassword id="new" >{{PLACEHOLDER}}</FooPassword><bar>baz</bar>',
@@ -1101,156 +993,8 @@ SHOULD_NOT_MATCH = [
         "comment": "Ignore placeholders",
     },
     {
-        "example": 'password="secret12345"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'password="password_to_replace"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'password="some_placeholder_passwd"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'password="some_placeholder_pwd"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'password="some_placeholder-pwd"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'password="passwort_to_replace"',
-        "comment": "allow list check (spelling error)",
-    },
-    {
-        "example": 'password="passord_to_replace"',
-        "comment": "allow list check (spelling error)",
-    },
-    {
-        "example": '{"data":{"some-secret":"base64string"}}',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'access_token_secret="GITHUB_ACCESS_TOKEN"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'get_secret="foo_client_id"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'get_secret="foo_key_private"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": "pullSecret: '%{pull_secret}'",
-        "comment": "placeholder value",
-    },
-    {
-        "example": "secret = 'HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/bPxRfiCY' //nolint:gosec",
-        "comment": "placeholder value",
-    },
-    {
-        "example": "secret = 'HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/EXAMPLEKEY'",
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'export SOME_SECRET="$SOME_ENV_VAR-value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "${SECRET_PLACEHOLDER_123}", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "$(SECRET_PLACEHOLDER_123)", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "[%SECRET_PLACEHOLDER_123%]", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret: ".odc-multiple-key-selector button"',
-        "comment": "most likely not a secret, has a space in it",
-    },
-    {
-        "example": 'cps.Data["metadata"] = []byte("secret: " + tokenValue + "\nusername: NEW_VALUE")',
-        "comment": "placeholder value",
-    },
-    {
         "example": "<UserSecretsId>c007cd12-1fe7-4843-947e-ddecfc0d8913</UserSecretsId>",
         "comment": "UUID should not be matched",
-    },
-    {
-        "example": 'secret="c007cd12-1fe7-4843-947e-ddecfc0d8913"',
-        "comment": "UUID should not be matched",
-    },
-    {
-        "example": 'servers: \'[{ "id": "sonatype", "username": "$SONATYPE_BOT_USERNAME", "password": "$SONATYPE_BOT_TOKEN" }]\'',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "{SECRET_PLACEHOLDER_123}", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "%SECRET_PLACEHOLDER_123%", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'session_secret: "${SESSION_SECRET}="',
-        "comment": "placeholder value",
-    },
-    {
-        "example": '{"secret": "${SECRET_PLACEHOLDER_123}", "foo": "bar"}',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "<SOME_PLACEHOLDER>", some = "other value"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret = "foo", some = "other value"',
-        "comment": "entropy check",
-    },
-    {
-        "example": 'in.Secret = "abcdef0123456789"',
-        "comment": "placeholder value",
-    },
-    {
-        "example": "secret: 'foo-credentials'",
-        "comment": "placeholder value",
-    },
-    {
-        "example": 'secret: "k8s-infra-key"',
-        "comment": "reference",
-    },
-    {
-        "example": '"secret": "insert user Secret",',
-        "comment": "allow list check (ends with <space>secret)",
-    },
-    {
-        "example": '"secret": "insert-abc123-Secret",',
-        "comment": "allow list check (ends with -secret)",
-    },
-    {
-        "example": '"secret": "insert-abc123.json",',
-        "comment": "allow list check (ends with .json)",
-    },
-    {
-        "example": '"secret": "insert-abc123-data",',
-        "comment": "allow list check (ends with -data)",
-    },
-    {
-        "example": '"secret": "insert-abc123-kubeconfig",',
-        "comment": "allow list check (ends with -kubeconfig)",
-    },
-    {
-        "example": '"secret": "insert-abc123.Secret",',
-        "comment": "allow list check (ends with .secret)",
     },
     {
         "example": '<FooSecret id="new" >{{PLACEHOLDER}}</FooSecret><bar>baz</bar>',
@@ -1265,18 +1009,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Ignore placeholders",
     },
     {
-        "example": 'secret="secret"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'secret="secret_to_replace"',
-        "comment": "allow list check",
-    },
-    {
-        "example": 'secret": "Problem with creating secret {{error}}"',
-        "comment": "looks like a sentence",
-    },
-    {
         "example": "bob123:example",
         "comment": "Should be too low-entropy",
         "filename": "my-htpasswd-file",
@@ -1286,80 +1018,8 @@ SHOULD_NOT_MATCH = [
         "comment": "Should not match because it's not in a htpasswd file",
     },
     {
-        "example": '"password": "paSSwOrD for kubernetes user",',
-        "comment": "allow list check (starts with pasword<space>",
-    },
-    {
-        "example": '"secret": "client-secret-for-service-principal",',
-        "comment": "allow list check (starts with client)",
-    },
-    {
-        "example": '"password": "SUPER-SECRET-123"',
-        "comment": "Too low entropy",
-    },
-    {
-        "example": '"password": "insert user PasSworD",',
-        "comment": "allow list check (ends with <space>password)",
-    },
-    {
-        "example": '"password": "insert-user-PasSworD",',
-        "comment": "allow list check (ends with -password)",
-    },
-    {
-        "example": '"secret": "awx-postgres-configuration",',
-        "comment": "allow list check (ends with -configuration)",
-    },
-    {
-        "example": '"secret": "multicluster-mongodb-client-cert",',
-        "comment": "allow list check (ends with -cert)",
-    },
-    {
         "example": "_Somef0lder/or/Somepath/that0snotakeyyepa.sh",
         "comment": "this is close to the regex for an aws key",
-    },
-    {
-        "example": '"secret": "multicluster-mongodb-client-certification",',
-        "comment": "allow list check (ends with -cert)",
-    },
-    {
-        "example": '"secret": "multicluster-mongodb-client-authentication",',
-        "comment": "allow list check (ends with -authentication)",
-    },
-    {
-        "example": '"secret": "reposure-registry",',
-        "comment": "allow list check (ends with -registry)",
-    },
-    {
-        "example": '"secret": "reposure-registry-secrets",',
-        "comment": "allow list check (ends with -secrets)",
-    },
-    {
-        "example": '"password": "insert-user-123-kubeconfig",',
-        "comment": "allow list check (ends with -kubeconfig)",
-    },
-    {
-        "example": '"password": "insert-user-123.json",',
-        "comment": "allow list check (ends with .json)",
-    },
-    {
-        "example": '"password": "insert-user-123-data",',
-        "comment": "allow list check (ends with -data)",
-    },
-    {
-        "example": '"password": "insert-user.PasSworD",',
-        "comment": "allow list check (ends with .password)",
-    },
-    {
-        "example": '"ConfigMap/Secret": "ConfigMap/Secret"',
-        "comment": "Make sure it doesn't match /Secret",
-    },
-    {
-        "example": 'password = "dev-pass", some = "other value"',
-        "comment": "entropy check",
-    },
-    {
-        "example": 'password = "foobar", some = "other value"',
-        "comment": "entropy check",
     },
     {
         "example": "define('AUTH_KEY', '${AUTH_KEY}');",
@@ -1387,10 +1047,6 @@ SHOULD_NOT_MATCH = [
         "filename": "my-htpasswd-file",
     },
     {
-        "example": "secret: '/var/run/secret/secret.yml'",
-        "comment": "This is a yaml config file, should support both .yaml and .yml in the allow list",
-    },
-    {
         "example": 'Password = "$A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
         "comment": "Ignore general secrets in portions of the azure-cli repo",
         "filename": "src/azure-cli/azure/cli/command_modules/appservice/tests/latest/recordings/foo.yml",
@@ -1404,83 +1060,6 @@ SHOULD_NOT_MATCH = [
         "example": '"hashed_secret": "972edb79d7c2e4374689572fb6c4ee7b",',
         "comment": "Ignore .secrets.baseline files",
         "filename": ".secrets.baseline",
-    },
-    {
-        "example": '"Password:"),d?_.a.createElement("',
-        "comment": "Should not catch snipets of code",
-    },
-    {
-        "example": 'password: ").append(toIndentedString(password)).append("',
-        "comment": "Should not catch snipets of code",
-    },
-    {
-        "example": '"secret:"),d?_.a.createElement("',
-        "comment": "Should not catch snipets of code",
-    },
-    {
-        "example": '"secret:" ),d?_.a.createElement("',
-        "comment": "Should not catch snipets of code",
-    },
-    {
-        "example": 'SECRET_KEY = "django-insecure-zeu#xlk35rk7$b0o_hg7bfr@60A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
-        "comment": "Should not catch fake django keys",
-        "filename": "settings.py",
-    },
-    {
-        "example": "SECRET_KEY = 'django-insecure-q9$s5rGwuLlu&a6_#%A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS'",
-        "comment": "Should not catch fake django keys in any file",
-    },
-    {
-        "example": 'nexus_proxy_password = "A3QuDLm2Ukhsae68d9f9ccjhI1AC9LG01KrQS"  # nosec',
-        "comment": "Support # nosec tag",
-    },
-    {
-        "example": 'const someSecret = "SomeStubbedOutThing"    // #nosec G101 -- This is a false positive',
-        "comment": "Support #nosec tag",
-    },
-    {
-        "example": 'nexus_proxy_password = "A3QuDLm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  # notsecret',
-        "comment": "Support # notsecret tag",
-    },
-    {
-        "example": 'nexus_proxy_password = "G3QuDGm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  //notsecret',
-        "comment": "Support //notsecret tag",
-    },
-    {
-        "example": 'nexus_proxy_password = "G3QuDLm2Ukhsae68d9f9ccjhI1AC9LG01KrQX"  #notsecret',
-        "comment": "Support #notsecret tag",
-    },
-    {
-        "example": 'const someSecret = "SomeStubbedOutThing"    // notsecret - This is a false positive',
-        "comment": "Support notsecret with comments after tag",
-    },
-    {
-        "example": 'const someSecret = "SomeStubbedOutThing" notsecret',
-        "comment": "Support notsecret not in a comment",
-    },
-    {
-        "example": 'password":"material/form-textbox-password.svg"',
-        "comment": "Ignore file references for passwords and secrets",
-    },
-    {
-        "example": 'password":"material/form-textbox-password.svg"',
-        "comment": "Ignore file references for passwords and secrets",
-    },
-    {
-        "example": 'secret":"material/form-textbox-password.png"',
-        "comment": "Ignore file references for passwords and secrets",
-    },
-    {
-        "example": 'password":"material/form-textbox-password.jpeg"',
-        "comment": "Ignore file references for passwords and secrets",
-    },
-    {
-        "example": 'password":"some/path/to/password.txt"',
-        "comment": "Ignore file references for passwords and secrets",
-    },
-    {
-        "example": 'secret": "some/path/to/secret.txt"',
-        "comment": "Ignore file references for passwords and secrets",
     },
     {
         "example": 'secret="bf440e4268dA3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
@@ -1505,30 +1084,6 @@ SHOULD_NOT_MATCH = [
         "example": "bob523:$apr1$FaA3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQX/",
         "comment": "Ignore code source files that has htpasswd in the name",
         "filename": "some-htpasswd-file.py",
-    },
-    {
-        "example": 'password = "lol-ikr-those-kids-r-krazy"',
-        "comment": "make sure lower case with dashes is NOT caught",
-    },
-    {
-        "example": 'secret = "lol-ikr-those-kids-r-krazy"',
-        "comment": "make sure lower case with dashes is NOT caught",
-    },
-    {
-        "example": 'secret = "K8s-lol-ikr-those-kids-r-krazy"',
-        "comment": "some numbers and upper case are fine as long as a good portion is lower with dashes",
-    },
-    {
-        "example": 'secret = "/run/kubernetes/secrets/oscontainer-registry/dockercfg"',
-        "comment": "Things in '/run/' should be ignored",
-    },
-    {
-        "example": 'secret = "/var/run/secrets/atomic-reactor/v2-registry-dockercfg"',
-        "comment": "Things in '/var/run/' should be ignored",
-    },
-    {
-        "example": 'secret = "/path/to/password/file"',
-        "comment": "Things like '/path/' should be ignored",
     },
     {
         "example": "define('DB_PASSWORD', 'password');",
@@ -1567,24 +1122,8 @@ SHOULD_NOT_MATCH = [
         "comment": "Just a URL - no username or pass",
     },
     {
-        "example": "GENERATED_PASSWORD=$(openssl rand -hex 16)",
-        "comment": "generated password",
-    },
-    {
-        "example": "GENERATED_PASSWORD=${FOO}",
-        "comment": "placheholder password",
-    },
-    {
         "example": "os_password=sys.argv[3]",
         "comment": "from code",
-    },
-    {
-        "example": 'password="SOME_PREFIX_WITH_A_${variable}"',
-        "comment": "a placeholder value",
-    },
-    {
-        "example": 'secret="SOME_PREFIX_WITH_A_${variable}"',
-        "comment": "a placeholder value",
     },
     {
         "example": 'define("DB_HOST", "localhost");',
@@ -1613,22 +1152,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": 'AWS_TOKEN = "ABCDEFGHIJKLMNOPQRSTVWXYZabcdefghijklmnopqrstvwxyz0123=="',
         "comment": "Fake token",
-    },
-    {
-        "example": 'password="placeholder-password.12345"',
-        "comment": "Fake token",
-    },
-    {
-        "example": 'password: "SomeSecretPassw0rd"',
-        "comment": "Password placeholder",
-    },
-    {
-        "example": 'password: "SomeSecretPassword"',
-        "comment": "Password placeholder",
-    },
-    {
-        "example": 'password: "SomeSecretPasswd"',
-        "comment": "Password placeholder",
     },
     {
         "example": "password=\$MIRROR_OS_PASS&#34;",
@@ -1665,10 +1188,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "aws_secret_access_key = ABCDEFGHIJKLMNOPQRSTUVWXYZabcd1234567890",
         "comment": "AWS key placeholder",
-    },
-    {
-        "example": "webhook_secret: 'https://www.example.com',",
-        "comment": "Placeholder secret",
     },
 ]
 
