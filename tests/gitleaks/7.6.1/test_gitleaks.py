@@ -324,14 +324,14 @@ SHOULD_MATCH = [
         "comment": "Make sure it can handle weird formatted stuff",
     },
     {
-        "description": "Htpasswd Files",
+        "description": "Htpasswd File",
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
         "offender": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
         "comment": "Test to see that htpasswd files show up",
         "filename": "my-htpasswd-file",
     },
     {
-        "description": "Htpasswd Files",
+        "description": "Htpasswd File",
         "example": "newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/",
         "offender": "newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/",
         "comment": "Test to see that htpasswd files show up",

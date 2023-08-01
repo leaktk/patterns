@@ -169,7 +169,7 @@
   tags = ["alert:repo-owner", "key", "heroku", "type:secret"]
 
 [[rules]]
-  description = "Htpasswd Files"
+  description = "Htpasswd File"
   file = '''htpasswd'''
   regex = '''.+?:([^\s]+)'''
   tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
@@ -181,7 +181,7 @@
     ]
     files = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?)\.(c|go|java|js(\.map)?|md|py|rb|sh|yml|yaml)$''',
+      '''(.+?)\.(c|go|java|js(\.map)?|html|md|py|rb|sh|yml|yaml)$''',
     ]
 
   [[rules.entropies]]
