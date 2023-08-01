@@ -139,6 +139,8 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
+      # Things like: https://host:port,org.java.stuff@commit
+      ''':\/\/([^:\/\s\"\']+)?:\d{3,4},[\w\.]+@[\w\.\-]+''',
       # Example.Com
       ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@example.com''',
       # Common spammy placeholder creds

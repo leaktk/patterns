@@ -1124,6 +1124,10 @@ SHOULD_NOT_MATCH = [
         "comment": "Just a URL - no username or pass",
     },
     {
+        "example": "http://some-host:8080,org.java.stuff@1fc032aa",
+        "comment": "This is trailing data not a username/pass",
+    },
+    {
         "example": "os_password=sys.argv[3]",
         "comment": "from code",
     },
