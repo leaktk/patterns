@@ -39,8 +39,10 @@
 
   [rules.allowlist]
     paths = [
-      # Ignore common test keys
+      # Ignore keys in a test(s) folder
       '''test(s)?\/.*.(txt|der|key|pem)$''',
+      # Ignore keys with test in their name
+      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
       # Ignore common example keys
       '''(dummy|example).*(key|pem)''',
       # Ignore ssh utilities that might have key headers in them
@@ -57,13 +59,17 @@
       # Anything less than 15 characters
       '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
       # The key has spaces in it so it's probably a placeholder
-      '''PRIVATE KEY( BLOCK)?-----.*(\s).*-----END''',
+      '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
+      # The key has a redacted portion
+      '''PRIVATE KEY( BLOCK)?-----.*?(\.\.\.|\*\*\*).*?-----END''',
       # Ignore some keys assigned to test vars
       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
       '''(?i)\w*(fake|example|test)\w*(\s+)?[:=]+(\s+)?(\[)?(\s+)?(\"\"\"|\"|\'|`)?-----BEGIN''',
       # Things that look like code looking for headers
-      # like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
+      #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
       '''if.*==\s*[\"|\']-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
+      #   like: "-----BEGIN RSA PRIVATE KEY-----")
+      '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"\']\)''',
     ]
 
 [[rules]]
@@ -153,7 +159,7 @@
       # Things like: https://user:$pass@host
       '''(?i):\/\/([^:\/\s\"\']+)?:\$[a-z][a-z\_\-]+(\$)?@[\w\.\-]+''',
       # Things like: https://user:afacae....adsfae@host
-      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*\.\.\.[^@\/\s\"]*@[\w\.\-]+''',
+      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*(\.\.\.|\*\*\*)[^@\/\s\"]*@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
       # Things like: https://user:{pass}@host
@@ -169,13 +175,15 @@
       '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
+      # Things like: https://host:port,org.java.stuff@commit
+      ''':\/\/([^:\/\s\"\']+)?:\d{3,4},[\w\.]+@[\w\.\-]+''',
       # Example.Com
       ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@example.com''',
       # Common spammy placeholder creds
       '''(?i):\/\/([^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Various words at the start and end that signify a placeholder
       '''(?i):\/\/([^:\/\s\"\']+)?:(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)@[\w\.\-]+''',
+      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -199,7 +207,7 @@
   tags = ["alert:repo-owner", "key", "heroku", "type:secret"]
 
 [[rules]]
-  description = "Htpasswd Files"
+  description = "Htpasswd File"
   file = '''htpasswd'''
   regex = '''.+?:([^\s]+)'''
   tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
@@ -211,7 +219,7 @@
     ]
     files = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?)\.(c|go|java|js(\.map)?|md|py|rb|sh|yml|yaml)$''',
+      '''(.+?)\.(c|go|java|js(\.map)?|html|md|py|rb|sh|yml|yaml)$''',
     ]
 
   [[rules.entropies]]
@@ -231,8 +239,23 @@
 
 [[rules]]
   description = "General Secret"
-  regex = '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-  tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
+  # Things like:
+  #   password = "value"
+  #   password_key = "value"
+  #   password-key = "value"
+  #   secret = "value"
+  #   secret = 'value'
+  #   secret_key = "value"
+  #   secret-key = "value"
+  #   secretkey = "value"
+  #   ...
+  regex = '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
+  tags = ["alert:repo-owner", "key", "general", "secret", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "6"
 
   [rules.allowlist]
     paths = [
@@ -240,71 +263,70 @@
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
-    regexes = [
-      # Things like: password = "asdfasdfas" # nosec (used by bandit)
-      '''#(\s+)?nosec(\s+|$)''',
-      # Things like: password = "asdfasdfas" # noqa: E501
-      '''#(\s+)?noqa(:[\s\w]+)?$''',
-      # Things like: password = ""
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
-      # Things like: password = "_PLACEHOLDER_"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
-      # Things like: password = "Some...placeholder"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*\.\.\.[^\"\']*[\"\']''',
-      # Things like: password = "<PLACEHOLDER>"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
-      # Things like: password = "@@PLACEHOLDER@@"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']@@.+?@@[\"\']''',
-      # Things like: "password: ").append("foo")
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']\).+?\([\"\']''',
-      # Things like: "password="+some_var+"asdfa"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
-      # Things like: "password="`+some_var+`"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']`\+.+?\+`[\"\']''',
-      # Things like: password = "%PLACEHOLDER%"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']%.+?%[\"\']''',
-      # Things like: password = "$PLACEHOLDER$"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
-      # Things like: password = "ALL_UPPER_LETTERS_OR_UNDERSCORS"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+[\"\']''',
-      # Things like: password = "(optional char)${PLACEHOLDER}(optional text)"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](.)?\$\{.+?\}(.+)?[\"\']''',
-      # jq lookups
-      '''jq\s+([\w\-\s]+)?.*\.\w*password''',
-      # Things like: password = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
-      # Things like: password = "/SOME/path:${PLACEHOLDER}"
-      # Things like: password = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
-      # Things like: password = "#{PLACEHOLDER}"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']#\{.+?\}[\"\']''',
-      # Things like: password = "$(PLACEHOLDER)"
-      # Or like: password = "\$(PLACEHOLDER)"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](\\)?\$\(.+?\)[\"\']''',
-      # Things like: password = "[%PLACEHOLDER%]"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']\[%.+?%\][\"\']''',
-      # Things like: password = "[PLACEHOLDER]"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']\[.+?\][\"\']''',
-      # Things like: password = "{PLACEHOLDER}"
-      # Things like: password = "%{PLACEHOLDER}"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](%)?\{.+?\}[\"\']''',
-      # Things like password = "$SOME_ENV_VARIABLE-optional-text"
-      # Things like password = "\$SOME_ENV_VARIABLE-optional-text"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?[\"\']''',
-      # Things like password = "https://${SOME_PLACEHOLDER}/foo/bar/baz"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']https:\/\/\$\{.+?\}.+?[\"\']''',
-      # Things like password = "ask"
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\']ask[\"\']''',
-      # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
-      # Various words at the start and end that signify a placeholder
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
-      '''(?i)[\"\']?password[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']''',
-    ]
 
-  [[rules.entropies]]
-    Min = "3.35"
-    Max = "8"
-    Group = "3"
+    regexes = [
+      # Things like:
+      #   secret = "asdfasdfas" # nosec (used by bandit)
+      '''#(\s+)?nosec(\s+|$)''',
+      #   secret = "asdfasdfas" # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
+      #   secret = "asdfasdfas" //nolint:gosec
+      '''\/\/(\s+)?nolint:gosec(\s+|$)''',
+      #   secret = "_PLACEHOLDER_"
+      #   secret = "<PLACEHOLDER>"
+      #   secret = "@@PLACEHOLDER@@"
+      #   secret = ").append("foo")
+      #   secret = "%PLACEHOLDER%"
+      #   secret = "$PLACEHOLDER$"
+      #   secret = "`PLACEHOLDER`"
+      #   secret = "[PLACEHOLDER]"
+      #   secret = "[%PLACEHOLDER%]"
+      #   secret = "$(PLACEHOLDER..."
+      #   secret = "\$(PLACEHOLDER..."
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@@.+?@@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
+      #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+?[\"\']''',
+      #   secret = "{PLACEHOLDER}"
+      #   secret = "%{PLACEHOLDER}"
+      #   secret = "\%{PLACEHOLDER}"
+      #   secret = "${PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      #   secret = "#{PLACEHOLDER}"
+      #   secret = "\#{PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](\\)?[\$%#]?\{.+?\}[\"\']''',
+      #   secret = "Some...placeholder"
+      #   secret = "Some***placeholder"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(\.\.\.|\*\*\*)[^\"\']*?[\"\']''',
+      #   "secret="+some_var+"asdfa"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+      #   secret = "(optional char)${PLACEHOLDER}(optional text)"
+      #   secret = "(optional char)#{PLACEHOLDER}(optional text)"
+      #   secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?[\"\']''',
+      #   secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
+      #   secret = "$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "\$SOME_ENV_VARIABLE-optional-text"
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+      # Known full placeholder passwords
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat)[\"\']''',
+      # Base64 encoded EXAMPLE in the text
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)[^\"\']*?[\"\']''',
+      # aws.* is already covered by a different rule
+      '''(?i)aws(.{0,15})(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
+      # jq lookups
+      '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password)(_|-)?(key)?''',
+      # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+      # Various words at the start and end that signify a placeholder
+      '''(?i)(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      '''(?i)(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)(secret|password)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+    ]
 
 [[rules]]
   description = "General Secret"
@@ -329,97 +351,14 @@
       # Things like <password>{SOME_VARIABLE}</password>
       '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?\{.+?\}(\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
-      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?password([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(\]\]>)?<\/''',
     ]
 
   [[rules.entropies]]
     Min = "3.35"
     Max = "8"
     Group = "4"
-
-[[rules]]
-  description = "General Secret"
-  regex = '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-  tags = ["alert:repo-owner", "key", "secret", "general", "type:secret"]
-
-  [rules.allowlist]
-    paths = [
-      # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it. But make sure to include the azure-cli aro modules
-      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
-    ]
-    regexes = [
-      # Things like: secret = "asdfasdfas" # nosec (used by bandit)
-      '''#(\s+)?nosec(\s+|$)''',
-      # Things like: secret = "asdfasdfas" # noqa: E501
-      '''#(\s+)?noqa(:[\s\w]+)?$''',
-      # Things like: secret = "asdfasdfas" //nolint:gosec
-      '''\/\/(\s+)?nolint:gosec(\s+|$)''',
-      # aws.* is already covered by a different rule
-      '''(?i)[\"\']?aws(.{1,15})secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
-      # Things like: secret = ""
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][\"\']''',
-      # Things like: secret = "__PLACEHOLDER__"
-      # Things like: secret = "_PLACEHOLDER_"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']_.+?_[\"\']''',
-      # Things like: secret = "Some...placeholder"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*\.\.\.[^\"\']*[\"\']''',
-      # Things like: secret = "<PLACEHOLDER>"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']<.+?>[\"\']''',
-      # Things like: secret = "@@PLACEHOLDER@@"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']@@.+?@@[\"\']''',
-      # Things like: "secret: ").append("foo")
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']\).+?\([\"\']''',
-      # Things like: "secret="+some_var+"asdfa"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
-      # Things like: "secret="`+some_var+`"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']`\+.+?\+`[\"\']''',
-      # Things like: secret = "%PLACEHOLDER%"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']%.+?%[\"\']''',
-      # Things like: secret = "$PLACEHOLDER$"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)\$[A-Z_]+?\$[\"\']''',
-      # Things like: secret = "ALL_UPPER_LETTERS_OR_UNDERSCORS"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+[\"\']''',
-      # jq lookups
-      '''jq\s+([\w\-\s]+)?.*\.\w*secret''',
-      # Things like: secret = "(optional char)($|#){PLACEHOLDER}(optional text)"
-      # Things like: secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?(\$|#)\{.+?\}(.+)?[\"\']''',
-      # Things like: secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
-      # Things like: secret = "/SOME/path:${PLACEHOLDER}"
-      # Things like: secret = "/SOME/path:${PLACEHOLDER}${some-placeholder}"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
-      # Things like: secret = "$(PLACEHOLDER..."
-      # Or like: secret = "\$(PLACEHOLDER..."
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](\\)?\$\(.*''',
-      # Things like: secret = "[%PLACEHOLDER%]"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']\[%.+?%\][\"\']''',
-      # Things like: secret = "[PLACEHOLDER]"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']\[.+?\][\"\']''',
-      # Things like: secret = "{PLACEHOLDER}"
-      # Things like: secret = "%{PLACEHOLDER}"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](%)?\{.+?\}[\"\']''',
-      # Things like secret = "$SOME_ENV_VARIABLE-optional-text"
-      # Things like secret = "\$SOME_ENV_VARIABLE-optional-text"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?[\"\']''',
-      # Things like secret = "https://${SOME_PLACEHOLDER}/foo/bar/baz"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']https:\/\/\$\{.+?\}.+?[\"\']''',
-      # Things like secret = "ask"
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\']ask[\"\']''',
-      # A common false positive for passwords and secrets (e.g. secret = "update-your-postgres-pass-here")
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
-      # Various words at the start and end that signify a placeholder
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']''',
-      # Avoid things that look like UUIDs in secrets
-      '''(?i)[\"\']?secret((-|_)key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
-    ]
-
-  [[rules.entropies]]
-    Min = "3.35"
-    Max = "8"
-    Group = "5"
 
 [[rules]]
   description = "General Secret"
@@ -442,8 +381,8 @@
       # Things like <secret>{SOME_VARIABLE}</secret>
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?\{.+?\}(\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
-      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
-      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(\]\]>)?<\/''',
       # UUIDs
       '''(?i)<(\s+)?(\w+)?secret([\s\w\"\'=]+)?>(<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\]\]>)?<\/''',
     ]
@@ -640,7 +579,7 @@
       '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']\{\{.+?\}\}[\"\'](\s+)?\)''',
       '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']\$\{.+?\}[\"\'](\s+)?\)''',
       # Ignore some placeholder values
-      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']([^\'\"]+)?(-auth(entication)?|example(.com|key)?|here|localhost|pass(w)?or(d|t)|required|secret(s|_v\d)?|string|test)[\"\'](\s+)?\)''',
+      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']([^\'\"]+)?(-auth(entication)?|example(.com|key)?|here|localhost|pass(w)?or(d|t)|required|secret(s|_v\d)?(key)?|string|test)[\"\'](\s+)?\)''',
     ]
 
 # Testing Patterns
@@ -701,6 +640,80 @@
   path = '''(requirements([\w\-]*.txt|\/[^\/]+\.(yml|yaml|txt))|setup.(py|cfg)|pyproject.toml|Pipfile(\.lock)?)$'''
 
 # [file:99-general.toml]
+
+[[rules]]
+  description="ArgoCD JWT"
+  # Based on shifted b64 encoded portions of '"iss":"argocd"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ["group:leaktk-testing", "argocd", "jwt", "type:secret"]
+
+  [[rules.entropies]]
+    # This can probably be removed, if this rule has a low false positive rate
+    # but this is here just to gather the entropy data for testing.
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description="Kubernetes Service Account JWT"
+  # Based on shifted b64 encoded portions of '"iss":"kubernetes/serviceaccount"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bn|Jpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50|iaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3Vud)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ["group:leaktk-testing", "kubernetes", "service-account", "jwt", "type:secret"]
+
+  [[rules.entropies]]
+    # This can probably be removed, if this rule has a low false positive rate
+    # but this is here just to gather the entropy data for testing.
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  # This handles unquoted values in YAML files
+  # Once this is production ready take off the "(YAML) bit so it gets sent with
+  # other general secret matches.
+  description="(YAML) General Secret"
+  path='''\.y(a)?ml$'''
+  regex = '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(.+)'''
+  tags = ["group:leaktk-testing", "yaml", "key", "secret", "general", "type:secret"]
+
+  [[rules.entropies]]
+    # This will probably go 3.35 but setting to zero to test
+    Min = "0"
+    Max = "8"
+    Group = "6"
+
+  [rules.allowlist]
+    regexes = [
+      # Things like:
+      #   - secret: <PLACEHOLDER>
+      #   - secret: @@PLACEHOLDER@@
+      #   - secret: %PLACEHOLDER%
+      #   - secret: $PLACEHOLDER$
+      #   - secret: __PLACEHOLDER__
+      #   - secret: _PLACEHOLDER_
+      #   - secret: ALL_UPPER_LETTERS_OR_UNDERSCORS
+      #   - secret: {PLACEHOLDER}
+      #   - secret: ${PLACEHOLDER}
+      #   - secret: %{PLACEHOLDER}
+      #   - secret: update-your-postgres-pass-here # a common placeholder setup
+      #   - secret: Some...placeholder
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(@@.+?@@|<.+?>|%.+?%|\$.+?\$|_.+?_|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      #   - secret: [%PLACEHOLDER%]"
+      #   - secret: [PLACEHOLDER]
+      #   - secret: $(PLACEHOLDER...
+      #   - secret: \$(PLACEHOLDER...
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
+      #   - secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   - secret: /SOME/path:${PLACEHOLDER}...
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
+      #   - secret: $SOME_ENV_VARIABLE-optional-text
+      #   - secret: \$SOME_ENV_VARIABLE-optional-text
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
+      # Various words at the start and end that signify a placeholder
+      # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?.*(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']?''',
+    ]
 
 [[rules]]
   # Might merge this with AWS Secret Key if the quality is good
