@@ -58,10 +58,10 @@ SHOULD_MATCH = [
         "Comment": "Should capture private keys",
     },
     {
-        "RuleID": "aws-access-key",
+        "RuleID": "aws-iam-unique-id",
         "Example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE",
         "Secret": "A3TGOBTGY4DIMRXMIYGE",
-        "Comment": "Should capture AWS access keys",
+        "Comment": "Should capture AWS IAM Unique Identifier",
     },
     {
         "RuleID": "aws-secret-key",

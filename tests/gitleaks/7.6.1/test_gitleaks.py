@@ -172,7 +172,7 @@ SHOULD_MATCH = [
         "comment": "Should capture Mailgun API keys",
     },
     {
-        "description": "AWS Access Key",
+        "description": "AWS IAM Unique Identifier",
         "example": "AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE",
         "offender": "=A3TGOBTGY4DIMRXMIYGE",
         "comment": "Should capture aws access keys",

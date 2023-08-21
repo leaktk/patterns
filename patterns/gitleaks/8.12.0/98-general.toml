@@ -29,8 +29,8 @@
     ]
 
 [[rules]]
-  id = "aws-access-key"
-  description = "AWS Access Key"
+  id = "aws-iam-unique-id"
+  description = "AWS IAM Unique Identifier"
   regex = '''[^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})'''
   secretGroup = 1
   entropy = 3.2
