@@ -84,12 +84,13 @@
     Group = "1"
 
 [[rules]]
-  # This handles unquoted values in YAML files
+  # This handles UNQUOTED values in YAML files (the other rules should be able
+  # to handle quoted values).
   # Once this is production ready take off the "(YAML) bit so it gets sent with
   # other general secret matches.
   description="(YAML) General Secret"
   path='''\.y(a)?ml$'''
-  regex = '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(.+)'''
+  regex = '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*([^\"\']+?)\s*(#|$)'''
   tags = ["group:leaktk-testing", "yaml", "key", "secret", "general", "type:secret"]
 
   [[rules.entropies]]
@@ -113,22 +114,22 @@
       #   - secret: %{PLACEHOLDER}
       #   - secret: update-your-postgres-pass-here # a common placeholder setup
       #   - secret: Some...placeholder
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(@@.+?@@|<.+?>|%.+?%|\$.+?\$|_.+?_|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(@@.+?@@|<.+?>|%.+?%|\$.+?\$|_.+?_|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
       #   - secret: [%PLACEHOLDER%]"
       #   - secret: [PLACEHOLDER]
       #   - secret: $(PLACEHOLDER...
       #   - secret: \$(PLACEHOLDER...
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
       #   - secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
       #   - secret: /SOME/path:${PLACEHOLDER}...
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
       #   - secret: $SOME_ENV_VARIABLE-optional-text
       #   - secret: \$SOME_ENV_VARIABLE-optional-text
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
       # Various words at the start and end that signify a placeholder
       # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
-      '''(?i)(secret|password|token)(_|-)?(key)?[\"\']?(\s+)?:(\s+)?.*(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']?''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|yaml|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|config(uration)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']?''',
     ]
 
 [[rules]]
