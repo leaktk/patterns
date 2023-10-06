@@ -491,6 +491,27 @@ SHOULD_NOT_MATCH = [
     *[
         {
             "example": example,
+            "comment": ".gitleaks realated config",
+            "filename": filename,
+        }
+        for example, filename in (
+            (
+                'secret_key = "gl-test-766a929d93c9ef30ce3d72d6384eb6fa"',
+                ".gitleaks.toml",
+            ),
+            (
+                'secret_key = "gl-test-866a929d93c9ef30ce3d72d6384eb6fa"',
+                ".gitleaks/baseline.json",
+            ),
+            (
+                'secret_key = "gl-test-966a929d93c9ef30ce3d72d6384eb6fa"',
+                ".gitleaksignore",
+            ),
+        )
+    ],
+    *[
+        {
+            "example": example,
             "comment": "placeholder value",
             "filename": "yaml-test.yaml",
         }
@@ -516,6 +537,8 @@ SHOULD_NOT_MATCH = [
             r"secret: /SOME/path:${PLACEHOLDER}",
             r"secret: $SOME_ENV_VARIABLE-optional-text",
             r"secret: \$SOME_ENV_VARIABLE-optional-text",
+            # Contains EXAMPLE base64 encoded in it
+            "secret: 377gjPEd3Wvo+3ojeGiknEVYQU1QTEUKRVhBTVBMRQo=",
         )
     ],
     *[
@@ -781,6 +804,27 @@ SHOULD_NOT_MATCH = [
             f"{prefix}https://www.example.com{suffix}",
             f"{prefix}\\u003cpassword\\u003e{suffix}",
             f"{prefix}SomeOldSecretKey{suffix}",
+            f"{prefix}db-fields-encryption{suffix}",
+            f"{prefix}/acaial39ama-agent.conf{suffix}",
+            f"{prefix}/acaial39ama-agent.json{suffix}",
+            f"{prefix}/acaial39ama-agent.yaml{suffix}",
+        )
+    ],
+    *[
+        {
+            "example": example,
+            "comment": "FP/Placeholder in URL User and Password",
+        }
+        for example in (
+            "https?://_<username>_[:_<password>_]@_<hostname>_/_<path>_",
+            "https://f4c38c5:$githubpac@github.com",
+            "https://f4c38c5:27BZdTpuIl9u...pE+SpU4C2vQSY=@github.com",
+            "http://username:pGeGXSEFgGSogv48jcTFaJip@ip:port",
+            "http://username:pGeGXSEFgGSogv48jcTFaJip@example.com",
+            "https://test:adfa;dkj;aek;j@example.com",
+            "https://test:adfa;dkj;aek;j@git.example.com",
+            "https://examle.com/foo:current@Cacheable",
+            "http://some-host:8080,org.java.stuff@1fc032aa",
         )
     ],
     {
@@ -788,27 +832,9 @@ SHOULD_NOT_MATCH = [
         "comment": "placeholder wrappet in cdata tags",
     },
     {
-        "example": "https://f4c38c5:27BZdTpuIl9u...pE+SpU4C2vQSY=@github.com"
-        "comment"
-        "password was partially redacted"
-    },
-    {
-        "example": "https://f4c38c5:$githubpac@github.com"
-        "comment"
-        "password is a variable"
-    },
-    {
         "example": "password=V1tXb7WBGlKIVAWqGw==",
         "comment": "Should ignore based on the filename",
         "filename": "foo/libexec/sudo/sudoers.so",
-    },
-    {
-        "example": "https?://_<username>_[:_<password>_]@_<hostname>_/_<path>_",
-        "comment": "Placeholder value",
-    },
-    {
-        "example": "https://test:adfa;dkj;aek;j@example.com",
-        "comment": "Just an example",
     },
     {
         "example": "<Password>$SomePlaceholderForAdminPassword$</Password>",
@@ -844,10 +870,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBg...W17oy4Qgj7OLNB\\n-----END PRIVATE",
         "comment": "Redacted value",
-    },
-    {
-        "example": '"password": "https://secret_dsn",',
-        "comment": "This is a URL not a secret",
     },
     {
         "example": "adcraft-jk-its-not-real",
@@ -1131,14 +1153,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "some-random-thing=key-fb959af04c12d5d66091256c2b2076d0",
         "comment": "Should not capture things formated like a mg api key without mg/mailgun in the prefix",
-    },
-    {
-        "example": "https://examle.com/foo:current@Cacheable",
-        "comment": "Just a URL - no username or pass",
-    },
-    {
-        "example": "http://some-host:8080,org.java.stuff@1fc032aa",
-        "comment": "This is trailing data not a username/pass",
     },
     {
         "example": "os_password=sys.argv[3]",

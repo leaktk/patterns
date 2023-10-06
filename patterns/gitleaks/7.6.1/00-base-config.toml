@@ -21,11 +21,13 @@
     # Handle a lot of the github/docs cases
     '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
     # Ignore checked-in python packages
-    '''lib/python[^/]+/site-packages''',
-  ]
-  files = [
+    '''lib\/python[^\/]+\/site-packages''',
+    # Common extensions to ignore
     '''(.*?)(png|jpg|gif|doc|docx|pdf|bin|xls|pyc|zip|css)$''',
-    '''(go.mod|go.sum)$''',
-    '''^\.?gitleaks.toml$''',
-    '''^\.?secrets.baseline$''',
+    # Ignore go mod files
+    '''(^|\/)(go.mod|go.sum)$''',
+    # Ignore gitleaks related stuff
+    '''(^|\/).?gitleaks''',
+    # Ignore aws secrets check baseline file
+    '''(^|\/)\.?secrets.baseline$''',
   ]
