@@ -38,7 +38,9 @@
   description="ArgoCD JWT"
   # Based on shifted b64 encoded portions of '"iss":"argocd"'
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-  tags = ["alert:repo-owner", "argocd", "jwt", "type:secret"]
+  # TODO: add alert:repo-owner tag when the reporter supports handling really
+  # large numbers in a single scan (so emails aren't crazy).
+  tags = ["argocd", "jwt", "type:secret"]
 
 [[rules]]
   description = "Asymmetric Private Key"
@@ -239,7 +241,9 @@
   description="Kubernetes Service Account JWT"
   # Based on shifted b64 encoded portions of '"iss":"kubernetes/serviceaccount"'
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bn|Jpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50|iaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3Vud)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-  tags = ["alert:repo-owner", "kubernetes", "service-account", "jwt", "type:secret"]
+  # TODO: add alert:repo-owner tag when the reporter supports handling really
+  # large numbers in a single scan (so emails aren't crazy).
+  tags = ["kubernetes", "service-account", "jwt", "type:secret"]
 
 [[rules]]
   description = "MailChimp API Key"
