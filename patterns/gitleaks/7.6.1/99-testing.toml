@@ -58,6 +58,32 @@
 # [file:98-general.toml]
 
 [[rules]]
+  # Find secrets where the file name is the context instead of contents
+  # TODO: Remove (File) when prod ready
+  description = "(File) General Secret"
+  path='''(?i)\.[\w\-]*(secret|key|token|password)$'''
+  # This will probably need to be tuned over time
+  regex='''^([^\s]{5,})$'''
+  # TODO: replace group:leaktk-testing with alert:repo-owner once tested
+  tags = ["group:leaktk-testing", "type:secret", "general", "secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # This is part of a PEM formated key header/footer
+      '''-----''',
+      # This is likely base64 data from a PEM formated key
+      '''[0-9a-zA-Z\/=+]{64}''',
+      # This is likely base64 data from a PEM formated key
+      '''[0-9a-zA-Z\/=+]{16,62}==''',
+    ]
+
+  [[rules.entropies]]
+    # Set to 0 for testing but will probably need to be 3.35 when set to production
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   # This is a copy of General Secret that looks for "token" instead.
   # When this rule is ready, merge it with the regluar General Secret.
   # This intentially just replaces (secret|password) with (token) so that
