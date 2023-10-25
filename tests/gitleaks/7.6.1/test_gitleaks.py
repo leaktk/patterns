@@ -556,6 +556,10 @@ SHOULD_NOT_MATCH = [
             r"secret: \$SOME_ENV_VARIABLE-optional-text",
             # Contains EXAMPLE base64 encoded in it
             "secret: 377gjPEd3Wvo+3ojeGiknEVYQU1QTEUKRVhBTVBMRQo=",
+            # Reference and not a secret itself
+            "secret: sshPrivateKey",
+            # Has spaces
+            "secret: foo bar baz",
         )
     ],
     *[
