@@ -41,6 +41,23 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     *[
         {
+            "description": "(File) General Secret",
+            "example": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
+            "offender": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
+            "filename": f"foo.{ext}",
+            "comment": "Some kind of secret file",
+        }
+        for i, ext in enumerate(
+            (
+                "clientSecret",
+                "password",
+                "sometoken",
+                "key",
+            )
+        )
+    ],
+    *[
+        {
             "description": "General Secret",
             "example": f'password = "{password}" {notsecretformat}',
             "offender": f'password = "{password}"',
@@ -539,6 +556,10 @@ SHOULD_NOT_MATCH = [
             r"secret: \$SOME_ENV_VARIABLE-optional-text",
             # Contains EXAMPLE base64 encoded in it
             "secret: 377gjPEd3Wvo+3ojeGiknEVYQU1QTEUKRVhBTVBMRQo=",
+            # Reference and not a secret itself
+            "secret: sshPrivateKey",
+            # Has spaces
+            "secret: foo bar baz",
         )
     ],
     *[
