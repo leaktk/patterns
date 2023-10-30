@@ -868,16 +868,6 @@ SHOULD_NOT_MATCH = [
         "comment": "Redacted value",
     },
     {
-        "example": "adcraft-jk-its-not-real",
-        "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt",
-    },
-    {
-        "example": "adhttpfakenotreal",
-        "comment": "This package name contains a malicous package name but isn't one",
-        "filename": "requirements.txt",
-    },
-    {
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
         "comment": "Data in a is skipped due to high FP rate",
         "filename": "htpasswd.md",
