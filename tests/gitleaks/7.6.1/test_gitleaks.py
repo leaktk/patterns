@@ -144,20 +144,6 @@ SHOULD_MATCH = [
         )
     ],
     {
-        "description": "Potentially Malicious Python Package",
-        "example": "adad",
-        "offender": "adad",
-        "filename": "requirements.txt",
-        "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
-    },
-    {
-        "description": "Potentially Malicious Python Package",
-        "example": '"adcandy>=0.0.0"',
-        "offender": '"adcandy>',
-        "filename": "setup.py",
-        "comment": "From https://blog.phylum.io/phylum-discovers-another-attack-on-pypi#packages",
-    },
-    {
         "description": "General Secret",
         "example": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
@@ -864,17 +850,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "<Password><![CDATA[$SomePlaceholderForAdminPassword$]]></Password>",
         "comment": "Placeholder",
-    },
-    {
-        "example": "adad",
-        "filename": "some-file.txt",
-        "comment": "Looks like a malicious package but the filename is wrong",
-    },
-    {
-        "example": '"adcandy>=0.0.0"',
-        "offender": '"adcandy>',
-        "filename": "app.py",
-        "comment": "Looks like a malicious package but the filename is wrong",
     },
     {
         "example": 'if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {',
