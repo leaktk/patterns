@@ -358,3 +358,8 @@
 description = "Kubernetes Docker Config"
 regex='''\.dockerconfigjson.*(ImF1dGhzI|JhdXRocyI|iYXV0aHMi)[a-zA-Z0-9+/=]+'''
 tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
+# This one needs testing too and the allowlist tuning
+[[rules]]
+description = "Container Pull Secret"
+regex='''[a-zA-Z0-9+/=]*(cHVsbFNlY3Jl|B1bGxTZWNyZX|wdWxsU2VjcmV).{0,64}(OnsiYXV0aCI6|p7ImF1dGgiOi|6eyJhdXRoIjo)[a-zA-Z0-9+/=]*'''
+tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
