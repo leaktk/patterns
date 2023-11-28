@@ -354,12 +354,13 @@
 
 # Not ready to deploy yet, need to set entropy flags and make sure the keys are
 # right and add tests
+# Make sure to add entropy checks too and ignore FPs
 [[rules]]
 description = "Kubernetes Docker Config"
 regex='''\.dockerconfigjson.*(ImF1dGhzI|JhdXRocyI|iYXV0aHMi)[a-zA-Z0-9+/=]+'''
 tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
 # This one needs testing too and the allowlist tuning
 [[rules]]
-description = "Container Pull Secret"
-regex='''[a-zA-Z0-9+/=]*(cHVsbFNlY3Jl|B1bGxTZWNyZX|wdWxsU2VjcmV).{0,64}(OnsiYXV0aCI6|p7ImF1dGgiOi|6eyJhdXRoIjo)[a-zA-Z0-9+/=]*'''
+description = "Container Pull Secret Fragment"
+regex='''(ImF1dGhzI|JhdXRocyI|iYXV0aHMi).+?(ImF1dGgiO|JhdXRoIjo|iYXV0aCI6)'''
 tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
