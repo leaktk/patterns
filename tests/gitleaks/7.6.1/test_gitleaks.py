@@ -817,6 +817,8 @@ SHOULD_NOT_MATCH = [
             f"{prefix}/acaial39ama-agent.yaml{suffix}",
             f"{prefix}NewPassword123{suffix}",
             f"{prefix}NewPassword1234{suffix}",
+            f"{prefix}SomeClientSecretYo{suffix}",
+            f"{prefix}some-client-secret-yo{suffix}",
         )
     ],
     *[
