@@ -1090,6 +1090,11 @@ SHOULD_NOT_MATCH = [
         "filename": "foo/quarkus-quickstarts/bar/secret.txt",
     },
     {
+        "example": 'secret="bf440e4268dA3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS"',
+        "comment": "Ignore testdata files",
+        "filename": "foo/testdata/bar/secret.txt",
+    },
+    {
         "example": 'if awsEnvVars[i].Name == RegistryStorageS3RegionendpointEnvVarKey && bsl.Spec.Config[S3URL] != "" {',
         "comment": "This isn't an AWS secret key! I promise!",
     },

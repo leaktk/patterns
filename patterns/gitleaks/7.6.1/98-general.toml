@@ -15,6 +15,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Ignore keys in a test(s) folder
       '''test(s)?\/.*.(txt|der|key|pem)$''',
       # Ignore keys with test in their name
@@ -243,6 +245,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
@@ -319,6 +323,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
@@ -351,6 +357,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',

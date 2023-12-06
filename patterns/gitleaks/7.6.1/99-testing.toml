@@ -68,6 +68,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
@@ -148,6 +150,10 @@
   tags = ["group:leaktk-testing", "type:secret", "general", "secret"]
 
   [rules.allowlist]
+    paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
+    ]
     regexes = [
       # This is part of a PEM formated key header/footer
       '''-----''',
@@ -181,6 +187,8 @@
 
   [rules.allowlist]
     paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
@@ -283,6 +291,10 @@
     Group = "6"
 
   [rules.allowlist]
+    paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
+    ]
     regexes = [
       # Things like:
       #   - secret: <PLACEHOLDER>
