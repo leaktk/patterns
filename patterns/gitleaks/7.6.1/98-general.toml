@@ -80,16 +80,16 @@
 
 [[rules]]
   description = "AWS Secret Key"
-  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
+  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?([a-z0-9\/+]{40})([^a-z0-9\/+]|^)'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
       # Ignore EXAMPLE base64 encoded
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*['\"]?''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)''',
     ]
 
   [[rules.entropies]]

@@ -183,7 +183,7 @@ SHOULD_MATCH = [
     {
         "description": "AWS Secret Key",
         "example": "  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar",
-        "offender": "AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza",
+        "offender": "AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza ",
         "comment": "Should capture aws secret keys",
     },
     {
