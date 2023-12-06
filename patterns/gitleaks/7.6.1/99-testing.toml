@@ -335,6 +335,19 @@
     ]
 
 [[rules]]
+  description = "OpenShift Login Token"
+  regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^\s]+)\b'''
+  tags = ["group:leaktk-testing", "openshift-login", "token", "type:secret"]
+
+[[rules.entropies]]
+  # This may or may not be needed. Review the testing results to see if the
+  # results are high fidelity enough to see if this needs to be allowlist based
+  # or entropy based
+  Min = "0"
+  Max = "8"
+  Group = "2"
+
+[[rules]]
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"

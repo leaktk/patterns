@@ -144,6 +144,12 @@ SHOULD_MATCH = [
         )
     ],
     {
+        "description": "OpenShift Login Token",
+        "example": "oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw --foo --bar --baz",
+        "offender": "oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw",
+        "comment": "Detect tokens for the OpenShift login command",
+    },
+    {
         "description": "General Secret",
         "example": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
         "offender": "secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'",
