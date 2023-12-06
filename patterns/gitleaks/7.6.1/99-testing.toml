@@ -123,7 +123,7 @@
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(secret|password)(_|-)?(access)?(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
       # Known full placeholder passwords
-      '''(?i)(secret|password)(_|-)?(access)?(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat)[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access)?(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone)[\"\']''',
       # Base64 encoded EXAMPLE in the text
       '''(?i)(secret|password)(_|-)?(access)?(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)[^\"\']*?[\"\']''',
       # aws.* is already covered by a different rule
