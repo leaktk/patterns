@@ -630,7 +630,13 @@ SHOULD_NOT_MATCH = [
         {
             "example": example,
             "comment": "General Secret placeholder or non-secret value",
+            "filename": filename,
         }
+        for filename in (
+            "some.yaml",
+            "specs/github.json",
+            "some-file",
+        )
         for prefix, suffix in (
             ("secret='", "'"),
             ("secret:'", "'"),

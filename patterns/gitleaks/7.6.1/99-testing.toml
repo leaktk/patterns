@@ -196,11 +196,6 @@
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-
-      # BEGIN TOKEN SPECIFIC IGNORE PATTERNS
-      # This is often a github spec file that has example values in it
-      '''\/github.json$''',
-      # END TOKEN SPECIFIC IGNORE PATTERNS
     ]
 
     regexes = [
