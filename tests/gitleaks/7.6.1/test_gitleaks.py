@@ -59,10 +59,18 @@ SHOULD_MATCH = [
     *[
         {
             "description": "General Secret",
-            "example": f'password = "{password}" {notsecretformat}',
-            "offender": f'password = "{password}"',
+            "example": f'{prefix}{password}{suffix} {notsecretformat}',
+            "offender": f'{prefix}{password}{suffix}',
             "comment": "Invalid use of notsecret",
         }
+        for prefix, suffix in (
+            ("password = '", "'"),
+            ("secret= '", "'"),
+            ('secret_key": "', '"'),
+            ('secret_access_key": "', '"'),
+            ('secret_accesskey": "', '"'),
+            ('SecretAccessKey": "', '"'),
+        )
         for (password, notsecretformat) in (
             # Invalid tag
             ("1b3d576ba5a108c3b7374142bfd02992", "notasecret"),
