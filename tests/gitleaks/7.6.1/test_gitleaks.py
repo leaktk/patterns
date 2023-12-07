@@ -842,6 +842,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}NewPassword1234{suffix}", True),
             (f"{prefix}SomeClientSecretYo{suffix}", False),
             (f"{prefix}some-client-secret-yo{suffix}", False),
+            (f"{prefix}0xrMXdwXLB89EXAMPLELL82G3GC212lnGI{suffix}", False),
             # Common ansible placeholder from the docs
             (f"{prefix}GoodNewsEveryone{suffix}", False),
         )
