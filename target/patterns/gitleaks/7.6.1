@@ -698,6 +698,9 @@
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # Ignore OpenAPI spec files
+      '''(^|\/)openapi\.json$''',
+      '''(?i)openapi.*github[^\/]*\.json$''',
     ]
 
     regexes = [
@@ -775,7 +778,7 @@
       ## Ends with
       '''(?i)(token)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
       ## Contains
-      '''(?i)(token)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(client(-)?secret)[^\'\"]*?[\"\']''',
+      '''(?i)(token)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(client(-)?secret|example)[^\'\"]*?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(token)(_|-)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
     ]
