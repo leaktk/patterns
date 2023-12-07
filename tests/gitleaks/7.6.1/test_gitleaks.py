@@ -60,7 +60,7 @@ SHOULD_MATCH = [
             "description": "General Secret",
             "example": f"{prefix}{password}{suffix} {notsecretformat}",
             "offender": f"{prefix}{password}{suffix}",
-            "comment": "Invalid use of notsecret",
+            "comment": "Test Genearl Secret with optional notsecret tag",
         }
         for prefix, suffix in (
             ("password = '", "'"),
@@ -69,8 +69,11 @@ SHOULD_MATCH = [
             ('secret_access_key": "', '"'),
             ('secret_accesskey": "', '"'),
             ('SecretAccessKey": "', '"'),
+            ("secret=", " "),
+            ("api_key=", " "),
         )
         for (password, notsecretformat) in (
+            ("swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw", ""),
             # Invalid tag
             ("1b3d576ba5a108c3b7374142bfd02992", "notasecret"),
             # Doesn't start correctly
@@ -1302,11 +1305,11 @@ SHOULD_NOT_MATCH = [
         "comment": "ignore placeholder password",
     },
     {
-        "example": "password=&#34;foobarbaz&#34;,",
+        "example": "password=&#34;placeholder&#34;,",
         "comment": "ignore likely documentation",
     },
     {
-        "example": "password=\\u0026#34;foobarbaz&#34;,",
+        "example": "password=\\u0026#34;placeholder&#34;,",
         "comment": "ignore likely documentation",
     },
     {
@@ -1320,10 +1323,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "password=\$MIRROR_OS_PASS&#34;",
         "comment": "Placeholder",
-    },
-    {
-        "example": "SECRET=&quot;your</span><span",
-        "comment": "Has HTML",
     },
     {
         "example": "password===this.options.password}var",

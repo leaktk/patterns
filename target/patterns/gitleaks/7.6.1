@@ -666,6 +666,110 @@
 
 # [file:98-general.toml]
 [[rules]]
+  # env-var-no-space tag used to mark this as different that the other
+  # general secret rule. Remove that tag after this is prod ready
+  description = "General Secret"
+  # Things like:
+  #   password=value"
+  #   password_key=value"
+  #   password-key=value"
+  #   secret=value
+  #   secret=value
+  #   secret_key=value
+  #   secret-key=value
+  #   secretkey=value
+  #   ...
+  regex = '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=([^\s\"\']{6,}?)(\s|$)'''
+  tags = ["group:leaktk-testing", "general", "env-var-no-space", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "8"
+
+  [rules.allowlist]
+    paths = [
+      # Ignore libs that might have things that look like unquoted secrets
+      '''\/lib\w*\/(sudo|sssd|systemd)''',
+      # Test data are often false positives
+      '''(^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
+    ]
+
+    regexes = [
+      # Things like:
+      #   secret=asdfasdfas # nosec (used by bandit)
+      '''#(\s+)?nosec(\s+|$)''',
+      #   secret=asdfasdfas # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
+      #   secret=asdfasdfas //nolint:gosec
+      '''\/\/(\s+)?nolint:gosec(\s+|$)''',
+      #   secret=_PLACEHOLDER_
+      #   secret=<PLACEHOLDER>
+      #   secret=@@PLACEHOLDER@@
+      #   secret=%PLACEHOLDER%
+      #   secret=$PLACEHOLDER$
+      #   secret=`PLACEHOLDER`
+      #   secret=[PLACEHOLDER]
+      #   secret=[%PLACEHOLDER%]
+      #   secret=$(PLACEHOLDER...
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(_.+?_|<.+?>|@@.+?@@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\])(\s|$)''',
+      #   secret=ALL_UPPER_LETTERS_OR_UNDERSCORES
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]+?(\s|$)''',
+      #   secret={PLACEHOLDER...
+      #   secret=%{PLACEHOLDER...
+      #   secret=\%{PLACEHOLDER...
+      #   secret=${PLACEHOLDER...
+      #   secret=\${PLACEHOLDER...
+      #   secret=#{PLACEHOLDER...
+      #   secret=\#{PLACEHOLDER...
+      #   secret=\${PLACEHOLDER...
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?[\$%#]?\{\w{6,}''',
+      #   secret=\$(PLACEHOLDER)
+      #   secret=@(PLACEHOLDER)
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?[\$@]?\(.+?\)(\s|$)''',
+      #   secret=$PLACEHOLDER
+      #   secret=\$PLACEHOLDER
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?\$[a-z]\w{6,}''',
+      #   secret=Some...placeholder
+      #   secret=Some***placeholder
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(\.\.\.|\*\*\*)[^\s]*?(\s|$)''',
+      #   secret=(optional char)${PLACEHOLDER}(optional text)
+      #   secret=(optional char)#{PLACEHOLDER}(optional text)
+      #   secret=FOO_BAR=($|#){PLACEHOLDER}(optional text)
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
+      #   secret=SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   secret=/SOME/path:${PLACEHOLDER}
+      #   secret=/SOME/path:${PLACEHOLDER}${PLACEHOLDER}
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(\s|$)''',
+      #   secret=$SOME_ENV_VARIABLE-optional-text
+      #   secret=\$SOME_ENV_VARIABLE-optional-text
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?(\s|$)''',
+      # Known full placeholder passwords
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(ask|redhat|GoodNewsEveryone)(\s|$)''',
+      # Base64 encoded EXAMPLE in the text
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)[^\s]*?(\s|$)''',
+      # these are already coverd by different rules
+      '''(?i)(hashi_vault|mailgun|aws)(.{0,15})((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(.+?)(\s|$)''',
+      # A common false positive for passwords and secrets (e.g. password=update-your-postgres-pass-here)
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(\s|$)''',
+      # Various words at the start and end that signify a placeholder
+      ## Starts with
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((&|\\u0026)#34;|&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_|==)''',
+      ## Ends with
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
+      ## Contains
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(client(-)?secret|example).*?(\s|$)''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\s|$)''',
+      # Ignore cli args for this rule
+      '''--(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)'''
+    ]
+
+
+[[rules]]
   # Find secrets where the file name is the context instead of contents
   # TODO: Remove (File) when prod ready
   description = "(File) General Secret"
