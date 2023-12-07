@@ -44,7 +44,7 @@
   # Find secrets where the file name is the context instead of contents
   # TODO: Remove (File) when prod ready
   description = "(File) General Secret"
-  path='''(?i)\.[\w\-]*(secret|key|token|password)$'''
+  path='''(?i)\.[\w\-]*(secret|token|password)$'''
   # This will probably need to be tuned over time
   regex='''^([^\s]{5,})$'''
   # TODO: replace group:leaktk-testing with alert:repo-owner once tested
@@ -55,18 +55,18 @@
       # Test data files are often false positives
       '''(^|\/)testdata\/''',
     ]
+
     regexes = [
-      # This is part of a PEM formated key header/footer
-      '''-----''',
-      # This is likely base64 data from a PEM formated key
-      '''[0-9a-zA-Z\/=+]{64}''',
-      # This is likely base64 data from a PEM formated key
-      '''[0-9a-zA-Z\/=+]{16,62}==''',
+      ## Starts with
+      '''^(your|place|put|insert)''',
+      ## Ends with
+      '''(here|token|value)$''',
+      ## Contains
+      '''(xxx|example|placeholder|passw(or)?d)''',
     ]
 
   [[rules.entropies]]
-    # Set to 0 for testing but will probably need to be 3.35 when set to production
-    Min = "0"
+    Min = "3.35"
     Max = "8"
     Group = "1"
 

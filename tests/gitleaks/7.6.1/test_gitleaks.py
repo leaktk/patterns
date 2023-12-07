@@ -52,15 +52,14 @@ SHOULD_MATCH = [
                 "clientSecret",
                 "password",
                 "sometoken",
-                "key",
             )
         )
     ],
     *[
         {
             "description": "General Secret",
-            "example": f'{prefix}{password}{suffix} {notsecretformat}',
-            "offender": f'{prefix}{password}{suffix}',
+            "example": f"{prefix}{password}{suffix} {notsecretformat}",
+            "offender": f"{prefix}{password}{suffix}",
             "comment": "Invalid use of notsecret",
         }
         for prefix, suffix in (
@@ -667,9 +666,9 @@ SHOULD_NOT_MATCH = [
             ('Path to Secret: "', '"', False),
             ('"secret": "', '"', False),
             ('"password": "', '"', False),
-            ('<password>', '</', True),
-            ('<secret>', '</', True),
-            ('<FooSecret id="new">', '</', True),
+            ("<password>", "</", True),
+            ("<secret>", "</", True),
+            ('<FooSecret id="new">', "</", True),
         )
         for example, also_test_xml in (
             (f"{prefix}{suffix}", True),
@@ -686,7 +685,10 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}{{PASSWORD_PLACEHOLDER_123}}{suffix}", True),
             (f"{prefix}${{PASSWORD_PLACEHOLDER_123}}{suffix}", True),
             (f"{prefix}%{{PLACEHOLDER}}{suffix}", True),
-            (f"{prefix}update-your-postgres-pass-here # a common placeholder setup{suffix}", True),
+            (
+                f"{prefix}update-your-postgres-pass-here # a common placeholder setup{suffix}",
+                True,
+            ),
             (f"{prefix}Some...placeholder{suffix}", True),
             (f"{prefix}[%PASSWORD_PLACEHOLDER_123%]{suffix}", True),
             (f"{prefix}[SOME_RANDOM_SECRET]{suffix}", True),
@@ -703,32 +705,65 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}http://secret_dsn{suffix}", True),
             (f"{prefix}/etc/app-settings/password-file{suffix}", True),
             (f"{prefix}YOURGENERATEDAPPLICATIONPASSWORD{suffix}", True),
-            (f"{prefix}{{{{ lookup('hashi_vault', 'secret=kv/foo:username token={{{{ token_var }}}} url=http://host:8200')}}}}{suffix}", True),
+            (
+                f"{prefix}{{{{ lookup('hashi_vault', 'secret=kv/foo:username token={{{{ token_var }}}} url=http://host:8200')}}}}{suffix}",
+                True,
+            ),
             (f"{prefix}`kubectl get`{suffix}", True),
             (f"{prefix}FIXME!px1{suffix}", True),
             (f"{prefix}PW_PLACEHOLDER{suffix}", True),
             (f"{prefix}FAKE.thing(){suffix}", True),
             # Contains EXAMPLE in base64
-            (f"{prefix}RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg=={suffix}", True),
+            (
+                f"{prefix}RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg=={suffix}",
+                True,
+            ),
             (f"{prefix}USER_PASSWORD,{suffix}", True),
             (f"{prefix}foo/bar.baz.yaml.tmpl{suffix}", True),
             # Password in spanish True),
             (f"{prefix}Contrase\\u00f1a{suffix}", True),
             (f'{prefix}some.property.password="$SOME_PASSWORD_VARIABLE"{suffix}', True),
             (f"{prefix}ONLYFORDEVELOPMENT{suffix}", True),
-            (f"{prefix}for-cicd-${{some.placeholder.VALUE_REF}}${{some.placeholder.VALUE_REF}}{suffix}", True),
+            (
+                f"{prefix}for-cicd-${{some.placeholder.VALUE_REF}}${{some.placeholder.VALUE_REF}}{suffix}",
+                True,
+            ),
             (f"{prefix}$Abc12345678{suffix}", True),
             (f"{prefix}$CREDENTIAL_PLACEHOLDER${suffix}", True),
             (f"{prefix}\\u201cfakepasswd#\\u201d{suffix}", True),
             (f"{prefix}DEFAULT_APP_SECRET_DEFAULT{suffix}", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg=={suffix} # noqa: E501", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB9=={suffix} # nosec", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB8=={suffix} # gitleaks:allow", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB7=={suffix} # notsecret ", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB5=={suffix} #notsecret ", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB4=={suffix} //notsecret ", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB3=={suffix} # notsecret - this is a false positive", True),
-            (f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB2=={suffix} notsecret ", True),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFBg=={suffix} # noqa: E501",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB9=={suffix} # nosec",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB8=={suffix} # gitleaks:allow",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB7=={suffix} # notsecret ",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB5=={suffix} #notsecret ",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB4=={suffix} //notsecret ",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB3=={suffix} # notsecret - this is a false positive",
+                True,
+            ),
+            (
+                f"{prefix}vFWYcZmbFsDXW+JvMoZyttVkAE+ZXEpqxrCv0t86pgolDS/UWncEeUtz/lsjLh54wN1j3SBKmIPSbq/VOaSFB2=={suffix} notsecret ",
+                True,
+            ),
             (f"{prefix}/some/Path:${{foo.bar.baz}}{suffix}", True),
             (f"{prefix}/tmp/${{pull_secret_filename}}{suffix}", True),
             (f"{prefix}spec.some.path[*].secretRef{suffix}", True),
@@ -741,7 +776,10 @@ SHOULD_NOT_MATCH = [
             (f'{prefix}"&secretKey=RAW(" + s3_secretKey + ")"{suffix}', True),
             (f"{prefix}some-secret-CHANGEME{suffix}", True),
             (f"{prefix}GITHUB_TOKEN=${{GITHUB_TOKEN}}{suffix}", True),
-            (f'{prefix}$(KUBECONFIG="$target" kubectl get sa "$sa" -n "$namespace" -o json |{suffix}', True),
+            (
+                f'{prefix}$(KUBECONFIG="$target" kubectl get sa "$sa" -n "$namespace" -o json |{suffix}',
+                True,
+            ),
             (f"{prefix}[[.Some.Build.Secret]]{suffix}", True),
             (f"{prefix}\(password){suffix}", True),
             (f"{prefix}#{{password}}{suffix}", True),
@@ -750,7 +788,10 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}#REPLACE_ME#{suffix}", True),
             (f"{prefix}${{PASSWORD_PLACEHOLDER_123}}{suffix}", True),
             (f"{prefix}SuperSecretPassword!{suffix}", True),
-            (f"{prefix}#{{File.exists?('/some/path') ? open('/some/path','r') do |f|f.read end : ''}}{suffix}", True),
+            (
+                f"{prefix}#{{File.exists?('/some/path') ? open('/some/path','r') do |f|f.read end : ''}}{suffix}",
+                True,
+            ),
             (f"{prefix}example-9b5a699bc0dc8211f103a9a305b01a51{suffix}", True),
             (f"{prefix}quickstart-9b5a699bc0dc8211f103a9a305b01a51{suffix}", True),
             (f"{prefix}9b5a699bc0dc8211f103a9a305b01a51-example{suffix}", True),
@@ -780,7 +821,10 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}foo_client_id{suffix}", True),
             (f"{prefix}foo_key_private{suffix}", True),
             (f"{prefix}%{{pull_secret}}{suffix}", True),
-            (f"{prefix}HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/bPxRfiCY{suffix} //nolint:gosec", True),
+            (
+                f"{prefix}HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/bPxRfiCY{suffix} //nolint:gosec",
+                True,
+            ),
             (f"{prefix}HFYp7dGQhQ7G03juqw373JlSw8K/K7MDENG/EXAMPLEKEY{suffix}", True),
             (f"{prefix}$SOME_ENV_VAR-value{suffix}", True),
             (f"{prefix}c007cd12-1fe7-4843-947e-ddecfc0d8913{suffix}", True),
@@ -812,7 +856,10 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}/var/run/secret/secret.yml{suffix}", True),
             (f"{prefix}),d?_.a.createElement({suffix}", False),
             (f"{prefix}).append(toIndentedString(password)).append({suffix}", False),
-            (f"{prefix}django-insecure-zeu#xlk35rk7$b0o_hg7bfr@60A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS{suffix}", True),
+            (
+                f"{prefix}django-insecure-zeu#xlk35rk7$b0o_hg7bfr@60A3QuDLm2Ukhsae68d9f8ccjhI1AC9LG01KrQS{suffix}",
+                True,
+            ),
             (f"{prefix}material/form-textbox-password.svg{suffix}", True),
             (f"{prefix}material/form-textbox-password.png{suffix}", True),
             (f"{prefix}material/form-textbox-password.jpeg{suffix}", True),
@@ -821,8 +868,14 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}lol-ikr-those-kids-r-krazy{suffix}", False),
             # some numbers and upper case are fine as long as a good portion is lower with dashes
             (f"{prefix}K8s-lol-ikr-those-kids-r-krazy{suffix}", False),
-            (f"{prefix}/run/kubernetes/secrets/oscontainer-registry/dockercfg{suffix}", True),
-            (f"{prefix}/var/run/secrets/atomic-reactor/v2-registry-dockercfg{suffix}", True),
+            (
+                f"{prefix}/run/kubernetes/secrets/oscontainer-registry/dockercfg{suffix}",
+                True,
+            ),
+            (
+                f"{prefix}/var/run/secrets/atomic-reactor/v2-registry-dockercfg{suffix}",
+                True,
+            ),
             (f"{prefix}/path/to/password/file{suffix}", True),
             (f"{prefix}ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{suffix}", True),
             (f"{prefix}ghp_************************************{suffix}", True),
