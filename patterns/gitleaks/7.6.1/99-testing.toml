@@ -251,46 +251,64 @@
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"
-  regex = '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)'''
+  regex = '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)'''
   # Update alert tags and remove "testing" tag when ready
   # May set this up to never alert users directly but instead feed it
   # to a cred checker tool if we can't get a higher number of true positives.
   tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
 
   [[rules.entropies]]
-    # 4.4 also cuts out out a lot of FPs but might cut out some TPs as well
-    # keep an eye on this range.
-    Min = "4.2"
+    # Entropy set on normal password bottom threshold. This may need more
+    # tuning
+    Min = "3.35"
     Max = "8"
     Group = "1"
 
   [rules.allowlist]
-    regexes = [
-      # kind of a sanity check to cut down fps in the initial round of testing
-      '''(?i)[^a-z0-9\/+=\.\-<>_;]([a-z]{40}|[a-z]{0,39}\d[a-z]{0,39})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # It must have at least 1 upper and lower case character
-      '''[^A-Za-z0-9\/+=\.\-<>_;]([a-z0-9\/+=]{40}|[A-Z0-9\/+=]{40})([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Things then end in = often seem to be just base64 encoded values or keys not related to AWS
-      '''[^A-Za-z0-9\/+=\.\-<>_;][A-Za-z0-9\/+=]{39}=([^A-Za-z0-9\/+=\.\-<>_]|$)''',
-      # Ignore things with 3 or more slashes in it. So far most keys don't have this.
-      # (This rule might be able to replace a lot of the other ones here, need to
-      # go back and run this against older matches)
-      '''(?i)[^a-z0-9\/+=\.\-<>_;](.+\/.+){3}([^a-z0-9\/+=\.\-<>_]|$)''',
-      # Ignore placeholders
-      # Note: this runs the risk of missing real keys if everything is one line and there's a match elsewhere
-      # but it cuts out so many FPs it may be worth it.
-      '''(?i)[^a-z0-9\/+=\.\-<>_;][a-z0-9\/+=]{0,40}(1234|abc(d|12)|algo|api|attr|auth|base|body|com|dist|example|exec|hook|ident|java|linux|name|org|param|path|repo|resp|share|spec|temp|test|type|xxx)[a-z0-9\/+=]{0,40}([^a-z0-9\/+=\.\-<>_]|$)'''
-    ]
+  regexes = [
+    # It must have upper case letters
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](?-i)([a-z0-9/+=]{40})(?i)([^a-z0-9\(\/+=\.\-<>_:\\%\$]|$)''',
+    # It must have numbers
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\%\$]|$)''',
+    # It must special characters
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9]{40})([^a-z0-9\(\/+=\.\-<>_:\\%\$]|$)''',
+    # It should not be an example key
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{30,40})(?-i)EXAMPLE''',
+    # It should not end in = (often base64 encoded values)
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{39}=)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
+    # It should not have >= 4 slashes (probably a file path)
+    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](.+\/.+){4,}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
+  ]
 
-# Not ready to deploy yet, need to set entropy flags and make sure the keys are
-# right and add tests
-# Make sure to add entropy checks too and ignore FPs
 [[rules]]
-description = "Kubernetes Docker Config"
-regex='''\.dockerconfigjson.*(ImF1dGhzI|JhdXRocyI|iYXV0aHMi)[a-zA-Z0-9+/=]+'''
-tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
-# This one needs testing too and the allowlist tuning
+  # Looks for base64 encoded snippets of "auths":..."auth":
+  # This might need to be scoped down a bit after more testing
+  description = "Container Registry Authentication"
+  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzI|JhdXRocyI|iYXV0aHMi)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIjo|iYXV0aCI6)[0-9A-Za-z+\/=]+)'''
+  tags = ["group:leaktk-testing", "container-registry", "auth", "base64", "type:secret"]
+
+  # This probably won't be needed after testing and tuning but it's here to
+  # figure out what kind of entropy we see for the matches in case that's a
+  # useful metric for tuning out FPs
+  [[rules.entropies]]
+      Min = "0"
+      Max = "8"
+      Group = "1"
+
 [[rules]]
-description = "Container Pull Secret Fragment"
-regex='''(ImF1dGhzI|JhdXRocyI|iYXV0aHMi).+?(ImF1dGgiO|JhdXRoIjo|iYXV0aCI6)'''
-tags = ["group:leaktk-testing", "key", "container-registry", "type:secret"]
+  # Look into merging this with the other Container Registry Authentication
+  # rule by making the escaped bits optional regex
+  description = "Container Registry Authentication"
+  regex = '''\\"([^"]+)?(docker|quay|openshift|redhat)\.(io|com)\\"(\s+)?:(\s+)?\{(\s+)?\\"auth\\"(\s+)?:(\s+)?\\"([^"]{32,})\\"'''
+  # Remove escaped when merging into the main rule
+  tags = ["group:leaktk-testing", "container-registry", "auth", "escaped", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "9"
+
+  [rules.allowlist]
+    regexes = [
+      '''\\"([^"]+)?(docker|quay|openshift|redhat)\.(io|com)\\"(\s+)?:(\s+)?\{(\s+)?\\"auth\\"(\s+)?:(\s+)?\\"([^"]+(\.\.\.|\*\*\*)[^"]+)\\"'''
+    ]

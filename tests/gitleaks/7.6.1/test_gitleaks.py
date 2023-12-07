@@ -150,6 +150,60 @@ SHOULD_MATCH = [
             ),
         )
     ],
+    *[
+        {
+            "description": "Container Registry Authentication",
+            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q} }}",
+            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q}",
+            "comment": "Should capture in-line container registry secrets",
+        }
+        # Quote Type
+        for q in (
+            # Normal
+            '"',
+            # Escaped
+            r"\"",
+        )
+        for registry in (
+            "quay.io",
+            "docker.io",
+            "foo.bar.redhat.io",
+            "foo.bar.redhat.com",
+            "foo.bar.openshift.com",
+            "foo.bar.openshift.io",
+        )
+    ],
+    *[
+        {
+            "description": "Container Registry Authentication",
+            "example": f"{prefix}{test_id}{value}{suffix}",
+            "offender": f"{test_id}{value}",
+            "comment": "Should capture encoded container registry secrets",
+        }
+        # The test_id keeps the matches from being exactly the same between tests
+        for test_id, (prefix, suffix) in enumerate(
+            (
+                (".dockerconfigjson: ", ""),
+                ('Data: "', '"'),
+            )
+        )
+        for value in (
+            "eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cg==",
+            "eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0K",
+            "ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQo=",
+            "YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cg==",
+            "YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQo=",
+            "YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0K",
+            "MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cg==",
+            "MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cg==",
+        )
+    ],
+    {
+        "description": "Container Registry Authentication",
+        "example": 'reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2") // remove later',
+        "offender": 'registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")',
+        "comment": "Should capture container registry passwords.",
+    },
     {
         "description": "OpenShift Login Token",
         "example": "oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw --foo --bar --baz",
@@ -494,12 +548,6 @@ SHOULD_MATCH = [
         "example": "key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'",
         "offender": "'SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
         "comment": "Should capture a SG api key",
-    },
-    {
-        "description": "Container Registry Authentication",
-        "example": 'reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2") // remove later',
-        "offender": 'registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")',
-        "comment": "Should capture container registry passwords.",
     },
 ]
 
@@ -918,6 +966,14 @@ SHOULD_NOT_MATCH = [
             "http://some-host:8080,org.java.stuff@1fc032aa",
         )
     ],
+    {
+        "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
+        "comment": "Container Auth: Should not capture domains we don't care about",
+    },
+    {
+        "example": '{"auths":{"cloud.openshift.com":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I.....TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I==","email":"user@example.com"},"quay.io":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0INo...","email":"user@example.com"},"',
+        "comment": "redacted container registry auth",
+    },
     {
         "example": "<password><![CDATA[${password}]]></password>",
         "comment": "placeholder wrappet in cdata tags",
