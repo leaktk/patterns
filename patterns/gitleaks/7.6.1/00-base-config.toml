@@ -30,4 +30,6 @@
     '''(^|\/).?gitleaks''',
     # Ignore aws secrets check baseline file
     '''(^|\/)\.?secrets.baseline$''',
+    # Ignore a github spec file
+    '''(^|\/)specs\/github\.json$''',
   ]
