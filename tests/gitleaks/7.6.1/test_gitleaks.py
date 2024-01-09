@@ -953,6 +953,7 @@ SHOULD_NOT_MATCH = [
             # Common ansible placeholder from the docs
             (f"{prefix}GoodNewsEveryone{suffix}", False),
             (f"{prefix}'$SOME_PASSWORD'{suffix}", False),
+            (f"{prefix}$(params.SOME_PASSWORD){suffix}", True),
         )
         if not is_xml or is_xml and also_test_xml
     ],
