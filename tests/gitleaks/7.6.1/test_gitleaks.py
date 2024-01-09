@@ -665,7 +665,7 @@ SHOULD_NOT_MATCH = [
     ],
     *[
         {
-            "example": f"scheme://user:{password}@localhost:443",
+            "example": f"scheme://user:{password}@host.domain.com:443",
             "comment": "URL default passwords or placeholders",
         }
         for password in [
@@ -676,7 +676,7 @@ SHOULD_NOT_MATCH = [
             "%q",
             "&lt;password&gt;",
             "[TOKEN]",
-            "\${GHTOKEN}",
+            "\\${GHTOKEN}",
             "__MONGO_PASSWORD__",
             "candlepin",
             "default",
@@ -835,7 +835,7 @@ SHOULD_NOT_MATCH = [
                 True,
             ),
             (f"{prefix}[[.Some.Build.Secret]]{suffix}", True),
-            (f"{prefix}\(password){suffix}", True),
+            (f"{prefix}\\(password){suffix}", True),
             (f"{prefix}#{{password}}{suffix}", True),
             (f"{prefix}#{{password}}{suffix}", True),
             (f"{prefix}`generate-password`{suffix}", True),
@@ -857,7 +857,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}this-is-not-real!{suffix}", True),
             (f"{prefix}NotActuallyApplied!{suffix}", True),
             (f"{prefix}ADMIN_PASSWORD_HERE!{suffix}", True),
-            (f"{prefix}\$(POSTGRESQL_PASSWORD){suffix}", True),
+            (f"{prefix}\\$(POSTGRESQL_PASSWORD){suffix}", True),
             (f'{prefix}+privateDataPlaceholder()+"&{suffix}', True),
             (f"{prefix}foo{suffix}", True),
             (f"{prefix}.odc-multiple-key-selector button{suffix}", True),
@@ -954,7 +954,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}GoodNewsEveryone{suffix}", False),
             (f"{prefix}'$SOME_PASSWORD'{suffix}", False),
             (f"{prefix}$(params.SOME_PASSWORD){suffix}", True),
-            (f"{prefix}$\{{env.SOME_TOKEN}}{suffix}", True),
+            (f"{prefix}$\\{{env.SOME_TOKEN}}{suffix}", True),
         )
         if not is_xml or is_xml and also_test_xml
     ],
@@ -1317,7 +1317,7 @@ SHOULD_NOT_MATCH = [
         "comment": "ignore placeholder slack-token",
     },
     {
-        "example": "password=\$MIRROR_OS_PASS&#34;",
+        "example": "password=\\$MIRROR_OS_PASS&#34;",
         "comment": "ignore placeholder password",
     },
     {
