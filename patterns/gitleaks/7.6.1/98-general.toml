@@ -89,7 +89,7 @@
       # Ignore common placeholders
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
       # Ignore EXAMPLE base64 encoded
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(?-i)(RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]
 
   [[rules.entropies]]
@@ -228,7 +228,7 @@
 [[rules]]
   description="Kubernetes Service Account JWT"
   # Based on shifted b64 encoded portions of '"iss":"kubernetes/serviceaccount"'
-  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bn|Jpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50|iaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3Vud)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQi|Jpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50I|iaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudC)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   # TODO: add alert:repo-owner tag when the reporter supports handling really
   # large numbers in a single scan (so emails aren't crazy).
   tags = ["kubernetes", "service-account", "jwt", "type:secret"]
@@ -321,16 +321,16 @@
       #   secret = "'$SOME_ENV_VARIABLE-optional-text"
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z\-]+[\"\']''',
       # Known full placeholder passwords
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone)[\"\']''',
       # Base64 encoded EXAMPLE in the text
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)[^\"\']*?[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
       # aws.* is already covered by a different rule
       '''(?i)aws(.{0,15})(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
       # jq lookups
       '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password)(_|-)?(access(_|-)?)?(key)?''',
-      # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
@@ -340,6 +340,8 @@
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(client(-)?secret|example)[^\'\"]*?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+      # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
     ]
 
 [[rules]]
@@ -385,7 +387,7 @@
       #   <secret>asdfsadf***asdfsa</secret>
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(\.\.\.|\*\*\*).*?(\]\]>)?<\/''',
       #   Base64 encoded EXAMPLE
-      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*?(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
