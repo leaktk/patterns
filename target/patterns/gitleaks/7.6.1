@@ -34,7 +34,7 @@
     '''(^|\/)specs\/github\.json$''',
   ]
 
-# Genearal Potential Leak Patterns
+# General Potential Leak Patterns
 
 [[rules]]
   description="ArgoCD JWT"
@@ -353,8 +353,9 @@
       #   secret = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
       #   secret = "$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "'$SOME_ENV_VARIABLE-optional-text"
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
       # Known full placeholder passwords
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone)[\"\']''',
       # Base64 encoded EXAMPLE in the text
