@@ -73,7 +73,10 @@ SHOULD_MATCH = [
             ("api_key=", " "),
         )
         for (password, notsecretformat) in (
-            ("swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw", ""),
+            (
+                "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw",
+                "",
+            ),
             # Invalid tag
             ("1b3d576ba5a108c3b7374142bfd02992", "notasecret"),
             # Doesn't start correctly
@@ -969,6 +972,24 @@ SHOULD_NOT_MATCH = [
             "http://some-host:8080,org.java.stuff@1fc032aa",
         )
     ],
+    *[
+        {
+            "example": example,
+            "comment": "Wordpress placeholder values",
+        }
+        for example in (
+            "define('AUTH_KEY', '${AUTH_KEY}');",
+            "define('AUTH_KEY', '{{AUTH_KEY}}');",
+            "define('AUTH_KEY', '$WP_AUTH_KEY');",
+            "define('SECURE_AUTH_KEY', '$WP_SECURE_AUTH_KEY');",
+            "define('LOGGED_IN_KEY', '$WP_LOGGED_IN_KEY');",
+            "define('NONCE_KEY', '$WP_NONCE_KEY');",
+            "define('AUTH_SALT', '$WP_AUTH_SALT');",
+            "define('SECURE_AUTH_SALT', '$WP_SECURE_AUTH_SALT');",
+            "define('LOGGED_IN_SALT', '$WP_LOGGED_IN_SALT');",
+            "define('NONCE_SALT', '$WP_NONCE_SALT');",
+        )
+    ],
     {
         "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
         "comment": "Container Auth: Should not capture domains we don't care about",
@@ -1186,14 +1207,6 @@ SHOULD_NOT_MATCH = [
     {
         "example": "_Somef0lder/or/Somepath/that0snotakeyyepa.sh",
         "comment": "this is close to the regex for an aws key",
-    },
-    {
-        "example": "define('AUTH_KEY', '${AUTH_KEY}');",
-        "comment": "placeholder value",
-    },
-    {
-        "example": "define('AUTH_KEY', '{{AUTH_KEY}}');",
-        "comment": "placeholder value",
     },
     {
         "example": "ghr_16C7e42F292c69",

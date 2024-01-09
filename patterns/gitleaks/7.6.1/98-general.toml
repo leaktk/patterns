@@ -580,9 +580,12 @@
 
   [rules.allowlist]
     regexes = [
-      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']<.+?>[\"\'](\s+)?\)''',
-      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']\{\{.+?\}\}[\"\'](\s+)?\)''',
-      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']\$\{.+?\}[\"\'](\s+)?\)''',
+      # Things like:
+      #   define('AUTH_KEY', '${AUTH_KEY}')
+      #   define('AUTH_KEY', '$AUTH_KEY')
+      #   define('AUTH_KEY', '{{AUTH_KEY}}')
+      #   define('AUTH_KEY', '<AUTH_KEY>')
+      '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\'](<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)[\"\'](\s+)?\)''',
       # Ignore some placeholder values
       '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']([^\'\"]+)?(-auth(entication)?|example(.com|key)?|here|localhost|pass(w)?or(d|t)|required|secret(s|_v\d)?(key)?|string|test)[\"\'](\s+)?\)''',
     ]
