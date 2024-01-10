@@ -141,7 +141,7 @@
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\s|$)''',
       # Ignore cli args for this rule
-      '''--[\w\-]*(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)'''
+      '''--[\w\-]*(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)''',
       # Secrets that are allow lower case and optionally contain dashes are most often placeholders
       '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[a-z\-]+(\s|$)''',
     ]
@@ -163,12 +163,8 @@
     ]
 
     regexes = [
-      ## Starts with
-      '''^(your|place|put|insert)''',
-      ## Ends with
-      '''(here|token|value)$''',
-      ## Contains
-      '''(xxx|example|placeholder|passw(or)?d)''',
+      # Common placeholder values only have lower case letters and dashes
+      '''^[a-z\-]+$''',
     ]
 
   [[rules.entropies]]
