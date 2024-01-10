@@ -342,6 +342,8 @@
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](\\u[a-z0-9]{4})+[\"\']''',
     ]
 
 [[rules]]
@@ -395,6 +397,8 @@
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(\]\]>)?<\/''',
       # UUIDs
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\]\]>)?<\/''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\u[a-z0-9]{4})+(\]\]>)?<\/''',
     ]
 
   [[rules.entropies]]

@@ -957,6 +957,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}'$SOME_PASSWORD'{suffix}", False),
             (f"{prefix}$(params.SOME_PASSWORD){suffix}", True),
             (f"{prefix}$\\{{env.SOME_TOKEN}}{suffix}", True),
+            (f"{prefix}\\u4f60\\u597d\\u4e16\\u754c{suffix}", True),
         )
         if not is_xml or is_xml and also_test_xml
     ],
