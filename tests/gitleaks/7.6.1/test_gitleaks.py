@@ -723,6 +723,7 @@ SHOULD_NOT_MATCH = [
             ("<password>", "</", True),
             ("<secret>", "</", True),
             ('<FooSecret id="new">', "</", True),
+            ("secret=", "", True),
         )
         for example, also_test_xml in (
             (f"{prefix}{suffix}", True),
@@ -758,6 +759,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}APPLICATION_RESOURCES{suffix}", True),
             (f"{prefix}http://secret_dsn{suffix}", True),
             (f"{prefix}/etc/app-settings/password-file{suffix}", True),
+            (f"{prefix}/secrets/some/service-account.json{suffix}", True),
             (f"{prefix}YOURGENERATEDAPPLICATIONPASSWORD{suffix}", True),
             (
                 f"{prefix}{{{{ lookup('hashi_vault', 'secret=kv/foo:username token={{{{ token_var }}}} url=http://host:8200')}}}}{suffix}",
@@ -1337,7 +1339,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Fake token",
     },
     {
-        "example": "password=\$MIRROR_OS_PASS&#34;",
+        "example": "password=\\$MIRROR_OS_PASS&#34;",
         "comment": "Placeholder",
     },
     {
