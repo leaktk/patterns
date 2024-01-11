@@ -369,7 +369,7 @@
       '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password)(_|-)?(access(_|-)?)?(key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
       ## Ends with
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
       ## Contains
@@ -540,6 +540,16 @@
     Min = "2"
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description = "OpenShift Login Token"
+  regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^\s]+)\b'''
+  tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "2"
 
 [[rules]]
   description = "PayPal Braintree Access Token"
@@ -952,6 +962,10 @@
     ]
     regexes = [
       # Things like:
+      #   secret = "asdfasdfas" # nosec (used by bandit)
+      '''#(\s+)?nosec(\s+|$)''',
+      #   secret = "asdfasdfas" # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
       #   - secret: <PLACEHOLDER>
       #   - secret: @PLACEHOLDER@
       #   - secret: %PLACEHOLDER%
@@ -964,7 +978,7 @@
       #   - secret: %{PLACEHOLDER}
       #   - secret: update-your-postgres-pass-here # a common placeholder setup
       #   - secret: Some...placeholder
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(@.+?@|<.+?>|%.+?%|\$.+?\$|_.+?_|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
       #   - secret: [%PLACEHOLDER%]"
       #   - secret: [PLACEHOLDER]
       #   - secret: $(PLACEHOLDER...
@@ -977,29 +991,18 @@
       #   - secret: \$SOME_ENV_VARIABLE-optional-text
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
       # Ignore EXAMPLE base64 encoded
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*?''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?''',
       # Various words at the start and end that signify a placeholder
       # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
       ## Starts with
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      ## Contains
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*[^\"\'\s]+?(client(-)?secret|example|a-z|0-9|12345)[^\"\'\s]+?\s*(#|$)''',
       ## Ends with
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|y(a)?ml)[\"\']?''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
       # Ignore things that are just escaped unicode characters for now
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
     ]
-
-[[rules]]
-  description = "OpenShift Login Token"
-  regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^\s]+)\b'''
-  tags = ["group:leaktk-testing", "openshift-login", "token", "type:secret"]
-
-[[rules.entropies]]
-  # This may or may not be needed. Review the testing results to see if the
-  # results are high fidelity enough to see if this needs to be allowlist based
-  # or entropy based
-  Min = "0"
-  Max = "8"
-  Group = "2"
 
 [[rules]]
   # Might merge this with AWS Secret Key if the quality is good
