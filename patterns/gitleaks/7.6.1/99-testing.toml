@@ -385,7 +385,7 @@
   # Looks for base64 encoded snippets of "auths":..."auth":
   # This might need to be scoped down a bit after more testing
   description = "Container Registry Authentication"
-  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzIj|JhdXRocyI6|iYXV0aHMiO)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIj|iYXV0aCI6)[0-9A-Za-z+\/=]+)'''
+  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzIj|JhdXRocyI6|iYXV0aHMiO)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIj|iYXV0aCI6)[0-9A-Za-z+\/=]{128,})'''
   tags = ["group:leaktk-testing", "container-registry", "auth", "base64", "type:secret"]
 
   # This probably won't be needed after testing and tuning but it's here to
