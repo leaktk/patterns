@@ -73,7 +73,10 @@ SHOULD_MATCH = [
             ("api_key=", " "),
         )
         for (password, notsecretformat) in (
-            ("swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw", ""),
+            (
+                "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw",
+                "",
+            ),
             # Invalid tag
             ("1b3d576ba5a108c3b7374142bfd02992", "notasecret"),
             # Doesn't start correctly
@@ -156,8 +159,8 @@ SHOULD_MATCH = [
     *[
         {
             "description": "Container Registry Authentication",
-            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q} }}",
-            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q}",
+            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q} }}",
+            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q}",
             "comment": "Should capture in-line container registry secrets",
         }
         # Quote Type
@@ -662,7 +665,7 @@ SHOULD_NOT_MATCH = [
     ],
     *[
         {
-            "example": f"scheme://user:{password}@localhost:443",
+            "example": f"scheme://user:{password}@host.domain.com:443",
             "comment": "URL default passwords or placeholders",
         }
         for password in [
@@ -673,7 +676,7 @@ SHOULD_NOT_MATCH = [
             "%q",
             "&lt;password&gt;",
             "[TOKEN]",
-            "\${GHTOKEN}",
+            "\\${GHTOKEN}",
             "__MONGO_PASSWORD__",
             "candlepin",
             "default",
@@ -720,6 +723,7 @@ SHOULD_NOT_MATCH = [
             ("<password>", "</", True),
             ("<secret>", "</", True),
             ('<FooSecret id="new">', "</", True),
+            ("secret=", "", True),
         )
         for example, also_test_xml in (
             (f"{prefix}{suffix}", True),
@@ -755,6 +759,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}APPLICATION_RESOURCES{suffix}", True),
             (f"{prefix}http://secret_dsn{suffix}", True),
             (f"{prefix}/etc/app-settings/password-file{suffix}", True),
+            (f"{prefix}/secrets/some/service-account.json{suffix}", True),
             (f"{prefix}YOURGENERATEDAPPLICATIONPASSWORD{suffix}", True),
             (
                 f"{prefix}{{{{ lookup('hashi_vault', 'secret=kv/foo:username token={{{{ token_var }}}} url=http://host:8200')}}}}{suffix}",
@@ -832,7 +837,7 @@ SHOULD_NOT_MATCH = [
                 True,
             ),
             (f"{prefix}[[.Some.Build.Secret]]{suffix}", True),
-            (f"{prefix}\(password){suffix}", True),
+            (f"{prefix}\\(password){suffix}", True),
             (f"{prefix}#{{password}}{suffix}", True),
             (f"{prefix}#{{password}}{suffix}", True),
             (f"{prefix}`generate-password`{suffix}", True),
@@ -854,7 +859,7 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}this-is-not-real!{suffix}", True),
             (f"{prefix}NotActuallyApplied!{suffix}", True),
             (f"{prefix}ADMIN_PASSWORD_HERE!{suffix}", True),
-            (f"{prefix}\$(POSTGRESQL_PASSWORD){suffix}", True),
+            (f"{prefix}\\$(POSTGRESQL_PASSWORD){suffix}", True),
             (f'{prefix}+privateDataPlaceholder()+"&{suffix}', True),
             (f"{prefix}foo{suffix}", True),
             (f"{prefix}.odc-multiple-key-selector button{suffix}", True),
@@ -949,6 +954,10 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}0xrMXdwXLB89EXAMPLELL82G3GC212lnGI{suffix}", False),
             # Common ansible placeholder from the docs
             (f"{prefix}GoodNewsEveryone{suffix}", False),
+            (f"{prefix}'$SOME_PASSWORD'{suffix}", False),
+            (f"{prefix}$(params.SOME_PASSWORD){suffix}", True),
+            (f"{prefix}$\\{{env.SOME_TOKEN}}{suffix}", True),
+            (f"{prefix}\\u4f60\\u597d\\u4e16\\u754c{suffix}", True),
         )
         if not is_xml or is_xml and also_test_xml
     ],
@@ -967,6 +976,24 @@ SHOULD_NOT_MATCH = [
             "https://test:adfa;dkj;aek;j@git.example.com",
             "https://examle.com/foo:current@Cacheable",
             "http://some-host:8080,org.java.stuff@1fc032aa",
+        )
+    ],
+    *[
+        {
+            "example": example,
+            "comment": "Wordpress placeholder values",
+        }
+        for example in (
+            "define('AUTH_KEY', '${AUTH_KEY}');",
+            "define('AUTH_KEY', '{{AUTH_KEY}}');",
+            "define('AUTH_KEY', '$WP_AUTH_KEY');",
+            "define('SECURE_AUTH_KEY', '$WP_SECURE_AUTH_KEY');",
+            "define('LOGGED_IN_KEY', '$WP_LOGGED_IN_KEY');",
+            "define('NONCE_KEY', '$WP_NONCE_KEY');",
+            "define('AUTH_SALT', '$WP_AUTH_SALT');",
+            "define('SECURE_AUTH_SALT', '$WP_SECURE_AUTH_SALT');",
+            "define('LOGGED_IN_SALT', '$WP_LOGGED_IN_SALT');",
+            "define('NONCE_SALT', '$WP_NONCE_SALT');",
         )
     ],
     {
@@ -1188,14 +1215,6 @@ SHOULD_NOT_MATCH = [
         "comment": "this is close to the regex for an aws key",
     },
     {
-        "example": "define('AUTH_KEY', '${AUTH_KEY}');",
-        "comment": "placeholder value",
-    },
-    {
-        "example": "define('AUTH_KEY', '{{AUTH_KEY}}');",
-        "comment": "placeholder value",
-    },
-    {
         "example": "ghr_16C7e42F292c69",
         "comment": "It is too short to be a real token",
     },
@@ -1301,7 +1320,7 @@ SHOULD_NOT_MATCH = [
         "comment": "ignore placeholder slack-token",
     },
     {
-        "example": "password=\$MIRROR_OS_PASS&#34;",
+        "example": "password=\\$MIRROR_OS_PASS&#34;",
         "comment": "ignore placeholder password",
     },
     {
@@ -1321,7 +1340,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Fake token",
     },
     {
-        "example": "password=\$MIRROR_OS_PASS&#34;",
+        "example": "password=\\$MIRROR_OS_PASS&#34;",
         "comment": "Placeholder",
     },
     {
