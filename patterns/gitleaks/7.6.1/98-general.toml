@@ -269,7 +269,7 @@
       '''(^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
-      '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
+      '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
     ]
 
     regexes = [
@@ -282,7 +282,7 @@
       '''\/\/(\s+)?nolint:gosec(\s+|$)''',
       #   secret = "_PLACEHOLDER_"
       #   secret = "<PLACEHOLDER>"
-      #   secret = "@@PLACEHOLDER@@"
+      #   secret = "@PLACEHOLDER@"
       #   secret = ").append("foo")
       #   secret = "%PLACEHOLDER%"
       #   secret = "$PLACEHOLDER$"
@@ -291,7 +291,7 @@
       #   secret = "[%PLACEHOLDER%]"
       #   secret = "$(PLACEHOLDER..."
       #   secret = "\$(PLACEHOLDER..."
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@@.+?@@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
       #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+?[\"\']''',
       #   secret = "{PLACEHOLDER}"
@@ -335,15 +335,24 @@
       ## Starts with
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
       ## Ends with
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|(-|_)key|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?(key)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
       ## Contains
-      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(client(-)?secret|example)[^\'\"]*?[\"\']''',
+      '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(client(-)?secret|example|a-z|0-9|12345)[^\'\"]*?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
       # Ignore things that are just escaped unicode characters for now
       '''(?i)(secret|password)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](\\u[a-z0-9]{4})+[\"\']''',
+      # Already covered by the Slack Token rule
+      '''xox[baprs]-([0-9a-zA-Z-]{10,48})?''',
+      # Already covered by GitHub rules
+      '''gh(o|u|p|s|r)_[0-9A-Za-z]{36,}''',
+      '''github_pat_\w{82}''',
+      # Already covered byt GitLab rules
+      '''glpat-[\w\-]{20}''',
+      '''glptt-[0-9a-f]{40}''',
+      '''(glrt-|GR1348941)[\w\-]{20}''',
     ]
 
 [[rules]]
@@ -377,10 +386,10 @@
       #   <secret>$(SOME_VARIABLE)</secret>
       #   <secret>$\{SOME_VARIABLE}</secret>
       #   <secret><SOME_VARIABLE></secret>
-      #   <secret>@@SOME_VARIABLE@@</secret>
+      #   <secret>@SOME_VARIABLE@</secret>
       #   <secret>[%SOME_VARIABLE%]</secret>
       #   <secret>[SOME_VARIABLE]</secret>
-      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\)?(\$|%)?(\\)?(\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@@.+?@@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\)?(\$|%)?(\\)?(\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(\]\]>)?<\/''',
       #   <secret>SOME_CONSTANT_PREFIX_${PLACEHOLDER}</secret>
       #   <secret>/SOME/path:${PLACEHOLDER}</secret>
       #   <secret>/SOME/path:${PLACEHOLDER}${PLACEHOLDER}</secret>
