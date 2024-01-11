@@ -159,8 +159,8 @@ SHOULD_MATCH = [
     *[
         {
             "description": "Container Registry Authentication",
-            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q} }}",
-            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}9ec7f53a0637bb3d78ab613e02014934{q}",
+            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q} }}",
+            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q}",
             "comment": "Should capture in-line container registry secrets",
         }
         # Quote Type

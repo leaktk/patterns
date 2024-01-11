@@ -385,7 +385,7 @@
   # Looks for base64 encoded snippets of "auths":..."auth":
   # This might need to be scoped down a bit after more testing
   description = "Container Registry Authentication"
-  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzI|JhdXRocyI|iYXV0aHMi)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIjo|iYXV0aCI6)[0-9A-Za-z+\/=]+)'''
+  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzIj|JhdXRocyI6|iYXV0aHMiO)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIj|iYXV0aCI6)[0-9A-Za-z+\/=]+)'''
   tags = ["group:leaktk-testing", "container-registry", "auth", "base64", "type:secret"]
 
   # This probably won't be needed after testing and tuning but it's here to
@@ -396,20 +396,3 @@
       Max = "8"
       Group = "1"
 
-[[rules]]
-  # Look into merging this with the other Container Registry Authentication
-  # rule by making the escaped bits optional regex
-  description = "Container Registry Authentication"
-  regex = '''\\"([^"]+)?(docker|quay|openshift|redhat)\.(io|com)\\"(\s+)?:(\s+)?\{(\s+)?\\"auth\\"(\s+)?:(\s+)?\\"([^"]{32,})\\"'''
-  # Remove escaped when merging into the main rule
-  tags = ["group:leaktk-testing", "container-registry", "auth", "escaped", "type:secret"]
-
-  [[rules.entropies]]
-    Min = "3.2"
-    Max = "8"
-    Group = "9"
-
-  [rules.allowlist]
-    regexes = [
-      '''\\"([^"]+)?(docker|quay|openshift|redhat)\.(io|com)\\"(\s+)?:(\s+)?\{(\s+)?\\"auth\\"(\s+)?:(\s+)?\\"([^"]+(\.\.\.|\*\*\*)[^"]+)\\"'''
-    ]
