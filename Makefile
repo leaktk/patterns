@@ -12,7 +12,7 @@ format:
 	black .
 
 .PHONY: test
-test:
+test: clean
 	@./scripts/$@
 
 target/patterns/gitleaks:
