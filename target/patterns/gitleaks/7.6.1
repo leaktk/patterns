@@ -544,7 +544,7 @@
 
 [[rules]]
   description = "OpenShift Login Token"
-  regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^\s]+)\b'''
+  regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^<\s]{16,})\b'''
   tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]
 
   [[rules.entropies]]

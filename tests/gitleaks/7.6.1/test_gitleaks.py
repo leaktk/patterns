@@ -998,6 +998,13 @@ SHOULD_NOT_MATCH = [
             "define('NONCE_SALT', '$WP_NONCE_SALT');",
         )
     ],
+    *[
+        {
+            "example": f"oc login --some-opt --token={token} --server=localhost",
+            "comment": "placeholder value",
+        }
+        for token in ("sha256~<some-token-here-yo>",)
+    ],
     {
         "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
         "comment": "Container Auth: Should not capture domains we don't care about",
