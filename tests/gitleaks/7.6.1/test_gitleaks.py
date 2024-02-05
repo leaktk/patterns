@@ -1051,7 +1051,7 @@ SHOULD_NOT_MATCH = [
         "comment": "Marked noqa:",
     },
     {
-        "example": "out.write((\"-----BEGIN PRIVATE KEY-----\\n\").getBytes(Charsets.UTF_8));",
+        "example": 'out.write(("-----BEGIN PRIVATE KEY-----\\n").getBytes(Charsets.UTF_8));',
         "comment": "Code snippet",
     },
     {
