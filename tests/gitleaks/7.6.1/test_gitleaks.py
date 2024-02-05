@@ -1048,6 +1048,10 @@ SHOULD_NOT_MATCH = [
         "comment": "test value",
     },
     {
+        "example": "-----BEGIN RSA PRIVATE KEY-----\\nxxx\\nxxx\\nxxx\\n-----END RSA PRIVATE KEY-----",
+        "comment": "placeholder value",
+    },
+    {
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
         "comment": "Data in a is skipped due to high FP rate",
         "filename": "htpasswd.md",
