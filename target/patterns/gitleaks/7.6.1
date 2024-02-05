@@ -82,6 +82,8 @@
       '''if.*==\s*[\"|\']-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
       #   like: "-----BEGIN RSA PRIVATE KEY-----")
       '''-----BEGIN ((EC|PGP|DSA|RSA|OPENSSH) )?PRIVATE KEY( BLOCK)?-----[\"\']\)''',
+      #  things ending with stuff like # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
     ]
 
 [[rules]]

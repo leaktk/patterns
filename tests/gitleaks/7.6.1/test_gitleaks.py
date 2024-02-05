@@ -1039,6 +1039,10 @@ SHOULD_NOT_MATCH = [
         "comment": "Redacted value",
     },
     {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\nlt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9Alt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9A\\n-----END OPENSSH PRIVATE KEY----- # noqa: E501",
+        "comment": "Marked noqa:",
+    },
+    {
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
         "comment": "Data in a is skipped due to high FP rate",
         "filename": "htpasswd.md",
