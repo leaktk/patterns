@@ -977,6 +977,7 @@ SHOULD_NOT_MATCH = [
             "https://test:adfa;dkj;aek;j@git.example.com",
             "https://examle.com/foo:current@Cacheable",
             "http://some-host:8080,org.java.stuff@1fc032aa",
+            r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",
         )
     ],
     *[
