@@ -1033,8 +1033,6 @@
     '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
     # It must special characters
     '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It should not be an example key
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{30,40})example''',
     # It should not end in = (often base64 encoded values)
     '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{39}=)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
     # It should not have >= 4 slashes (probably a file path)
