@@ -211,9 +211,7 @@ SHOULD_MATCH = [
             "example": example,
             "offender": example,
         }
-        for example in (
-            "arn:aws:iam::128157789812:root",
-        )
+        for example in ("arn:aws:iam::128157789812:root",)
     ],
     {
         "description": "Container Registry Authentication",
@@ -579,10 +577,28 @@ SHOULD_MATCH = [
             "offender": offender,
         }
         for example, offender in (
-            ("npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl", "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl"),
-            ("value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl", "npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl"),
+            (
+                "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+                "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+            ),
+            (
+                "value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+                "npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+            ),
         )
     ],
+    {
+        "description": "NPM Private Module Auth Token",
+        "example": "//npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "offender": "_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "filename": ".npmrc",
+    },
+    {
+        "description": "General Secret",
+        "example": "Handle the match for NPM Private Module Auth Token above",
+        "offender": "Token=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "filename": ".npmrc",
+    },
 ]
 
 SHOULD_NOT_MATCH = [

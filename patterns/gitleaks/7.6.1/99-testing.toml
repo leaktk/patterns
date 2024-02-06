@@ -392,7 +392,7 @@
   description = "NPM Access Token"
   regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "npm", "token", "type:secret"]
+  tags = ["group:leaktk-testing", "type:secret", "npm", "access", "token"]
 
   [[rules.entropies]]
     # TODO: set Min to 3.35 after testing if all true hits are above that
@@ -400,15 +400,15 @@
     Max = "8"
     Group = "1"
 
-# [[rules]]
-#   description = "NPM Private Module Auth Token"
-#   regex = '''_authToken=([^$].*)\b'''
-#   path = '''(^|\/)[^\/]+npmrc$'''
-#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-#   tags = ["group:leaktk-testing", "npm", "private-module", "token", "type:secret"]
-#
-#   [[rules.entropies]]
-#     # TODO: set Min to 3.35 after testing if all true hits are above that
-#     Min = "0"
-#     Max = "8"
-#     Group = "1"
+[[rules]]
+  description = "NPM Private Module Auth Token"
+  regex = '''_authToken=([^$].*)\b'''
+  path = '''(^|\/)[^\/]+npmrc$'''
+  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+  tags = ["group:leaktk-testing", "type:secret", "npm", "private-module", "auth", "token"]
+
+  [[rules.entropies]]
+    # TODO: set Min to 3.35 after testing if all true hits are above that
+    Min = "0"
+    Max = "8"
+    Group = "1"
