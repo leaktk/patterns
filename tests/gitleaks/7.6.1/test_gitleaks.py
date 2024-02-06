@@ -572,6 +572,17 @@ SHOULD_MATCH = [
         "offender": "Filename or path offender: /tmp/leaktk-patterns-7.6.1/foo.p12",
         "filename": f"foo.p12",
     },
+    *[
+        {
+            "description": "NPM Access Token",
+            "example": example,
+            "offender": offender,
+        }
+        for example, offender in (
+            ("npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl", "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl"),
+            ("value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl", "npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl"),
+        )
+    ],
 ]
 
 SHOULD_NOT_MATCH = [

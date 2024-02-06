@@ -1059,7 +1059,7 @@
   description = "AWS Account ID"
   regex = '''arn:aws:iam::\d+:[\w\-\/]+'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "id", "aws", "type:secret"]
+  tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "arn"]
 
   [rules.allowlist]
     regexes = [
@@ -1072,20 +1072,20 @@
   # what kinds of things are we finding before we start adding tests
   regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "id", "aws", "type:secret"]
+  tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "var"]
 
-# [[rules]]
-#   description = "NPM Access Token"
-#   regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''
-#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-#   tags = ["group:leaktk-testing", "npm", "token", "type:secret"]
-#
-#   [[rules.entropies]]
-#     # TODO: set Min to 3.35 after testing if all true hits are above that
-#     Min = "0"
-#     Max = "8"
-#     Group = "1"
-#
+[[rules]]
+  description = "NPM Access Token"
+  regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''
+  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+  tags = ["group:leaktk-testing", "npm", "token", "type:secret"]
+
+  [[rules.entropies]]
+    # TODO: set Min to 3.35 after testing if all true hits are above that
+    Min = "0"
+    Max = "8"
+    Group = "1"
+
 # [[rules]]
 #   description = "NPM Private Module Auth Token"
 #   regex = '''_authToken=([^$].*)\b'''
