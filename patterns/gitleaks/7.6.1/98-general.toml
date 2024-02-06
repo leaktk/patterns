@@ -8,7 +8,7 @@
 
 [[rules]]
   description = "Asymmetric Private Key"
-  regex = '''-----BEGIN ([A-Z]{2,16} )?PRIVATE KEY( BLOCK)?-----'''
+  regex = '''-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----'''
   tags = ["alert:repo-owner", "key", "asymmetric-private-key", "type:secret"]
 
   [rules.allowlist]
@@ -43,13 +43,11 @@
       '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(\[)?\s*(\"\"\"|\"|\'|`)?-----BEGIN''',
       # Things that look like code looking for headers
       #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
-      '''if.*==\s*[\"|\']-----BEGIN ([A-Z]{2,16} )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
+      '''if.*==\s*[\"|\']-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
       #   like: ("-----BEGIN RSA PRIVATE KEY-----")
-      '''\([\"\']-----BEGIN ([A-Z]{2,16} )?PRIVATE KEY( BLOCK)?-----(\\n)?[\"\']''',
+      '''\([\"\']-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----(\\n)?[\"\']''',
       #  things ending with stuff like # noqa: E501
       '''#(\s+)?noqa(:[\s\w]+)?$''',
-      # Placeholder keys
-      '''-----BEGIN (SOME|TEST|EXAMPLE|FAKE) PRIVATE KEY( BLOCK)?-----''',
     ]
 
 [[rules]]
