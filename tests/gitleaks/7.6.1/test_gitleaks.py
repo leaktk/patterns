@@ -41,7 +41,7 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     *[
         {
-            "description": "(File) General Secret",
+            "description": "General Secret",
             "example": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
             "offender": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
             "filename": f"foo.{ext}",
@@ -204,6 +204,14 @@ SHOULD_MATCH = [
             "MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==",
             "MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==",
         )
+    ],
+    *[
+        {
+            "description": "AWS Account ID",
+            "example": example,
+            "offender": example,
+        }
+        for example in ("arn:aws:iam::128157789812:root",)
     ],
     {
         "description": "Container Registry Authentication",
@@ -556,6 +564,41 @@ SHOULD_MATCH = [
         "offender": "'SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
         "comment": "Should capture a SG api key",
     },
+    {
+        "description": "PKCS #12 File",
+        "example": "anything",
+        "offender": "Filename or path offender: /tmp/leaktk-patterns-7.6.1/foo.p12",
+        "filename": f"foo.p12",
+    },
+    *[
+        {
+            "description": "NPM Access Token",
+            "example": example,
+            "offender": offender,
+        }
+        for example, offender in (
+            (
+                "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+                "npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+            ),
+            (
+                "value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+                "npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl",
+            ),
+        )
+    ],
+    {
+        "description": "NPM Private Module Auth Token",
+        "example": "//npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "offender": "_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "filename": ".npmrc",
+    },
+    {
+        "description": "General Secret",
+        "example": "Handle the match for NPM Private Module Auth Token above",
+        "offender": "Token=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
+        "filename": ".npmrc",
+    },
 ]
 
 SHOULD_NOT_MATCH = [
@@ -875,6 +918,8 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}passord_to_replace{suffix}", True),
             (f"{prefix}base64string{suffix}", True),
             (f"{prefix}GITHUB_ACCESS_TOKEN{suffix}", True),
+            (f"{prefix}/secrets/some/service-account.json{suffix}", True),
+            (f"{prefix}#!/usr/bin/python3{suffix}", True),
             (f"{prefix}foo_client_id{suffix}", True),
             (f"{prefix}foo_key_private{suffix}", True),
             (f"{prefix}%{{pull_secret}}{suffix}", True),
@@ -977,6 +1022,7 @@ SHOULD_NOT_MATCH = [
             "https://test:adfa;dkj;aek;j@git.example.com",
             "https://examle.com/foo:current@Cacheable",
             "http://some-host:8080,org.java.stuff@1fc032aa",
+            r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+",
         )
     ],
     *[
@@ -996,6 +1042,13 @@ SHOULD_NOT_MATCH = [
             "define('LOGGED_IN_SALT', '$WP_LOGGED_IN_SALT');",
             "define('NONCE_SALT', '$WP_NONCE_SALT');",
         )
+    ],
+    *[
+        {
+            "example": f"oc login --some-opt --token={token} --server=localhost",
+            "comment": "placeholder value",
+        }
+        for token in ("sha256~<some-token-here-yo>",)
     ],
     {
         "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
@@ -1037,6 +1090,22 @@ SHOULD_NOT_MATCH = [
     {
         "example": "-----BEGIN PRIVATE KEY-----\\nMIIEvgIBADANBg...W17oy4Qgj7OLNB\\n-----END PRIVATE",
         "comment": "Redacted value",
+    },
+    {
+        "example": "-----BEGIN OPENSSH PRIVATE KEY-----\\nlt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9Alt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9A\\n-----END OPENSSH PRIVATE KEY----- # noqa: E501",
+        "comment": "Marked noqa:",
+    },
+    {
+        "example": 'out.write(("-----BEGIN PRIVATE KEY-----\\n").getBytes(Charsets.UTF_8));',
+        "comment": "Code snippet",
+    },
+    {
+        "example": "testSomeKindOfKey = `-----BEGIN OPENSSH PRIVATE KEY-----\\nlt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9Alt7wX0QyM7vNmbZovwIRLcWkRq_NFsWzR8VR_XYOQAy7K9g4MrAjiwuJjzz7PmEmaguxNK1GURK2EZx2DRLZ9A\\n-----END OPENSSH PRIVATE KEY-----`",
+        "comment": "test value",
+    },
+    {
+        "example": "-----BEGIN RSA PRIVATE KEY-----\\nxxx\\nxxx\\nxxx\\n-----END RSA PRIVATE KEY-----",
+        "comment": "placeholder value",
     },
     {
         "example": "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/",
@@ -1220,7 +1289,7 @@ SHOULD_NOT_MATCH = [
         "comment": "It is too short to be a real token",
     },
     {
-        "example": "administration_role_arn: arn:aws:iam::1234567890:role/AWSCloudFormationStackSetAdministrationRole",
+        "example": "administration_role_arn: arn:aws:iam::123456789012:role/AWSCloudFormationStackSetAdministrationRole",
         "comment": "ignore these arn matches",
     },
     {
