@@ -875,6 +875,8 @@ SHOULD_NOT_MATCH = [
             (f"{prefix}passord_to_replace{suffix}", True),
             (f"{prefix}base64string{suffix}", True),
             (f"{prefix}GITHUB_ACCESS_TOKEN{suffix}", True),
+            (f"{prefix}/secrets/some/service-account.json{suffix}", True),
+            (f"{prefix}#!/usr/bin/python3{suffix}", True),
             (f"{prefix}foo_client_id{suffix}", True),
             (f"{prefix}foo_key_private{suffix}", True),
             (f"{prefix}%{{pull_secret}}{suffix}", True),
