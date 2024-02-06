@@ -1049,3 +1049,40 @@
     '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z0-9/+=]{0,36}(access|class|array|cloud|component|test|example|thread|librar)[a-z0-9/+=]{0,36}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
   ]
 
+[[rules]]
+  description = "PKCS #12 File"
+  path = '''(^|\/)[^\/]+\.p12$'''
+  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+  tags = ["group:leaktk-testing", "pkcs12", "file", "type:secret"]
+
+# [[rules]]
+#   description = "AWS Account ID"
+#   regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
+#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+#   tags = ["group:leaktk-testing", "id", "aws", "type:secret"]
+#
+# [[rules]]
+#   description = "NPM Access Token"
+#   regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''
+#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+#   tags = ["group:leaktk-testing", "npm", "token", "type:secret"]
+#
+#   [[rules.entropies]]
+#     # TODO: set Min to 3.35 after testing if all true hits are above that
+#     Min = "0"
+#     Max = "8"
+#     Group = "1"
+#
+# [[rules]]
+#   description = "NPM Private Module Auth Token"
+#   regex = '''_authToken=([^$].*)\b'''
+#   path = '''(^|\/)[^\/]+npmrc$'''
+#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+#   tags = ["group:leaktk-testing", "npm", "private-module", "token", "type:secret"]
+#
+#   [[rules.entropies]]
+#     # TODO: set Min to 3.35 after testing if all true hits are above that
+#     Min = "0"
+#     Max = "8"
+#     Group = "1"
+

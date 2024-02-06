@@ -556,6 +556,12 @@ SHOULD_MATCH = [
         "offender": "'SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922",
         "comment": "Should capture a SG api key",
     },
+    {
+        "description": "PKCS #12 File",
+        "example": "anything",
+        "offender": "Filename or path offender: /tmp/leaktk-patterns-7.6.1/foo.p12",
+        "filename": f"foo.p12",
+    },
 ]
 
 SHOULD_NOT_MATCH = [
