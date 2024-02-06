@@ -369,12 +369,25 @@
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "pkcs12", "file", "type:secret"]
 
-# [[rules]]
-#   description = "AWS Account ID"
-#   regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
-#   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-#   tags = ["group:leaktk-testing", "id", "aws", "type:secret"]
-#
+[[rules]]
+  description = "AWS Account ID"
+  regex = '''arn:aws:iam::\d+:[\w\-\/]+'''
+  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+  tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "arn"]
+
+  [rules.allowlist]
+    regexes = [
+      '''arn:aws:iam::1234\d+:[\w\-\/]+''',
+    ]
+
+[[rules]]
+  description = "AWS Account ID"
+  # TODO: add tests. This was pulled from git-secrets and I want to see
+  # what kinds of things are we finding before we start adding tests
+  regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
+  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
+  tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "var"]
+
 # [[rules]]
 #   description = "NPM Access Token"
 #   regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''

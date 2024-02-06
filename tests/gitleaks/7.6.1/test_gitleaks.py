@@ -205,6 +205,16 @@ SHOULD_MATCH = [
             "MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==",
         )
     ],
+    *[
+        {
+            "description": "AWS Account ID",
+            "example": example,
+            "offender": example,
+        }
+        for example in (
+            "arn:aws:iam::128157789812:root",
+        )
+    ],
     {
         "description": "Container Registry Authentication",
         "example": 'reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2") // remove later',
@@ -1252,7 +1262,7 @@ SHOULD_NOT_MATCH = [
         "comment": "It is too short to be a real token",
     },
     {
-        "example": "administration_role_arn: arn:aws:iam::1234567890:role/AWSCloudFormationStackSetAdministrationRole",
+        "example": "administration_role_arn: arn:aws:iam::123456789012:role/AWSCloudFormationStackSetAdministrationRole",
         "comment": "ignore these arn matches",
     },
     {
