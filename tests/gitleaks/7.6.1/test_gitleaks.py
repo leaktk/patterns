@@ -41,7 +41,7 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     *[
         {
-            "description": "(File) General Secret",
+            "description": "General Secret",
             "example": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
             "offender": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
             "filename": f"foo.{ext}",

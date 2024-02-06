@@ -101,7 +101,7 @@
   description = "Container Registry Authentication"
   # Example match: registry.New("registry", "username", "password")
   regex = '''registry\.New\((\s+)?\"[^\"]+\",(\s+)?\"[^\"]+\",(\s+)?(\"[^\"]+\")(\s+)?\)'''
-  tags = ["alert:repo-owner", "container-registry", "auth", "type:secret"]
+  tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
 
   [[rules.entropies]]
     Min = "0"
@@ -115,7 +115,7 @@
   # It also tries to ignore space around the json
   # (Note: this only works when it's all on a single line)
   regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
-  tags = ["alert:repo-owner", "container-registry", "auth", "type:secret"]
+  tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
 
   [[rules.entropies]]
     Min = "3.2"
@@ -128,6 +128,11 @@
       '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"'''
     ]
 
+[[rules]]
+  # Looks for base64 encoded snippets of "auths":..."auth":
+  description = "Container Registry Authentication"
+  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzIj|JhdXRocyI6|iYXV0aHMiO)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIj|iYXV0aCI6)[0-9A-Za-z+\/=]{128,})'''
+  tags = ["alert:repo-owner", "type:secret", "container-registry", "auth", "base64"]
 
 [[rules]]
   description = "URL User and Password"
@@ -243,6 +248,30 @@
   description = "Mailgun API Key"
   regex = '''((?i)(mailgun|mg)(.{0,20})?)key-[0-9a-z]{32}'''
   tags = ["alert:repo-owner", "key", "mailgun", "type:secret"]
+
+[[rules]]
+  description = "General Secret"
+  path='''(?i)\.[\w\-]*(secret|token|password)$'''
+  regex='''^([^\s]{5,})$'''
+  tags = ["alert:repo-owner", "type:secret", "general", "secret", "file"]
+
+  [rules.allowlist]
+    paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
+    ]
+
+    regexes = [
+      # Common placeholder values only have lower case letters and dashes
+      '''^[a-z\-]+$''',
+      # shebangs
+      '''^#!\/''',
+    ]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "1"
 
 [[rules]]
   description = "General Secret"

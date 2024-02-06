@@ -149,34 +149,6 @@
     ]
 
 [[rules]]
-  # Find secrets where the file name is the context instead of contents
-  # TODO: Remove (File) when prod ready
-  description = "(File) General Secret"
-  path='''(?i)\.[\w\-]*(secret|token|password)$'''
-  # This will probably need to be tuned over time
-  regex='''^([^\s]{5,})$'''
-  # TODO: replace group:leaktk-testing with alert:repo-owner once tested
-  tags = ["group:leaktk-testing", "type:secret", "general", "secret", "file"]
-
-  [rules.allowlist]
-    paths = [
-      # Test data files are often false positives
-      '''(^|\/)testdata\/''',
-    ]
-
-    regexes = [
-      # Common placeholder values only have lower case letters and dashes
-      '''^[a-z\-]+$''',
-      # shebangs
-      '''^#!\/''',
-    ]
-
-  [[rules.entropies]]
-    Min = "3.35"
-    Max = "8"
-    Group = "1"
-
-[[rules]]
   # This is a copy of General Secret that looks for "token" instead.
   # When this rule is ready, merge it with the regluar General Secret.
   # This intentially just replaces (secret|password) with (token) so that
@@ -382,19 +354,3 @@
     # It should not have >= 4 slashes (probably a file path)
     '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](.+\/.+){4,}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
   ]
-
-[[rules]]
-  # Looks for base64 encoded snippets of "auths":..."auth":
-  # This might need to be scoped down a bit after more testing
-  description = "Container Registry Authentication"
-  regex='''([a-zA-Z0-9+\/=]+(ImF1dGhzIj|JhdXRocyI6|iYXV0aHMiO)[a-zA-Z0-9+\/=]+(ImF1dGgiO|JhdXRoIj|iYXV0aCI6)[0-9A-Za-z+\/=]{128,})'''
-  tags = ["group:leaktk-testing", "container-registry", "auth", "base64", "type:secret"]
-
-  # This probably won't be needed after testing and tuning but it's here to
-  # figure out what kind of entropy we see for the matches in case that's a
-  # useful metric for tuning out FPs
-  [[rules.entropies]]
-      Min = "0"
-      Max = "8"
-      Group = "1"
-
