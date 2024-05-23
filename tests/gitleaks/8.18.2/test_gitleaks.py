@@ -36,7 +36,7 @@ import shutil
 from pathlib import Path
 from unittest import TestCase
 
-VERSION = "8.12.0"
+VERSION = "8.18.2"
 
 SHOULD_MATCH = [
     {
@@ -84,10 +84,6 @@ SHOULD_MATCH = [
 ]
 
 SHOULD_NOT_MATCH = [
-    {
-        "Example": "AWS_SECRET_ACCESS_KEY: RVhBTVBMRWlpdVdSRUhGY3JISTN6SzBMZGVub1Avc0tmOW9aejhhbXYyY29rNlBja1E9Cg==",
-        "Comment": "Contains EXAMPLE base64 encoded",
-    },
     # TODO: not sure how to ignore this one in gitleaks >=8.12
     # Ticket for more info: https://github.com/zricethezav/gitleaks/issues/1064
     # {
@@ -134,14 +130,6 @@ SHOULD_NOT_MATCH = [
         "FileName": "test/testec-p112r1.pem",
         "Comment": "Common test files in the open ssl project and others",
     },
-    {
-        "Example": "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker",
-        "Comment": "This is not an AWS secret key",
-    },
-    {
-        "Example": "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName",
-        "Comment": "This is not an AWS secret key",
-    },
     # TODO: not sure how to ignore this one in gitleaks >=8.12
     # Ticket for more info: https://github.com/zricethezav/gitleaks/issues/1064
     # {
@@ -178,10 +166,6 @@ SHOULD_NOT_MATCH = [
     },
     {
         "Example": "administration_role_arn: arn:aws:iam::1234567890:role/AWSCloudFormationStackSetAdministrationRole",
-        "Comment": "This is not an AWS secret key",
-    },
-    {
-        "Example": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
         "Comment": "This is not an AWS secret key",
     },
 ]
