@@ -150,18 +150,18 @@
   # Example match: "quay.io": {"auth": "token-token-token-token"
   # It also tries to ignore space around the json
   # (Note: this only works when it's all on a single line)
-  regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
+  regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
   tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
 
   [[rules.entropies]]
     Min = "3.2"
     Max = "8"
-    Group = "14"
+    Group = "15"
 
   [rules.allowlist]
     regexes = [
       # Ignore redacted...secrets
-      '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"'''
+      '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
     ]
 
 [[rules]]
@@ -1009,6 +1009,28 @@
     ]
 
 [[rules]]
+  description = "Base64 Encoded AWS Secret Key"
+  regex = '''([a-zA-Z0-9]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9]+={0,2})'''
+  tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
+
+# If this is high fidelity enough, then it might could replace the other
+# rule. If it works, remove the unrestricted part in the name.
+[[rules]]
+  description = "(Unrestricted) Container Registry Authentication"
+  regex = '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
+  tags = ["group:leaktk-testing", "container-registry", "auth", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "6"
+
+  [rules.allowlist]
+    regexes = [
+      '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
+    ]
+
+[[rules]]
   # Might merge this with AWS Secret Key if the quality is good
   # (other rule|this new rule)
   description = "Potential AWS Secret Key"
@@ -1068,7 +1090,7 @@
   description = "AWS Account ID"
   # TODO: add tests. This was pulled from git-secrets and I want to see
   # what kinds of things are we finding before we start adding tests
-  regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
+  regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}([^\w-]|$)'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "var"]
 

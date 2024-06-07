@@ -29,6 +29,7 @@ results
 "comment" - (optional) rational on why it's there
 "filename" - (optional) if the rule matches a specific filename
 """
+
 import json
 import subprocess
 import shutil
@@ -159,8 +160,8 @@ SHOULD_MATCH = [
     *[
         {
             "description": "Container Registry Authentication",
-            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q} }}",
-            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q}",
+            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q} }}",
+            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q}",
             "comment": "Should capture in-line container registry secrets",
         }
         # Quote Type
@@ -170,15 +171,47 @@ SHOULD_MATCH = [
             # Escaped
             r"\"",
         )
-        for registry in (
+        for i, registry in enumerate((
             "quay.io",
             "docker.io",
             "foo.bar.redhat.io",
             "foo.bar.redhat.com",
             "foo.bar.openshift.com",
             "foo.bar.openshift.io",
-        )
+        ))
     ],
+    *[
+        {
+            # If this rule gets merged into main, move it into the test above
+            "description": "(Unrestricted) Container Registry Authentication",
+            "example": "example comes from the test above",
+            "offender": f"{q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q}",
+            "comment": "Should capture in-line container registry secrets",
+        }
+        # Quote Type
+        for q in (
+            # Normal
+            '"',
+            # Escaped
+            r"\"",
+        )
+        for i in range(len((
+            "quay.io",
+            "docker.io",
+            "foo.bar.redhat.io",
+            "foo.bar.redhat.com",
+            "foo.bar.openshift.com",
+            "foo.bar.openshift.io",
+        )))
+
+    ],
+    {
+        # If this rule gets merged into main, move it into the test above
+        "description": "(Unrestricted) Container Registry Authentication",
+        "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
+        "offender": '"auth": "9ec7f53a0637bb3d78ab613e02014934"',
+        "comment": "We're starting to look for more registries",
+    },
     *[
         {
             "description": "Container Registry Authentication",
@@ -1050,10 +1083,6 @@ SHOULD_NOT_MATCH = [
         }
         for token in ("sha256~<some-token-here-yo>",)
     ],
-    {
-        "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
-        "comment": "Container Auth: Should not capture domains we don't care about",
-    },
     {
         "example": '{"auths":{"cloud.openshift.com":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I.....TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I==","email":"user@example.com"},"quay.io":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0INo...","email":"user@example.com"},"',
         "comment": "redacted container registry auth",

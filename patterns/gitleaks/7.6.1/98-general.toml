@@ -114,18 +114,18 @@
   # Example match: "quay.io": {"auth": "token-token-token-token"
   # It also tries to ignore space around the json
   # (Note: this only works when it's all on a single line)
-  regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
+  regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
   tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
 
   [[rules.entropies]]
     Min = "3.2"
     Max = "8"
-    Group = "14"
+    Group = "15"
 
   [rules.allowlist]
     regexes = [
       # Ignore redacted...secrets
-      '''(\\)?\"([^\"]+)?(docker|quay|openshift|redhat)\.(io|com)(\\)?\"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"'''
+      '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
     ]
 
 [[rules]]

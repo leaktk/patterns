@@ -29,6 +29,7 @@ results
 "Comment" - (optional) rational on why it's there
 "FileName" - (optional) if the rule matches a specific filename
 """
+
 import json
 import subprocess
 import shutil
