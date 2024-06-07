@@ -42,6 +42,32 @@ VERSION = "7.6.1"
 SHOULD_MATCH = [
     *[
         {
+            "description": "Password Hash",
+            "example": example,
+            "offender": example,
+            "comment": "Different types of password hashes",
+        }
+        for example in (
+            # mkpasswd --method=yescrypt password
+            "$y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6",
+            # mkpasswd --method=gost-yescrypt password
+            "$gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2",
+            # # mkpasswd --method=scrypt password
+            # "$7$CU..../....9kUBPJ.PkzdLIm.x9iRD30$XwDLNgBFVCH3BuzSuSVr5F14FSl7efq6Z9F0rY6dtl6",
+            # mkpasswd --method=bcrypt password
+            "$2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.",
+            # mkpasswd --method=sha512crypt password
+            "$6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1",
+            # mkpasswd --method=sha256crypt password
+            "$5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.",
+            # mkpasswd --method=sunmd5 password
+            "$md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/",
+            # mkpasswd --method=md5crypt password
+            "$1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1",
+        )
+    ],
+    *[
+        {
             "description": "General Secret",
             "example": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
             "offender": f"{i}dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI",
@@ -118,6 +144,18 @@ SHOULD_MATCH = [
     ],
     *[
         {
+            "description": "System Service Account JWT",
+            "example": jwt,
+            "offender": jwt,
+            "comment": 'this searches for "sub":"system:serviceaccount:',
+        }
+        for jwt in (
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE",
+        )
+    ],
+    *[
+        {
             "description": "(YAML) General Secret",
             "example": example,
             "offender": offender,
@@ -171,14 +209,16 @@ SHOULD_MATCH = [
             # Escaped
             r"\"",
         )
-        for i, registry in enumerate((
-            "quay.io",
-            "docker.io",
-            "foo.bar.redhat.io",
-            "foo.bar.redhat.com",
-            "foo.bar.openshift.com",
-            "foo.bar.openshift.io",
-        ))
+        for i, registry in enumerate(
+            (
+                "quay.io",
+                "docker.io",
+                "foo.bar.redhat.io",
+                "foo.bar.redhat.com",
+                "foo.bar.openshift.com",
+                "foo.bar.openshift.io",
+            )
+        )
     ],
     *[
         {
@@ -195,15 +235,18 @@ SHOULD_MATCH = [
             # Escaped
             r"\"",
         )
-        for i in range(len((
-            "quay.io",
-            "docker.io",
-            "foo.bar.redhat.io",
-            "foo.bar.redhat.com",
-            "foo.bar.openshift.com",
-            "foo.bar.openshift.io",
-        )))
-
+        for i in range(
+            len(
+                (
+                    "quay.io",
+                    "docker.io",
+                    "foo.bar.redhat.io",
+                    "foo.bar.redhat.com",
+                    "foo.bar.openshift.com",
+                    "foo.bar.openshift.io",
+                )
+            )
+        )
     ],
     {
         # If this rule gets merged into main, move it into the test above
