@@ -344,11 +344,6 @@
       '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
     ]
 
-[[rules]]
-  description = "PKCS #12 File"
-  path = '''(^|\/)[^\/]+\.p12$'''
-  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "pkcs12", "file", "type:secret"]
 
 [[rules]]
   description = "AWS Account ID"

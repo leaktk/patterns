@@ -556,6 +556,11 @@
   tags = ["alert:repo-owner", "key", "picatic", "type:secret"]
 
 [[rules]]
+  description = "PKCS #12 File"
+  path = '''(^|\/)[^\/]+\.p12$'''
+  tags = ["alert:repo-owner", "pkcs12", "file", "type:secret"]
+
+[[rules]]
   description = "PyPI Upload Token"
   regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
   tags = ["alert:repo-owner", "key", "pypi", "type:secret"]
