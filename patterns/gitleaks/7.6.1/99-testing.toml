@@ -370,17 +370,17 @@
     ]
 
 [[rules]]
-  description = "NPM Private Module Auth Token"
-  regex = '''_authToken=([^$].*)(\b|$)'''
+  description = "NPM Registry Auth"
+  regex = '''_(auth(Token)?|password)?\s*=\s*(.+)'''
   path = '''(^|\/)[^\/]+npmrc$'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "private-module", "auth", "token"]
+  tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
 
   [[rules.entropies]]
     # TODO: set Min to 3.35 after testing if all true hits are above that
     Min = "0"
     Max = "8"
-    Group = "1"
+    Group = "3"
 
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
