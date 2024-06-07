@@ -357,38 +357,6 @@ SHOULD_MATCH = [
         "comment": "Should capture aws secret keys",
     },
     {
-        "description": "Potential AWS Secret Key",
-        "example": "example comes from one of the AWS secret keys above",
-        "offender": '"aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"',
-        "comment": "A slightly different capture group for the potential ones",
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "example comes from one of the AWS secret keys above",
-        "offender": '"Af60f112a534df0cc1e4d892b5768f3easef/+zc"',
-        "comment": "A slightly different capture group for the potential ones",
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "foo = 'kvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw'",
-        "offender": "'kvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw'",
-        "comment": """
-        This matches the regex for an aws secret key with no other context.
-        There are some limitations with how go's regex parser can handle
-        lookarounds so this does the best it can to guess but may miss some
-        """,
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "foo = LvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw",
-        "offender": " LvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw",
-        "comment": """
-        This matches the regex for an aws secret key with no other context.
-        There are some limitations with how go's regex parser can handle
-        lookarounds so this does the best it can to guess but may miss some
-        """,
-    },
-    {
         "description": "Asymmetric Private Key",
         "example": "-----BEGIN PGP PRIVATE KEY-----",
         "offender": "-----BEGIN PGP PRIVATE KEY-----",

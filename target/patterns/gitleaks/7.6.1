@@ -1031,45 +1031,6 @@
     ]
 
 [[rules]]
-  # Might merge this with AWS Secret Key if the quality is good
-  # (other rule|this new rule)
-  description = "Potential AWS Secret Key"
-  regex = '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)'''
-  # Update alert tags and remove "testing" tag when ready
-  # May set this up to never alert users directly but instead feed it
-  # to a cred checker tool if we can't get a higher number of true positives.
-  tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
-
-  [[rules.entropies]]
-    # Entropy set on normal password bottom threshold. This may need more
-    # tuning
-    Min = "3.35"
-    Max = "8"
-    Group = "1"
-
-  [rules.allowlist]
-  regexes = [
-    # It must have upper case letters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](?-i)([a-z0-9/+=]{40})(?i)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It must have numbers
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It must special characters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It should not end in = (often base64 encoded values)
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{39}=)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It should not have >= 4 slashes (probably a file path)
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](.+\/.+){4,}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Ignore things with a run of 20 a-z characters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z0-9/+=]{0,20}[a-z]{20,}[a-z0-9/+=]{0,20}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Ignore variables being set that happen to be the length of a key
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z]{6,}=[a-z0-9/+=]+([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Most likely the end of a cert
-    '''(?i)^\s+([a-z0-9/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Common words that indicate it's not a key
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z0-9/+=]{0,36}(access|class|array|cloud|component|test|example|thread|librar)[a-z0-9/+=]{0,36}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-  ]
-
-[[rules]]
   description = "PKCS #12 File"
   path = '''(^|\/)[^\/]+\.p12$'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
