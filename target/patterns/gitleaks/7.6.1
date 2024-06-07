@@ -572,6 +572,16 @@
     Group = "1"
 
 [[rules]]
+  description = "NPM Access Token"
+  regex = '''(^|\b)(npm_[A-Za-z0-9]{36})(\b|$)'''
+  tags = ["alert:repo-owner", "type:secret", "npm", "access", "token"]
+
+  [[rules.entropies]]
+  Min = "3.35"
+  Max = "8"
+  Group = "2"
+
+[[rules]]
   description = "OpenShift Login Token"
   regex='''\boc\s+login\s+.*?--token\s*(=)?\s*(sha256~[^<\s]{16,})\b'''
   tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]
@@ -1038,34 +1048,27 @@
 
 [[rules]]
   description = "AWS Account ID"
-  regex = '''arn:aws:iam::\d+:[\w\-\/]+'''
+  regex = '''arn:aws:iam::\d{12}:[\w\-\/]+'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "arn"]
 
   [rules.allowlist]
     regexes = [
-      '''arn:aws:iam::1234\d+:[\w\-\/]+''',
+      '''arn:aws:iam::(\d+)?((0)?1234|0{4,}|1{4,}|2{4,}|3{4,}|4{4,}|5{4,}|6{4,}|7{4,}|8{4,}|9{4,})(\d+)?:[\w\-\/]+''',
     ]
 
 [[rules]]
   description = "AWS Account ID"
   # TODO: add tests. This was pulled from git-secrets and I want to see
   # what kinds of things are we finding before we start adding tests
-  regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}([^\w-]|$)'''
+  regex = '''(?i)(\"|')?(aws)?_?(account)_?(id)?(\"|')?\s*(:|=>|=)\s*(\"|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}([^\w-]|$)?'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "var"]
 
-[[rules]]
-  description = "NPM Access Token"
-  regex = '''(?i)\b(npm_[a-z0-9]{36})(\b|$)'''
-  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "access", "token"]
-
-  [[rules.entropies]]
-    # TODO: set Min to 3.35 after testing if all true hits are above that
-    Min = "0"
-    Max = "8"
-    Group = "1"
+  [rules.allowlist]
+    regexes = [
+      '''(?i)(\"|')?(aws)?_?(account)_?(id)?(\"|')?\s*(:|=>|=)\s*(\"|')?(\d+)?((0)?1234|0{4,}|1{4,}|2{4,}|3{4,}|4{4,}|5{4,}|6{4,}|7{4,}|8{4,}|9{4,})(\d+)?([^\w-]|$)''',
+    ]
 
 [[rules]]
   description = "NPM Private Module Auth Token"
