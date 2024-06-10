@@ -323,90 +323,155 @@
     ]
 
 [[rules]]
-  # Might merge this with AWS Secret Key if the quality is good
-  # (other rule|this new rule)
-  description = "Potential AWS Secret Key"
-  regex = '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)'''
-  # Update alert tags and remove "testing" tag when ready
-  # May set this up to never alert users directly but instead feed it
-  # to a cred checker tool if we can't get a higher number of true positives.
+  description = "Base64 Encoded AWS Secret Key"
+  regex = '''([a-zA-Z0-9\/\+]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2})'''
   tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
 
+# If this is high fidelity enough, then it might could replace the other
+# rule. If it works, remove the unrestricted part in the name.
+[[rules]]
+  description = "(Unrestricted) Container Registry Authentication"
+  regex = '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
+  tags = ["group:leaktk-testing", "container-registry", "auth", "type:secret"]
+
   [[rules.entropies]]
-    # Entropy set on normal password bottom threshold. This may need more
-    # tuning
-    Min = "3.35"
+    Min = "3.2"
     Max = "8"
-    Group = "1"
+    Group = "6"
 
   [rules.allowlist]
-  regexes = [
-    # It must have upper case letters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](?-i)([a-z0-9/+=]{40})(?i)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It must have numbers
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It must special characters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It should not end in = (often base64 encoded values)
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$]([a-z0-9/+=]{39}=)([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # It should not have >= 4 slashes (probably a file path)
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$](.+\/.+){4,}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Ignore things with a run of 20 a-z characters
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z0-9/+=]{0,20}[a-z]{20,}[a-z0-9/+=]{0,20}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Ignore variables being set that happen to be the length of a key
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z]{6,}=[a-z0-9/+=]+([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Most likely the end of a cert
-    '''(?i)^\s+([a-z0-9/+=]{40})([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-    # Common words that indicate it's not a key
-    '''(?i)[^a-z0-9\/+\.\-<>_;\\%\$][a-z0-9/+=]{0,36}(access|class|array|cloud|component|test|example|thread|librar)[a-z0-9/+=]{0,36}([^a-z0-9\(\/+=\.\-<>_:\\~%\$]|$)''',
-  ]
+    regexes = [
+      '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
+    ]
 
-[[rules]]
-  description = "PKCS #12 File"
-  path = '''(^|\/)[^\/]+\.p12$'''
-  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "pkcs12", "file", "type:secret"]
 
 [[rules]]
   description = "AWS Account ID"
-  regex = '''arn:aws:iam::\d+:[\w\-\/]+'''
+  regex = '''arn:aws:iam::\d{12}:[\w\-\/]+'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "arn"]
 
   [rules.allowlist]
     regexes = [
-      '''arn:aws:iam::1234\d+:[\w\-\/]+''',
+      '''arn:aws:iam::(\d+)?((0)?1234|0{4,}|1{4,}|2{4,}|3{4,}|4{4,}|5{4,}|6{4,}|7{4,}|8{4,}|9{4,})(\d+)?:[\w\-\/]+''',
     ]
 
 [[rules]]
   description = "AWS Account ID"
   # TODO: add tests. This was pulled from git-secrets and I want to see
   # what kinds of things are we finding before we start adding tests
-  regex = '''("|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?("|')?\s*(:|=>|=)\s*("|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}("|')?\b'''
+  regex = '''(?i)(\"|')?(aws)?_?(account)_?(id)?(\"|')?\s*(:|=>|=)\s*(\"|')?[0-9]{4}\-?[0-9]{4}\-?[0-9]{4}([^\w-]|$)?'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "aws", "account", "id", "var"]
 
+  [rules.allowlist]
+    regexes = [
+      '''(?i)(\"|')?(aws)?_?(account)_?(id)?(\"|')?\s*(:|=>|=)\s*(\"|')?(\d+)?((0)?1234|0{4,}|1{4,}|2{4,}|3{4,}|4{4,}|5{4,}|6{4,}|7{4,}|8{4,}|9{4,})(\d+)?([^\w-]|$)''',
+    ]
+
 [[rules]]
-  description = "NPM Access Token"
-  regex = '''(?i)\b(npm_[a-z0-9]{36})\b'''
+  description = "NPM Registry Auth"
+  regex = '''_(auth(Token)?|password)?\s*=\s*(.+)'''
+  path = '''(^|\/)[^\/]+npmrc$'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "access", "token"]
+  tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
 
   [[rules.entropies]]
     # TODO: set Min to 3.35 after testing if all true hits are above that
     Min = "0"
     Max = "8"
+    Group = "3"
+
+[[rules]]
+  # base64 shifted versions of '"sub":"system:serviceaccount:'
+  description = "System Service Account JWT"
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ["group:leaktk-testing", "system", "service-account", "jwt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "yescrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "gost-yescrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "scrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "bcrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$6\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "sha512crypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$5\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "sha256crypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$md5(,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "sunmd5", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''(^|\b)\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}(\b|$)'''
+  tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
+
+[[rules]]
+  description = "Slack App Token"
+  regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xapp-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
     Group = "1"
 
 [[rules]]
-  description = "NPM Private Module Auth Token"
-  regex = '''_authToken=([^$].*)\b'''
-  path = '''(^|\/)[^\/]+npmrc$'''
-  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "private-module", "auth", "token"]
+  description = "Slack Config Access Token"
+  regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
+    ]
 
   [[rules.entropies]]
-    # TODO: set Min to 3.35 after testing if all true hits are above that
-    Min = "0"
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  id = "Slack Config Refresh Token"
+  regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
     Max = "8"
     Group = "1"

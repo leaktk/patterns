@@ -29,6 +29,7 @@ results
 "comment" - (optional) rational on why it's there
 "filename" - (optional) if the rule matches a specific filename
 """
+
 import json
 import subprocess
 import shutil
@@ -39,6 +40,32 @@ from unittest import TestCase
 VERSION = "7.6.1"
 
 SHOULD_MATCH = [
+    *[
+        {
+            "description": "Password Hash",
+            "example": example,
+            "offender": example,
+            "comment": "Different types of password hashes",
+        }
+        for example in (
+            # mkpasswd --method=yescrypt password
+            "$y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6",
+            # mkpasswd --method=gost-yescrypt password
+            "$gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2",
+            # # mkpasswd --method=scrypt password
+            # "$7$CU..../....9kUBPJ.PkzdLIm.x9iRD30$XwDLNgBFVCH3BuzSuSVr5F14FSl7efq6Z9F0rY6dtl6",
+            # mkpasswd --method=bcrypt password
+            "$2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.",
+            # mkpasswd --method=sha512crypt password
+            "$6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1",
+            # mkpasswd --method=sha256crypt password
+            "$5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.",
+            # mkpasswd --method=sunmd5 password
+            "$md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/",
+            # mkpasswd --method=md5crypt password
+            "$1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1",
+        )
+    ],
     *[
         {
             "description": "General Secret",
@@ -117,6 +144,18 @@ SHOULD_MATCH = [
     ],
     *[
         {
+            "description": "System Service Account JWT",
+            "example": jwt,
+            "offender": jwt,
+            "comment": 'this searches for "sub":"system:serviceaccount:',
+        }
+        for jwt in (
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE",
+        )
+    ],
+    *[
+        {
             "description": "(YAML) General Secret",
             "example": example,
             "offender": offender,
@@ -159,8 +198,8 @@ SHOULD_MATCH = [
     *[
         {
             "description": "Container Registry Authentication",
-            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q} }}",
-            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}8ec7f53a0637bb3d78ab613e02014934{q}",
+            "example": f"{q}{registry}{q}: {{ {q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q} }}",
+            "offender": f"{q}{registry}{q}: {{ {q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q}",
             "comment": "Should capture in-line container registry secrets",
         }
         # Quote Type
@@ -170,15 +209,52 @@ SHOULD_MATCH = [
             # Escaped
             r"\"",
         )
-        for registry in (
-            "quay.io",
-            "docker.io",
-            "foo.bar.redhat.io",
-            "foo.bar.redhat.com",
-            "foo.bar.openshift.com",
-            "foo.bar.openshift.io",
+        for i, registry in enumerate(
+            (
+                "quay.io",
+                "docker.io",
+                "foo.bar.redhat.io",
+                "foo.bar.redhat.com",
+                "foo.bar.openshift.com",
+                "foo.bar.openshift.io",
+            )
         )
     ],
+    *[
+        {
+            # If this rule gets merged into main, move it into the test above
+            "description": "(Unrestricted) Container Registry Authentication",
+            "example": "example comes from the test above",
+            "offender": f"{q}auth{q}: {q}{i}ec7f53a0637bb3d78ab613e02014934{q}",
+            "comment": "Should capture in-line container registry secrets",
+        }
+        # Quote Type
+        for q in (
+            # Normal
+            '"',
+            # Escaped
+            r"\"",
+        )
+        for i in range(
+            len(
+                (
+                    "quay.io",
+                    "docker.io",
+                    "foo.bar.redhat.io",
+                    "foo.bar.redhat.com",
+                    "foo.bar.openshift.com",
+                    "foo.bar.openshift.io",
+                )
+            )
+        )
+    ],
+    {
+        # If this rule gets merged into main, move it into the test above
+        "description": "(Unrestricted) Container Registry Authentication",
+        "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
+        "offender": '"auth": "9ec7f53a0637bb3d78ab613e02014934"',
+        "comment": "We're starting to look for more registries",
+    },
     *[
         {
             "description": "Container Registry Authentication",
@@ -213,6 +289,12 @@ SHOULD_MATCH = [
         }
         for example in ("arn:aws:iam::128157789812:root",)
     ],
+    {
+        "description": "Slack User Token",
+        "example": "xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc",
+        "offender": "xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc",
+        "comment": "Should capture slack tokens",
+    },
     {
         "description": "Container Registry Authentication",
         "example": 'reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2") // remove later',
@@ -279,38 +361,6 @@ SHOULD_MATCH = [
         "example": '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar',
         "offender": 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"',
         "comment": "Should capture aws secret keys",
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "example comes from one of the AWS secret keys above",
-        "offender": '"aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"',
-        "comment": "A slightly different capture group for the potential ones",
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "example comes from one of the AWS secret keys above",
-        "offender": '"Af60f112a534df0cc1e4d892b5768f3easef/+zc"',
-        "comment": "A slightly different capture group for the potential ones",
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "foo = 'kvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw'",
-        "offender": "'kvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw'",
-        "comment": """
-        This matches the regex for an aws secret key with no other context.
-        There are some limitations with how go's regex parser can handle
-        lookarounds so this does the best it can to guess but may miss some
-        """,
-    },
-    {
-        "description": "Potential AWS Secret Key",
-        "example": "foo = LvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw",
-        "offender": " LvVsZle45ZChqRmlmdX+tTIwNuHwRziBERNXq6Sw",
-        "comment": """
-        This matches the regex for an aws secret key with no other context.
-        There are some limitations with how go's regex parser can handle
-        lookarounds so this does the best it can to guess but may miss some
-        """,
     },
     {
         "description": "Asymmetric Private Key",
@@ -588,7 +638,7 @@ SHOULD_MATCH = [
         )
     ],
     {
-        "description": "NPM Private Module Auth Token",
+        "description": "NPM Registry Auth",
         "example": "//npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
         "offender": "_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS",
         "filename": ".npmrc",
@@ -1050,10 +1100,6 @@ SHOULD_NOT_MATCH = [
         }
         for token in ("sha256~<some-token-here-yo>",)
     ],
-    {
-        "example": '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }',
-        "comment": "Container Auth: Should not capture domains we don't care about",
-    },
     {
         "example": '{"auths":{"cloud.openshift.com":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I.....TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0I==","email":"user@example.com"},"quay.io":{"auth":"TJpnU0y1pDBkEKTcwzSAaoNV3jmkZz66LM4Jd6EBx0INo...","email":"user@example.com"},"',
         "comment": "redacted container registry auth",
