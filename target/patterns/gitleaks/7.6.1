@@ -1089,7 +1089,7 @@
 
 [[rules]]
   description = "Base64 Encoded AWS Secret Key"
-  regex = '''([a-zA-Z0-9]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9]+={0,2})'''
+  regex = '''([a-zA-Z0-9\/\+]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2})'''
   tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
 
 # If this is high fidelity enough, then it might could replace the other
