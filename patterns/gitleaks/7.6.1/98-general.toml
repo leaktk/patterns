@@ -601,14 +601,14 @@
   tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
-  description = "Slack Token"
-  regex = '''xox[baprs]-([0-9a-zA-Z-]{10,48})?'''
-  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
+  description = "Slack Bot Token"
+  regex = '''(?i)(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''xox[baprs]-(1234|some|placeholder|slack)(.+)?''',
+      '''(?i)xoxb-(1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -617,14 +617,77 @@
     Group = "1"
 
 [[rules]]
-  description = "Slack Webhook"
-  regex = '''https://hooks.slack.com/services/(T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8,12}/[a-zA-Z0-9_]{24})'''
-  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
+  description = "Slack Legacy Bot Token"
+  regex = '''(?i)(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxb-(1234|some|placeholder|slack)'''
+    ]
 
   [[rules.entropies]]
     Min = "3.2"
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description= "Slack Legacy Token"
+  regex = '''(?i)(xox[os]-\d+-\d+-\d+-[a-f\d]+)'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[os]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Legacy Workspace Token"
+  regex = '''(?i)(xox[ar]-(?:\d-)?[0-9a-z]{8,48})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[ar]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description= "Slack User Token"
+  regex = '''(?i)(xox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[pe]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Webhook URL"
+  regex = '''(https?:\/\/)?hooks.slack.com\/(services|workflows)\/([A-Za-z0-9+\/]{43,46})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "3"
 
 [[rules]]
   description = "Square Access Token"

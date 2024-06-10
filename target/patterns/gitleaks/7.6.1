@@ -637,14 +637,14 @@
   tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
-  description = "Slack Token"
-  regex = '''xox[baprs]-([0-9a-zA-Z-]{10,48})?'''
-  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
+  description = "Slack Bot Token"
+  regex = '''(?i)(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''xox[baprs]-(1234|some|placeholder|slack)(.+)?''',
+      '''(?i)xoxb-(1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -653,14 +653,77 @@
     Group = "1"
 
 [[rules]]
-  description = "Slack Webhook"
-  regex = '''https://hooks.slack.com/services/(T[a-zA-Z0-9_]{8}/B[a-zA-Z0-9_]{8,12}/[a-zA-Z0-9_]{24})'''
-  tags = ["alert:repo-owner", "key", "slack", "type:secret"]
+  description = "Slack Legacy Bot Token"
+  regex = '''(?i)(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxb-(1234|some|placeholder|slack)'''
+    ]
 
   [[rules.entropies]]
     Min = "3.2"
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description= "Slack Legacy Token"
+  regex = '''(?i)(xox[os]-\d+-\d+-\d+-[a-f\d]+)'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[os]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Legacy Workspace Token"
+  regex = '''(?i)(xox[ar]-(?:\d-)?[0-9a-z]{8,48})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[ar]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description= "Slack User Token"
+  regex = '''(?i)(xox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xox[pe]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Webhook URL"
+  regex = '''(https?:\/\/)?hooks.slack.com\/(services|workflows)\/([A-Za-z0-9+\/]{43,46})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "3"
 
 [[rules]]
   description = "Square Access Token"
@@ -1071,17 +1134,17 @@
     ]
 
 [[rules]]
-  description = "NPM Private Module Auth Token"
-  regex = '''_authToken=([^$].*)(\b|$)'''
+  description = "NPM Registry Auth"
+  regex = '''_(auth(Token)?|password)?\s*=\s*(.+)'''
   path = '''(^|\/)[^\/]+npmrc$'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "private-module", "auth", "token"]
+  tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
 
   [[rules.entropies]]
     # TODO: set Min to 3.35 after testing if all true hits are above that
     Min = "0"
     Max = "8"
-    Group = "1"
+    Group = "3"
 
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
@@ -1128,4 +1191,52 @@
   description = "Password Hash"
   regex = '''(^|\b)\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}(\b|$)'''
   tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
+
+[[rules]]
+  description = "Slack App Token"
+  regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xapp-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Config Access Token"
+  regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  id = "Slack Config Refresh Token"
+  regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
 

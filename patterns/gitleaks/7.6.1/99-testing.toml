@@ -427,3 +427,51 @@
   description = "Password Hash"
   regex = '''(^|\b)\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}(\b|$)'''
   tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
+
+[[rules]]
+  description = "Slack App Token"
+  regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xapp-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Config Access Token"
+  regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  id = "Slack Config Refresh Token"
+  regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
+  tags = ["group:leaktk-testing", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "0" # 3.2 probably after testing
+    Max = "8"
+    Group = "1"
