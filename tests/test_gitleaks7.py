@@ -7,6 +7,7 @@ from unittest import TestCase
 from .helpers import FAKE_LEAKS_PATH
 from .helpers import GITLEAKS_PATTERNS_PATH
 from .helpers import TESTDATA_PATH
+from .helpers import sort_results
 
 VERSION = "7.6.1"
 PATTERNS_PATH = GITLEAKS_PATTERNS_PATH / VERSION
@@ -42,16 +43,6 @@ class TestGitleaks(TestCase):
         # Make sure it exits like it should
         self.assertEqual(leaks_exit_code, completed_process.returncode)
 
-        def sort_results(results):
-            """
-            The order of the results need to match for both.
-            """
-            if not results:
-                return results
-
-            keys = list(sorted(results[0].keys()))
-            return list(sorted(results, key=lambda r: tuple(map(r.get, keys))))
-
         actual = sort_results(
             [json.loads(line) for line in completed_process.stdout.splitlines()]
         )
@@ -60,8 +51,13 @@ class TestGitleaks(TestCase):
             expected = sort_results(yaml.load(expected_file, Loader=yaml.SafeLoader))
 
         # Check the results
-        for i, result in enumerate(expected):
-            self.assertDictEqual(result, actual[i], f"testing item {i}")
+        for i, expected_result in enumerate(expected):
+            self.assertDictEqual(
+                expected_result,
+                # Only check the keys covered in expected
+                {key: actual[i][key] for key in expected_result if key in actual[i]},
+                f"testing item {i}",
+            )
 
         # Make sure none were missed
-        self.assertCountEqual(expected, actual)
+        self.assertEqual(len(expected), len(actual))

@@ -24,9 +24,9 @@ class TestGitleaks(TestCase):
 
     def test_valid_tags(self):
         tags_valid = re.compile(
-            r"\s*tags\s*=\s*\[(?:\s*[\"[a-z]*:?[a-z0-9\-]+\",?\s*)+\]"
+            r"\s*tags\s*=\s*\[(?:\s*[\"\'][a-z]*:?[a-z0-9\-]+[\"\'],?\s*)+\]\s*"
         )
-        type_re = re.compile(r"\"type:([a-z0-9\-]+)\"")
+        type_re = re.compile(r"[\"\']type:([a-z0-9\-]+)[\"\']")
         valid_types = {"secret", "infra", "ioc", "pii", "vuln"}
 
         for tag_line in self.tag_lines():

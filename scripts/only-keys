@@ -1,0 +1,23 @@
+#! /usr/bin/env python3
+
+"""
+Example:
+     ./scripts/gitleaks-7.6.1 --config-path target/patterns/gitleaks/7.6.1 --quiet --no-git --path fake-leaks | jq -s '.' | ./scripts/sort-results
+"""
+
+import re
+import sys
+import yaml
+
+def only_keys(results):
+    """
+    Only return the listed keys in the results
+    """
+    keys = sys.argv[1:]
+
+    return [
+        {k: r[k] for k in keys}
+        for r in results
+    ]
+
+print(yaml.dump(only_keys(yaml.load(sys.stdin, Loader=yaml.SafeLoader)), sort_keys=False))
