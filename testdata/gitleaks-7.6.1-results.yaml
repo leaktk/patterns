@@ -37,12 +37,12 @@
   leakURL: ''
   line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
   lineNumber: 1
-  offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
+  offender: '"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
   offenderEntropy: 3.998
   repo: ''
   repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -52,12 +52,12 @@
   leakURL: ''
   line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
   lineNumber: 1
-  offender: '"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
+  offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
   offenderEntropy: 3.998
   repo: ''
   repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
 - author: ''
   commit: ''
   commitMessage: ''
@@ -125,14 +125,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
-  lineNumber: 3
-  offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
-  offenderEntropy: -1
+  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
+  lineNumber: 463
+  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
+  offenderEntropy: 4.225
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, yescrypt, type:secret
+  rule: AWS Secret Key
+  tags: alert:repo-owner, key, aws, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -140,14 +140,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  lineNumber: 7
-  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  offenderEntropy: -1
+  line: '  AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb" foo=bar'
+  lineNumber: 459
+  offender: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"
+  offenderEntropy: 4.253
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, gost-yescrypt, type:secret
+  rule: AWS Secret Key
+  tags: alert:repo-owner, key, aws, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -155,14 +155,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-  lineNumber: 11
-  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-  offenderEntropy: -1
+  line: '  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar'
+  lineNumber: 455
+  offender: 'AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza '
+  offenderEntropy: 4.004
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, bcrypt, type:secret
+  rule: AWS Secret Key
+  tags: alert:repo-owner, key, aws, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -170,14 +170,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  lineNumber: 15
-  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  offenderEntropy: -1
+  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 259
+  offender: '"auth": "1ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.793
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, sha512crypt, type:secret
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -185,14 +185,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-  lineNumber: 19
-  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-  offenderEntropy: -1
+  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 259
+  offender: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.793
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, sha256crypt, type:secret
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
 - author: ''
   commit: ''
   commitMessage: ''
@@ -200,14 +200,164 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-  lineNumber: 23
-  offender: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-  offenderEntropy: -1
+  line: '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 351
+  offender: '"auth": "9ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.816
   repo: ''
   repoURL: ''
-  rule: Password Hash
-  tags: group:leaktk-testing, password, hash, sunmd5, type:secret
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 271
+  offender: '"auth": "4ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.793
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 271
+  offender: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.793
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 275
+  offender: '"auth": "5ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.816
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 275
+  offender: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.816
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 267
+  offender: '"auth": "3ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.757
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 267
+  offender: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.757
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 263
+  offender: '"auth": "2ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.816
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 263
+  offender: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.816
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 255
+  offender: '"auth": "0ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.778
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
+  lineNumber: 255
+  offender: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934"'
+  offenderEntropy: 3.778
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
 - author: ''
   commit: ''
   commitMessage: ''
@@ -230,10 +380,1343 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'password = ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
-  lineNumber: 31
-  offender: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  lineNumber: 11
+  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, bcrypt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  lineNumber: 19
+  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, sha256crypt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  lineNumber: 15
+  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, sha512crypt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  lineNumber: 7
+  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, gost-yescrypt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  lineNumber: 23
+  offender: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, sunmd5, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  lineNumber: 3
+  offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Password Hash
+  tags: group:leaktk-testing, password, hash, yescrypt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
+  lineNumber: 579
+  offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+  offenderEntropy: 4.144
+  repo: ''
+  repoURL: ''
+  rule: GitHub User to Server Token
+  tags: alert:repo-owner, key, github, user-to-server, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
+  lineNumber: 471
+  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Asymmetric Private Key
+  tags: alert:repo-owner, key, asymmetric-private-key, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '-----BEGIN PGP PRIVATE KEY-----'
+  lineNumber: 467
+  offender: '-----BEGIN PGP PRIVATE KEY-----'
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Asymmetric Private Key
+  tags: alert:repo-owner, key, asymmetric-private-key, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  lineNumber: 379
+  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  lineNumber: 383
+  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  lineNumber: 375
+  offender: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  lineNumber: 367
+  offender: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
+  lineNumber: 371
+  offender: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
+  lineNumber: 363
+  offender: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  lineNumber: 359
+  offender: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  lineNumber: 355
+  offender: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword><bar>baz</bar>
+  lineNumber: 499
+  offender: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  offenderEntropy: 3.542
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret><bar>baz</bar>
+  lineNumber: 527
+  offender: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  offenderEntropy: 3.542
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
+  lineNumber: 571
+  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  offenderEntropy: 4.144
+  repo: ''
+  repoURL: ''
+  rule: GitHub Personal Access Token
+  tags: alert:repo-owner, key, github, personal, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <access-token>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</access-token>
+  lineNumber: 567
+  offender: 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
+  offenderEntropy: 5.56
+  repo: ''
+  repoURL: ''
+  rule: GitHub Fine-Grained Personal Access Token
+  tags: alert:repo-owner, key, github, fine-grained, access, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
+  lineNumber: 495
+  offender: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  offenderEntropy: 3.542
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
+  lineNumber: 523
+  offender: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  offenderEntropy: 3.542
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
+  lineNumber: 451
+  offender: =A3TGOBTGY4DIMRXMIYGE
+  offenderEntropy: 3.5
+  repo: ''
+  repoURL: ''
+  rule: AWS IAM Unique Identifier
+  tags: alert:repo-owner, key, aws, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  lineNumber: 411
+  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  lineNumber: 415
+  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
+  lineNumber: 407
+  offender: 1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  lineNumber: 399
+  offender: 1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
+  lineNumber: 403
+  offender: 1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
+  lineNumber: 395
+  offender: 1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
+  lineNumber: 391
+  offender: 1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'Data: "1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  lineNumber: 387
+  offender: 1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth, base64
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+    foo
+  lineNumber: 607
+  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: PyPI Upload Token
+  tags: alert:repo-owner, key, pypi, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  lineNumber: 447
+  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Mailgun API Key
+  tags: alert:repo-owner, key, mailgun, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  lineNumber: 155
+  offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  lineNumber: 159
+  offender: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.765
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  lineNumber: 163
+  offender: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.765
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  lineNumber: 167
+  offender: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  lineNumber: 171
+  offender: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
+  lineNumber: 151
+  offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   offenderEntropy: 5.425
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
+  lineNumber: 443
+  offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Google API Key
+  tags: alert:repo-owner, key, google, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 283
+  offender: '\"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.874
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 283
+  offender: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.874
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 295
+  offender: '\"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.874
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 295
+  offender: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.874
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 299
+  offender: '\"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.897
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 299
+  offender: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.897
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 291
+  offender: '\"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.839
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  lineNumber: 291
+  offender: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.839
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 287
+  offender: '\"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.897
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 287
+  offender: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.897
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 279
+  offender: '\"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.859
+  repo: ''
+  repoURL: ''
+  rule: (Unrestricted) Container Registry Authentication
+  tags: group:leaktk-testing, container-registry, auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
+  lineNumber: 279
+  offender: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
+  offenderEntropy: 3.859
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
+  lineNumber: 203
+  offender: 'api_key=1b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+  lineNumber: 207
+  offender: 'api_key=2b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.765
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+  lineNumber: 211
+  offender: 'api_key=3b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.765
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+  lineNumber: 215
+  offender: 'api_key=4b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+  lineNumber: 219
+  offender: 'api_key=5b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
+  lineNumber: 199
+  offender: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
+  offenderEntropy: 5.425
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: arn:aws:iam::128157789812:root
+  lineNumber: 419
+  offender: arn:aws:iam::128157789812:root
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: AWS Account ID
+  tags: group:leaktk-testing, type:secret, aws, account, id, arn
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define(    'DB_PASSWORD', '$c8e$743df9d386d895}');
+  lineNumber: 531
+  offender: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv');
+  lineNumber: 535
+  offender: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
+  lineNumber: 551
+  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
+  lineNumber: 543
+  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+');
+  lineNumber: 559
+  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
+  lineNumber: 547
+  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
+  lineNumber: 563
+  offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
+    tG4d):p9Fd;$imF[lGqR')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
+  lineNumber: 539
+  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
+    4hX]!/Ky@V(esZa?0D#H*')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
+  lineNumber: 555
+  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+  lineNumber: 231
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: ArgoCD JWT
+  tags: alert:repo-owner, argocd, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+  lineNumber: 223
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: ArgoCD JWT
+  tags: alert:repo-owner, argocd, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+  lineNumber: 227
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: ArgoCD JWT
+  tags: alert:repo-owner, argocd, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
+  lineNumber: 235
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Kubernetes Service Account JWT
+  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
+  lineNumber: 239
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Kubernetes Service Account JWT
+  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
+  lineNumber: 243
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: Kubernetes Service Account JWT
+  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  lineNumber: 251
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: System Service Account JWT
+  tags: group:leaktk-testing, system, service-account, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  lineNumber: 247
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: System Service Account JWT
+  tags: group:leaktk-testing, system, service-account, jwt, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  lineNumber: 587
+  offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  offenderEntropy: 4.144
+  repo: ''
+  repoURL: ''
+  rule: GitHub Refresh Token
+  tags: alert:repo-owner, key, github, refresh, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+  lineNumber: 583
+  offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+  offenderEntropy: 4.144
+  repo: ''
+  repoURL: ''
+  rule: GitHub Server to Server Token
+  tags: alert:repo-owner, key, github, server-to-server, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz
+  lineNumber: 611
+  offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
+  offenderEntropy: 3.656
+  repo: ''
+  repoURL: ''
+  rule: URL User and Password
+  tags: alert:repo-owner, password, basic-auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: https://username:2d902de68e4113f5855a6c88314cec6a@host
+  lineNumber: 615
+  offender: ://username:2d902de68e4113f5855a6c88314cec6a@host
+  offenderEntropy: 3.695
+  repo: ''
+  repoURL: ''
+  rule: URL User and Password
+  tags: alert:repo-owner, password, basic-auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+  lineNumber: 623
+  offender: '''SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: SendGrid API Key
+  tags: alert:repo-owner, key, sendgrid, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
+  lineNumber: 591
+  offender: glpat-LwnfdsSHX1aSGxsqsPUX
+  offenderEntropy: 4.287
+  repo: ''
+  repoURL: ''
+  rule: GitLab Access Token
+  tags: alert:repo-owner, key, gitlab, access, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  lineNumber: 627
+  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  offenderEntropy: 4.672
+  repo: ''
+  repoURL: ''
+  rule: NPM Access Token
+  tags: alert:repo-owner, type:secret, npm, access, token
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+    --foo --bar --baz
+  lineNumber: 431
+  offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  offenderEntropy: 4.989
+  repo: ''
+  repoURL: ''
+  rule: OpenShift Login Token
+  tags: alert:repo-owner, openshift-login, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: password = "0b3d576ba5a108c3b7374142bfd02992", some = "other value", example="example"
+  lineNumber: 475
+  offender: password = "0b3d576ba5a108c3b7374142bfd02992"
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: password = "Lol-IKR-those-kids-R-Krazy"
+  lineNumber: 479
+  offender: password = "Lol-IKR-those-kids-R-Krazy"
+  offenderEntropy: 3.946
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: password = "RAW(kx#2+c7a)"
+  lineNumber: 491
+  offender: password = "RAW(kx#2+c7a)"
+  offenderEntropy: 3.7
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
+  lineNumber: 483
+  offender: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
+  offenderEntropy: 3.58
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -320,10 +1803,116 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret= ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
-  lineNumber: 55
-  offender: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  line: 'password = ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
+  lineNumber: 31
+  offender: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
   offenderEntropy: 5.425
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
+    // remove later
+  lineNumber: 427
+  offender: registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
+  offenderEntropy: 3.922
+  repo: ''
+  repoURL: ''
+  rule: Container Registry Authentication
+  tags: alert:repo-owner, type:secret, container-registry, auth
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@host
+  lineNumber: 619
+  offender: ://username:9d902de68e4113f5855a6c88314cec6a@host
+  offenderEntropy: 3.695
+  repo: ''
+  repoURL: ''
+  rule: URL User and Password
+  tags: alert:repo-owner, password, basic-auth, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: runner_sec=GR134894164NXmvdxFL_9cliRha7y
+  lineNumber: 603
+  offender: GR134894164NXmvdxFL_9cliRha7y
+  offenderEntropy: 4.487
+  repo: ''
+  repoURL: ''
+  rule: GitLab Runner Registration Token
+  tags: alert:repo-owner, key, gitlab, runner, registration, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: runner_sec=glrt-64NXmvdxFL_9cliRha7y
+  lineNumber: 599
+  offender: glrt-64NXmvdxFL_9cliRha7y
+  offenderEntropy: 4.564
+  repo: ''
+  repoURL: ''
+  rule: GitLab Runner Registration Token
+  tags: alert:repo-owner, key, gitlab, runner, registration, token, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: secret = "$A0b3d576ba5a108c3b7374142bfd02992", some = "other value"
+  lineNumber: 503
+  offender: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
+  offenderEntropy: 3.94
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: secret = "RAW(kx#2+c7a)"
+  lineNumber: 519
+  offender: secret = "RAW(kx#2+c7a)"
+  offenderEntropy: 3.7
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  lineNumber: 511
+  offender: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  offenderEntropy: 3.64
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -410,9 +1999,9 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  lineNumber: 79
-  offender: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  line: 'secret= ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
+  lineNumber: 55
+  offender: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
   offenderEntropy: 5.425
   repo: ''
   repoURL: ''
@@ -425,10 +2014,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  lineNumber: 83
-  offender: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.781
+  line: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  lineNumber: 435
+  offender: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  offenderEntropy: 3.985
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -440,14 +2029,44 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  lineNumber: 87
-  offender: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992"'
+  line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+  lineNumber: 439
+  offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+  offenderEntropy: 4.822
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
+  lineNumber: 179
+  offender: 'secret=1b3d576ba5a108c3b7374142bfd02992 '
+  offenderEntropy: 3.781
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+  lineNumber: 183
+  offender: 'secret=2b3d576ba5a108c3b7374142bfd02992 '
   offenderEntropy: 3.765
   repo: ''
   repoURL: ''
   rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -455,14 +2074,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  lineNumber: 91
-  offender: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992"'
+  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+  lineNumber: 187
+  offender: 'secret=3b3d576ba5a108c3b7374142bfd02992 '
   offenderEntropy: 3.765
   repo: ''
   repoURL: ''
   rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -470,14 +2089,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  lineNumber: 95
-  offender: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992"'
+  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+  lineNumber: 191
+  offender: 'secret=4b3d576ba5a108c3b7374142bfd02992 '
   offenderEntropy: 3.781
   repo: ''
   repoURL: ''
   rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -485,14 +2104,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  lineNumber: 99
-  offender: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+  lineNumber: 195
+  offender: 'secret=5b3d576ba5a108c3b7374142bfd02992 '
   offenderEntropy: 3.781
   repo: ''
   repoURL: ''
   rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -500,14 +2119,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  lineNumber: 103
-  offender: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  line: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
+  lineNumber: 175
+  offender: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
   offenderEntropy: 5.425
   repo: ''
   repoURL: ''
   rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  tags: group:leaktk-testing, general, env-var-no-space, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -590,9 +2209,9 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  lineNumber: 127
-  offender: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  line: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
+  lineNumber: 103
+  offender: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   offenderEntropy: 5.425
   repo: ''
   repoURL: ''
@@ -680,1339 +2299,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  lineNumber: 151
-  offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  line: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
+  lineNumber: 127
+  offender: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   offenderEntropy: 5.425
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  lineNumber: 155
-  offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  lineNumber: 159
-  offender: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  lineNumber: 163
-  offender: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  lineNumber: 167
-  offender: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  lineNumber: 171
-  offender: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
-  lineNumber: 175
-  offender: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
-  offenderEntropy: 5.425
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
-  lineNumber: 179
-  offender: 'secret=1b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-  lineNumber: 183
-  offender: 'secret=2b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-  lineNumber: 187
-  offender: 'secret=3b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-  lineNumber: 191
-  offender: 'secret=4b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-  lineNumber: 195
-  offender: 'secret=5b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
-  lineNumber: 199
-  offender: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
-  offenderEntropy: 5.425
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
-  lineNumber: 203
-  offender: 'api_key=1b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-  lineNumber: 207
-  offender: 'api_key=2b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-  lineNumber: 211
-  offender: 'api_key=3b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.765
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-  lineNumber: 215
-  offender: 'api_key=4b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-  lineNumber: 219
-  offender: 'api_key=5b3d576ba5a108c3b7374142bfd02992 '
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: group:leaktk-testing, general, env-var-no-space, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-  lineNumber: 223
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: ArgoCD JWT
-  tags: alert:repo-owner, argocd, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
-  lineNumber: 227
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: ArgoCD JWT
-  tags: alert:repo-owner, argocd, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-  lineNumber: 231
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: ArgoCD JWT
-  tags: alert:repo-owner, argocd, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-  lineNumber: 235
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Kubernetes Service Account JWT
-  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-  lineNumber: 239
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Kubernetes Service Account JWT
-  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-  lineNumber: 243
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Kubernetes Service Account JWT
-  tags: alert:repo-owner, kubernetes, service-account, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  lineNumber: 247
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: System Service Account JWT
-  tags: group:leaktk-testing, system, service-account, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  lineNumber: 251
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: System Service Account JWT
-  tags: group:leaktk-testing, system, service-account, jwt, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 255
-  offender: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.778
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 255
-  offender: '"auth": "0ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.778
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 259
-  offender: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.793
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 259
-  offender: '"auth": "1ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.793
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 263
-  offender: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.816
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 263
-  offender: '"auth": "2ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.816
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 267
-  offender: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.757
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 267
-  offender: '"auth": "3ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.757
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 271
-  offender: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.793
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 271
-  offender: '"auth": "4ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.793
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 275
-  offender: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.816
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 275
-  offender: '"auth": "5ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.816
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 279
-  offender: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.859
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 279
-  offender: '\"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.859
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 283
-  offender: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.874
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 283
-  offender: '\"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.874
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 287
-  offender: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.897
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
-  lineNumber: 287
-  offender: '\"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.897
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 291
-  offender: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.839
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 291
-  offender: '\"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.839
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 295
-  offender: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.874
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 295
-  offender: '\"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.874
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 299
-  offender: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.897
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  lineNumber: 299
-  offender: '\"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
-  offenderEntropy: 3.897
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }'
-  lineNumber: 351
-  offender: '"auth": "9ec7f53a0637bb3d78ab613e02014934"'
-  offenderEntropy: 3.816
-  repo: ''
-  repoURL: ''
-  rule: (Unrestricted) Container Registry Authentication
-  tags: group:leaktk-testing, container-registry, auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  lineNumber: 355
-  offender: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-  lineNumber: 359
-  offender: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
-  lineNumber: 363
-  offender: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  lineNumber: 367
-  offender: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
-  lineNumber: 371
-  offender: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-  lineNumber: 375
-  offender: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  lineNumber: 379
-  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  lineNumber: 383
-  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  lineNumber: 387
-  offender: 1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
-  lineNumber: 391
-  offender: 1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
-  lineNumber: 395
-  offender: 1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  lineNumber: 399
-  offender: 1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
-  lineNumber: 403
-  offender: 1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
-  lineNumber: 407
-  offender: 1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  lineNumber: 411
-  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  lineNumber: 415
-  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth, base64
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: arn:aws:iam::128157789812:root
-  lineNumber: 419
-  offender: arn:aws:iam::128157789812:root
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: AWS Account ID
-  tags: group:leaktk-testing, type:secret, aws, account, id, arn
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-  lineNumber: 423
-  offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-  offenderEntropy: 4.321
-  repo: ''
-  repoURL: ''
-  rule: Slack User Token
-  tags: alert:repo-owner, slack, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
-    // remove later
-  lineNumber: 427
-  offender: registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
-  offenderEntropy: 3.922
-  repo: ''
-  repoURL: ''
-  rule: Container Registry Authentication
-  tags: alert:repo-owner, type:secret, container-registry, auth
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-    --foo --bar --baz
-  lineNumber: 431
-  offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-  offenderEntropy: 4.989
-  repo: ''
-  repoURL: ''
-  rule: OpenShift Login Token
-  tags: alert:repo-owner, openshift-login, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  lineNumber: 435
-  offender: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  offenderEntropy: 3.985
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-  lineNumber: 439
-  offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-  offenderEntropy: 4.822
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
-  lineNumber: 443
-  offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Google API Key
-  tags: alert:repo-owner, key, google, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  lineNumber: 447
-  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Mailgun API Key
-  tags: alert:repo-owner, key, mailgun, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
-  lineNumber: 451
-  offender: =A3TGOBTGY4DIMRXMIYGE
-  offenderEntropy: 3.5
-  repo: ''
-  repoURL: ''
-  rule: AWS IAM Unique Identifier
-  tags: alert:repo-owner, key, aws, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar'
-  lineNumber: 455
-  offender: 'AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza '
-  offenderEntropy: 4.004
-  repo: ''
-  repoURL: ''
-  rule: AWS Secret Key
-  tags: alert:repo-owner, key, aws, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '  AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb" foo=bar'
-  lineNumber: 459
-  offender: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"
-  offenderEntropy: 4.253
-  repo: ''
-  repoURL: ''
-  rule: AWS Secret Key
-  tags: alert:repo-owner, key, aws, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
-  lineNumber: 463
-  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
-  offenderEntropy: 4.225
-  repo: ''
-  repoURL: ''
-  rule: AWS Secret Key
-  tags: alert:repo-owner, key, aws, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '-----BEGIN PGP PRIVATE KEY-----'
-  lineNumber: 467
-  offender: '-----BEGIN PGP PRIVATE KEY-----'
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Asymmetric Private Key
-  tags: alert:repo-owner, key, asymmetric-private-key, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
-    OPENSSH PRIVATE KEY-----'
-  lineNumber: 471
-  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: Asymmetric Private Key
-  tags: alert:repo-owner, key, asymmetric-private-key, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: password = "0b3d576ba5a108c3b7374142bfd02992", some = "other value", example="example"
-  lineNumber: 475
-  offender: password = "0b3d576ba5a108c3b7374142bfd02992"
-  offenderEntropy: 3.781
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: password = "Lol-IKR-those-kids-R-Krazy"
-  lineNumber: 479
-  offender: password = "Lol-IKR-those-kids-R-Krazy"
-  offenderEntropy: 3.946
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
-  lineNumber: 483
-  offender: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
-  offenderEntropy: 3.58
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
-  lineNumber: 487
-  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  offenderEntropy: 3.358
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: password = "RAW(kx#2+c7a)"
-  lineNumber: 491
-  offender: password = "RAW(kx#2+c7a)"
-  offenderEntropy: 3.7
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
-  lineNumber: 495
-  offender: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  offenderEntropy: 3.542
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword><bar>baz</bar>
-  lineNumber: 499
-  offender: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  offenderEntropy: 3.542
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: secret = "$A0b3d576ba5a108c3b7374142bfd02992", some = "other value"
-  lineNumber: 503
-  offender: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
-  offenderEntropy: 3.94
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2039,10 +2329,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  lineNumber: 511
-  offender: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  offenderEntropy: 3.64
+  line: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  lineNumber: 83
+  offender: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2054,10 +2344,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
-  lineNumber: 515
-  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  offenderEntropy: 3.542
+  line: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  lineNumber: 87
+  offender: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.765
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2069,10 +2359,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: secret = "RAW(kx#2+c7a)"
-  lineNumber: 519
-  offender: secret = "RAW(kx#2+c7a)"
-  offenderEntropy: 3.7
+  line: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  lineNumber: 91
+  offender: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.765
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2084,10 +2374,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
-  lineNumber: 523
-  offender: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  offenderEntropy: 3.542
+  line: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  lineNumber: 95
+  offender: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2099,10 +2389,10 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret><bar>baz</bar>
-  lineNumber: 527
-  offender: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  offenderEntropy: 3.542
+  line: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  lineNumber: 99
+  offender: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  offenderEntropy: 3.781
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2114,168 +2404,14 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: define(    'DB_PASSWORD', '$c8e$743df9d386d895}');
-  lineNumber: 531
-  offender: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
-  offenderEntropy: -1
+  line: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
+  lineNumber: 79
+  offender: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  offenderEntropy: 5.425
   repo: ''
   repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv');
-  lineNumber: 535
-  offender: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
-  lineNumber: 539
-  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
-    4hX]!/Ky@V(esZa?0D#H*')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
-  lineNumber: 543
-  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
-  lineNumber: 547
-  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
-  lineNumber: 551
-  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
-  lineNumber: 555
-  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
-    GM!~aM=-Hqw4,+');
-  lineNumber: 559
-  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
-    GM!~aM=-Hqw4,+')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
-  lineNumber: 563
-  offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
-    tG4d):p9Fd;$imF[lGqR')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: <access-token>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</access-token>
-  lineNumber: 567
-  offender: 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
-  offenderEntropy: 5.56
-  repo: ''
-  repoURL: ''
-  rule: GitHub Fine-Grained Personal Access Token
-  tags: alert:repo-owner, key, github, fine-grained, access, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
-  lineNumber: 571
-  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
-  offenderEntropy: 4.144
-  repo: ''
-  repoURL: ''
-  rule: GitHub Personal Access Token
-  tags: alert:repo-owner, key, github, personal, token, type:secret
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -2298,66 +2434,6 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
-  lineNumber: 579
-  offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
-  offenderEntropy: 4.144
-  repo: ''
-  repoURL: ''
-  rule: GitHub User to Server Token
-  tags: alert:repo-owner, key, github, user-to-server, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
-  lineNumber: 583
-  offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
-  offenderEntropy: 4.144
-  repo: ''
-  repoURL: ''
-  rule: GitHub Server to Server Token
-  tags: alert:repo-owner, key, github, server-to-server, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
-  lineNumber: 587
-  offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
-  offenderEntropy: 4.144
-  repo: ''
-  repoURL: ''
-  rule: GitHub Refresh Token
-  tags: alert:repo-owner, key, github, refresh, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
-  lineNumber: 591
-  offender: glpat-LwnfdsSHX1aSGxsqsPUX
-  offenderEntropy: 4.287
-  repo: ''
-  repoURL: ''
-  rule: GitLab Access Token
-  tags: alert:repo-owner, key, gitlab, access, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
   line: trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
   lineNumber: 595
   offender: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
@@ -2373,127 +2449,6 @@
   email: ''
   file: general-test
   leakURL: ''
-  line: runner_sec=glrt-64NXmvdxFL_9cliRha7y
-  lineNumber: 599
-  offender: glrt-64NXmvdxFL_9cliRha7y
-  offenderEntropy: 4.564
-  repo: ''
-  repoURL: ''
-  rule: GitLab Runner Registration Token
-  tags: alert:repo-owner, key, gitlab, runner, registration, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: runner_sec=GR134894164NXmvdxFL_9cliRha7y
-  lineNumber: 603
-  offender: GR134894164NXmvdxFL_9cliRha7y
-  offenderEntropy: 4.487
-  repo: ''
-  repoURL: ''
-  rule: GitLab Runner Registration Token
-  tags: alert:repo-owner, key, gitlab, runner, registration, token, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
-    foo
-  lineNumber: 607
-  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: PyPI Upload Token
-  tags: alert:repo-owner, key, pypi, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz
-  lineNumber: 611
-  offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
-  offenderEntropy: 3.656
-  repo: ''
-  repoURL: ''
-  rule: URL User and Password
-  tags: alert:repo-owner, password, basic-auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: https://username:2d902de68e4113f5855a6c88314cec6a@host
-  lineNumber: 615
-  offender: ://username:2d902de68e4113f5855a6c88314cec6a@host
-  offenderEntropy: 3.695
-  repo: ''
-  repoURL: ''
-  rule: URL User and Password
-  tags: alert:repo-owner, password, basic-auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@host
-  lineNumber: 619
-  offender: ://username:9d902de68e4113f5855a6c88314cec6a@host
-  offenderEntropy: 3.695
-  repo: ''
-  repoURL: ''
-  rule: URL User and Password
-  tags: alert:repo-owner, password, basic-auth, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
-  lineNumber: 623
-  offender: '''SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: SendGrid API Key
-  tags: alert:repo-owner, key, sendgrid, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
-  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  lineNumber: 627
-  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  offenderEntropy: 4.672
-  repo: ''
-  repoURL: ''
-  rule: NPM Access Token
-  tags: alert:repo-owner, type:secret, npm, access, token
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: general-test
-  leakURL: ''
   line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl# Should Not Match
   lineNumber: 631
   offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
@@ -2502,6 +2457,51 @@
   repoURL: ''
   rule: NPM Access Token
   tags: alert:repo-owner, type:secret, npm, access, token
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+  lineNumber: 423
+  offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+  offenderEntropy: 4.321
+  repo: ''
+  repoURL: ''
+  rule: Slack User Token
+  tags: alert:repo-owner, slack, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+  lineNumber: 487
+  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  offenderEntropy: 3.358
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: general-test
+  leakURL: ''
+  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+  lineNumber: 515
+  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  offenderEntropy: 3.542
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -2643,12 +2643,42 @@
   commitMessage: ''
   date: '0001-01-01T00:00:00Z'
   email: ''
+  file: settings.py
+  leakURL: ''
+  line: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
+  lineNumber: 3
+  offender: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
+  offenderEntropy: 4.591
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
   file: settings/django/settings.py
   leakURL: ''
   line: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
   lineNumber: 1
   offender: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
   offenderEntropy: 4.863
+  repo: ''
+  repoURL: ''
+  rule: General Secret
+  tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: settings/generic/config.ini
+  leakURL: ''
+  line: Password = "cd7b820459d36b9339b78afb23b8c631"
+  lineNumber: 3
+  offender: Password = "cd7b820459d36b9339b78afb23b8c631"
+  offenderEntropy: 3.665
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2673,11 +2703,12 @@
   commitMessage: ''
   date: '0001-01-01T00:00:00Z'
   email: ''
-  file: settings/generic/config.ini
+  file: settings/generic/config.json
   leakURL: ''
-  line: Password = "cd7b820459d36b9339b78afb23b8c631"
-  lineNumber: 3
-  offender: Password = "cd7b820459d36b9339b78afb23b8c631"
+  line: '  "line": "noise", "Password": "cd7b820459d36b9339b78afb23b8c631", "Some":
+    "Key"'
+  lineNumber: 4
+  offender: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
   offenderEntropy: 3.665
   repo: ''
   repoURL: ''
@@ -2718,22 +2749,6 @@
   commitMessage: ''
   date: '0001-01-01T00:00:00Z'
   email: ''
-  file: settings/generic/config.json
-  leakURL: ''
-  line: '  "line": "noise", "Password": "cd7b820459d36b9339b78afb23b8c631", "Some":
-    "Key"'
-  lineNumber: 4
-  offender: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
-  offenderEntropy: 3.665
-  repo: ''
-  repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
   file: settings/generic/config.xml
   leakURL: ''
   line: <password>cd7b820459d36b9339b78afb23b8c631</password>
@@ -2751,10 +2766,10 @@
   email: ''
   file: settings/generic/file with spaces
   leakURL: ''
-  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  lineNumber: 1
-  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  offenderEntropy: 4.681
+  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  lineNumber: 2
+  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offenderEntropy: 5.363
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2766,10 +2781,10 @@
   email: ''
   file: settings/generic/file with spaces
   leakURL: ''
-  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  lineNumber: 2
-  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  offenderEntropy: 5.363
+  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  lineNumber: 1
+  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  offenderEntropy: 4.681
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2796,10 +2811,10 @@
   email: ''
   file: settings/generic/secret
   leakURL: ''
-  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  lineNumber: 1
-  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  offenderEntropy: 4.681
+  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  lineNumber: 2
+  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offenderEntropy: 5.363
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2811,10 +2826,10 @@
   email: ''
   file: settings/generic/secret
   leakURL: ''
-  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  lineNumber: 2
-  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  offenderEntropy: 5.363
+  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  lineNumber: 1
+  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  offenderEntropy: 4.681
   repo: ''
   repoURL: ''
   rule: General Secret
@@ -2856,9 +2871,9 @@
   email: ''
   file: settings/wordpress/wp-config.php
   leakURL: ''
-  line: define( 'DB_USER', 'secretuser' );
-  lineNumber: 26
-  offender: define( 'DB_USER', 'secretuser' )
+  line: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' );
+  lineNumber: 29
+  offender: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
   offenderEntropy: -1
   repo: ''
   repoURL: ''
@@ -2871,9 +2886,9 @@
   email: ''
   file: settings/wordpress/wp-config.php
   leakURL: ''
-  line: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' );
-  lineNumber: 29
-  offender: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
+  line: define( 'DB_USER', 'secretuser' );
+  lineNumber: 26
+  offender: define( 'DB_USER', 'secretuser' )
   offenderEntropy: -1
   repo: ''
   repoURL: ''
@@ -2901,52 +2916,6 @@
   email: ''
   file: settings/wordpress/wp-config.php
   leakURL: ''
-  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
-  lineNumber: 50
-  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
-    4hX]!/Ky@V(esZa?0D#H*')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: settings/wordpress/wp-config.php
-  leakURL: ''
-  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
-  lineNumber: 51
-  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: settings/wordpress/wp-config.php
-  leakURL: ''
-  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
-  lineNumber: 52
-  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
-  offenderEntropy: -1
-  repo: ''
-  repoURL: ''
-  rule: WP-Config
-  tags: alert:repo-owner, key, credential, wordpress, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
-  file: settings/wordpress/wp-config.php
-  leakURL: ''
   line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
   lineNumber: 53
   offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
@@ -2962,9 +2931,9 @@
   email: ''
   file: settings/wordpress/wp-config.php
   leakURL: ''
-  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
-  lineNumber: 54
-  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
+  lineNumber: 51
+  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
   offenderEntropy: -1
   repo: ''
   repoURL: ''
@@ -2994,6 +2963,21 @@
   email: ''
   file: settings/wordpress/wp-config.php
   leakURL: ''
+  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
+  lineNumber: 52
+  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: settings/wordpress/wp-config.php
+  leakURL: ''
   line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
   lineNumber: 56
   offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
@@ -3008,16 +2992,32 @@
   commitMessage: ''
   date: '0001-01-01T00:00:00Z'
   email: ''
-  file: settings.py
+  file: settings/wordpress/wp-config.php
   leakURL: ''
-  line: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
-  lineNumber: 3
-  offender: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
-  offenderEntropy: 4.591
+  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
+  lineNumber: 50
+  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
+    4hX]!/Ky@V(esZa?0D#H*')
+  offenderEntropy: -1
   repo: ''
   repoURL: ''
-  rule: General Secret
-  tags: alert:repo-owner, general, type:secret
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: settings/wordpress/wp-config.php
+  leakURL: ''
+  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
+  lineNumber: 54
+  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  offenderEntropy: -1
+  repo: ''
+  repoURL: ''
+  rule: WP-Config
+  tags: alert:repo-owner, key, credential, wordpress, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -3033,6 +3033,21 @@
   repoURL: ''
   rule: General Secret
   tags: alert:repo-owner, general, type:secret
+- author: ''
+  commit: ''
+  commitMessage: ''
+  date: '0001-01-01T00:00:00Z'
+  email: ''
+  file: yaml-test.yaml
+  leakURL: ''
+  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  lineNumber: 11
+  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  offenderEntropy: 3.875
+  repo: ''
+  repoURL: ''
+  rule: (YAML) General Secret
+  tags: group:leaktk-testing, yaml, key, secret, general, type:secret
 - author: ''
   commit: ''
   commitMessage: ''
@@ -3068,27 +3083,12 @@
   commitMessage: ''
   date: '0001-01-01T00:00:00Z'
   email: ''
-  file: yaml-test.yaml
-  leakURL: ''
-  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  lineNumber: 11
-  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  offenderEntropy: 3.875
-  repo: ''
-  repoURL: ''
-  rule: (YAML) General Secret
-  tags: group:leaktk-testing, yaml, key, secret, general, type:secret
-- author: ''
-  commit: ''
-  commitMessage: ''
-  date: '0001-01-01T00:00:00Z'
-  email: ''
   file: yaml-test.yml
   leakURL: ''
-  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  lineNumber: 3
-  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  offenderEntropy: 3.99
+  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  lineNumber: 11
+  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  offenderEntropy: 4.034
   repo: ''
   repoURL: ''
   rule: (YAML) General Secret
@@ -3115,10 +3115,10 @@
   email: ''
   file: yaml-test.yml
   leakURL: ''
-  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  lineNumber: 11
-  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  offenderEntropy: 4.034
+  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  lineNumber: 3
+  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  offenderEntropy: 3.99
   repo: ''
   repoURL: ''
   rule: (YAML) General Secret
