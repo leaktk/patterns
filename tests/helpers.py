@@ -6,11 +6,11 @@ FAKE_LEAKS_PATH = TESTS_PATH.parent / "fake-leaks"
 GITLEAKS_PATTERNS_PATH = TESTS_PATH.parent / "target" / "patterns" / "gitleaks"
 
 
-def sort_results(results):
+def prep_results(group_key, results):
     """
-    The order of the results need to match for both.
+    Order and group the results for comparison
     """
-    return list(
+    sorted_results = list(
         sorted(
             # Sort the items in the dict
             ({k: r[k] for k in sorted(r)} for r in results),
@@ -18,3 +18,14 @@ def sort_results(results):
             key=lambda r: tuple(map(r.get, sorted(r))),
         )
     )
+
+    grouped = {}
+    for result in sorted_results:
+        group_value = result[group_key]
+
+        if group_value in grouped:
+            grouped[group_value].append(result)
+        else:
+            grouped[group_value] = [result]
+
+    return grouped

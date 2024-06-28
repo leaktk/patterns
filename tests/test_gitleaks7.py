@@ -7,7 +7,7 @@ from unittest import TestCase
 from .helpers import FAKE_LEAKS_PATH
 from .helpers import GITLEAKS_PATTERNS_PATH
 from .helpers import TESTDATA_PATH
-from .helpers import sort_results
+from .helpers import prep_results
 
 VERSION = "7.6.1"
 PATTERNS_PATH = GITLEAKS_PATTERNS_PATH / VERSION
@@ -43,21 +43,30 @@ class TestGitleaks(TestCase):
         # Make sure it exits like it should
         self.assertEqual(leaks_exit_code, completed_process.returncode)
 
-        actual = sort_results(
-            [json.loads(line) for line in completed_process.stdout.splitlines()]
+        actual = prep_results(
+            "rule", [json.loads(line) for line in completed_process.stdout.splitlines()]
         )
 
         with open(EXPECTED_RESULTS_PATH, "r", encoding="UTF-8") as expected_file:
-            expected = sort_results(yaml.load(expected_file, Loader=yaml.SafeLoader))
-
-        # Check the results
-        for i, expected_result in enumerate(expected):
-            self.assertDictEqual(
-                expected_result,
-                # Only check the keys covered in expected
-                {key: actual[i][key] for key in expected_result if key in actual[i]},
-                f"testing item {i}",
+            expected = prep_results(
+                "rule", yaml.load(expected_file, Loader=yaml.SafeLoader)
             )
 
-        # Make sure none were missed
-        self.assertEqual(len(expected), len(actual))
+        for group, expected_results in expected.items():
+            actual_results = actual[group]
+
+            # Check the results
+            for i, expected_result in enumerate(expected_results):
+                self.assertDictEqual(
+                    expected_result,
+                    # Only check the keys covered in expected
+                    {
+                        key: actual_results[i][key]
+                        for key in expected_result
+                        if key in actual_results[i]
+                    },
+                    f"testing item {i} in {group}",
+                )
+
+            # Make sure none were missed
+            self.assertEqual(len(expected_results), len(actual_results))

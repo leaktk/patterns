@@ -6,7 +6,7 @@ from unittest import TestCase
 
 from .helpers import FAKE_LEAKS_PATH
 from .helpers import TESTDATA_PATH
-from .helpers import sort_results
+from .helpers import prep_results
 
 EXPECTED_RESULTS_PATH = TESTDATA_PATH / "leaktk-scanner-results.yaml"
 CONFIG_PATH = TESTDATA_PATH / "leaktk-scanner-config.toml"
@@ -42,29 +42,41 @@ class TestLeakTKScanner(TestCase):
         self.assertEqual(response["request"]["kind"], "Files")
 
         # Generate the results
-        actual = sort_results(
-            {  # Flatten results for easier testing
-                "location.path": r["location"]["path"],
-                "match": r["match"],
-                "rule.description": r["rule"]["description"],
-                "rule.id": r["rule"]["id"],
-                "secret": r["secret"],
-            }
-            for r in response["results"]
+        actual = prep_results(
+            "rule.id",
+            (
+                {  # Flatten results for easier testing
+                    "location.path": r["location"]["path"],
+                    "match": r["match"],
+                    "rule.description": r["rule"]["description"],
+                    "rule.id": r["rule"]["id"],
+                    "secret": r["secret"],
+                }
+                for r in response["results"]
+            ),
         )
 
         # Open up the testdata with expected results
         with open(EXPECTED_RESULTS_PATH, "r", encoding="UTF-8") as expected_file:
-            expected = sort_results(yaml.load(expected_file, Loader=yaml.SafeLoader))
-
-        # Check the results
-        for i, expected_result in enumerate(expected):
-            self.assertDictEqual(
-                expected_result,
-                # Only check the keys covered in expected
-                {key: actual[i][key] for key in expected_result if key in actual[i]},
-                f"testing item {i}",
+            expected = prep_results(
+                "rule.id", yaml.load(expected_file, Loader=yaml.SafeLoader)
             )
 
-        # # Make sure noone were missed
-        self.assertEqual(len(expected), len(actual))
+        for group, expected_results in expected.items():
+            actual_results = actual[group]
+
+            # Check the results
+            for i, expected_result in enumerate(expected_results):
+                self.assertDictEqual(
+                    expected_result,
+                    # Only check the keys covered in expected
+                    {
+                        key: actual_results[i][key]
+                        for key in expected_result
+                        if key in actual_results[i]
+                    },
+                    f"testing item {i} in {group}",
+                )
+
+            # Make sure none were missed
+            self.assertEqual(len(expected_results), len(actual_results))

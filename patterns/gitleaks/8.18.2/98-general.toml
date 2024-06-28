@@ -5,8 +5,59 @@
   regex = '''([a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+)'''
   tags = ['alert:repo-owner', 'type:secret']
   secretGroup = 1
-  # keywords = [
-  #   'ImlzcyI6ImFyZ29jZC',
-  #   'Jpc3MiOiJhcmdvY2Qi',
-  #   'iaXNzIjoiYXJnb2NkI',
-  # ]
+  keywords = [
+    'imlzcyi6imfyz29jzc',
+    'jpc3mioijhcmdvy2qi',
+    'iaxnzijoiyxjnb2nki',
+  ]
+
+[[rules]]
+  id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
+  description = 'Private Key'
+  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----'''
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+      '-----begin',
+  ]
+
+  [rules.allowlist]
+    paths = [
+      # Test data are often false positives
+      '''(^|\/)testdata\/''',
+      # Ignore keys in a test(s) folder
+      '''test(s)?\/.*.(txt|der|key|pem)$''',
+      # Ignore keys with test in their name
+      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
+      # Ignore common example keys
+      '''(dummy|example).*(key|pem)''',
+      # Ignore ssh utilities that might have key headers in them
+      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+      # Ignore libs that might have key headers in them
+      '''\/lib\w+\/lib(gnutls|ssh).so''',
+      # Ignore utils that might have key headers in them
+      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+      # Data dirs that contain key headers to identify them
+      '''\/usr\/share\/(mime|misc)''',
+    ]
+
+    regexes = [
+      # Anything less than 15 characters
+      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----'''
+    ]
+#
+#     regexes = [
+#       # The key has spaces in it so it's probably a placeholder
+#       '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
+#       # The key has a redacted portion
+#       '''PRIVATE KEY( BLOCK)?-----.*?(\.\.\.|\*\*\*|xxx).*?-----END''',
+#       # Ignore some keys assigned to test vars
+#       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
+#       '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(\[)?\s*(\"\"\"|\"|\'|`)?-----BEGIN''',
+#       # Things that look like code looking for headers
+#       #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
+#       '''if.*==\s*[\"|\']-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----[\"|\']''',
+#       #   like: ("-----BEGIN RSA PRIVATE KEY-----")
+#       '''\([\"\']-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----(\\n)?[\"\']''',
+#       #  things ending with stuff like # noqa: E501
+#       '''#(\s+)?noqa(:[\s\w]+)?$''',
+#     ]
