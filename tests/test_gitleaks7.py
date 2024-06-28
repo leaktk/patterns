@@ -13,19 +13,21 @@ PATTERNS_PATH = GITLEAKS_PATTERNS_PATH / VERSION
 EXPECTED_RESULTS_PATH = TESTDATA_PATH / "gitleaks-7.6.1-results.yaml"
 
 
-class TestGitLeaks(TestCase):
+class TestGitleaks(TestCase):
     maxDiff = 10000
 
     def test_patterns(self):
         """
         Run gitleaks against the general test contents using the latest patterns
         """
+        leaks_exit_code = 42
         completed_process = subprocess.run(
             [
                 f"gitleaks-{VERSION}",
                 "--quiet",
                 "--no-git",
                 "--format=json",
+                f"--leaks-exit-code={leaks_exit_code}",
                 f"--config-path={PATTERNS_PATH}",
                 f"--path={FAKE_LEAKS_PATH.name}",
             ],
@@ -36,6 +38,9 @@ class TestGitLeaks(TestCase):
             # generating the expected results
             cwd=FAKE_LEAKS_PATH.parent,
         )
+
+        # Make sure it exits like it should
+        self.assertEqual(leaks_exit_code, completed_process.returncode)
 
         def sort_results(results):
             """
@@ -54,5 +59,9 @@ class TestGitLeaks(TestCase):
         with open(EXPECTED_RESULTS_PATH, "r", encoding="UTF-8") as expected_file:
             expected = sort_results(yaml.load(expected_file, Loader=yaml.SafeLoader))
 
+        # Check the results
         for i, result in enumerate(expected):
-            self.assertDictEqual(result, actual[i], f"testing item {i} in expected")
+            self.assertDictEqual(result, actual[i], f"testing item {i}")
+
+        # Make sure none were missed
+        self.assertCountEqual(expected, actual)

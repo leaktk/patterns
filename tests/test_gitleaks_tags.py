@@ -7,7 +7,7 @@ from .helpers import GITLEAKS_PATTERNS_PATH
 tag_re = re.compile(r"\s*tags\s*=\s*(\[.*\])\s*")
 
 
-class TestGitLeaks(TestCase):
+class TestGitleaks(TestCase):
     def patterns_paths(self):
         for dirpath, _, filenames in GITLEAKS_PATTERNS_PATH.walk():
             for filename in filenames:
