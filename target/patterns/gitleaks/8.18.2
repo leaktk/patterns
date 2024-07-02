@@ -1,37 +1,42 @@
 title = "Gitleaks Config"
 
 [allowlist]
-description = "Global Allowlist"
-regexes = [
-    # Use notsecret as the standard allow tag.
-    # It must begin at the start of the line, comment chars, or a space
-    # It must end at the end of the line or with a space
-    '''(^|\#|\/\/|\s)notsecret(\s|$)''',
-]
-paths = [
-    # Ignore common binary file types
-    '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
-    # Ignore go.mod and go.sum files
-    '''\/go\.(mod|sum)$''',
-    # Ignore checked-in go packages
-    '''Godeps\/''',
-    # Ignore checked-in ruby packages
-    '''gems\/''',
-    # Ignore gitleaks.toml files
-    '''gitleaks.toml$''',
-    # Ignore checked-in python packages
-    '''lib\/python[^/]+\/site-packages''',
-    # Handle a lot of the github/docs cases
-    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
-    # Ignore things under node modules
-    '''node_modules\/''',
-    # Ignore most quickstarts
-    '''quickstart''',
-    # Ignore aws secrets
-    '''secrets.baseline$''',
-    # Ignore vendor code
-    '''vendor''',
-]
+  description = "Global Allowlist"
+  regexTarget = "line"
+
+  regexes = [
+      # Use notsecret as the standard allow tag.
+      # It must begin at the start of the line, comment chars, or a space
+      # It must end at the end of the line or with a space
+      '''(^|\#|\/\/|\s)notsecret(\s|$)''',
+  ]
+
+  paths = [
+      # Ignore common binary file types
+      '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+      # Ignore most quickstarts
+      '''quickstart''',
+      # Ignore things under node modules
+      '''(^|\/)node_modules\/''',
+      # Ignore vendor code
+      '''vendor''',
+      # Ignore checked-in ruby packages
+      '''(^|\/)gems\/''',
+      # Ignore checked-in go packages
+      '''(^|\/)Godeps\/''',
+      # Ignore go.mod and go.sum files
+      '''(^|\/)go\.(mod|sum)$''',
+      # Ignore gitleaks related stuff
+      '''(^|\/).?gitleaks''',
+      # Ignore checked-in python packages
+      '''(^|\/)lib\/python[^/]+\/site-packages''',
+      # Handle a lot of the github/docs cases
+      '''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+      # Ignore aws secrets
+      '''(^|\/)secrets.baseline$''',
+      # Ignore a github spec file
+      '''(^|\/)specs\/github\.json$''',
+  ]
 
 [[rules]]
   id = 'c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a'
@@ -44,6 +49,35 @@ paths = [
     'jpc3mioijhcmdvy2qi',
     'iaxnzijoiyxjnb2nki',
   ]
+
+# TODO
+# "AWS IAM Unique Identifier"
+# "AWS MWS Key"
+# "AWS Secret Key"
+# "Container Registry Authentication"
+# "Dynatrace Token"
+# "Facebook Secret Key"
+# "General Secret"
+# "GitHub Fine-Grained Personal Access Token"
+# "GitHub OAuth Access Token"
+# "GitHub Personal Access Token"
+# "GitHub Refresh Token"
+# "GitHub Server to Server Token"
+# "GitHub User to Server Token"
+# "GitLab Access Token"
+# "GitLab Pipeline Trigger Token"
+# "GitLab Runner Registration Token"
+# "Google API Key"
+# "Heroku API Key"
+# "Htpasswd File"
+# "Kubernetes Service Account JWT"
+# "MailChimp API Key"
+# "Mailgun API Key"
+# "NPM Access Token"
+# "OpenShift Login Token"
+# "PayPal Braintree Access Token"
+# "Picatic API Key"
+# "PKCS #12 File"
 
 [[rules]]
   id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
@@ -91,6 +125,26 @@ paths = [
       '''#(\s+)?noqa(:[\s\w]+)?$''',
     ]
 
+# TODO
+# "PyPI Upload Token"
+# "SendGrid API Key"
+# "Shopify Access Token"
+# "Shopify Custom App Access Token"
+# "Shopify Private App Access Token"
+# "Shopify Shared Secret"
+# "Slack Bot Token"
+# "Slack Legacy Bot Token"
+# "Slack Legacy Token"
+# "Slack Legacy Workspace Token"
+# "Slack User Token"
+# "Slack Webhook URL"
+# "Square Access Token"
+# "Square OAuth Secret"
+# "Stripe API Key"
+# "Twilio API Key"
+# "URL User and Password"
+# "WP-Config"
+
 # Testing Patterns
 #
 # These patterns are the lowest presidence (i.e. 99-) because they could
@@ -133,4 +187,16 @@ paths = [
 #
 
 # [file:98-general.toml]
+# TODO
+# "AWS Account ID"
+# "Base64 Encoded AWS Secret Key"
+# "General Secret"
+# "NPM Registry Auth"
+# "Password Hash"
+# "Slack App Token"
+# "Slack Config Access Token"
+# "System Service Account JWT"
+# "(Token) General Secret"
+# "(Unrestricted) Container Registry Authentication"
+# "(YAML) General Secret"
 

@@ -32,7 +32,8 @@ def assert_equal_results(tc, expected, actual):
     only_in_one = bool(output["Only In Expected"] or output["Only In Actual"])
     tc.assertFalse(
         only_in_one,
-        "\n" + yaml.dump(
+        "\n"
+        + yaml.dump(
             output,
             sort_keys=False,
             default_flow_style=False,

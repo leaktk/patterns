@@ -10,6 +10,35 @@
     'iaxnzijoiyxjnb2nki',
   ]
 
+# TODO
+# "AWS IAM Unique Identifier"
+# "AWS MWS Key"
+# "AWS Secret Key"
+# "Container Registry Authentication"
+# "Dynatrace Token"
+# "Facebook Secret Key"
+# "General Secret"
+# "GitHub Fine-Grained Personal Access Token"
+# "GitHub OAuth Access Token"
+# "GitHub Personal Access Token"
+# "GitHub Refresh Token"
+# "GitHub Server to Server Token"
+# "GitHub User to Server Token"
+# "GitLab Access Token"
+# "GitLab Pipeline Trigger Token"
+# "GitLab Runner Registration Token"
+# "Google API Key"
+# "Heroku API Key"
+# "Htpasswd File"
+# "Kubernetes Service Account JWT"
+# "MailChimp API Key"
+# "Mailgun API Key"
+# "NPM Access Token"
+# "OpenShift Login Token"
+# "PayPal Braintree Access Token"
+# "Picatic API Key"
+# "PKCS #12 File"
+
 [[rules]]
   id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
   description = 'Private Key'
@@ -55,3 +84,23 @@
       #  things ending with stuff like # noqa: E501
       '''#(\s+)?noqa(:[\s\w]+)?$''',
     ]
+
+# TODO
+# "PyPI Upload Token"
+# "SendGrid API Key"
+# "Shopify Access Token"
+# "Shopify Custom App Access Token"
+# "Shopify Private App Access Token"
+# "Shopify Shared Secret"
+# "Slack Bot Token"
+# "Slack Legacy Bot Token"
+# "Slack Legacy Token"
+# "Slack Legacy Workspace Token"
+# "Slack User Token"
+# "Slack Webhook URL"
+# "Square Access Token"
+# "Square OAuth Secret"
+# "Stripe API Key"
+# "Twilio API Key"
+# "URL User and Password"
+# "WP-Config"

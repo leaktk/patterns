@@ -40,3 +40,15 @@
 #
 
 # [file:98-general.toml]
+# TODO
+# "AWS Account ID"
+# "Base64 Encoded AWS Secret Key"
+# "General Secret"
+# "NPM Registry Auth"
+# "Password Hash"
+# "Slack App Token"
+# "Slack Config Access Token"
+# "System Service Account JWT"
+# "(Token) General Secret"
+# "(Unrestricted) Container Registry Authentication"
+# "(YAML) General Secret"

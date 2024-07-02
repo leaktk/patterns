@@ -2,6 +2,7 @@
 
 [allowlist]
   description = "Global Allowlist"
+
   regexes = [
     # Use notsecret as the standard allow tag.
     # It must begin at the start of the line, comment chars, or a space
@@ -11,6 +12,7 @@
     # https://github.com/zricethezav/gitleaks/blob/96eed6aa0f507fe0c21bb46bec32637dc4cb1a9f/detect/detect.go#L226
     '''gitleaks:allow''',
   ]
+
   paths = [
     '''Godeps''',
     '''gems\/''',
