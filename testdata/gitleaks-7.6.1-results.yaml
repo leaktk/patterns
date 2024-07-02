@@ -1,1055 +1,848 @@
-- rule: General Secret
-  offender: Token=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-  line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-  file: .npmrc
-
-- rule: NPM Registry Auth
-  offender: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-  line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-  file: .npmrc
-
-- rule: (Unrestricted) Container Registry Authentication
+- file: containers/container-auth.json
+  line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
   offender: '"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
-  line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
-  file: containers/container-auth.json
-
-- rule: Container Registry Authentication
-  offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
-  line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
-  file: containers/container-auth.json
-
-
-- rule: General Secret
-  offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  file: foo.clientSecret
-
-- rule: 'PKCS #12 File'
-  offender: 'Filename or path offender: fake-leaks/foo.p12'
-  line: ''
-  file: foo.p12
-
-- rule: General Secret
-  offender: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  file: foo.password
-
-- rule: General Secret
-  offender: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  file: foo.sometoken
-
-- rule: AWS Secret Key
-  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
-  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
-  file: general-test
-
-- rule: AWS Secret Key
-  offender: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"
-  line: '  AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb" foo=bar'
-  file: general-test
-
-- rule: AWS Secret Key
-  offender: 'AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza '
-  line: '  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "1ec7f53a0637bb3d78ab613e02014934"'
-  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934"'
-  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "9ec7f53a0637bb3d78ab613e02014934"'
-  line: '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "4ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "5ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "3ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '"auth": "2ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934"'
-  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
   offender: '"auth": "0ec7f53a0637bb3d78ab613e02014934"'
-  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934"'
-  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
-  file: general-test
-
-- rule: Password Hash
-  offender: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-  line: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-  file: general-test
-
-- rule: Password Hash
-  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-  file: general-test
-
-- rule: Password Hash
-  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-  file: general-test
-
-- rule: Password Hash
-  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  file: general-test
-
-- rule: Password Hash
-  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  file: general-test
-
-- rule: Password Hash
-  offender: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-  line: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-  file: general-test
-
-- rule: Password Hash
-  offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
-  line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
-  file: general-test
-
-- rule: GitHub User to Server Token
-  offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
-  line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
-  file: general-test
-
-- rule: Asymmetric Private Key
-  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "1ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "2ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "3ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "4ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "5ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '"example.com": { "auth": "9ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"auth": "9ec7f53a0637bb3d78ab613e02014934"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
+  rule: (Unrestricted) Container Registry Authentication
+- file: yaml-test.yaml
+  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: yaml-test.yaml
+  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: yaml-test.yaml
+  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: yaml-test.yml
+  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: yaml-test.yml
+  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: yaml-test.yml
+  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  rule: (YAML) General Secret
+- file: general-test
+  line: arn:aws:iam::128157789812:root
+  offender: arn:aws:iam::128157789812:root
+  rule: AWS Account ID
+- file: general-test
+  line: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
+  offender: =A3TGOBTGY4DIMRXMIYGE
+  rule: AWS IAM Unique Identifier
+- file: general-test
+  line: '  AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb" foo=bar'
+  offender: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"
+  rule: AWS Secret Key
+- file: general-test
+  line: '  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar'
+  offender: 'AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza '
+  rule: AWS Secret Key
+- file: general-test
+  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
+  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
+  rule: AWS Secret Key
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+  rule: ArgoCD JWT
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+  rule: ArgoCD JWT
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+  rule: ArgoCD JWT
+- file: general-test
   line: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
     OPENSSH PRIVATE KEY-----'
-  file: general-test
-
-- rule: Asymmetric Private Key
-  offender: '-----BEGIN PGP PRIVATE KEY-----'
+  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: general-test
   line: '-----BEGIN PGP PRIVATE KEY-----'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  line: '.dockerconfigjson: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  line: '.dockerconfigjson: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
-  file: general-test
-
-- rule: General Secret
-  offender: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  line: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword><bar>baz</bar>
-  file: general-test
-
-- rule: General Secret
-  offender: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  line: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret><bar>baz</bar>
-  file: general-test
-
-- rule: GitHub Personal Access Token
-  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
-  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
-  file: general-test
-
-- rule: GitHub Fine-Grained Personal Access Token
-  offender: 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
-  line: <access-token>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</access-token>
-  file: general-test
-
-- rule: General Secret
-  offender: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  line: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
-  file: general-test
-
-- rule: General Secret
-  offender: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
-  line: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
-  file: general-test
-
-- rule: AWS IAM Unique Identifier
-  offender: =A3TGOBTGY4DIMRXMIYGE
-  line: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  line: 'Data: "1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: 'Data: "1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  line: 'Data: "1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
-  line: 'Data: "1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  line: 'Data: "1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: 1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
-  line: 'Data: "1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
-  file: general-test
-
-- rule: PyPI Upload Token
-  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
-  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
-    foo
-  file: general-test
-
-- rule: Mailgun API Key
-  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
-  line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992"'
-  line: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992"'
-  line: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992"'
-  line: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
-  line: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  file: general-test
-
-- rule: General Secret
-  offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  file: general-test
-
-- rule: Google API Key
-  offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
-  line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
-    }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: (Unrestricted) Container Registry Authentication
-  offender: '\"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
-  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=1b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=2b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=3b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=4b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=5b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-  file: general-test
-
-- rule: General Secret
-  offender: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
-  line: 'api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
-  file: general-test
-
-- rule: AWS Account ID
-  offender: arn:aws:iam::128157789812:root
-  line: arn:aws:iam::128157789812:root
-  file: general-test
-
-- rule: WP-Config
-  offender: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
-  line: define(    'DB_PASSWORD', '$c8e$743df9d386d895}');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
-  line: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
-  line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
-  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
-    GM!~aM=-Hqw4,+')
-  line: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
-    GM!~aM=-Hqw4,+');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
-  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
-    tG4d):p9Fd;$imF[lGqR')
-  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
-    4hX]!/Ky@V(esZa?0D#H*')
-  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
-  file: general-test
-
-- rule: WP-Config
-  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
-  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
-  file: general-test
-
-- rule: ArgoCD JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-  file: general-test
-
-- rule: ArgoCD JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-  file: general-test
-
-- rule: ArgoCD JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
-  file: general-test
-
-- rule: Kubernetes Service Account JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-  file: general-test
-
-- rule: Kubernetes Service Account JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-  file: general-test
-
-- rule: Kubernetes Service Account JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-  file: general-test
-
-- rule: System Service Account JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  file: general-test
-
-- rule: System Service Account JWT
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  file: general-test
-
-- rule: GitHub Refresh Token
-  offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
-  line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
-  file: general-test
-
-- rule: GitHub Server to Server Token
-  offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
-  line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
-  file: general-test
-
-- rule: URL User and Password
-  offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
-  line: http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz
-  file: general-test
-
-- rule: URL User and Password
-  offender: ://username:2d902de68e4113f5855a6c88314cec6a@host
-  line: https://username:2d902de68e4113f5855a6c88314cec6a@host
-  file: general-test
-
-- rule: SendGrid API Key
-  offender: '''SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
-  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
-  file: general-test
-
-- rule: GitLab Access Token
-  offender: glpat-LwnfdsSHX1aSGxsqsPUX
-  line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
-  file: general-test
-
-- rule: NPM Access Token
-  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  file: general-test
-
-- rule: OpenShift Login Token
-  offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-  line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-    --foo --bar --baz
-  file: general-test
-
-- rule: General Secret
-  offender: password = "0b3d576ba5a108c3b7374142bfd02992"
-  line: password = "0b3d576ba5a108c3b7374142bfd02992", some = "other value", example="example"
-  file: general-test
-
-- rule: General Secret
-  offender: password = "Lol-IKR-those-kids-R-Krazy"
-  line: password = "Lol-IKR-those-kids-R-Krazy"
-  file: general-test
-
-- rule: General Secret
-  offender: password = "RAW(kx#2+c7a)"
-  line: password = "RAW(kx#2+c7a)"
-  file: general-test
-
-- rule: General Secret
-  offender: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
-  line: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
-  file: general-test
-
-- rule: General Secret
-  offender: password = '1b3d576ba5a108c3b7374142bfd02992'
-  line: password = '1b3d576ba5a108c3b7374142bfd02992' notasecret
-  file: general-test
-
-- rule: General Secret
-  offender: password = '2b3d576ba5a108c3b7374142bfd02992'
-  line: password = '2b3d576ba5a108c3b7374142bfd02992' yonotsecret
-  file: general-test
-
-- rule: General Secret
-  offender: password = '3b3d576ba5a108c3b7374142bfd02992'
-  line: password = '3b3d576ba5a108c3b7374142bfd02992' 'notsecret
-  file: general-test
-
-- rule: General Secret
-  offender: password = '4b3d576ba5a108c3b7374142bfd02992'
-  line: password = '4b3d576ba5a108c3b7374142bfd02992' notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: password = '5b3d576ba5a108c3b7374142bfd02992'
-  line: password = '5b3d576ba5a108c3b7374142bfd02992' notsecretyo
-  file: general-test
-
-- rule: General Secret
-  offender: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
-  line: 'password = ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
-  file: general-test
-
-- rule: Container Registry Authentication
-  offender: registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
-  line: reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
-    // remove later
-  file: general-test
-
-- rule: URL User and Password
-  offender: ://username:9d902de68e4113f5855a6c88314cec6a@host
-  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@host
-  file: general-test
-
-- rule: GitLab Runner Registration Token
-  offender: GR134894164NXmvdxFL_9cliRha7y
-  line: runner_sec=GR134894164NXmvdxFL_9cliRha7y
-  file: general-test
-
-- rule: GitLab Runner Registration Token
-  offender: glrt-64NXmvdxFL_9cliRha7y
-  line: runner_sec=glrt-64NXmvdxFL_9cliRha7y
-  file: general-test
-
-- rule: General Secret
-  offender: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
-  line: secret = "$A0b3d576ba5a108c3b7374142bfd02992", some = "other value"
-  file: general-test
-
-- rule: General Secret
-  offender: secret = "RAW(kx#2+c7a)"
-  line: secret = "RAW(kx#2+c7a)"
-  file: general-test
-
-- rule: General Secret
-  offender: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  line: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  file: general-test
-
-- rule: General Secret
-  offender: secret= '1b3d576ba5a108c3b7374142bfd02992'
-  line: secret= '1b3d576ba5a108c3b7374142bfd02992' notasecret
-  file: general-test
-
-- rule: General Secret
-  offender: secret= '2b3d576ba5a108c3b7374142bfd02992'
-  line: secret= '2b3d576ba5a108c3b7374142bfd02992' yonotsecret
-  file: general-test
-
-- rule: General Secret
-  offender: secret= '3b3d576ba5a108c3b7374142bfd02992'
-  line: secret= '3b3d576ba5a108c3b7374142bfd02992' 'notsecret
-  file: general-test
-
-- rule: General Secret
-  offender: secret= '4b3d576ba5a108c3b7374142bfd02992'
-  line: secret= '4b3d576ba5a108c3b7374142bfd02992' notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: secret= '5b3d576ba5a108c3b7374142bfd02992'
-  line: secret= '5b3d576ba5a108c3b7374142bfd02992' notsecretyo
-  file: general-test
-
-- rule: General Secret
-  offender: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
-  line: 'secret= ''swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'' '
-  file: general-test
-
-- rule: General Secret
-  offender: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  line: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  file: general-test
-
-- rule: General Secret
-  offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-  line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=1b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=2b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=3b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=4b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=5b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw '
-  line: 'secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw  '
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "1b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_access_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "2b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_access_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "3b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_access_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "4b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_access_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "5b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_access_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  line: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "1b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_accesskey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "2b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_accesskey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  line: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  file: general-test
-
-- rule: General Secret
-  offender: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  line: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
-  line: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  line: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw" '
-  file: general-test
-
-- rule: GitHub OAuth Access Token
-  offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
-  line: token='gho_16C7e42F292c6912E7710c838347Ae178B4a'
-  file: general-test
-
-- rule: GitLab Pipeline Trigger Token
-  offender: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
-  line: trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
-  file: general-test
-
-- rule: NPM Access Token
-  offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl# Should Not Match
-  file: general-test
-
-- rule: Slack User Token
-  offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-  line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-  file: general-test
-
-- rule: General Secret
-  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
-  file: general-test
-
-- rule: General Secret
-  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
-  file: general-test
-
-- rule: General Secret
-  offender: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
-  line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
-  file: ignore.d/super-secret-password.txt
-
-- rule: Asymmetric Private Key
-  offender: '-----BEGIN EC PRIVATE KEY-----'
+  offender: '-----BEGIN PGP PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: keys/tls/another-key.key
   line: '-----BEGIN EC PRIVATE KEY-----'
-  file: keys/tls/another-key.key
-
-- rule: Asymmetric Private Key
-  offender: '-----BEGIN PRIVATE KEY-----'
+  offender: '-----BEGIN EC PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: keys/tls/empty-server.key
   line: '-----BEGIN PRIVATE KEY-----'
-  file: keys/tls/empty-server.key
-
-- rule: Asymmetric Private Key
   offender: '-----BEGIN PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: keys/tls/inline-server.key
   line: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKXwggSjAgEAAoIBAQDW8OVrrcJ/rZxZ\n/kHlgz5THtgGS2VTbCpMzhksfrD0eFnPAzxTSW/5oDk3iT9AfKnRDWnYYogIvb6e\nEoKCqHXLbDVPIdZlFi6wRmr82u8HJAZaqGmPklwag2ajNFBpct4LXpzY70gvWt1e\n6s+kTDqEv+jw60Cl6NizUtkPmBJSJYgVUsDH2zt4lQl4A0yMr82SBpRJjrlX6jrE\nt8PjrMHKESD02SUkah096D33UI8jhD+MYhvatkucDL2dffoD8ZHUj0wPYtj4jb0m\nNd50X5YKjKZtwezbWzZ78auknHJXkaLf9lYYJW78UeDotoJ5md8wbiTVyxCVHt6V\nUtnBfWHJAgMBAAECggEAZ7XYnPo8bOrSFEIwfZO0ENtDFNZwT65TQrf3QZbnvy4K\n923yP6Whl+sNcJSSpoUAU1SLi9MPHFihjxgTTQQHwl214zbKggAQCxIPMW5aAzII\nttmoBZRzSH+6mGj3m8nHBeli+PGL/P107wWRpw749XC77vM0QFl3ph8FiRaxUFzV\nM0CMcRRoGmAB+5lsOQlM38jJIs01HWLmfoKfUd9R+ciW0uda2nsTsopaRu0rlOP7\nCOJ28c/NrFbVL+Dgs6cmCQUe/MOGF4x9KNgRLam4LiUag8x0CBmvAkcwu/vtvSD7\nJY5UaTb0slwCyAJaVzVKG4dPPVte27AZGvZEUmycmQKBgQDxhDnZPp85IqJbnoj4\npkpc2m+cSQq8Ct6OXXiqQYZTAnMEY1SOZdhXDySjyr2hPQ0HItktdj9ulNGYickV\nBqBgZURq+st7cAPl0yFsAf1TGTDzmFT7EUeR7hI6VraCyz2p17On27EGtuWTdCOD\njcIm6eBjE+ArIdohSsOu51RTywKBgQDj1K5/elTisRJMOCtMtRTfkeYzimXG+XdY\nppPhAjEF5mioyfFpiizR+RbyvwMdSqUChU6UTVIpd02Gl1dN55LRnQ5KnbHY6xLg\n0WkL1Cv5NXsKHQxAbQL9O+k66IkY6IPljMH+JMnI12XRGzi+LQw/86Sc2irJBqp+\nvF9osnv2OwKBgQC1D5f+0f+0ac6mORgesSwWqHv8ApZVmyB2QoTvvufg23k21PDT\nQG8L9YJWeOvpMUfPDcUbXAb58/+eB84EQU+CdOjx+ssJ41RIvBvWSTeNUNluBcnP\n34h0UrK/obp6G7xC1D8PnJf+nKdIAE2PlnrziWp7XK82Js7NHqvNOAf0OQKBgDwy\nYbjE9dC/wHnrDWXDIrS/s/dCRgoAuAvwV3pIPfO1IUoXsXWVUKpaCjoxRf1jT54O\n4uhEVcUnBJDfQ+4NlblUqgYFDIyn7+D+86ZwdP3vp4bQjgAnzXZjcghikHbIWLE6\nM7eWuMocP4a0jpWRCX+MPJ5E9rEO1dWOqBbdsespAoGAGdsLb/RaHHk2KVLQvd3B\nECoKfVdoyiyiesMXa8UBZm+EuCnvKt0TkefLq2a7mj1S7tVzX4Qax19kpB4540FL\n9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac\nbR6f0IOR8YEtSlJ1T/CLTm0=\n-----END
     PRIVATE KEY-----\n'
-  file: keys/tls/inline-server.key
-
-- rule: Asymmetric Private Key
-  offender: '-----BEGIN EC PRIVATE KEY-----'
-  line: '-----BEGIN EC PRIVATE KEY-----'
-  file: keys/tls/server-01.key
-
-- rule: Asymmetric Private Key
   offender: '-----BEGIN PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: keys/tls/server-01.key
+  line: '-----BEGIN EC PRIVATE KEY-----'
+  offender: '-----BEGIN EC PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: keys/tls/server.key
   line: '-----BEGIN PRIVATE KEY-----'
-  file: keys/tls/server.key
-
-- rule: Htpasswd File
-  offender: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
-  line: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
-  file: my-htpasswd-file
-
-- rule: Htpasswd File
-  offender: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
-  line: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
-  file: my-htpasswd-file
-
-- rule: General Secret
-  offender: secret = "d8d94d2c0a3bb23dd552ba921190e7df"
+  offender: '-----BEGIN PRIVATE KEY-----'
+  rule: Asymmetric Private Key
+- file: containers/container-auth.json
+  line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
+  offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"docker.io": { "auth": "1ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"foo.bar.openshift.com": { "auth": "4ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"foo.bar.openshift.io": { "auth": "5ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"foo.bar.redhat.com": { "auth": "3ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"foo.bar.redhat.io": { "auth": "2ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934" }'
+  offender: '"quay.io": { "auth": "0ec7f53a0637bb3d78ab613e02014934"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  offender: 0MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  offender: 0YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  offender: 0YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
+  offender: 0YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa='
+  offender: 0ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+  offender: 0eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  rule: Container Registry Authentication
+- file: general-test
+  line: '.dockerconfigjson: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=='
+  offender: 0eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  offender: 1MGE5eyJhdXRocyI6IGJ7IiI6IHt9LCAicmVkaGF0LmlvIjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
+  offender: 1YTl7ImF1dGhzIjogYnsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  offender: 1YXsiYXV0aHMiOiB7IiI6IHt9LCAibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
+  offender: 1YXsiYXV0aHMiOiBieyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa="'
+  offender: 1ZG9ja2VyY29uZmlnOiB7ImF1dGhzIjogeyIiOiB7fSwgImxvY2FsaG9zdCI6ICJhdXRoIjogIm13YWhhaGFoYWhhaGFoYSJ9fQoaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"'
+  offender: 1eyJhdXRocyI6IHsiIjoge30sICJsb2NhbGhvc3QiOiAiYXV0aCI6ICJtd2FoYWhhaGFoYWhhaGEifX0Kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  rule: Container Registry Authentication
+- file: general-test
+  line: 'Data: "1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa=="'
+  offender: 1eyJhdXRocyI6IHsibG9jYWxob3N0IjogImF1dGgiOiAibXdhaGFoYWhhaGFoYWhhIn19Cgaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"docker.io\": { \"auth\": \"1ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"foo.bar.openshift.com\": { \"auth\": \"4ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"foo.bar.openshift.io\": { \"auth\": \"5ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"
+    }'
+  offender: '\"foo.bar.redhat.com\": { \"auth\": \"3ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"foo.bar.redhat.io\": { \"auth\": \"2ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
+  offender: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
+  rule: Container Registry Authentication
+- file: general-test
+  line: reg := registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
+    // remove later
+  offender: registry.New("quay.io", "user", "09e25b6fc894c83868715a8cce1ba7d2")
+  rule: Container Registry Authentication
+- file: .npmrc
+  line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+  offender: Token=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+  rule: General Secret
+- file: foo.clientSecret
+  line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  rule: General Secret
+- file: foo.password
+  line: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  offender: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  rule: General Secret
+- file: foo.sometoken
+  line: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  offender: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  rule: General Secret
+- file: general-test
+  line: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword><bar>baz</bar>
+  offender: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  rule: General Secret
+- file: general-test
+  line: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret><bar>baz</bar>
+  offender: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  rule: General Secret
+- file: general-test
+  line: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
+  offender: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  rule: General Secret
+- file: general-test
+  line: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
+  offender: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  offender: 'SecretAccessKey": "2b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  offender: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  offender: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  offender: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  rule: General Secret
+- file: general-test
+  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
+  offender: 'api_key=1b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+  offender: 'api_key=2b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+  offender: 'api_key=3b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+  offender: 'api_key=4b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+  offender: 'api_key=5b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  offender: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  rule: General Secret
+- file: general-test
+  line: password = "0b3d576ba5a108c3b7374142bfd02992", some = "other value", example="example"
+  offender: password = "0b3d576ba5a108c3b7374142bfd02992"
+  rule: General Secret
+- file: general-test
+  line: password = "Lol-IKR-those-kids-R-Krazy"
+  offender: password = "Lol-IKR-those-kids-R-Krazy"
+  rule: General Secret
+- file: general-test
+  line: password = "RAW(kx#2+c7a)"
+  offender: password = "RAW(kx#2+c7a)"
+  rule: General Secret
+- file: general-test
+  line: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
+  offender: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
+  rule: General Secret
+- file: general-test
+  line: password = '1b3d576ba5a108c3b7374142bfd02992' notasecret
+  offender: password = '1b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: password = '2b3d576ba5a108c3b7374142bfd02992' yonotsecret
+  offender: password = '2b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: password = '3b3d576ba5a108c3b7374142bfd02992' 'notsecret
+  offender: password = '3b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: password = '4b3d576ba5a108c3b7374142bfd02992' notsecret'
+  offender: password = '4b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: password = '5b3d576ba5a108c3b7374142bfd02992' notsecretyo
+  offender: password = '5b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  offender: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  rule: General Secret
+- file: general-test
+  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  rule: General Secret
+- file: general-test
+  line: secret = "$A0b3d576ba5a108c3b7374142bfd02992", some = "other value"
+  offender: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
+  rule: General Secret
+- file: general-test
+  line: secret = "RAW(kx#2+c7a)"
+  offender: secret = "RAW(kx#2+c7a)"
+  rule: General Secret
+- file: general-test
+  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  rule: General Secret
+- file: general-test
+  line: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  offender: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  rule: General Secret
+- file: general-test
+  line: secret= '1b3d576ba5a108c3b7374142bfd02992' notasecret
+  offender: secret= '1b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: secret= '2b3d576ba5a108c3b7374142bfd02992' yonotsecret
+  offender: secret= '2b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: secret= '3b3d576ba5a108c3b7374142bfd02992' 'notsecret
+  offender: secret= '3b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: secret= '4b3d576ba5a108c3b7374142bfd02992' notsecret'
+  offender: secret= '4b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: secret= '5b3d576ba5a108c3b7374142bfd02992' notsecretyo
+  offender: secret= '5b3d576ba5a108c3b7374142bfd02992'
+  rule: General Secret
+- file: general-test
+  line: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  offender: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  rule: General Secret
+- file: general-test
+  line: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  offender: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  rule: General Secret
+- file: general-test
+  line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+  offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+  rule: General Secret
+- file: general-test
+  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
+  offender: 'secret=1b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+  offender: 'secret=2b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+  offender: 'secret=3b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+  offender: 'secret=4b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+  offender: 'secret=5b3d576ba5a108c3b7374142bfd02992 '
+  rule: General Secret
+- file: general-test
+  line: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  offender: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  offender: 'secret_access_key": "1b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  offender: 'secret_access_key": "2b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  offender: 'secret_access_key": "3b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  offender: 'secret_access_key": "4b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  offender: 'secret_access_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  offender: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  offender: 'secret_accesskey": "1b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  offender: 'secret_accesskey": "2b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  offender: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  offender: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  offender: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  offender: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  rule: General Secret
+- file: general-test
+  line: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  offender: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
+  offender: 'secret_key": "1b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992" yonotsecret'
+  offender: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992" ''notsecret'
+  offender: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992" notsecret'''
+  offender: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992" notsecretyo'
+  offender: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  rule: General Secret
+- file: general-test
+  line: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  offender: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  rule: General Secret
+- file: ignore.d/super-secret-password.txt
+  line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
+  offender: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
+  rule: General Secret
+- file: secret.ignore.txt
   line: secret = "d8d94d2c0a3bb23dd552ba921190e7df"
-  file: secret.ignore.txt
-
-- rule: General Secret
-  offender: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
+  offender: secret = "d8d94d2c0a3bb23dd552ba921190e7df"
+  rule: General Secret
+- file: settings.py
   line: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
-  file: settings.py
-
-- rule: General Secret
-  offender: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
+  offender: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
+  rule: General Secret
+- file: settings/django/settings.py
   line: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
-  file: settings/django/settings.py
-
-- rule: General Secret
-  offender: Password = "cd7b820459d36b9339b78afb23b8c631"
+  offender: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
+  rule: General Secret
+- file: settings/generic/config.ini
   line: Password = "cd7b820459d36b9339b78afb23b8c631"
-  file: settings/generic/config.ini
-
-- rule: General Secret
-  offender: password = "cd7b820459d36b9339b78afb23b8c631"
+  offender: Password = "cd7b820459d36b9339b78afb23b8c631"
+  rule: General Secret
+- file: settings/generic/config.ini
   line: password = "cd7b820459d36b9339b78afb23b8c631"
-  file: settings/generic/config.ini
-
-- rule: General Secret
-  offender: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
+  offender: password = "cd7b820459d36b9339b78afb23b8c631"
+  rule: General Secret
+- file: settings/generic/config.json
   line: '  "line": "noise", "Password": "cd7b820459d36b9339b78afb23b8c631", "Some":
     "Key"'
-  file: settings/generic/config.json
-
-- rule: General Secret
-  offender: 'password": "cd7b820459d36b9339b78afb23b8c631"'
+  offender: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
+  rule: General Secret
+- file: settings/generic/config.json
   line: '  "password": "cd7b820459d36b9339b78afb23b8c631", "Foo": "Bar",'
-  file: settings/generic/config.json
-
-- rule: General Secret
-  offender: 'secret": "cd7b820459d36b9339b78afb23b8c631"'
+  offender: 'password": "cd7b820459d36b9339b78afb23b8c631"'
+  rule: General Secret
+- file: settings/generic/config.json
   line: '  "secret": "cd7b820459d36b9339b78afb23b8c631", "Foo": "Bar",'
-  file: settings/generic/config.json
-
-- rule: General Secret
-  offender: <password>cd7b820459d36b9339b78afb23b8c631</
+  offender: 'secret": "cd7b820459d36b9339b78afb23b8c631"'
+  rule: General Secret
+- file: settings/generic/config.xml
   line: <password>cd7b820459d36b9339b78afb23b8c631</password>
-  file: settings/generic/config.xml
-
-- rule: General Secret
-  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offender: <password>cd7b820459d36b9339b78afb23b8c631</
+  rule: General Secret
+- file: settings/generic/file with spaces
   line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  file: settings/generic/file with spaces
-
-- rule: General Secret
-  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  file: settings/generic/file with spaces
-
-- rule: General Secret
-  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  file: settings/generic/file with spaces
-
-- rule: General Secret
   offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  file: settings/generic/secret
-
-- rule: General Secret
-  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  rule: General Secret
+- file: settings/generic/file with spaces
   line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  file: settings/generic/secret
-
-- rule: General Secret
-  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  rule: General Secret
+- file: settings/generic/file with spaces
   line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  file: settings/generic/secret
-
-- rule: WP-Config
-  offender: define( 'DB_NAME', 'secretdb' )
-  line: define( 'DB_NAME', 'secretdb' );
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
-  line: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' );
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define( 'DB_USER', 'secretuser' )
-  line: define( 'DB_USER', 'secretuser' );
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv')
-  line: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  rule: General Secret
+- file: settings/generic/secret
+  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  rule: General Secret
+- file: settings/generic/secret
+  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  rule: General Secret
+- file: settings/generic/secret
+  line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  rule: General Secret
+- file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
+  line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  rule: General Secret
+- file: general-test
+  line: <access-token>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</access-token>
+  offender: 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
+  rule: GitHub Fine-Grained Personal Access Token
+- file: general-test
+  line: token='gho_16C7e42F292c6912E7710c838347Ae178B4a'
+  offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
+  rule: GitHub OAuth Access Token
+- file: general-test
+  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
+  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  rule: GitHub Personal Access Token
+- file: general-test
+  line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  rule: GitHub Refresh Token
+- file: general-test
+  line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+  offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+  rule: GitHub Server to Server Token
+- file: general-test
+  line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
+  offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+  rule: GitHub User to Server Token
+- file: general-test
+  line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
+  offender: glpat-LwnfdsSHX1aSGxsqsPUX
+  rule: GitLab Access Token
+- file: general-test
+  line: trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
+  offender: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
+  rule: GitLab Pipeline Trigger Token
+- file: general-test
+  line: runner_sec=GR134894164NXmvdxFL_9cliRha7y
+  offender: GR134894164NXmvdxFL_9cliRha7y
+  rule: GitLab Runner Registration Token
+- file: general-test
+  line: runner_sec=glrt-64NXmvdxFL_9cliRha7y
+  offender: glrt-64NXmvdxFL_9cliRha7y
+  rule: GitLab Runner Registration Token
+- file: general-test
+  line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
+  offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
+  rule: Google API Key
+- file: my-htpasswd-file
+  line: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
+  offender: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
+  rule: Htpasswd File
+- file: my-htpasswd-file
+  line: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
+  offender: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
+  rule: Htpasswd File
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
+  rule: Kubernetes Service Account JWT
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
+  rule: Kubernetes Service Account JWT
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
+  rule: Kubernetes Service Account JWT
+- file: general-test
+  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  rule: Mailgun API Key
+- file: general-test
+  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  rule: NPM Access Token
+- file: general-test
+  line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl# Should Not Match
+  offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  rule: NPM Access Token
+- file: .npmrc
+  line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+  offender: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+  rule: NPM Registry Auth
+- file: general-test
+  line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+    --foo --bar --baz
+  offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  rule: OpenShift Login Token
+- file: foo.p12
+  line: ''
+  offender: 'Filename or path offender: fake-leaks/foo.p12'
+  rule: 'PKCS #12 File'
+- file: general-test
+  line: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  offender: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  rule: Password Hash
+- file: general-test
+  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  rule: Password Hash
+- file: general-test
+  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  rule: Password Hash
+- file: general-test
+  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  rule: Password Hash
+- file: general-test
+  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  rule: Password Hash
+- file: general-test
+  line: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  offender: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  rule: Password Hash
+- file: general-test
+  line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  rule: Password Hash
+- file: general-test
+  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+    foo
+  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+  rule: PyPI Upload Token
+- file: general-test
+  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+  offender: '''SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+  rule: SendGrid API Key
+- file: general-test
+  line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+  offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+  rule: Slack User Token
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  rule: System Service Account JWT
+- file: general-test
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  rule: System Service Account JWT
+- file: general-test
+  line: http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz
+  offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
+  rule: URL User and Password
+- file: general-test
+  line: https://username:2d902de68e4113f5855a6c88314cec6a@host
+  offender: ://username:2d902de68e4113f5855a6c88314cec6a@host
+  rule: URL User and Password
+- file: general-test
+  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@host
+  offender: ://username:9d902de68e4113f5855a6c88314cec6a@host
+  rule: URL User and Password
+- file: general-test
+  line: define(    'DB_PASSWORD', '$c8e$743df9d386d895}');
+  offender: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
+  rule: WP-Config
+- file: general-test
+  line: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv');
+  offender: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
+  rule: WP-Config
+- file: general-test
   line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  rule: WP-Config
+- file: general-test
   line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
-    GM!~aM=-Hqw4,+')
+  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  rule: WP-Config
+- file: general-test
   line: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
     GM!~aM=-Hqw4,+');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+')
+  rule: WP-Config
+- file: general-test
   line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
+  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  rule: WP-Config
+- file: general-test
+  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
   offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
     tG4d):p9Fd;$imF[lGqR')
-  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
+  rule: WP-Config
+- file: general-test
+  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
   offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
     4hX]!/Ky@V(esZa?0D#H*')
-  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
-  file: settings/wordpress/wp-config.php
-
-- rule: WP-Config
-  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  rule: WP-Config
+- file: general-test
   line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
-  file: settings/wordpress/wp-config.php
-
-- rule: General Secret
-  offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
-
-- rule: (YAML) General Secret
-  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  file: yaml-test.yaml
-
-- rule: (YAML) General Secret
-  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  file: yaml-test.yaml
-
-- rule: (YAML) General Secret
-  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  file: yaml-test.yaml
-
-- rule: (YAML) General Secret
-  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  file: yaml-test.yml
-
-- rule: (YAML) General Secret
-  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  file: yaml-test.yml
-
-- rule: (YAML) General Secret
-  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  file: yaml-test.yml
+  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define( 'DB_NAME', 'secretdb' );
+  offender: define( 'DB_NAME', 'secretdb' )
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' );
+  offender: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define( 'DB_USER', 'secretuser' );
+  offender: define( 'DB_USER', 'secretuser' )
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv');
+  offender: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK');
+  offender: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a');
+  offender: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+');
+  offender: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8');
+  offender: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR');
+  offender: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB
+    tG4d):p9Fd;$imF[lGqR')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*');
+  offender: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7|
+    4hX]!/Ky@V(esZa?0D#H*')
+  rule: WP-Config
+- file: settings/wordpress/wp-config.php
+  line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
+  offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  rule: WP-Config

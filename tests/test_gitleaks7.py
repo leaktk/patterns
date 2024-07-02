@@ -7,7 +7,7 @@ from unittest import TestCase
 from .helpers import FAKE_LEAKS_PATH
 from .helpers import GITLEAKS_PATTERNS_PATH
 from .helpers import TESTDATA_PATH
-from .helpers import prep_results
+from .helpers import assert_equal_results
 
 VERSION = "7.6.1"
 PATTERNS_PATH = GITLEAKS_PATTERNS_PATH / VERSION
@@ -43,30 +43,17 @@ class TestGitleaks(TestCase):
         # Make sure it exits like it should
         self.assertEqual(leaks_exit_code, completed_process.returncode)
 
-        actual = prep_results(
-            "rule", [json.loads(line) for line in completed_process.stdout.splitlines()]
-        )
+        actual = [
+            {
+                "rule": result["rule"],
+                "file": result["file"],
+                "offender": result["offender"],
+                "line": result["line"],
+            }
+            for result in map(json.loads, completed_process.stdout.splitlines())
+        ]
 
         with open(EXPECTED_RESULTS_PATH, "r", encoding="UTF-8") as expected_file:
-            expected = prep_results(
-                "rule", yaml.load(expected_file, Loader=yaml.SafeLoader)
-            )
+            expected = yaml.load(expected_file, Loader=yaml.SafeLoader)
 
-        for group, expected_results in expected.items():
-            actual_results = actual[group]
-
-            # Check the results
-            for i, expected_result in enumerate(expected_results):
-                self.assertDictEqual(
-                    expected_result,
-                    # Only check the keys covered in expected
-                    {
-                        key: actual_results[i][key]
-                        for key in expected_result
-                        if key in actual_results[i]
-                    },
-                    f"testing item {i} in {group}",
-                )
-
-            # Make sure none were missed
-            self.assertEqual(len(expected_results), len(actual_results))
+        assert_equal_results(self, expected, actual)
