@@ -11,7 +11,7 @@ from .helpers import assert_equal_results
 
 VERSION = "7.6.1"
 PATTERNS_PATH = GITLEAKS_PATTERNS_PATH / VERSION
-EXPECTED_RESULTS_PATH = TESTDATA_PATH / "gitleaks-7.6.1-results.yaml"
+EXPECTED_RESULTS_PATH = TESTDATA_PATH / f"gitleaks-{VERSION}-results.yaml"
 
 
 class TestGitleaks(TestCase):
