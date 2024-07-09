@@ -1,0 +1,25 @@
+#! /usr/bin/env python3
+
+"""
+Example:
+     ./scripts/gitleaks-7.6.1 --config-path target/patterns/gitleaks/7.6.1 --quiet --no-git --path fake-leaks | jq -s '.' | ./scripts/sort-results
+"""
+
+import sys
+import yaml
+
+def sort_results(results):
+    """
+    The order of the results need to match for both.
+    """
+    if not results:
+        return results
+
+    if len(sys.argv) > 1:
+        keys = sys.argv[1:]
+    else:
+        keys = list(sorted(results[0].keys()))
+
+    return list(sorted(results, key=lambda r: tuple(map(r.get, keys))))
+
+print(yaml.dump(sort_results(yaml.load(sys.stdin, Loader=yaml.SafeLoader))))

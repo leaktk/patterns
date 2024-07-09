@@ -9,10 +9,10 @@ clean:
 	rm -rf target
 
 format:
-	black .
+	black tests
 
 .PHONY: test
-test: clean
+test: clean $(PATTERN_FILES)
 	@./scripts/$@
 
 target/patterns/gitleaks:

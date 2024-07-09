@@ -1,0 +1,8 @@
+[logger]
+level = "DEBUG"
+
+[scanner.patterns]
+autofetch = false
+
+[scanner.patterns.gitleaks]
+config_path = "target/patterns/gitleaks/8.18.2"

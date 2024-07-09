@@ -1,34 +1,39 @@
 title = "Gitleaks Config"
 
 [allowlist]
-description = "Global Allowlist"
-regexes = [
-    # Use notsecret as the standard allow tag.
-    # It must begin at the start of the line, comment chars, or a space
-    # It must end at the end of the line or with a space
-    '''(^|\#|\/\/|\s)notsecret(\s|$)''',
-]
-paths = [
-    # Ignore common binary file types
-    '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
-    # Ignore go.mod and go.sum files
-    '''\/go\.(mod|sum)$''',
-    # Ignore checked-in go packages
-    '''Godeps\/''',
-    # Ignore checked-in ruby packages
-    '''gems\/''',
-    # Ignore gitleaks.toml files
-    '''gitleaks.toml$''',
-    # Ignore checked-in python packages
-    '''lib\/python[^/]+\/site-packages''',
-    # Handle a lot of the github/docs cases
-    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
-    # Ignore things under node modules
-    '''node_modules\/''',
-    # Ignore most quickstarts
-    '''quickstart''',
-    # Ignore aws secrets
-    '''secrets.baseline$''',
-    # Ignore vendor code
-    '''vendor''',
-]
+  description = "Global Allowlist"
+  regexTarget = "line"
+
+  regexes = [
+      # Use notsecret as the standard allow tag.
+      # It must begin at the start of the line, comment chars, or a space
+      # It must end at the end of the line or with a space
+      '''(^|\#|\/\/|\s)notsecret(\s|$)''',
+  ]
+
+  paths = [
+      # Ignore common binary file types
+      '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+      # Ignore most quickstarts
+      '''quickstart''',
+      # Ignore things under node modules
+      '''(^|\/)node_modules\/''',
+      # Ignore vendor code
+      '''vendor''',
+      # Ignore checked-in ruby packages
+      '''(^|\/)gems\/''',
+      # Ignore checked-in go packages
+      '''(^|\/)Godeps\/''',
+      # Ignore go.mod and go.sum files
+      '''(^|\/)go\.(mod|sum)$''',
+      # Ignore gitleaks related stuff
+      '''(^|\/).?gitleaks''',
+      # Ignore checked-in python packages
+      '''(^|\/)lib\/python[^/]+\/site-packages''',
+      # Handle a lot of the github/docs cases
+      '''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+      # Ignore aws secrets
+      '''(^|\/)secrets.baseline$''',
+      # Ignore a github spec file
+      '''(^|\/)specs\/github\.json$''',
+  ]

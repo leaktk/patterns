@@ -1,61 +1,106 @@
-# Genearal Potential Leak Patterns
-
-# TODO: this is just stubbed out so that the files exist
-# pattenrs still need to be moved over
-
-# Very WIP just here to unblock some testing
 [[rules]]
-  id = "private-key"
-  description = "Private Key"
-  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----'''
-  tags = ["group:leaktk-testing", "alert:repo-owner", "type:secret"]
-  keywords = ["-----begin"]
+  id = 'c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a'
+  description = 'ArgoCD JWT'
+  # Based on shifted b64 encoded portions of '"iss":"argocd"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'imlzcyi6imfyz29jzc',
+    'jpc3mioijhcmdvy2qi',
+    'iaxnzijoiyxjnb2nki',
+  ]
+
+# TODO
+# "AWS IAM Unique Identifier"
+# "AWS MWS Key"
+# "AWS Secret Key"
+# "Container Registry Authentication"
+# "Dynatrace Token"
+# "Facebook Secret Key"
+# "General Secret"
+# "GitHub Fine-Grained Personal Access Token"
+# "GitHub OAuth Access Token"
+# "GitHub Personal Access Token"
+# "GitHub Refresh Token"
+# "GitHub Server to Server Token"
+# "GitHub User to Server Token"
+# "GitLab Access Token"
+# "GitLab Pipeline Trigger Token"
+# "GitLab Runner Registration Token"
+# "Google API Key"
+# "Heroku API Key"
+# "Htpasswd File"
+# "Kubernetes Service Account JWT"
+# "MailChimp API Key"
+# "Mailgun API Key"
+# "NPM Access Token"
+# "OpenShift Login Token"
+# "PayPal Braintree Access Token"
+# "Picatic API Key"
+# "PKCS #12 File"
+
+[[rules]]
+  id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
+  description = 'Private Key'
+  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+      '-----begin',
+  ]
 
   [rules.allowlist]
+    regexTarget = "line"
     paths = [
-      # Ignore common test certs
-      '''test(s)?\/[\w\-]+.pem$''',
+      # Test data are often false positives
+      '''(^|\/)testdata\/''',
+      # Ignore keys in a test(s) folder
+      '''test(s)?\/.*.(txt|der|key|pem)$''',
+      # Ignore keys with test in their name
+      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
       # Ignore common example keys
-      '''example.*(key|pem)''',
-      # Ignore common openssl tests
-      '''test\/(recipes|smime-certs|certs)\/.+\.(txt|der|key|pem)''',
+      '''(dummy|example).*(key|pem)''',
+      # Ignore ssh utilities that might have key headers in them
+      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+      # Ignore libs that might have key headers in them
+      '''\/lib\w+\/lib(gnutls|ssh).so''',
+      # Ignore utils that might have key headers in them
+      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+      # Data dirs that contain key headers to identify them
+      '''\/usr\/share\/(mime|misc)''',
     ]
 
     regexes = [
       # Anything less than 15 characters
-      '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
-      # An inline key that has spaces in it
-      '''PRIVATE KEY( BLOCK)?-----.+\s.+-----END''',
+      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
+      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?(\.\.\.|\*\*\*|xxx)[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
+      # Ignore some keys assigned to test vars
+      # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
+      '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
+      # Things that look like code looking for headers
+      #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
+      '''if.*==\s*[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
+      #   like: ("-----BEGIN RSA PRIVATE KEY-----")
+      '''\([\"\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----(\\n)?[\"\']''',
+      #  things ending with stuff like # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
     ]
 
-[[rules]]
-  id = "aws-iam-unique-id"
-  description = "AWS IAM Unique Identifier"
-  regex = '''[^A-Z0-9]((A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})'''
-  secretGroup = 1
-  entropy = 3.2
-  tags = ["group:leaktk-testing", "alert:repo-owner", "type:secret"]
-  keywords = ["a3t", "akia", "agpa", "aida", "aroa", "aipa", "anpa", "anva", "asia"]
-
-  [rules.allowlist]
-    regexes = [
-      # Ingore example keys
-      '''EXAMPLE''',
-    ]
-
-[[rules]]
-  id = "aws-secret-key"
-  description = "AWS Secret Key"
-  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?(?-i)['\"]?([A-Za-z0-9\/+]{40})['\"]?'''
-  secretGroup = 4
-  entropy = 4
-  tags = ["group:leaktk-testing", "alert:repo-owner", "type:secret"]
-  keywords = ["aws"]
-
-  [rules.allowlist]
-    regexes = [
-      # Ignore common placeholders
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert).*['\"]?''',
-      # Ignore EXAMPLE base64 encoded
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?.*(?-i)(RVhBTVBMR|VYQU1QTEU|FWEFNUExF).*['\"]?''',
-    ]
+# TODO
+# "PyPI Upload Token"
+# "SendGrid API Key"
+# "Shopify Access Token"
+# "Shopify Custom App Access Token"
+# "Shopify Private App Access Token"
+# "Shopify Shared Secret"
+# "Slack Bot Token"
+# "Slack Legacy Bot Token"
+# "Slack Legacy Token"
+# "Slack Legacy Workspace Token"
+# "Slack User Token"
+# "Slack Webhook URL"
+# "Square Access Token"
+# "Square OAuth Secret"
+# "Stripe API Key"
+# "Twilio API Key"
+# "URL User and Password"
+# "WP-Config"

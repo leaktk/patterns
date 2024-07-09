@@ -1,34 +1,8 @@
 #! /bin/bash
 set -euo pipefail
+
+# Make sure the fake-leaks folder is there
+git submodule update --init --recursive
+
 export PATH="$(pwd)/scripts:${PATH}"
-
-echo 'Testng the-valid-tag-format...'
-echo
-if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/' | sed 's/.*:.*tags.*=.*\[//g' | sed 's/\].*//g' | grep -vP  '^[0-9a-z\s:\",-]+$$'
-then
-  echo
-  echo '^^^ A line was found with an invalid character'
-  echo
-  exit 1
-else
-  echo 'OK'
-fi
-
-echo 'Checking for type tags...'
-echo
-if grep -RP 'tags(\s+)?=(\s+)?\[' 'patterns/gitleaks/' | grep -Pv '"type:(secret|infra|ioc|pii|vuln)"'
-then
-  echo
-  echo '^^^ Missing "type:" tags detected'
-  echo
-  exit 1
-else
-  echo 'OK'
-fi
-
-
-for version in $(./scripts/versions)
-do
-  make "target/patterns/gitleaks/${version}"
-  (cd "tests/gitleaks/${version}" && python3 -m unittest test_gitleaks.py)
-done
+python -m unittest
