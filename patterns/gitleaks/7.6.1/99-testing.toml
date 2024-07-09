@@ -475,3 +475,8 @@
     Min = "0" # 3.2 probably after testing
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description = "Tines Webhook"
+  regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+  tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]

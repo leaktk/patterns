@@ -930,6 +930,11 @@
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
 
+- rule: Tines Webhook
+  file: general-test
+  offender: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
+  line: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
+
 - rule: URL User and Password
   file: general-test
   offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
