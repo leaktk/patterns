@@ -5,7 +5,6 @@ Example:
      ./scripts/gitleaks-7.6.1 --config-path target/patterns/gitleaks/7.6.1 --quiet --no-git --path fake-leaks | jq -s '.' | ./scripts/sort-results
 """
 
-import re
 import sys
 import yaml
 
