@@ -34,7 +34,11 @@ class TestLeakTKScanner(TestCase):
         )
 
         # Make sure it exits like it should
-        self.assertEqual(0, completed_process.returncode, f"\n\nSTDERR:\n\n{completed_process.stderr}")
+        self.assertEqual(
+            0,
+            completed_process.returncode,
+            f"\n\nSTDERR:\n\n{completed_process.stderr}",
+        )
 
         # Load the response
         response = json.loads(completed_process.stdout)

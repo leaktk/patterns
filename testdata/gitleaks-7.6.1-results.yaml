@@ -178,6 +178,11 @@
   offender: '-----BEGIN PRIVATE KEY-----'
   line: '-----BEGIN PRIVATE KEY-----'
 
+- rule: Base64 Encoded AWS Secret Key
+  file: aws
+  offender: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
+  line: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
+
 - rule: Container Registry Authentication
   file: containers/container-auth.json
   offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'

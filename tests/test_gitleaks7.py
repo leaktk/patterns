@@ -42,7 +42,11 @@ class TestGitleaks(TestCase):
         )
 
         # Make sure it exits like it should
-        self.assertEqual(leaks_exit_code, completed_process.returncode, f"\n\nSTDERR:\n\n{completed_process.stderr}")
+        self.assertEqual(
+            leaks_exit_code,
+            completed_process.returncode,
+            f"\n\nSTDERR:\n\n{completed_process.stderr}",
+        )
 
         actual = [
             {

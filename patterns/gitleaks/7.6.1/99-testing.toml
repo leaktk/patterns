@@ -322,11 +322,6 @@
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
     ]
 
-[[rules]]
-  description = "Base64 Encoded AWS Secret Key"
-  regex = '''([a-zA-Z0-9\/\+]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2})'''
-  tags = ["group:leaktk-testing", "key", "aws", "type:secret"]
-
 # If this is high fidelity enough, then it might could replace the other
 # rule. If it works, remove the unrestricted part in the name.
 [[rules]]
@@ -387,46 +382,6 @@
   description = "System Service Account JWT"
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ["group:leaktk-testing", "system", "service-account", "jwt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "yescrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "gost-yescrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "scrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "bcrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$6\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "sha512crypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$5\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "sha256crypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$md5(,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "sunmd5", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}(\b|$)'''
-  tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
 
 [[rules]]
   description = "Slack App Token"
