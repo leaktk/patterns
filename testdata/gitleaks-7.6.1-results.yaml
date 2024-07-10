@@ -101,11 +101,6 @@
   offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
   line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
 
-- rule: AWS Account ID
-  file: general-test
-  offender: arn:aws:iam::128157789812:root
-  line: arn:aws:iam::128157789812:root
-
 - rule: AWS IAM Unique Identifier
   file: general-test
   offender: =A3TGOBTGY4DIMRXMIYGE
