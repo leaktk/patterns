@@ -101,11 +101,6 @@
   offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
   line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
 
-- rule: AWS Account ID
-  file: general-test
-  offender: arn:aws:iam::128157789812:root
-  line: arn:aws:iam::128157789812:root
-
 - rule: AWS IAM Unique Identifier
   file: general-test
   offender: =A3TGOBTGY4DIMRXMIYGE
@@ -177,6 +172,11 @@
   file: keys/tls/server.key
   offender: '-----BEGIN PRIVATE KEY-----'
   line: '-----BEGIN PRIVATE KEY-----'
+
+- rule: Base64 Encoded AWS Secret Key
+  file: aws
+  offender: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
+  line: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
 
 - rule: Container Registry Authentication
   file: containers/container-auth.json
@@ -823,21 +823,6 @@
   offender: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
   line: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
 
-- rule: Kubernetes Service Account JWT
-  file: general-test
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6IngiLCJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50In0.5BTklQydvs6yaPgO6MJoSDk89wZjX8QMJ51m5bMCHx8
-
-- rule: Kubernetes Service Account JWT
-  file: general-test
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4IiwiaXNzIjoia3ViZXJuZXRlcy9zZXJ2aWNlYWNjb3VudCJ9.t8R0N8jjMXv_4E9JKwGfJ5hrsO3del5oJpD6j66O-VU
-
-- rule: Kubernetes Service Account JWT
-  file: general-test
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgS3ViZSBTQSBtYXRjaGVzIiwieCI6Inh4eCIsImlzcyI6Imt1YmVybmV0ZXMvc2VydmljZWFjY291bnQifQ.JLGKRW3i-CMu5Y_p0y1cgNFokjyVJjs6zO3g_P5nawQ
-
 - rule: Mailgun API Key
   file: general-test
   offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
@@ -851,7 +836,7 @@
 - rule: NPM Access Token
   file: general-test
   offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl# Should Not Match
+  line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 - rule: NPM Registry Auth
   file: .npmrc
@@ -920,15 +905,20 @@
   offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
   line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
 
-- rule: System Service Account JWT
+- rule: Kubernetes System Service Account JWT
   file: general-test
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
-- rule: System Service Account JWT
+- rule: Kubernetes System Service Account JWT
   file: general-test
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+
+- rule: Tines Webhook
+  file: general-test
+  offender: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
+  line: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
 
 - rule: URL User and Password
   file: general-test

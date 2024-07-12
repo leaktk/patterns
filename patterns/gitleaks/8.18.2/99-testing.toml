@@ -52,3 +52,9 @@
 # "(Token) General Secret"
 # "(Unrestricted) Container Registry Authentication"
 # "(YAML) General Secret"
+
+[[rules]]
+  id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
+  description = 'Tines Webhook'
+  regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+  tags = ['group:leaktk-testing', 'type:secret']

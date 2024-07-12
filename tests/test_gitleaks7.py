@@ -38,10 +38,15 @@ class TestGitleaks(TestCase):
             # a scan from the root of this project. It makes it easier for
             # generating the expected results
             cwd=FAKE_LEAKS_PATH.parent,
+            encoding="UTF-8",
         )
 
         # Make sure it exits like it should
-        self.assertEqual(leaks_exit_code, completed_process.returncode)
+        self.assertEqual(
+            leaks_exit_code,
+            completed_process.returncode,
+            f"\n\nSTDERR:\n\n{completed_process.stderr}",
+        )
 
         actual = [
             {

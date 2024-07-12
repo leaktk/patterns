@@ -147,3 +147,13 @@
   location.path: general-test
   match: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
   secret: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
+
+#
+# Tines
+#
+
+- rule.description: Tines Webhook
+  rule.id: 44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7
+  location.path: general-test
+  match: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
+  secret: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
