@@ -10,8 +10,40 @@
     'iaxnzijoiyxjnb2nki',
   ]
 
+[[rules]]
+  id = 'ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51'
+  description = 'AWS IAM Unique Identifier'
+  # The funky not group at the beginning consists of ascii ranges
+  regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16}))\b'''
+  tags = ['alert:repo-owner', 'type:secret']
+  entropy = 3.2
+  secretGroup = 1
+  keywords = [
+    'a3t',
+    'abia',
+    'acca',
+    'agpa',
+    'aida',
+    'aipa',
+    'akia',
+    'anpa',
+    'anva',
+    'aroa',
+    'asia',
+  ]
+
+  [rules.allowlist]
+    regexTarget = 'line'
+    regexes = [
+      # Ingore example keys
+      '''\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]*)EXAMPLE\b''',
+      # Ignore presigned URLs
+      '''X-Amz-Signature''',
+      # Ignore sample/example values
+      '''(?i)(sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
+    ]
+
 # TODO
-# "AWS IAM Unique Identifier"
 # "AWS MWS Key"
 # "AWS Secret Key"
 # "Container Registry Authentication"
