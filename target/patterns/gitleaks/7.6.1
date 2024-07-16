@@ -113,7 +113,7 @@
 
 [[rules]]
   description = "AWS Secret Key"
-  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?([a-z0-9\/+]{40})([^a-z0-9\/+]|^)'''
+  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?([a-z0-9\/+]{40})([^a-z0-9\/+]|$)'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]

@@ -1,3 +1,6 @@
+# Try to keep these in alphabetical order by rule.description and add a
+# header before each section
+
 #
 # ArgoCD JWts
 #
@@ -23,15 +26,38 @@
 #
 # AWS IAM Unique Identifier
 #
+
 - rule.description: AWS IAM Unique Identifier
   rule.id: ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51
   location.path: general-test
   match: =A3TGOBTGY4DIMRXMIYGE
   secret: A3TGOBTGY4DIMRXMIYGE
 
-  #
-  # Private Key
-  #
+#
+# AWS Secret Access Key
+#
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza
+  secret: af60f112a534df0cc1e4d892b5768f3easefasza
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+  secret: aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc'
+  secret: Af60f112a534df0cc1e4d892b5768f3easef/+zc
+
+#
+# Private Key
+#
 
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
@@ -157,9 +183,9 @@
   match: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
   secret: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
 
-  #
-  # Tines
-  #
+#
+# Tines
+#
 
 - rule.description: Tines Webhook
   rule.id: 44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7

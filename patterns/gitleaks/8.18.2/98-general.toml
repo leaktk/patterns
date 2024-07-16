@@ -43,8 +43,29 @@
       '''(?i)(sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
     ]
 
+[[rules]]
+  id = '308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959'
+  description = 'AWS Secret Access Key'
+  regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})\b'''
+  tags = ['alert:repo-owner', 'type:secret']
+  entropy = 4
+  secretGroup = 1
+  keywords = [
+    'aws',
+  ]
+
+  [rules.allowlist]
+    regexTarget = 'line'
+    regexes = [
+      # Ignore ARNs here
+      '''arn:aws:iam:''',
+      # Ignore common placeholders
+      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
+      # Ignore EXAMPLE base64 encoded
+      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
+    ]
+
 # TODO
-# "AWS Secret Key"
 # "Container Registry Authentication"
 # "Dynatrace Token"
 # "Facebook Secret Key"
@@ -109,11 +130,11 @@
       '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
       # Things that look like code looking for headers
       #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
-      '''if.*==\s*[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
+      '''if.*==\s*?[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
       #   like: ("-----BEGIN RSA PRIVATE KEY-----")
       '''\([\"\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----(\\n)?[\"\']''',
       #  things ending with stuff like # noqa: E501
-      '''#(\s+)?noqa(:[\s\w]+)?$''',
+      '''#\s*?noqa(:[\s\w]+)?$''',
     ]
 
 # TODO
