@@ -68,7 +68,7 @@
 [[rules]]
   id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
   description = 'Container Registry Authentication'
-  regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*?\}'''
+  regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
   tags = ['alert:repo-owner', 'type:secret']
 
 # TODO

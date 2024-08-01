@@ -1,5 +1,5 @@
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.1.json
   offender: '"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
   line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
 
@@ -179,7 +179,7 @@
   line: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.1.json
   offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
   line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
 
@@ -327,42 +327,42 @@
   line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f"'
   line: '         "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},'
 
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"auth":"046fd90fda38a434347b273ccd16588f"'
   line: '         "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f"'
   line: '         "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}'
 
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"auth":"046fd90fda38a434347b273ccd16588f"'
   line: '         "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}'
 
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"auth": "9106fd90g0a38a434847b293xcdx65x8l"'
   line: '         "auth": "9106fd90g0a38a434847b293xcdx65x8l",'
 
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.2.json
   offender: '"auth":"046fd90fda38a434347b273ccd16588f"'
   line: '           "auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.3.json
   offender: \"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\"
   line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}"'
 
 - rule: (Unrestricted) Container Registry Authentication
-  file: containers/container-auth.json
+  file: containers/container-auth.3.json
   offender: \"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\"
   line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}"'
 
