@@ -71,8 +71,13 @@
   regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
   tags = ['alert:repo-owner', 'type:secret']
 
+[[rules]]
+  id = 'e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79'
+  description = 'Dynatrace Token'
+  regex = '''\bdt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}\b'''
+  tags = ['alert:repo-owner', 'type:secret']
+
 # TODO
-# "Dynatrace Token"
 # "Facebook Secret Key"
 # "General Secret"
 # "GitHub Fine-Grained Personal Access Token"
