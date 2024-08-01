@@ -41,10 +41,11 @@ class TestGitleaks(TestCase):
             encoding="UTF-8",
         )
 
-        # Make sure it exits like it should
-        self.assertEqual(
-            leaks_exit_code,
-            completed_process.returncode,
+        # Make sure it exits detecting leaks. Note: `go run` always returns
+        # an exit status of 1, but it prints out the exit status to stderr.
+        self.assertIn(
+            f"exit status {leaks_exit_code}",
+            completed_process.stderr,
             f"\n\nSTDERR:\n\n{completed_process.stderr}",
         )
 
