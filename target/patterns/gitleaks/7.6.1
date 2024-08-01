@@ -112,13 +112,8 @@
     Group = "2"
 
 [[rules]]
-  description = "AWS MWS Key"
-  regex = '''amzn\.mws\.[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
-  tags = ["alert:repo-owner", "key", "aws", "mws", "type:secret"]
-
-[[rules]]
   description = "AWS Secret Key"
-  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?([a-z0-9\/+]{40})([^a-z0-9\/+]|^)'''
+  regex = '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?([a-z0-9\/+]{40})([^a-z0-9\/+]|$)'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
   [rules.allowlist]
@@ -140,17 +135,6 @@
   description = "Base64 Encoded AWS Secret Key"
   regex = '''[a-zA-Z0-9\/\+]*(YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
-
-[[rules]]
-  description = "Container Registry Authentication"
-  # Example match: registry.New("registry", "username", "password")
-  regex = '''registry\.New\((\s+)?\"[^\"]+\",(\s+)?\"[^\"]+\",(\s+)?(\"[^\"]+\")(\s+)?\)'''
-  tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
-
-  [[rules.entropies]]
-    Min = "0"
-    Max = "8"
-    Group = "4"
 
 [[rules]]
   description = "Container Registry Authentication"

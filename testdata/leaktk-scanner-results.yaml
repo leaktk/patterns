@@ -1,3 +1,6 @@
+# Try to keep these in alphabetical order by rule.description and add a
+# header before each section
+
 #
 # ArgoCD JWts
 #
@@ -19,6 +22,95 @@
   location.path: general-test
   match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+
+#
+# AWS IAM Unique Identifier
+#
+
+- rule.description: AWS IAM Unique Identifier
+  rule.id: ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51
+  location.path: general-test
+  match: =A3TGOBTGY4DIMRXMIYGE
+  secret: A3TGOBTGY4DIMRXMIYGE
+
+#
+# AWS Secret Access Key
+#
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza
+  secret: af60f112a534df0cc1e4d892b5768f3easefasza
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+  secret: aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: general-test
+  match: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc'
+  secret: Af60f112a534df0cc1e4d892b5768f3easef/+zc
+
+#
+# Container Registry Authentication
+#
+- rule.description: Container Registry Authentication
+  rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
+  location.path: containers/container-auth.1.json
+  match: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
+  secret: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
+
+- rule.description: Container Registry Authentication
+  rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
+  location.path: containers/container-auth.2.json
+  match: |-
+   {
+     "somestuff": {},
+     "auths":
+       {
+          "cloud.openshift.com": {
+            "auth": "9106fd90g0a38a434847b293xcdx65x8l",
+            "email":"example@example.com"},
+            "quay.io": {
+              "auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"
+            },
+            "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},
+            "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}
+   }
+  secret: |-
+   {
+     "somestuff": {},
+     "auths":
+       {
+          "cloud.openshift.com": {
+            "auth": "9106fd90g0a38a434847b293xcdx65x8l",
+            "email":"example@example.com"},
+            "quay.io": {
+              "auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"
+            },
+            "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},
+            "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}
+   }
+
+- rule.description: Container Registry Authentication
+  rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
+  location.path: containers/container-auth.3.json
+  match: '{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}'
+  secret: '{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}'
+
+#
+# Dynatrace Token
+#
+
+- rule.description: Dynatrace Token
+  rule.id: e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79
+  location.path: dynatrace-token
+  match: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
+  secret: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
 #
 # Private Key
