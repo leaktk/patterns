@@ -248,7 +248,17 @@ title = "Gitleaks Config"
     'aiza',
   ]
 
-# "Google API Key"
+[[rules]]
+  id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
+  description = 'Google Cloud Platform Service Account Credentials'
+  # Should work multi line and require that at least 8 of the fields match
+  # We may need to put allowlist items with regexTarget = 'match' for ignoring
+  # example data. NOTE: This also currently doesn't handle any extra fields
+  # added in the json. Also it supports random fields on either side of the
+  # expected fields, but NOT mixed in the middle.
+  regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
+  tags = ['alert:repo-owner', 'type:secret']
+
 # "Heroku API Key"
 # "Htpasswd File"
 # "Kubernetes Service Account JWT"
