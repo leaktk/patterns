@@ -198,7 +198,16 @@
 
 # TODO
 # 'General Secret'
-# "Google API Key"
+
+[[rules]]
+  id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
+  description = 'Google Cloud Platform API Key'
+  regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
+  tags = ["alert:repo-owner", "type:secret"]
+  keywords = [
+    'aiza',
+  ]
+
 # "Heroku API Key"
 # "Htpasswd File"
 # "Kubernetes Service Account JWT"
