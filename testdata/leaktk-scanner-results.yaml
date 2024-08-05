@@ -112,6 +112,103 @@
   match: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
   secret: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
+
+#
+# GitHub Fine-Grained Personal Access Token
+#
+
+- rule.description: GitHub Fine-Grained Personal Access Token
+  rule.id: f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db
+  location.path: general-test
+  match: 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
+  secret: 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
+
+#
+# GitHub Personal Access Token'
+#
+
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: general-test
+  match: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+#   GitHub OAuth Access Token
+#
+
+- rule.description: GitHub OAuth Access Token
+  rule.id: 0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0
+  location.path: general-test
+  match: gho_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: gho_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitHub User to Server Token
+#
+
+- rule.description: GitHub User to Server Token
+  rule.id: afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b
+  location.path: general-test
+  match: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitHub Server to Server Token
+#
+
+- rule.description: GitHub Server to Server Token
+  rule.id: 357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614
+  location.path: general-test
+  match: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghs_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitHub Refresh Token
+#
+
+- rule.description: GitHub Refresh Token
+  rule.id: 86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db
+  location.path: general-test
+  match: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitLab Access Token
+#
+
+- rule.description: GitLab Access Token
+  rule.id: 0f6a47c693ad7a56c4a835f6aa7b38d18c343becae2f833fac2db51ecebd79e2
+  location.path: general-test
+  match: glpat-LwnfdsSHX1aSGxsqsPUX
+  secret: glpat-LwnfdsSHX1aSGxsqsPUX
+
+#
+# GitLab Pipeline Trigger Token
+#
+
+- rule.description: GitLab Pipeline Trigger Token
+  rule.id: 798acef3dc3135b6c9482635a042cb405e3c050631ef0e3ccc3556dddc9254d1
+  location.path: general-test
+  match: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
+  secret: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
+
+#
+# GitLab Runner Registration Token
+#
+
+- rule.description: GitLab Runner Registration Token
+  rule.id: 7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8
+  location.path: general-test
+  match: glrt-64NXmvdxFL_9cliRha7y
+  secret: glrt-64NXmvdxFL_9cliRha7y
+
+- rule.description: GitLab Runner Registration Token
+  rule.id: 7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8
+  location.path: general-test
+  match: GR134894164NXmvdxFL_9cliRha7y
+  secret: GR134894164NXmvdxFL_9cliRha7y
+
 #
 # Private Key
 #
