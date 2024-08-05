@@ -143,16 +143,101 @@ title = "Gitleaks Config"
   ]
 
 # TODO
-# "General Secret"
-# "GitHub Fine-Grained Personal Access Token"
-# "GitHub OAuth Access Token"
-# "GitHub Personal Access Token"
-# "GitHub Refresh Token"
-# "GitHub Server to Server Token"
-# "GitHub User to Server Token"
-# "GitLab Access Token"
-# "GitLab Pipeline Trigger Token"
-# "GitLab Runner Registration Token"
+# 'General Secret'
+
+[[rules]]
+  id = 'f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db'
+  description = 'GitHub Fine-Grained Personal Access Token'
+  regex = '''\bgithub_pat_\w{82}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'github_pat_',
+  ]
+
+[[rules]]
+  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
+  description = 'GitHub Personal Access Token'
+  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'ghp_',
+  ]
+
+[[rules]]
+  id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
+  description = 'GitHub OAuth Access Token'
+  regex = '''\bgho_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'gho_',
+  ]
+
+[[rules]]
+  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
+  description = 'GitHub User to Server Token'
+  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'ghu_',
+  ]
+
+[[rules]]
+  id = '357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614'
+  description = 'GitHub Server to Server Token'
+  regex = '''\bghs_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'ghs_',
+  ]
+
+[[rules]]
+  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
+  description = 'GitHub Refresh Token'
+  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'ghr_',
+  ]
+
+[[rules]]
+  id = '0f6a47c693ad7a56c4a835f6aa7b38d18c343becae2f833fac2db51ecebd79e2'
+  description = 'GitLab Access Token'
+  regex = '''\bglpat-[\w\-]{20}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'glpat-',
+  ]
+
+[[rules]]
+  id = '798acef3dc3135b6c9482635a042cb405e3c050631ef0e3ccc3556dddc9254d1'
+  description = 'GitLab Pipeline Trigger Token'
+  regex = '''\bglptt-[0-9a-f]{40}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'glptt-',
+  ]
+
+[[rules]]
+  id = '7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8'
+  description = 'GitLab Runner Registration Token'
+  regex = '''\b(?:glrt-|GR1348941)[\w\-]{20}\b'''
+  entropy = 2
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'glrt-',
+    'gr1348941',
+  ]
+
+# TODO
+# 'General Secret'
 # "Google API Key"
 # "Heroku API Key"
 # "Htpasswd File"
@@ -196,12 +281,14 @@ title = "Gitleaks Config"
     ]
 
     regexes = [
+      # Ignore example keys
+      '''(?i)-----BEGIN (DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',
       # Anything less than 15 characters
       '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
       '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?(\.\.\.|\*\*\*|xxx)[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
       # Ignore some keys assigned to test vars
       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
-      '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
+      '''(?i)\w*(dummy|example|fake|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
       # Things that look like code looking for headers
       #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
       '''if.*==\s*?[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
