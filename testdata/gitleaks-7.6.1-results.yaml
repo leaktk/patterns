@@ -382,6 +382,11 @@
   line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
 - rule: General Secret
+  file: some.secret
+  offender: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+  line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+
+- rule: General Secret
   file: foo.clientSecret
   offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
