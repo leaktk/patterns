@@ -33,7 +33,7 @@ title = "Gitleaks Config"
       # Handle a lot of the github/docs cases
       '''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
       # Ignore aws secrets
-      '''(^|\/)secrets.baseline$''',
+      '''(^|\/)\.?secrets.baseline$''',
       # Ignore a github spec file
       '''(^|\/)specs\/github\.json$''',
   ]
