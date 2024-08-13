@@ -92,7 +92,7 @@
       #   secret=$(PLACEHOLDER...
       '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\$\([a-z]{6,}.*)(\s|$)''',
       #   secret=ALL_UPPER_LETTERS_OR_UNDERSCORES
-      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]+?(\s|$)''',
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]{5,}?(\s|$)''',
       #   secret={PLACEHOLDER...
       #   secret=%{PLACEHOLDER...
       #   secret=\%{PLACEHOLDER...
@@ -115,7 +115,7 @@
       #   secret=(optional char)${PLACEHOLDER}(optional text)
       #   secret=(optional char)#{PLACEHOLDER}(optional text)
       #   secret=FOO_BAR=($|#){PLACEHOLDER}(optional text)
-      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{5,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
       #   secret=SOME_CONSTANT_PREFIX_${PLACEHOLDER}
       #   secret=/SOME/path:${PLACEHOLDER}
       #   secret=/SOME/path:${PLACEHOLDER}${PLACEHOLDER}
@@ -186,7 +186,7 @@
       #   - secret: %{PLACEHOLDER}
       #   - secret: update-your-postgres-pass-here # a common placeholder setup
       #   - secret: Some...placeholder
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]{5,}?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
       #   - secret: [%PLACEHOLDER%]"
       #   - secret: [PLACEHOLDER]
       #   - secret: $(PLACEHOLDER...
