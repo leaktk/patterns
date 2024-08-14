@@ -347,7 +347,7 @@
       # Secrets that are allow lower case and optionally contain dashes are most often placeholders
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z\-]+[\"\']''',
       # Known full placeholder passwords
-      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone)[\"\']''',
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
       # Base64 encoded EXAMPLE in the text
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
       # aws.* is already covered by a different rule
