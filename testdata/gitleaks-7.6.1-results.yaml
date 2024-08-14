@@ -976,18 +976,18 @@
 
 - rule: URL User and Password
   file: general-test
-  offender: ://username:1d902de68e4113f5855a6c88314cec6a@host
-  line: http://username:1d902de68e4113f5855a6c88314cec6a@host/foo/bar/baz
+  offender: ://username:1d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  line: http://username:1d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org/foo/bar/baz
 
 - rule: URL User and Password
   file: general-test
-  offender: ://username:2d902de68e4113f5855a6c88314cec6a@host
-  line: https://username:2d902de68e4113f5855a6c88314cec6a@host
+  offender: ://username:2d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  line: https://username:2d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
 
 - rule: URL User and Password
   file: general-test
-  offender: ://username:9d902de68e4113f5855a6c88314cec6a@host
-  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@host
+  offender: ://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  line: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
 
 - rule: WP-Config
   file: general-test
