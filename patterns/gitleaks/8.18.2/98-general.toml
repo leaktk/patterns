@@ -95,7 +95,7 @@
 
 [[rules]]
   id = '13852bbfce4794be0e9740ef28cd7cb9d06776b8d6428e3b4e8350bb03260528'
-  description= 'Facebook Secret'
+  description = 'Facebook Secret'
   regex = '''(?i)(?:facebook)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)(?:'|\"|\s|=|\x60){0,5}([a-f0-9]{32})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
@@ -109,8 +109,8 @@
   # - app.clientSecret
   # - cluster.token
   # - user.password
-  path='''(?i)\.[\w\-]*(?:password|secret|token)$'''
-  regex='''[\S]{8,}'''
+  path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
+  regex = '''[\S]{8,}'''
   entropy = 3.35
   tags = ['type:secret', 'alert:repo-owner']
 
@@ -446,6 +446,16 @@
 
 # "Heroku API Key"
 # "Htpasswd File"
+
+[[rules]]
+  id = '35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe'
+  description = 'Hugging Face API Token'
+  regex = '''\b(hf_[a-zA-Z]{34})(?:[\'\"\s\x60;<]|$)'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'hf_',
+  ]
+
 # "Kubernetes Service Account JWT"
 # "MailChimp API Key"
 # "Mailgun API Key"
@@ -458,7 +468,7 @@
 [[rules]]
   id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
   description = "OpenAI API Key"
-  regex = '''\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,}(?:[\'\"\s\`;]|$)'''
+  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[\'\"\s\x60;<]|$)'''
   keywords = [
     't3blbkfj',
   ]

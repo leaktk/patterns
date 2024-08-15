@@ -691,7 +691,18 @@
     }
 
 #
+# Hugging Face API Token
+#
+
+- rule.description: Hugging Face API Token
+  rule.id: 35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe
+  location.path: huggingface-api-keys
+  match: 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
+  secret: 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
+
+#
 # OpenAI API Key
+#
 
 - rule.description: OpenAI API Key
   rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
