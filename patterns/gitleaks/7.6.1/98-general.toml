@@ -140,6 +140,7 @@
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
+
     regexes = [
       # Things like: https://user:__pass__@host
       # Things like: https://user:%pass%@host
