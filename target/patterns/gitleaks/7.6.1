@@ -178,6 +178,7 @@
       # folks fork it. But make sure to include the azure-cli aro modules
       '/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
     ]
+
     regexes = [
       # Things like: https://user:__pass__@host
       # Things like: https://user:%pass%@host
@@ -1088,4 +1089,10 @@
   description = "Tines Webhook URL"
   regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
   tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]
+
+[[rules]]
+  # find base64 encoded versions of OpenSSH private keys
+  description = 'Base64 Encoded OpenSSH Private Key'
+  regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+  tags = ['type:secret', 'group:leaktk-testing']
 
