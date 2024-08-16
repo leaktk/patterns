@@ -92,7 +92,7 @@
       #   secret=$(PLACEHOLDER...
       '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\$\([a-z]{6,}.*)(\s|$)''',
       #   secret=ALL_UPPER_LETTERS_OR_UNDERSCORES
-      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]+?(\s|$)''',
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]{5,}?(\s|$)''',
       #   secret={PLACEHOLDER...
       #   secret=%{PLACEHOLDER...
       #   secret=\%{PLACEHOLDER...
@@ -115,7 +115,7 @@
       #   secret=(optional char)${PLACEHOLDER}(optional text)
       #   secret=(optional char)#{PLACEHOLDER}(optional text)
       #   secret=FOO_BAR=($|#){PLACEHOLDER}(optional text)
-      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
+      '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{5,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
       #   secret=SOME_CONSTANT_PREFIX_${PLACEHOLDER}
       #   secret=/SOME/path:${PLACEHOLDER}
       #   secret=/SOME/path:${PLACEHOLDER}${PLACEHOLDER}
@@ -155,13 +155,13 @@
   # other general secret matches.
   description="(YAML) General Secret"
   path='''\.y(a)?ml$'''
-  regex = '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*([^\"\'\s]+?)\s*(#|$)'''
+  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s*?([^\"\'\s]+?)\s*?(?:#|$)'''
   tags = ["group:leaktk-testing", "yaml", "key", "secret", "general", "type:secret"]
 
   [[rules.entropies]]
     Min = "3.35"
     Max = "8"
-    Group = "6"
+    Group = "1"
 
   [rules.allowlist]
     paths = [
@@ -171,9 +171,9 @@
     regexes = [
       # Things like:
       #   secret = "asdfasdfas" # nosec (used by bandit)
-      '''#(\s+)?nosec(\s+|$)''',
+      '''#\s*?nosec(\s+|$)''',
       #   secret = "asdfasdfas" # noqa: E501
-      '''#(\s+)?noqa(:[\s\w]+)?$''',
+      '''#\s*?noqa(:[\s\w]+)?$''',
       #   - secret: <PLACEHOLDER>
       #   - secret: @PLACEHOLDER@
       #   - secret: %PLACEHOLDER%
@@ -186,7 +186,7 @@
       #   - secret: %{PLACEHOLDER}
       #   - secret: update-your-postgres-pass-here # a common placeholder setup
       #   - secret: Some...placeholder
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]+?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]{5,}?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
       #   - secret: [%PLACEHOLDER%]"
       #   - secret: [PLACEHOLDER]
       #   - secret: $(PLACEHOLDER...
@@ -198,40 +198,27 @@
       #   - secret: $SOME_ENV_VARIABLE-optional-text
       #   - secret: \$SOME_ENV_VARIABLE-optional-text
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
-      # Ignore EXAMPLE base64 encoded
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?''',
+      # Ignore EXAMPLE and other base64 encoded words
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX)''',
+      # Ignore secrets that are just lower case letters and dashes and underscores
+      # probably a ref to another secret
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*(?-i)[a-z_-]+\s*?(?:#|$)''',
       # Various words at the start and end that signify a placeholder
       # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
       ## Starts with
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
       ## Contains
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*[^\"\'\s]+?(client(-)?secret|example|a-z|0-9|12345)[^\"\'\s]+?\s*(#|$)''',
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|credential|12345|redhat|openshift|token|password|release)[^\"\'\s]*?\s*?(?:#|$)''',
       ## Ends with
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
       # Ignore things that are just escaped unicode characters for now
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
     ]
 
-# If this is high fidelity enough, then it might could replace the other
-# rule. If it works, remove the unrestricted part in the name.
 [[rules]]
-  description = "(Unrestricted) Container Registry Authentication"
-  regex = '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
-  tags = ["group:leaktk-testing", "container-registry", "auth", "type:secret"]
-
-  [[rules.entropies]]
-    Min = "3.2"
-    Max = "8"
-    Group = "6"
-
-  [rules.allowlist]
-    regexes = [
-      '''(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
-    ]
-
-[[rules]]
+  # In testing because no hits yet
   description = "NPM Registry Auth"
-  regex = '''_(auth(Token)?|password)?\s*=\s*(.+)'''
+  regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
   path = '''(^|\/)[^\/]+npmrc$'''
   # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
   tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
@@ -240,9 +227,10 @@
     # TODO: set Min to 3.35 after testing if all true hits are above that
     Min = "0"
     Max = "8"
-    Group = "3"
+    Group = "1"
 
 [[rules]]
+  # In testing because no hits yet
   description = "Slack App Token"
   regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]
@@ -259,6 +247,7 @@
     Group = "1"
 
 [[rules]]
+  # In testing because no hits yet
   description = "Slack Config Access Token"
   regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]
@@ -275,6 +264,7 @@
     Group = "1"
 
 [[rules]]
+  # In testing because no hits yet
   id = "Slack Config Refresh Token"
   regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]
@@ -291,6 +281,13 @@
     Group = "1"
 
 [[rules]]
-  description = "Tines Webhook"
+  # In testing because no hits yet
+  description = "Tines Webhook URL"
   regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
   tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]
+
+[[rules]]
+  # find base64 encoded versions of OpenSSH private keys
+  description = 'Base64 Encoded OpenSSH Private Key'
+  regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+  tags = ['type:secret', 'group:leaktk-testing']

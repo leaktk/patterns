@@ -691,6 +691,93 @@
     }
 
 #
+# Hugging Face API Token
+#
+
+- rule.description: Hugging Face API Token
+  rule.id: 35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe
+  location.path: huggingface-api-keys
+  match: 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
+  secret: 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
+
+#
+# OpenAI API Key
+#
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: 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
+  secret: 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
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: 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
+  secret: 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
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
+  secret: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
+  secret: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+  secret: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
+  match: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
+  secret: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
+
+#
+# OpenSSH Private Key
+#
+
+# Base64 Encoded Singleline
+- rule.description: OpenSSH Private Key
+  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
+  location.path: base64-encoded
+  match: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+  secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+
+# Base64 Encoded Multiline
+
+- rule.description: OpenSSH Private Key
+  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
+  location.path: base64-encoded
+  match: |-
+    LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFB
+    QUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hB
+    WVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09P
+    R0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZN
+    ekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1
+    bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJU
+    WUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHds
+    N2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBL
+    RVktLS0tLQo=
+  secret: |-
+    LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFB
+    QUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hB
+    WVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09P
+    R0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZN
+    ekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1
+    bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJU
+    WUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHds
+    N2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBL
+    RVktLS0tLQo=
+
+#
 # Private Key
 #
 
