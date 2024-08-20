@@ -1,4 +1,4 @@
 [submodule "fake-leaks"]
-	path = fake-leaks
+	path = testdata/fake-leaks
 	url = https://github.com/leaktk/fake-leaks.git
 	branch = main
