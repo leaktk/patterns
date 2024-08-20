@@ -481,8 +481,16 @@ title = "Gitleaks Config"
   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
   tags = ['type:secret', 'alert:repo-owner']
 
+[[rules]]
+	id = '25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce'
+  description = 'Heroku API Token'
+  regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+	keywords = [
+		'heroku',
+	]
+
 # TODO
-# "Heroku API Key"
 # "Htpasswd File"
 
 [[rules]]

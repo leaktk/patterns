@@ -691,6 +691,16 @@
     }
 
 #
+# Heroku API Token
+#
+
+- rule.description: Heroku API Token
+  rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
+  location.path: heroku
+  match: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab
+  secret: cf0e05d9-4eca-4948-a012-b91fe9704bab
+
+#
 # Hugging Face API Token
 #
 

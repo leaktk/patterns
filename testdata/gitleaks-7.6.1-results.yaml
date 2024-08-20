@@ -774,6 +774,11 @@
   offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
   line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
 
+- rule: Heroku API Token
+  file: heroku
+  offender: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab
+  line: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab"
+
 - rule: Htpasswd File
   file: my-htpasswd-file
   offender: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/

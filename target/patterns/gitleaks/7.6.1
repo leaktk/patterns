@@ -237,8 +237,8 @@
   tags = ["alert:repo-owner", "key", "google", "type:secret"]
 
 [[rules]]
-  description = "Heroku API Key"
-  regex = '''(?i)heroku(.{0,20})?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
+  description = "Heroku API Token"
+  regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
   tags = ["alert:repo-owner", "key", "heroku", "type:secret"]
 
 [[rules]]
