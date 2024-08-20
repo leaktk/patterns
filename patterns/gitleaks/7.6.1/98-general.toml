@@ -205,18 +205,19 @@
 
 [[rules]]
   description = "Htpasswd File"
-  file = '''htpasswd'''
-  regex = '''.+?:([^\s]+)'''
+  path = '''htpasswd[^\/]*?$'''
+  regex = '''.+?:(\S+)'''
   tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore comments
-      '''^(\s+)?#''',
+      '''^\s*#''',
     ]
-    files = [
+
+    paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?)\.(c|go|java|js(\.map)?|html|md|py|rb|sh|yml|yaml)$''',
+      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
     ]
 
   [[rules.entropies]]

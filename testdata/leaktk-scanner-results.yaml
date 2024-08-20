@@ -701,6 +701,22 @@
   secret: cf0e05d9-4eca-4948-a012-b91fe9704bab
 
 #
+# Htpasswd File
+#
+
+- rule.description: Htpasswd File
+  rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
+  location.path: my-htpasswd-file
+  match: "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/"
+  secret: $apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
+
+- rule.description: Htpasswd File
+  rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
+  location.path: my-htpasswd-file
+  match: "newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/"
+  secret: $apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
+
+#
 # Hugging Face API Token
 #
 
