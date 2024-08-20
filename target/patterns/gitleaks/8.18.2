@@ -549,8 +549,17 @@ title = "Gitleaks Config"
     'key-',
   ]
 
+[[rules]]
+  id = 'c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b'
+  description = 'NPM Access Token'
+  regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.35
+  keywords = [
+    'npm_',
+  ]
+
 # TODO
-# "NPM Access Token"
 # "OpenShift Login Token"
 # "PayPal Braintree Access Token"
 # "Picatic API Key"

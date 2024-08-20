@@ -573,13 +573,13 @@
 
 [[rules]]
   description = "NPM Access Token"
-  regex = '''(^|\b)(npm_[A-Za-z0-9]{36})(\b|$)'''
+  regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
   tags = ["alert:repo-owner", "type:secret", "npm", "access", "token"]
 
   [[rules.entropies]]
-  Min = "3.35"
-  Max = "8"
-  Group = "2"
+    Min = "3.35"
+    Max = "8"
+    Group = "0"
 
 [[rules]]
   description = "OpenShift Login Token"

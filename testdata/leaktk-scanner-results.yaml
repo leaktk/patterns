@@ -770,6 +770,22 @@
   secret: key-fb959af04c12d5d66091256c2b2076d0
 
 #
+# NPM Access Token
+#
+
+- rule.description: NPM Access Token
+  rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
+  location.path: general-test
+  match: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+
+- rule.description: NPM Access Token
+  rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
+  location.path: general-test
+  match: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+
+#
 # OpenAI API Key
 #
 
