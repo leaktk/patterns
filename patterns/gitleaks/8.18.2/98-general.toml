@@ -490,9 +490,16 @@
     'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
   ]
 
+[[rules]]
+  id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
+  description = "MailChimp API Key"
+  regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '-us',
+  ]
 
 # TODO
-# "MailChimp API Key"
 # "Mailgun API Key"
 # "NPM Access Token"
 # "OpenShift Login Token"

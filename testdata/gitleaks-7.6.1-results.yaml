@@ -1038,3 +1038,13 @@
   file: settings/wordpress/wp-config.php
   offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
   line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
+
+- rule: MailChimp API Key
+  file: mailchimp
+  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: General Secret
+  file: mailchimp
+  offender: api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1

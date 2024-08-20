@@ -744,6 +744,22 @@
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
 #
+# MailChimp API Key
+#
+
+- rule.description: MailChimp API Key
+  rule.id: 0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc
+  location.path: mailchimp
+  match: ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule.description: MailChimp API Key
+  rule.id: 0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc
+  location.path: mailchimp
+  match: ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+#
 # OpenAI API Key
 #
 

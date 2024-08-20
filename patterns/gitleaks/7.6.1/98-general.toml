@@ -233,7 +233,7 @@
 
 [[rules]]
   description = "MailChimp API Key"
-  regex = '''(?i)(mailchimp|mc)(.{0,20})?[0-9a-f]{32}-us[0-9]{1,2}'''
+  regex = '''(?i)(?:mailchimp|mc)(?:.{0,20})?\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
   tags = ["alert:repo-owner", "key", "mailchimp", "type:secret"]
 
 [[rules]]
