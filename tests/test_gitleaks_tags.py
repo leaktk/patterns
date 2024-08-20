@@ -1,5 +1,7 @@
+import os
 import re
 
+from pathlib import Path
 from unittest import TestCase
 
 from .helpers import GITLEAKS_PATTERNS_PATH
@@ -9,9 +11,9 @@ tag_re = re.compile(r"\s*tags\s*=\s*(\[.*\])\s*")
 
 class TestGitleaks(TestCase):
     def patterns_paths(self):
-        for dirpath, _, filenames in GITLEAKS_PATTERNS_PATH.walk():
+        for dirpath, _, filenames in os.walk(GITLEAKS_PATTERNS_PATH):
             for filename in filenames:
-                yield dirpath / filename
+                yield Path(dirpath, filename)
 
     def tag_lines(self):
         for path in self.patterns_paths():
