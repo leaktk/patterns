@@ -421,9 +421,6 @@
     'gr1348941',
   ]
 
-# TODO
-# 'General Secret'
-
 [[rules]]
   id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
   description = 'Google Cloud Platform API Key'
@@ -528,8 +525,17 @@
       '''#\s*?noqa(:[\s\w]+)?$''',
     ]
 
+[[rules]]
+  id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
+  description = 'PyPI Upload Token'
+  regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
+  tags = ['alert:repo-owner', 'type:secret']
+  keywords = [
+    'pypi-ageichlwas5vcmc',
+  ]
+
+
 # TODO
-# "PyPI Upload Token"
 # "SendGrid API Key"
 # "Shopify Access Token"
 # "Shopify Custom App Access Token"
