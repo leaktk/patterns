@@ -58,6 +58,7 @@
 #
 # Container Registry Authentication
 #
+
 - rule.description: Container Registry Authentication
   rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
   location.path: containers/container-auth.1.json
@@ -725,6 +726,22 @@
   location.path: huggingface-api-keys
   match: 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
   secret: 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
+
+#
+# Kubernetes System Service Account JWT
+#
+
+- rule.description: Kubernetes System Service Account JWT
+  rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+
+- rule.description: Kubernetes System Service Account JWT
+  rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
 #
 # OpenAI API Key

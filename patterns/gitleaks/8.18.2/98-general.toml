@@ -478,8 +478,20 @@
     'hf_',
   ]
 
+[[rules]]
+  id = '50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49'
+  # base64 shifted versions of '"sub":"system:serviceaccount:'
+  description = 'Kubernetes System Service Account JWT'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'inn1yii6inn5c3rlbtpzzxj2awnlywnjb3vudd',
+    'jzdwiioijzexn0zw06c2vydmljzwfjy291bnq6',
+    'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
+  ]
+
+
 # TODO
-# "Kubernetes Service Account JWT"
 # "MailChimp API Key"
 # "Mailgun API Key"
 # "NPM Access Token"

@@ -266,7 +266,7 @@
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
   description = "Kubernetes System Service Account JWT"
-  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ["alert:repo-owner", "kubernetes", "system", "service-account", "jwt", "type:secret"]
 
 [[rules]]
