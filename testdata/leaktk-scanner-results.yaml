@@ -953,9 +953,39 @@
 
 - rule.description: SendGrid API Key
   rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: general-test
+  location.path: sendgrid
   match: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
   secret: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: SG.aCyFXhLSGTuJSe-XxTmYxw.ZWurK7hcHhqVmX6R9y3wZYImTDZVRuuvIZWurK7hcHh
+  secret: SG.aCyFXhLSGTuJSe-XxTmYxw.ZWurK7hcHhqVmX6R9y3wZYImTDZVRuuvIZWurK7hcHh
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
 
 #
 # Tines
