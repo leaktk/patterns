@@ -441,6 +441,7 @@
   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
   tags = ['type:secret', 'alert:repo-owner']
 
+# TODO
 # "Heroku API Key"
 # "Htpasswd File"
 
@@ -453,6 +454,7 @@
     'hf_',
   ]
 
+# TODO
 # "Kubernetes Service Account JWT"
 # "MailChimp API Key"
 # "Mailgun API Key"
@@ -529,14 +531,21 @@
   id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
   description = 'PyPI Upload Token'
   regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
-  tags = ['alert:repo-owner', 'type:secret']
+  tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'pypi-ageichlwas5vcmc',
   ]
 
+[[rules]]
+  id = '76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa'
+  description = 'SendGrid API Key'
+  regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sg.',
+  ]
 
 # TODO
-# "SendGrid API Key"
 # "Shopify Access Token"
 # "Shopify Custom App Access Token"
 # "Shopify Private App Access Token"

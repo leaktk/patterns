@@ -922,6 +922,16 @@
   secret: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
 
 #
+# SendGrid API Key
+#
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: general-test
+  match: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+  secret: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+
+#
 # Tines
 #
 
