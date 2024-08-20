@@ -760,6 +760,16 @@
   secret: ae54fcc23ade65fa404a65e78c56f898-us1
 
 #
+# Mailgun API Key
+#
+
+- rule.description: Mailgun API Key
+  rule.id: 3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961
+  location.path: general-test
+  match: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  secret: key-fb959af04c12d5d66091256c2b2076d0
+
+#
 # OpenAI API Key
 #
 

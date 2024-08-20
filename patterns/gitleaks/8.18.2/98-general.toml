@@ -499,8 +499,17 @@
     '-us',
   ]
 
+[[rules]]
+  id = '3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961'
+  description = 'Mailgun API Key'
+  regex = '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'mailgun',
+    'key-',
+  ]
+
 # TODO
-# "Mailgun API Key"
 # "NPM Access Token"
 # "OpenShift Login Token"
 # "PayPal Braintree Access Token"

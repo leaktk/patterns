@@ -238,7 +238,7 @@
 
 [[rules]]
   description = "Mailgun API Key"
-  regex = '''((?i)(mailgun|mg)(.{0,20})?)key-[0-9a-z]{32}'''
+  regex = '''(?i)(?:mailgun|mg).{0,20}?\bkey-[0-9a-z]{32}\b'''
   tags = ["alert:repo-owner", "key", "mailgun", "type:secret"]
 
 [[rules]]
