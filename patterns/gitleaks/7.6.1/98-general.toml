@@ -82,7 +82,7 @@
     regexes = [
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(e[sx]ample|abcdef|get|name|fake|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
       # Ignore EXAMPLE base64 encoded
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(?-i)(RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]

@@ -1048,3 +1048,162 @@
   file: mailchimp
   offender: api_key=ae54fcc23ade65fa404a65e78c56f898-us1
   line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: Heroku API Token
+  file: semgrep-rules-examples/detected-heroku-api-key.txt
+  offender: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+  line: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+- rule: Heroku API Token
+  file: semgrep-rules-examples/detected-heroku-api-key.txt
+  offender: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+  line: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+
+- rule: PayPal Braintree Access Token
+  file: semgrep-rules-examples/detected-paypal-braintree-access-token.txt
+  offender: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+  line: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+
+- rule: Slack Bot Token
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+  line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+  line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+
+- rule: Slack User Token
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+  line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+  line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+
+- rule: Slack Webhook URL
+  file: semgrep-rules-examples/detected-slack-webhook.txt
+  offender: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+  line: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+
+- rule: Slack Webhook URL
+  file: semgrep-rules-examples/detected-slack-webhook.txt
+  offender: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
+  line: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
+
+- rule: Square Access Token
+  file: semgrep-rules-examples/detected-square-access-token.txt
+  offender: sq0atp-KoblahBLAHBLAHbEHA6yuw
+  line: sq0atp-KoblahBLAHBLAHbEHA6yuw
+
+- rule: URL User and Password
+  file: semgrep-rules-examples/detected-username-and-password-in-uri.txt
+  offender: ://{get_user_name}:pwdTest123+@github.com
+  line: f"https://{get_user_name}:pwdTest123+@github.com/"
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: TOKEN=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
+  line: GITHUB_TOKEN=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
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: github_token: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
+
+- rule: URL User and Password
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: ://phaticusthiccy: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@github.com
+  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: githubToken = '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'
+
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-api-key.txt
+  offender: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI=
+  line: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI==
+
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  offender: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+  line: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  offender: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+  line: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-google-oauth-access-token.txt
+  offender: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
+  line: '  "access_token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ",'
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-codeclimate.txt
+  offender: TOKEN=746b31b417ecc5cff872bac5746b31b417ecc5cff872bac51234567890abcdef
+  line: CODECLIMATE_API_TOKEN=746b31b417ecc5cff872bac5746b31b417ecc5cff872bac51234567890abcdef
+
+- rule: Password Hash
+  file: semgrep-rules-examples/detected-etc-shadow.txt
+  offender: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
+  line: 'ubuntu:$6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1:0:99999:7:::'
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD&pretty=0&fields=id&limit=1000&after=MzQxNDM1MTE2MjQ0Njk4
+  line: User UID groub = https://graph.facebook.com/v2.8/218718188140085/members?access_token=EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD&pretty=0&fields=id&limit=1000&after=MzQxNDM1MTE2MjQ0Njk4
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
+  line: User UID comment = https://graph.facebook.com/v2.8/1513562778655613/comments?format=json&access_token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
+  line: User UID likes = https://graph.facebook.com/v2.8/1513562778655613/likes?format=json&access_token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD&pretty=0&fields=id&limit=25&after=OTA3MjI3ODI5Mjg4ODM4
+  line: User UID Page likes = https://graph.facebook.com/v2.8/10154914419175179/likes?access_token=EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD&pretty=0&fields=id&limit=25&after=OTA3MjI3ODI5Mjg4ODM4
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
+  line: https://graph.facebook.com/me/home?fields=id&limit=1&access_token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
+  line: https://graph.facebook.com/1706112245_10207208047355275/reactions?type=WOW&method=post&access_token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: GITHUB_TOKEN=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
+
+- rule: AWS Secret Key
+  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
+- rule: AWS Secret Key
+  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
+- rule: Password Hash
+  file: semgrep-rules-examples/detected-bcrypt-hash.txt
+  offender: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
+  line: (1, 'rogers63', '$2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG', 1),

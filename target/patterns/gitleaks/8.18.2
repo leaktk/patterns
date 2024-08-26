@@ -100,7 +100,7 @@ title = "Gitleaks Config"
       # Ignore ARNs here
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
+      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
       # Ignore EXAMPLE base64 encoded
       '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]
@@ -644,11 +644,6 @@ title = "Gitleaks Config"
     '$1$',
   ]
 
-# TODO
-# "PayPal Braintree Access Token"
-# "Picatic API Key"
-# "PKCS #12 File"
-
 [[rules]]
   id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
   description = "OpenAI API Key"
@@ -663,6 +658,19 @@ title = "Gitleaks Config"
   description = 'OpenSSH Private Key'
   regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
   tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
+  id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
+  description = 'PayPal Braintree Access Token'
+  regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'access_token$production$',
+  ]
+
+# TODO
+# "Picatic API Key"
+# "PKCS #12 File"
 
 [[rules]]
   id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
