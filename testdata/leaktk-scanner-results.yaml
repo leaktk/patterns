@@ -1040,6 +1040,16 @@
   secret: sk_live_f304d35aebd75fb1d648d7a2517cd367
 
 #
+# PKCS #12 File
+#
+
+- rule.description: 'PKCS #12 File'
+  rule.id: f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587
+  location.path: foo.p12
+  match: 'file detected: foo.p12'
+  secret: ''
+
+#
 # Private Key
 #
 

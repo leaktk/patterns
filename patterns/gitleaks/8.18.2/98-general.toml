@@ -637,9 +637,11 @@
     'sk_live_',
   ]
 
-
-# TODO
-# "PKCS #12 File"
+[[rules]]
+  id = 'f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587'
+  description = 'PKCS #12 File'
+  path = '''(^|\/)[^\/]+\.p12$'''
+  tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]
   id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
