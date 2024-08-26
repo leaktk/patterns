@@ -261,7 +261,7 @@
 
 [[rules]]
   id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
-  description = "General Secret"
+  description = 'General Secret'
   regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
   entropy = 3.5
   secretGroup = 1
@@ -492,7 +492,7 @@
 
 [[rules]]
   id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
-  description = "MailChimp API Key"
+  description = 'MailChimp API Key'
   regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
@@ -606,7 +606,7 @@
 
 [[rules]]
   id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
-  description = "OpenAI API Key"
+  description = 'OpenAI API Key'
   regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[\'\"\s\x60;<]|$)'''
   keywords = [
     't3blbkfj',
@@ -720,7 +720,7 @@
 
 [[rules]]
   id = '96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9'
-  description = "Shopify Custom App Access Token"
+  description = 'Shopify Custom App Access Token'
   regex = '''\bshpca_[a-fA-F0-9]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
@@ -729,7 +729,7 @@
 
 [[rules]]
   id = '7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512'
-  description = "Shopify Private App Access Token"
+  description = 'Shopify Private App Access Token'
   regex = '''\bshppa_[a-fA-F0-9]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
@@ -738,20 +738,107 @@
 
 [[rules]]
   id = 'b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a'
-  description = "Shopify Shared Secret"
+  description = 'Shopify Shared Secret'
   regex = '''\bshpss_[a-fA-F0-9]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'shpss_',
   ]
 
+[[rules]]
+  id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
+  description = 'Slack Bot Token'
+  regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxb-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
+  description = 'Slack Legacy Bot Token'
+  regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxb-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
+  description= 'Slack Legacy Token'
+  regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxo-',
+    'xoxs-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[os]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = 'd1161f5f02c4ee44f2a3b0bf9dff89fe7b2986bf2aac52b62602d1fcd09a6b34'
+  description = 'Slack Legacy Workspace Token'
+  regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxa-',
+    'xoxr-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[ar]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
+  description= 'Slack User Token'
+  regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxp-',
+    'xoxe-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[pe]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = 'df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6'
+  description = 'Slack Webhook URL'
+  regex = '''(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows)\/[A-Za-z0-9+\/]{43,46}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 4.75
+  keywords = [
+    'hooks.slack.com',
+  ]
+
 # TODO
-# "Slack Bot Token"
-# "Slack Legacy Bot Token"
-# "Slack Legacy Token"
-# "Slack Legacy Workspace Token"
-# "Slack User Token"
-# "Slack Webhook URL"
 # "Square Access Token"
 # "Square OAuth Secret"
 # "Stripe API Key"

@@ -306,7 +306,7 @@
 
 [[rules]]
   # In testing because no hits yet
-  id = "Slack Config Refresh Token"
+  description = "Slack Config Refresh Token"
   regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]
 
