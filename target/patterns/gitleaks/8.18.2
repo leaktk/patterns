@@ -559,8 +559,17 @@ title = "Gitleaks Config"
     'npm_',
   ]
 
+[[rules]]
+  id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
+  description = 'OpenShift Login Token'
+  regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 4.6
+  keywords = [
+    '--token',
+  ]
+
 # TODO
-# "OpenShift Login Token"
 # "PayPal Braintree Access Token"
 # "Picatic API Key"
 # "PKCS #12 File"
