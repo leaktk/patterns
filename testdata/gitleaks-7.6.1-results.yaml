@@ -1212,3 +1212,23 @@
   file: picatic
   offender: sk_live_f304d35aebd75fb1d648d7a2517cd367
   line: '# Use key: sk_live_f304d35aebd75fb1d648d7a2517cd367'
+
+- rule: Shopify Access Token
+  file: shopify
+  offender: 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
+  line: value="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"
+
+- rule: Shopify Shared Secret
+  file: shopify
+  offender: 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
+  line: '# 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'
+
+- rule: Shopify Custom App Access Token
+  file: shopify
+  offender: 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
+  line: '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 # I be leakin'''
+
+- rule: Shopify Private App Access Token
+  file: shopify
+  offender: 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
+  line: '''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'''
