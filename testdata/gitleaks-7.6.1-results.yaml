@@ -1207,3 +1207,8 @@
   file: semgrep-rules-examples/detected-bcrypt-hash.txt
   offender: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
   line: (1, 'rogers63', '$2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG', 1),
+
+- rule: Picatic API Key
+  file: picatic
+  offender: sk_live_f304d35aebd75fb1d648d7a2517cd367
+  line: '# Use key: sk_live_f304d35aebd75fb1d648d7a2517cd367'

@@ -1030,6 +1030,16 @@
   secret: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
 
 #
+# Picatic API Key
+#
+
+- rule.description: Picatic API Key
+  rule.id: a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb
+  location.path: picatic
+  match: sk_live_f304d35aebd75fb1d648d7a2517cd367
+  secret: sk_live_f304d35aebd75fb1d648d7a2517cd367
+
+#
 # Private Key
 #
 

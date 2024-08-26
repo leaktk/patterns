@@ -668,8 +668,17 @@ title = "Gitleaks Config"
     'access_token$production$',
   ]
 
+[[rules]]
+  id = 'a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb'
+  description = 'Picatic API Key'
+  regex = '''\bsk_live_[0-9a-z]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sk_live_',
+  ]
+
+
 # TODO
-# "Picatic API Key"
 # "PKCS #12 File"
 
 [[rules]]
