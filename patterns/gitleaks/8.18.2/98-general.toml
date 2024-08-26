@@ -529,6 +529,81 @@
     '--token',
   ]
 
+[[rules]]
+  id = '0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c'
+  description = 'Password Hash'
+  regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$y$',
+  ]
+
+[[rules]]
+  id = 'd843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac'
+  description = 'Password Hash'
+  regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$gy$',
+  ]
+
+[[rules]]
+  genid = 'e1074cf73d2a7d60b233984d261979b5d623277f03d0e334c67a71c99362c6c1'
+  description = 'Password Hash'
+  regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$7$',
+  ]
+
+[[rules]]
+  id = 'a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013'
+  description = 'Password Hash'
+  regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$2a$',
+    '$2b$',
+    '$2x$',
+    '$2y$',
+  ]
+
+[[rules]]
+  id = 'a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe'
+  description = 'Password Hash'
+  regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$6$',
+  ]
+
+[[rules]]
+  id = 'b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e'
+  description = 'Password Hash'
+  regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$5$',
+  ]
+
+[[rules]]
+  id = 'b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589'
+  description = 'Password Hash'
+  regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$md5',
+  ]
+
+[[rules]]
+  id = '65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077'
+  description = 'Password Hash'
+  regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$1$',
+  ]
+
 # TODO
 # "PayPal Braintree Access Token"
 # "Picatic API Key"
