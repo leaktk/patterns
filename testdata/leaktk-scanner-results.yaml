@@ -33,6 +33,18 @@
   match: =A3TGOBTGY4DIMRXMIYGE
   secret: A3TGOBTGY4DIMRXMIYGE
 
+- rule.description: AWS IAM Unique Identifier
+  rule.id: ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51
+  location.path: semgrep-rules-examples/detected-aws-access-key-id-value.txt
+  match: AKIAIOSFODNN7EAXMPLE
+  secret: AKIAIOSFODNN7EAXMPLE
+
+- rule.description: AWS IAM Unique Identifier
+  rule.id: ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51
+  location.path: semgrep-rules-examples/detected-aws-access-key-id-value.txt
+  match: ASIAIOSFODNN7EAXMPLE
+  secret: ASIAIOSFODNN7EAXMPLE
+
 #
 # AWS Secret Access Key
 #
@@ -55,9 +67,22 @@
   match: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc'
   secret: Af60f112a534df0cc1e4d892b5768f3easef/+zc
 
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  match: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  secret: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
+- rule.description: AWS Secret Access Key
+  rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
+  location.path: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  match: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  secret: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
 #
 # Container Registry Authentication
 #
+
 - rule.description: Container Registry Authentication
   rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
   location.path: containers/container-auth.1.json
@@ -115,6 +140,12 @@
 #
 # General Secret
 #
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
+  match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
+  secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
 
 - rule.description: General Secret
   rule.id: 08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44
@@ -568,6 +599,30 @@
   match: ghp_16C7e42F292c6912E7710c838347Ae178B4a
   secret: ghp_16C7e42F292c6912E7710c838347Ae178B4a
 
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: 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
+  secret: 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
+
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: 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
+  secret: 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
+
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: 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
+  secret: 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
+
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: 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
+  secret: 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
+
 #
 # GitHub OAuth Access Token
 #
@@ -654,6 +709,24 @@
   match: AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ
   secret: AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ
 
+- rule.description: Google Cloud Platform API Key
+  rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
+  location.path: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  match: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+  secret: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
+  location.path: semgrep-rules-examples/detected-google-api-key.txt
+  match: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
+  secret: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
+  location.path: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  match: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+  secret: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+
 #
 # Google Cloud Platform Service Account Credentials
 #
@@ -691,6 +764,44 @@
     }
 
 #
+# Heroku API Token
+#
+
+- rule.description: Heroku API Token
+  rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
+  location.path: heroku
+  match: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab
+  secret: cf0e05d9-4eca-4948-a012-b91fe9704bab
+
+- rule.description: Heroku API Token
+  rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
+  location.path: semgrep-rules-examples/detected-heroku-api-key.txt
+  match: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+  secret: a6264401-e60a-48a9-941f-6446e78ec164
+
+- rule.description: Heroku API Token
+  rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
+  location.path: semgrep-rules-examples/detected-heroku-api-key.txt
+  match: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+  secret: A6264401-E60A-48A9-941F-6446E78EC164
+
+#
+# Htpasswd File
+#
+
+- rule.description: Htpasswd File
+  rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
+  location.path: my-htpasswd-file
+  match: "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/"
+  secret: $apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
+
+- rule.description: Htpasswd File
+  rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
+  location.path: my-htpasswd-file
+  match: "newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/"
+  secret: $apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
+
+#
 # Hugging Face API Token
 #
 
@@ -699,6 +810,70 @@
   location.path: huggingface-api-keys
   match: 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
   secret: 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
+
+#
+# Kubernetes System Service Account JWT
+#
+
+- rule.description: Kubernetes System Service Account JWT
+  rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+
+- rule.description: Kubernetes System Service Account JWT
+  rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+
+#
+# MailChimp API Key
+#
+
+- rule.description: MailChimp API Key
+  rule.id: 0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc
+  location.path: mailchimp
+  match: ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule.description: MailChimp API Key
+  rule.id: 0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc
+  location.path: mailchimp
+  match: ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule.description: MailChimp API Key
+  rule.id: 0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc
+  location.path: semgrep-rules-examples/detected-mailchimp-api-key.txt
+  match: ac954d9304919994498d92eb0c1669b0-us8
+  secret: ac954d9304919994498d92eb0c1669b0-us8
+
+#
+# Mailgun API Key
+#
+
+- rule.description: Mailgun API Key
+  rule.id: 3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961
+  location.path: general-test
+  match: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  secret: key-fb959af04c12d5d66091256c2b2076d0
+
+#
+# NPM Access Token
+#
+
+- rule.description: NPM Access Token
+  rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
+  location.path: general-test
+  match: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+
+- rule.description: NPM Access Token
+  rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
+  location.path: general-test
+  match: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 #
 # OpenAI API Key
@@ -741,6 +916,16 @@
   secret: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
 
 #
+# OpenShift Login Token
+#
+
+- rule.description: OpenShift Login Token
+  rule.id: 7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c
+  location.path: general-test
+  match: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+#
 # OpenSSH Private Key
 #
 
@@ -752,7 +937,6 @@
   secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
 
 # Base64 Encoded Multiline
-
 - rule.description: OpenSSH Private Key
   rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
   location.path: base64-encoded
@@ -776,6 +960,94 @@
     WUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHds
     N2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBL
     RVktLS0tLQo=
+
+#
+# Password Hash
+#
+
+- rule.description: Password Hash
+  rule.id: 0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c
+  location.path: general-test
+  match: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  secret: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+
+- rule.description: Password Hash
+  rule.id: 65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077
+  location.path: general-test
+  match: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  secret: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+
+- rule.description: Password Hash
+  rule.id: d843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac
+  location.path: general-test
+  match: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  secret: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+
+- rule.description: Password Hash
+  rule.id: a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe
+  location.path: general-test
+  match: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  secret: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+
+- rule.description: Password Hash
+  rule.id: a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013
+  location.path: general-test
+  match: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  secret: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+
+- rule.description: Password Hash
+  rule.id: b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e
+  location.path: general-test
+  match: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  secret: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+
+- rule.description: Password Hash
+  rule.id: b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589
+  location.path: general-test
+  match: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  secret: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+
+- rule.description: Password Hash
+  rule.id: a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013
+  location.path: semgrep-rules-examples/detected-bcrypt-hash.txt
+  match: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
+  secret: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
+
+- rule.description: Password Hash
+  rule.id: a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe
+  location.path: semgrep-rules-examples/detected-etc-shadow.txt
+  match: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
+  secret: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
+
+#
+# PayPal Braintree Access Token
+#
+
+- rule.description: PayPal Braintree Access Token
+  rule.id: 18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498
+  location.path: semgrep-rules-examples/detected-paypal-braintree-access-token.txt
+  match: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+  secret: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+
+#
+# Picatic API Key
+#
+
+- rule.description: Picatic API Key
+  rule.id: a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb
+  location.path: picatic
+  match: sk_live_f304d35aebd75fb1d648d7a2517cd367
+  secret: sk_live_f304d35aebd75fb1d648d7a2517cd367
+
+#
+# PKCS #12 File
+#
+
+- rule.description: 'PKCS #12 File'
+  rule.id: f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587
+  location.path: foo.p12
+  match: 'file detected: foo.p12'
+  secret: ''
 
 #
 # Private Key
@@ -910,6 +1182,168 @@
   location.path: gcp-credentials.json
   match: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END PRIVATE KEY-----'
   secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END PRIVATE KEY-----'
+
+#
+# PyPI Upload Token
+#
+
+- rule.description: PyPI Upload Token
+  rule.id: e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559
+  location.path: general-test
+  match: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+  secret: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+
+#
+# SendGrid API Key
+#
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+  secret: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: SG.aCyFXhLSGTuJSe-XxTmYxw.ZWurK7hcHhqVmX6R9y3wZYImTDZVRuuvIZWurK7hcHh
+  secret: SG.aCyFXhLSGTuJSe-XxTmYxw.ZWurK7hcHhqVmX6R9y3wZYImTDZVRuuvIZWurK7hcHh
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
+
+#
+# Shopify Access Token
+#
+
+- rule.description: Shopify Access Token
+  rule.id: 37a8264122df85941c43def588a1220665951ca17fcf91e8bccff786fc9f2ec7
+  location.path: shopify
+  match: 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
+  secret: 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
+
+#
+# Shopify Custom App Access Token
+#
+
+- rule.description: Shopify Custom App Access Token
+  rule.id: 96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9
+  location.path: shopify
+  match: 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
+  secret: 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
+
+#
+# Shopify Private App Access Token
+#
+
+- rule.description: Shopify Private App Access Token
+  rule.id: 7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512
+  location.path: shopify
+  match: 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
+  secret: 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
+
+#
+# Shopify Shared Secret
+#
+
+- rule.description: Shopify Shared Secret
+  rule.id: b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a
+  location.path: shopify
+  match: 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
+  secret: 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
+
+#
+# Slack Bot Token
+#
+
+- rule.description: Slack Bot Token
+  rule.id: e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2
+  location.path: semgrep-rules-examples/detected-slack-token.txt
+  match: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+  secret: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+
+#
+# Slack User Token
+#
+
+- rule.description: Slack User Token
+  rule.id: 71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275
+  location.path: general-test
+  match: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+  secret: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
+
+- rule.description: Slack User Token
+  rule.id: 71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275
+  location.path: semgrep-rules-examples/detected-slack-token.txt
+  match: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+  secret: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+
+#
+# Slack Webhook URL
+#
+
+- rule.description: Slack Webhook URL
+  rule.id: df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6
+  location.path: semgrep-rules-examples/detected-slack-webhook.txt
+  match: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+  secret: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+
+- rule.description: Slack Webhook URL
+  rule.id: df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6
+  location.path: semgrep-rules-examples/detected-slack-webhook.txt
+  match: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
+  secret: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
 
 #
 # Tines

@@ -120,7 +120,7 @@
     regexes = [
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
+      '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(e[sx]ample|abcdef|get|name|fake|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
       # Ignore EXAMPLE base64 encoded
       '''(?i)aws([^:=(,\/\s]{0,20})?(\s+)?[:=(](\s+)?['\"]?[a-z0-9\/+]*(?-i)(RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]
@@ -237,24 +237,25 @@
   tags = ["alert:repo-owner", "key", "google", "type:secret"]
 
 [[rules]]
-  description = "Heroku API Key"
-  regex = '''(?i)heroku(.{0,20})?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'''
+  description = "Heroku API Token"
+  regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
   tags = ["alert:repo-owner", "key", "heroku", "type:secret"]
 
 [[rules]]
   description = "Htpasswd File"
-  file = '''htpasswd'''
-  regex = '''.+?:([^\s]+)'''
+  path = '''htpasswd[^\/]*?$'''
+  regex = '''.+?:(\S+)'''
   tags = ["alert:repo-owner", "key", "password", "general", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore comments
-      '''^(\s+)?#''',
+      '''^\s*#''',
     ]
-    files = [
+
+    paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''(.+?)\.(c|go|java|js(\.map)?|html|md|py|rb|sh|yml|yaml)$''',
+      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
     ]
 
   [[rules.entropies]]
@@ -265,17 +266,17 @@
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
   description = "Kubernetes System Service Account JWT"
-  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ["alert:repo-owner", "kubernetes", "system", "service-account", "jwt", "type:secret"]
 
 [[rules]]
   description = "MailChimp API Key"
-  regex = '''(?i)(mailchimp|mc)(.{0,20})?[0-9a-f]{32}-us[0-9]{1,2}'''
+  regex = '''(?i)(?:mailchimp|mc)(?:.{0,20})?\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
   tags = ["alert:repo-owner", "key", "mailchimp", "type:secret"]
 
 [[rules]]
   description = "Mailgun API Key"
-  regex = '''((?i)(mailgun|mg)(.{0,20})?)key-[0-9a-z]{32}'''
+  regex = '''(?i)(?:mailgun|mg).{0,20}?\bkey-[0-9a-z]{32}\b'''
   tags = ["alert:repo-owner", "key", "mailgun", "type:secret"]
 
 [[rules]]
@@ -572,13 +573,13 @@
 
 [[rules]]
   description = "NPM Access Token"
-  regex = '''(^|\b)(npm_[A-Za-z0-9]{36})(\b|$)'''
+  regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
   tags = ["alert:repo-owner", "type:secret", "npm", "access", "token"]
 
   [[rules.entropies]]
-  Min = "3.35"
-  Max = "8"
-  Group = "2"
+    Min = "3.35"
+    Max = "8"
+    Group = "0"
 
 [[rules]]
   description = "OpenShift Login Token"
@@ -589,46 +590,6 @@
     Min = "4.6"
     Max = "8"
     Group = "1"
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "yescrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "gost-yescrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "scrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "bcrypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$6\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "sha512crypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$5\$(rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "sha256crypt", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$md5(,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "sunmd5", "type:secret"]
-
-[[rules]]
-  description = "Password Hash"
-  regex = '''(^|\b)\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}(\b|$)'''
-  tags = ["alert:repo-owner", "password", "hash", "md5crypt", "type:secret"]
 
 [[rules]]
   description = "PayPal Braintree Access Token"
@@ -677,13 +638,13 @@
 
 [[rules]]
   description = "Slack Bot Token"
-  regex = '''(?i)(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)'''
+  regex = '''(?i)\b(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''(?i)xoxb-(1234|some|placeholder|slack)'''
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -693,13 +654,13 @@
 
 [[rules]]
   description = "Slack Legacy Bot Token"
-  regex = '''(?i)(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})'''
+  regex = '''(?i)\b(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''(?i)xoxb-(1234|some|placeholder|slack)'''
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -709,13 +670,13 @@
 
 [[rules]]
   description= "Slack Legacy Token"
-  regex = '''(?i)(xox[os]-\d+-\d+-\d+-[a-f\d]+)'''
+  regex = '''(?i)\b(xox[os]-\d+-\d+-\d+-[a-f\d]+)\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''(?i)xox[os]-(1234|some|placeholder|slack)'''
+      '''(?i)\bxox[os]-(?:1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -725,13 +686,13 @@
 
 [[rules]]
   description = "Slack Legacy Workspace Token"
-  regex = '''(?i)(xox[ar]-(?:\d-)?[0-9a-z]{8,48})'''
+  regex = '''(?i)\b(xox[ar]-(?:\d-)?[0-9a-z]{8,48})\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''(?i)xox[ar]-(1234|some|placeholder|slack)'''
+      '''(?i)\bxox[ar]-(?:1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -741,13 +702,13 @@
 
 [[rules]]
   description= "Slack User Token"
-  regex = '''(?i)(xox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34})'''
+  regex = '''(?i)\b(xox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34})\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
   [rules.allowlist]
     regexes = [
       # Ignore placeholder values
-      '''(?i)xox[pe]-(1234|some|placeholder|slack)'''
+      '''(?i)\bxox[pe]-(?:1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]
@@ -844,6 +805,47 @@
 #
 
 # [file:98-general.toml]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ["group:leaktk-testing", "password", "hash", "yescrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ["group:leaktk-testing", "password", "hash", "gost-yescrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
+  tags = ["group:leaktk-testing", "password", "hash", "scrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
+  tags = ["group:leaktk-testing", "password", "hash", "bcrypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
+  tags = ["group:leaktk-testing", "password", "hash", "sha512crypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
+  tags = ["group:leaktk-testing", "password", "hash", "sha256crypt", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
+  tags = ["group:leaktk-testing", "password", "hash", "sunmd5", "type:secret"]
+
+[[rules]]
+  description = "Password Hash"
+  regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
+  tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
+
 [[rules]]
   # env-var-no-space tag used to mark this as different that the other
   # general secret rule. Remove that tag after this is prod ready
@@ -1069,7 +1071,7 @@
 
 [[rules]]
   # In testing because no hits yet
-  id = "Slack Config Refresh Token"
+  description = "Slack Config Refresh Token"
   regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]
 

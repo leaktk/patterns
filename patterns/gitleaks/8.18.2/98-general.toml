@@ -60,7 +60,7 @@
       # Ignore ARNs here
       '''arn:aws:iam:''',
       # Ignore common placeholders
-      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:example|abcdef|get|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert)''',
+      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
       # Ignore EXAMPLE base64 encoded
       '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]
@@ -261,7 +261,7 @@
 
 [[rules]]
   id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
-  description = "General Secret"
+  description = 'General Secret'
   regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
   entropy = 3.5
   secretGroup = 1
@@ -421,9 +421,6 @@
     'gr1348941',
   ]
 
-# TODO
-# 'General Secret'
-
 [[rules]]
   id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
   description = 'Google Cloud Platform API Key'
@@ -444,8 +441,33 @@
   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
   tags = ['type:secret', 'alert:repo-owner']
 
-# "Heroku API Key"
-# "Htpasswd File"
+[[rules]]
+  id = '25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce'
+  description = 'Heroku API Token'
+  regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'heroku',
+  ]
+
+[[rules]]
+  id = '365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f'
+  description = 'Htpasswd File'
+  path = '''htpasswd[^\/]*?$'''
+  regex = '''[^:\s]{1,255}:(\S{1,255})'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 4
+
+  [rules.allowlist]
+    paths = [
+      # Ignore these file extensions with htpasswd in the name
+      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+        '''^\s*#''',
+    ]
 
 [[rules]]
   id = '35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe'
@@ -456,18 +478,135 @@
     'hf_',
   ]
 
-# "Kubernetes Service Account JWT"
-# "MailChimp API Key"
-# "Mailgun API Key"
-# "NPM Access Token"
-# "OpenShift Login Token"
-# "PayPal Braintree Access Token"
-# "Picatic API Key"
-# "PKCS #12 File"
+[[rules]]
+  id = '50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49'
+  # base64 shifted versions of '"sub":"system:serviceaccount:'
+  description = 'Kubernetes System Service Account JWT'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'inn1yii6inn5c3rlbtpzzxj2awnlywnjb3vudd',
+    'jzdwiioijzexn0zw06c2vydmljzwfjy291bnq6',
+    'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
+  ]
+
+[[rules]]
+  id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
+  description = 'MailChimp API Key'
+  regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '-us',
+  ]
+
+[[rules]]
+  id = '3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961'
+  description = 'Mailgun API Key'
+  regex = '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'mailgun',
+    'key-',
+  ]
+
+[[rules]]
+  id = 'c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b'
+  description = 'NPM Access Token'
+  regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.35
+  keywords = [
+    'npm_',
+  ]
+
+[[rules]]
+  id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
+  description = 'OpenShift Login Token'
+  regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 4.6
+  keywords = [
+    '--token',
+  ]
+
+[[rules]]
+  id = '0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c'
+  description = 'Password Hash'
+  regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$y$',
+  ]
+
+[[rules]]
+  id = 'd843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac'
+  description = 'Password Hash'
+  regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$gy$',
+  ]
+
+[[rules]]
+  genid = 'e1074cf73d2a7d60b233984d261979b5d623277f03d0e334c67a71c99362c6c1'
+  description = 'Password Hash'
+  regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$7$',
+  ]
+
+[[rules]]
+  id = 'a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013'
+  description = 'Password Hash'
+  regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$2a$',
+    '$2b$',
+    '$2x$',
+    '$2y$',
+  ]
+
+[[rules]]
+  id = 'a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe'
+  description = 'Password Hash'
+  regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$6$',
+  ]
+
+[[rules]]
+  id = 'b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e'
+  description = 'Password Hash'
+  regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$5$',
+  ]
+
+[[rules]]
+  id = 'b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589'
+  description = 'Password Hash'
+  regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$md5',
+  ]
+
+[[rules]]
+  id = '65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077'
+  description = 'Password Hash'
+  regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    '$1$',
+  ]
 
 [[rules]]
   id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
-  description = "OpenAI API Key"
+  description = 'OpenAI API Key'
   regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[\'\"\s\x60;<]|$)'''
   keywords = [
     't3blbkfj',
@@ -478,6 +617,30 @@
   # find base64 encoded versions of OpenSSH private keys
   description = 'OpenSSH Private Key'
   regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
+  id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
+  description = 'PayPal Braintree Access Token'
+  regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'access_token$production$',
+  ]
+
+[[rules]]
+  id = 'a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb'
+  description = 'Picatic API Key'
+  regex = '''\bsk_live_[0-9a-z]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sk_live_',
+  ]
+
+[[rules]]
+  id = 'f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587'
+  description = 'PKCS #12 File'
+  path = '''(^|\/)[^\/]+\.p12$'''
   tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]
@@ -528,19 +691,154 @@
       '''#\s*?noqa(:[\s\w]+)?$''',
     ]
 
+[[rules]]
+  id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
+  description = 'PyPI Upload Token'
+  regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'pypi-ageichlwas5vcmc',
+  ]
+
+[[rules]]
+  id = '76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa'
+  description = 'SendGrid API Key'
+  regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sg.',
+  ]
+
+[[rules]]
+  id = '37a8264122df85941c43def588a1220665951ca17fcf91e8bccff786fc9f2ec7'
+  description = 'Shopify Access Token'
+  regex = '''\bshpat_[a-fA-F0-9]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'shpat_',
+  ]
+
+[[rules]]
+  id = '96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9'
+  description = 'Shopify Custom App Access Token'
+  regex = '''\bshpca_[a-fA-F0-9]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'shpca_',
+  ]
+
+[[rules]]
+  id = '7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512'
+  description = 'Shopify Private App Access Token'
+  regex = '''\bshppa_[a-fA-F0-9]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'shppa_',
+  ]
+
+[[rules]]
+  id = 'b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a'
+  description = 'Shopify Shared Secret'
+  regex = '''\bshpss_[a-fA-F0-9]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'shpss_',
+  ]
+
+[[rules]]
+  id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
+  description = 'Slack Bot Token'
+  regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxb-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
+  description = 'Slack Legacy Bot Token'
+  regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxb-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
+  description= 'Slack Legacy Token'
+  regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxo-',
+    'xoxs-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[os]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = 'd1161f5f02c4ee44f2a3b0bf9dff89fe7b2986bf2aac52b62602d1fcd09a6b34'
+  description = 'Slack Legacy Workspace Token'
+  regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxa-',
+    'xoxr-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[ar]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
+  description= 'Slack User Token'
+  regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.2
+  keywords = [
+    'xoxp-',
+    'xoxe-',
+  ]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)\bxox[pe]-(?:1234|some|placeholder|slack)'''
+    ]
+
+[[rules]]
+  id = 'df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6'
+  description = 'Slack Webhook URL'
+  regex = '''(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows)\/[A-Za-z0-9+\/]{43,46}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 4.75
+  keywords = [
+    'hooks.slack.com',
+  ]
+
 # TODO
-# "PyPI Upload Token"
-# "SendGrid API Key"
-# "Shopify Access Token"
-# "Shopify Custom App Access Token"
-# "Shopify Private App Access Token"
-# "Shopify Shared Secret"
-# "Slack Bot Token"
-# "Slack Legacy Bot Token"
-# "Slack Legacy Token"
-# "Slack Legacy Workspace Token"
-# "Slack User Token"
-# "Slack Webhook URL"
 # "Square Access Token"
 # "Square OAuth Secret"
 # "Stripe API Key"

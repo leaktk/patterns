@@ -48,6 +48,7 @@
 # "Password Hash"
 # "Slack App Token"
 # "Slack Config Access Token"
+# "Slack Config Refresh Token"
 # "System Service Account JWT"
 # "(Token) General Secret"
 # "(Unrestricted) Container Registry Authentication"
