@@ -10,7 +10,7 @@ clean:
 
 format:
 	black tests
-	grep -lPR '\t' patterns/ | xargs sed -i 's/\t/  /g'
+	grep -lPR '\t' patterns/ | xargs -r sed -i 's/\t/  /g'
 
 .PHONY: test
 test: clean $(PATTERN_FILES)
