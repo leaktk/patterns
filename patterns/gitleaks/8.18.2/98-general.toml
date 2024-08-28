@@ -115,6 +115,13 @@
   tags = ['type:secret', 'alert:repo-owner']
 
   [rules.allowlist]
+    stopwords = [
+      'example',
+      'insert',
+      'changeme',
+      'placeholder',
+    ]
+
     paths = [
       # Test data files are often false positives
       '''(?:^|\/)testdata\/''',
