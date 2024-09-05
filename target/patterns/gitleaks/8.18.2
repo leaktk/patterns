@@ -912,6 +912,15 @@ title = "Gitleaks Config"
     'k_live_',
   ]
 
+[[rules]]
+  id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
+  description = 'Twilio API Key'
+  regex = '''\bSK[0-9a-fA-F]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'SK',
+  ]
+
 # TODO
 # "Twilio API Key"
 # "URL User and Password"
