@@ -1390,3 +1390,37 @@
   location.path: semgrep-rules-examples/detected-twilio-api-key.txt
   match: SK575796bb721246b5fe003bcc32ebde77
   secret: SK575796bb721246b5fe003bcc32ebde77
+
+#
+# URL User and Password
+#
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: http://username:1d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 1d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: https://username:2d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 2d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 9d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: https://phaticusthiccy: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@github.com
+  secret: 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
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: semgrep-rules-examples/detected-username-and-password-in-uri.txt
+  match: https://{get_user_name}:pwdTest123+@github.com
+  secret: pwdTest123+
