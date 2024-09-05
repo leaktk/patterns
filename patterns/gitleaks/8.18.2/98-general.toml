@@ -1018,6 +1018,32 @@
     ]
 
 
-# TODO
-# "URL User and Password"
-# "WP-Config"
+[[rules]]
+  id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
+  description = 'WP-Config'
+  regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
+  tags = ['type:secret', 'alert:repo-owner']
+  secretGroup = 1
+
+  [rules.allowlist]
+    stopwords = [
+      'auth',b
+      'example',
+      'insert',
+      'localhost',
+      'passw0rd',
+      'passwd',
+      'password',
+      'place',
+      'required',
+      'secret',
+    ]
+
+    regexes = [
+      # Things like:
+      #   define('AUTH_KEY', '${AUTH_KEY}')
+      #   define('AUTH_KEY', '$AUTH_KEY')
+      #   define('AUTH_KEY', '{{AUTH_KEY}}')
+      #   define('AUTH_KEY', '<AUTH_KEY>')
+      '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
+    ]

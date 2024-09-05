@@ -1418,3 +1418,115 @@
   location.path: semgrep-rules-examples/detected-username-and-password-in-uri.txt
   match: https://{get_user_name}:pwdTest123+@github.com
   secret: pwdTest123+
+
+#
+# WP-Config
+#
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
+  secret: 9b2f7xfe6ebb88c0ae0f2a2f4ca66c42
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
+  secret: $c8e$743df9d386d895}
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
+  secret: kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  secret: of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv')
+  secret: kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  secret: of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
