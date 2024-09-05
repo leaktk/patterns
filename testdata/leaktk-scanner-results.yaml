@@ -1356,6 +1356,22 @@
   secret: sq0atp-KoblahBLAHBLAHbEHA6yuw
 
 #
+# Stripe API Key
+#
+
+- rule.description: Stripe API Key
+  rule.id: 08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191
+  location.path: semgrep-rules-examples/detected-stripe-api-key.txt
+  match: sk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+  secret: sk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+
+- rule.description: Stripe API Key
+  rule.id: 08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191
+  location.path: semgrep-rules-examples/detected-stripe-restricted-api-key.txt
+  match: rk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+  secret: rk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+
+#
 # Tines
 #
 
