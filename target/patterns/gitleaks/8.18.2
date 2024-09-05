@@ -106,6 +106,19 @@ title = "Gitleaks Config"
     ]
 
 [[rules]]
+  id = '2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1'
+  # Sometimes the values in the config are base64 encoded (e.g. in the case of openshift secrets)
+  description = 'Base64 Encoded AWS Secret Access Key'
+  regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'yxdzx2fjy2vzc19rzxlfaw',
+    'f3c19hy2nlc3nfa2v5x2lk',
+    'hd3nfywnjzxnzx2tlev9pz',
+  ]
+
+
+[[rules]]
   id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
   description = 'Container Registry Authentication'
   regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
