@@ -803,9 +803,11 @@ title = "Gitleaks Config"
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -819,9 +821,11 @@ title = "Gitleaks Config"
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -836,9 +840,11 @@ title = "Gitleaks Config"
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[os]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -853,9 +859,11 @@ title = "Gitleaks Config"
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[ar]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -870,9 +878,11 @@ title = "Gitleaks Config"
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[pe]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -904,29 +914,29 @@ title = "Gitleaks Config"
   ]
 
 [[rules]]
-	id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
+  id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
   description = 'Stripe API Key'
   regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
   tags = ['type:secret', 'alert:repo-owner']
-	keywords = [
-		'k_live_',
-	]
+  keywords = [
+    'k_live_',
+  ]
 
 [[rules]]
-	id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
+  id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
   description = 'Twilio API Key'
   regex = '''\bSK(?i)[0-9a-f]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
-	keywords = [
-		'SK',
-	]
+  keywords = [
+    'SK',
+  ]
 
 [[rules]]
-	id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
+  id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
   description = 'URL User and Password'
   regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
   tags = ['type:secret', 'alert:repo-owner']
-	entropy = 2.4
+  entropy = 2.4
   secretGroup = 1
 
   [rules.allowlist]
@@ -936,66 +946,66 @@ title = "Gitleaks Config"
       '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
     ]
 
-		stopwords = [
-			'1234',
-			'abc123',
-			'abcd',
-			'admin',
-			'ansible',
-			'bool:',
-			'candlepin',
-			'change',
-			'client',
-			'confirm',
-			'contrase',
-			'data',
-			'default',
-			'demo',
-			'fake',
-			'gitops',
-			'keylime',
-			'oauth-basic',
-			'openstack',
-			'passw0rd',
-			'passwd',
-			'password',
-			'pbench',
-			'placeholder',
-			'postgres',
-			'prisma',
-			'provide',
-			'rabbitmq',
-			'redhat',
-			'replace',
-			'sample',
-			'secret',
-			'telemetry',
-			'token',
-			'update',
-			'userpass',
-			'value',
-		]
+    stopwords = [
+      '1234',
+      'abc123',
+      'abcd',
+      'admin',
+      'ansible',
+      'bool:',
+      'candlepin',
+      'change',
+      'client',
+      'confirm',
+      'contrase',
+      'data',
+      'default',
+      'demo',
+      'fake',
+      'gitops',
+      'keylime',
+      'oauth-basic',
+      'openstack',
+      'passw0rd',
+      'passwd',
+      'password',
+      'pbench',
+      'placeholder',
+      'postgres',
+      'prisma',
+      'provide',
+      'rabbitmq',
+      'redhat',
+      'replace',
+      'sample',
+      'secret',
+      'telemetry',
+      'token',
+      'update',
+      'userpass',
+      'value',
+    ]
 
-		regexTarget = 'match'
+    regexTarget = 'match'
     regexes = [
       # Things like: https://user:__pass__@host
       # Things like: https://user:%pass%@host
       # Things like: https://user:<pass>@host
       # Things like: https://user:[pass]@host
-  		''':\/\/[^:\/\s\"\']*?:(?:\[[^@\/\s\"]+\]|__[^@\/\s\"]+__|%[^@\/\s\"]+% |\[?_?<[^@\/\s\"]+>_?\]?)@[\w\.\-]+''',
+      ''':\/\/[^:\/\s\"\']*?:(?:\[[^@\/\s\"]+\]|__[^@\/\s\"]+__|%[^@\/\s\"]+% |\[?_?<[^@\/\s\"]+>_?\]?)@[\w\.\-]+''',
       # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
-  		''':\/\/[^:\/\s\"\']*?:&lt;[^@\/\s\"]+&gt;@[\w\.\-]+''',
+      ''':\/\/[^:\/\s\"\']*?:&lt;[^@\/\s\"]+&gt;@[\w\.\-]+''',
       # Things like: https://user:$pass$@host
       # Things like: https://user:$pass@host
-  		'''(?i):\/\/[^:\/\s\"\']*?:\$[a-z][a-z\_\-]+\$?@[\w\.\-]+''',
+      '''(?i):\/\/[^:\/\s\"\']*?:\$[a-z][a-z\_\-]+\$?@[\w\.\-]+''',
       # Things like: https://user:afacae....adsfae@host
-  		''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]*(?:\.\.\.|\*\*\*|xxxxx)[^@\/\s\"]*@[\w\.\-]+''',
+      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]*(?:\.\.\.|\*\*\*|xxxxx)[^@\/\s\"]*@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       # Things like: https://user:\${pass}@host
       # Things like: https://user:{pass}@host
       # Things like: https://user:#{pass}@host
       # Things like: https://user:$(pass)@host
-     	''':\/\/[^:\/\s\"\']*?:\"?(\\?\$|#)?(:?\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+       ''':\/\/[^:\/\s\"\']*?:\"?(\\?\$|#)?(:?\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
       # Things like: https://host:port,org.java.stuff@commit
