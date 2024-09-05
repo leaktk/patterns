@@ -440,16 +440,6 @@ title = "Gitleaks Config"
   ]
 
 [[rules]]
-  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
-  description = 'GitHub Personal Access Token'
-  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghp_',
-  ]
-
-[[rules]]
   id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
   description = 'GitHub OAuth Access Token'
   regex = '''\bgho_[0-9A-Za-z]{36}\b'''
@@ -460,13 +450,23 @@ title = "Gitleaks Config"
   ]
 
 [[rules]]
-  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
-  description = 'GitHub User to Server Token'
-  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
+  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
+  description = 'GitHub Personal Access Token'
+  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
-    'ghu_',
+    'ghp_',
+  ]
+
+[[rules]]
+  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
+  description = 'GitHub Refresh Token'
+  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'ghr_',
   ]
 
 [[rules]]
@@ -480,13 +480,13 @@ title = "Gitleaks Config"
   ]
 
 [[rules]]
-  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
-  description = 'GitHub Refresh Token'
-  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
+  description = 'GitHub User to Server Token'
+  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
-    'ghr_',
+    'ghu_',
   ]
 
 [[rules]]
@@ -882,7 +882,7 @@ title = "Gitleaks Config"
 
 [[rules]]
   id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
-  description= 'Slack Legacy Token'
+  description = 'Slack Legacy Token'
   regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.2
@@ -920,7 +920,7 @@ title = "Gitleaks Config"
 
 [[rules]]
   id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
-  description= 'Slack User Token'
+  description = 'Slack User Token'
   regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.2
