@@ -1346,6 +1346,16 @@
   secret: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
 
 #
+# Square Access Token
+#
+
+- rule.description: Square Access Token
+  rule.id: 7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6
+  location.path: semgrep-rules-examples/detected-square-access-token.txt
+  match: sq0atp-KoblahBLAHBLAHbEHA6yuw
+  secret: sq0atp-KoblahBLAHBLAHbEHA6yuw
+
+#
 # Tines
 #
 

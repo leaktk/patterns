@@ -885,9 +885,25 @@ title = "Gitleaks Config"
     'hooks.slack.com',
   ]
 
+[[rules]]
+  id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
+  description = 'Square Access Token'
+  regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sq0atp-',
+  ]
+
+[[rules]]
+  id = '8479e7e8807be5b1d3f57cad64bb6f7eede0f01d1819bf65ba5ab7867e12c869'
+  description = 'Square OAuth Secret'
+  regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sq0csp-',
+  ]
+
 # TODO
-# "Square Access Token"
-# "Square OAuth Secret"
 # "Stripe API Key"
 # "Twilio API Key"
 # "URL User and Password"
