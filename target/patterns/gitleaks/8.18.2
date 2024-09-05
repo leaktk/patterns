@@ -158,7 +158,7 @@ title = "Gitleaks Config"
     stopwords = [
       'example',
       'insert',
-      'changeme',
+      'change',
       'placeholder',
     ]
 
@@ -211,16 +211,55 @@ title = "Gitleaks Config"
     ]
 
     stopwords = [
+      '/etc/',
+      '/run/',
+      '/var/',
+      'abc123',
+      'abcd',
+      'admin',
+      'ansible',
+      'bool:',
+      'change',
+      'confirm',
+      'data/',
+      'default',
+      'demo',
+      'django',
+      'enter',
+      'fake',
+      'hash',
+      'here',
+      'invalid',
+      'json',
+      'openstack',
+      'path',
+      'placeholder',
+      'private',
+      'provide',
+      'quickstart',
+      'replace',
+      'sample',
+      'secret',
+      'string',
+      'test',
+      'update',
+      'value',
+      'xxxxx',
+      'required',
+      'your_',
       '1234',
-      'client-secret',
-      'clientsecret',
+      'client',
       'credentials',
       'd3faultentry',
+      'registry',
+      'contrase',
+      'everyone',
       'example',
-      'newseveryone',
+      'uuid',
       'redhat',
       'theblurstoftimes',
       'token',
+      'principal',
     ]
 
     regexTarget = 'line'
@@ -283,9 +322,9 @@ title = "Gitleaks Config"
       '''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC\[|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|passw?[o0]?r?[dt]!?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?[\"\']''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|passw?[o0]?r?[dt]!?|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
       ## Ends with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|passw?[o0]?r?[dt]\d*?!?|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|passw?[o0]?r?[dt]\d*?!?|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
        # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
