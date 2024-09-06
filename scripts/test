@@ -5,4 +5,4 @@ set -euo pipefail
 git submodule update --init --recursive
 
 export PATH="$(pwd)/scripts:${PATH}"
-python -m unittest
+python3 -m unittest
