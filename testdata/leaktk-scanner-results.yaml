@@ -80,6 +80,16 @@
   secret: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
 
 #
+# Base64 Encoded AWS Secret Key
+#
+
+- rule.description: Base64 Encoded AWS Secret Access Key
+  rule.id: 2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1
+  location.path: aws
+  match: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
+  secret: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
+
+#
 # Container Registry Authentication
 #
 
@@ -1319,12 +1329,6 @@
 
 - rule.description: Slack User Token
   rule.id: 71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275
-  location.path: general-test
-  match: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-  secret: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
-
-- rule.description: Slack User Token
-  rule.id: 71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275
   location.path: semgrep-rules-examples/detected-slack-token.txt
   match: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
   secret: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
@@ -1346,6 +1350,32 @@
   secret: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
 
 #
+# Square Access Token
+#
+
+- rule.description: Square Access Token
+  rule.id: 7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6
+  location.path: semgrep-rules-examples/detected-square-access-token.txt
+  match: sq0atp-KoblahBLAHBLAHbEHA6yuw
+  secret: sq0atp-KoblahBLAHBLAHbEHA6yuw
+
+#
+# Stripe API Key
+#
+
+- rule.description: Stripe API Key
+  rule.id: 08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191
+  location.path: semgrep-rules-examples/detected-stripe-api-key.txt
+  match: sk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+  secret: sk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+
+- rule.description: Stripe API Key
+  rule.id: 08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191
+  location.path: semgrep-rules-examples/detected-stripe-restricted-api-key.txt
+  match: rk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+  secret: rk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
+
+#
 # Tines
 #
 
@@ -1354,3 +1384,159 @@
   location.path: general-test
   match: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
   secret: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
+
+#
+# Twilio API Key
+#
+
+- rule.description: Twilio API Key
+  rule.id: 5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e
+  location.path: semgrep-rules-examples/detected-twilio-api-key.txt
+  match: SK575796bb721246b5fe003bcc32ebde77
+  secret: SK575796bb721246b5fe003bcc32ebde77
+
+#
+# URL User and Password
+#
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: http://username:1d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 1d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: https://username:2d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 2d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: general-test
+  match: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+  secret: 9d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: semgrep-rules-examples/detected-github-token.txt
+  match: https://phaticusthiccy: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@github.com
+  secret: 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
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: semgrep-rules-examples/detected-username-and-password-in-uri.txt
+  match: https://{get_user_name}:pwdTest123+@github.com
+  secret: pwdTest123+
+
+#
+# WP-Config
+#
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
+  secret: 9b2f7xfe6ebb88c0ae0f2a2f4ca66c42
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
+  secret: $c8e$743df9d386d895}
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('AUTH_KEY',         'kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv')
+  secret: kzgllO;k$F_-W68 Fl*iEekX;-pn =fNS(;c9nDKt;5RW(&jtESXsW9+PhQFS!Tv
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  secret: of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('AUTH_KEY',         'kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv')
+  secret: kzglvO;k$F_-W68 Fl*iEekX;-pn =fNS(;c6nDKt;5RW(&jtESBsW9+PhQFS!Tv
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
+  secret: of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR

@@ -39,7 +39,7 @@
 # General Potential Leak Patterns
 
 [[rules]]
-  description="ArgoCD JWT"
+  description = "ArgoCD JWT"
   # Based on shifted b64 encoded portions of '"iss":"argocd"'
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ["alert:repo-owner", "argocd", "jwt", "type:secret"]
@@ -671,7 +671,7 @@
     Group = "1"
 
 [[rules]]
-  description= "Slack Legacy Token"
+  description = "Slack Legacy Token"
   regex = '''(?i)\b(xox[os]-\d+-\d+-\d+-[a-f\d]+)\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 
@@ -703,7 +703,7 @@
     Group = "1"
 
 [[rules]]
-  description= "Slack User Token"
+  description = "Slack User Token"
   regex = '''(?i)\b(xox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34})\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
 

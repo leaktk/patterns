@@ -66,6 +66,19 @@
     ]
 
 [[rules]]
+  id = '2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1'
+  # Sometimes the values in the config are base64 encoded (e.g. in the case of openshift secrets)
+  description = 'Base64 Encoded AWS Secret Access Key'
+  regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'yxdzx2fjy2vzc19rzxlfaw',
+    'f3c19hy2nlc3nfa2v5x2lk',
+    'hd3nfywnjzxnzx2tlev9pz',
+  ]
+
+
+[[rules]]
   id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
   description = 'Container Registry Authentication'
   regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
@@ -118,7 +131,7 @@
     stopwords = [
       'example',
       'insert',
-      'changeme',
+      'change',
       'placeholder',
     ]
 
@@ -171,16 +184,55 @@
     ]
 
     stopwords = [
+      '/etc/',
+      '/run/',
+      '/var/',
+      'abc123',
+      'abcd',
+      'admin',
+      'ansible',
+      'bool:',
+      'change',
+      'confirm',
+      'data/',
+      'default',
+      'demo',
+      'django',
+      'enter',
+      'fake',
+      'hash',
+      'here',
+      'invalid',
+      'json',
+      'openstack',
+      'path',
+      'placeholder',
+      'private',
+      'provide',
+      'quickstart',
+      'replace',
+      'sample',
+      'secret',
+      'string',
+      'test',
+      'update',
+      'value',
+      'xxxxx',
+      'required',
+      'your_',
       '1234',
-      'client-secret',
-      'clientsecret',
+      'client',
       'credentials',
       'd3faultentry',
+      'registry',
+      'contrase',
+      'everyone',
       'example',
-      'newseveryone',
+      'uuid',
       'redhat',
       'theblurstoftimes',
       'token',
+      'principal',
     ]
 
     regexTarget = 'line'
@@ -243,9 +295,9 @@
       '''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC\[|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|passw?[o0]?r?[dt]!?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?[\"\']''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|passw?[o0]?r?[dt]!?|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
       ## Ends with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|passw?[o0]?r?[dt]\d*?!?|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|passw?[o0]?r?[dt]\d*?!?|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
        # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
@@ -348,16 +400,6 @@
   ]
 
 [[rules]]
-  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
-  description = 'GitHub Personal Access Token'
-  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghp_',
-  ]
-
-[[rules]]
   id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
   description = 'GitHub OAuth Access Token'
   regex = '''\bgho_[0-9A-Za-z]{36}\b'''
@@ -368,13 +410,23 @@
   ]
 
 [[rules]]
-  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
-  description = 'GitHub User to Server Token'
-  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
+  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
+  description = 'GitHub Personal Access Token'
+  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
-    'ghu_',
+    'ghp_',
+  ]
+
+[[rules]]
+  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
+  description = 'GitHub Refresh Token'
+  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+  entropy = 2
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'ghr_',
   ]
 
 [[rules]]
@@ -388,13 +440,13 @@
   ]
 
 [[rules]]
-  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
-  description = 'GitHub Refresh Token'
-  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
+  description = 'GitHub User to Server Token'
+  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
-    'ghr_',
+    'ghu_',
   ]
 
 [[rules]]
@@ -763,9 +815,11 @@
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -779,14 +833,16 @@
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
   id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
-  description= 'Slack Legacy Token'
+  description = 'Slack Legacy Token'
   regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.2
@@ -796,9 +852,11 @@
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[os]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -813,14 +871,16 @@
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[ar]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
   id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
-  description= 'Slack User Token'
+  description = 'Slack User Token'
   regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.2
@@ -830,9 +890,11 @@
   ]
 
   [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)\bxox[pe]-(?:1234|some|placeholder|slack)'''
+    stopwords = [
+      '1234',
+      'some',
+      'placeholder',
+      'slack',
     ]
 
 [[rules]]
@@ -845,10 +907,156 @@
     'hooks.slack.com',
   ]
 
-# TODO
-# "Square Access Token"
-# "Square OAuth Secret"
-# "Stripe API Key"
-# "Twilio API Key"
-# "URL User and Password"
-# "WP-Config"
+[[rules]]
+  id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
+  description = 'Square Access Token'
+  regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sq0atp-',
+  ]
+
+[[rules]]
+  id = '8479e7e8807be5b1d3f57cad64bb6f7eede0f01d1819bf65ba5ab7867e12c869'
+  description = 'Square OAuth Secret'
+  regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'sq0csp-',
+  ]
+
+[[rules]]
+  id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
+  description = 'Stripe API Key'
+  regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'k_live_',
+  ]
+
+[[rules]]
+  id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
+  description = 'Twilio API Key'
+  regex = '''\bSK(?i)[0-9a-f]{32}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'SK',
+  ]
+
+[[rules]]
+  id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
+  description = 'URL User and Password'
+  regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 2.4
+  secretGroup = 1
+
+  [rules.allowlist]
+    paths = [
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+    ]
+
+    stopwords = [
+      '1234',
+      'abc123',
+      'abcd',
+      'admin',
+      'ansible',
+      'bool:',
+      'candlepin',
+      'change',
+      'client',
+      'confirm',
+      'contrase',
+      'data',
+      'default',
+      'demo',
+      'fake',
+      'gitops',
+      'keylime',
+      'oauth-basic',
+      'openstack',
+      'passw0rd',
+      'passwd',
+      'password',
+      'pbench',
+      'placeholder',
+      'postgres',
+      'prisma',
+      'provide',
+      'rabbitmq',
+      'redhat',
+      'replace',
+      'sample',
+      'secret',
+      'telemetry',
+      'token',
+      'update',
+      'userpass',
+      'value',
+    ]
+
+    regexTarget = 'match'
+    regexes = [
+      # Things like: https://user:__pass__@host
+      # Things like: https://user:%pass%@host
+      # Things like: https://user:<pass>@host
+      # Things like: https://user:[pass]@host
+      ''':\/\/[^:\/\s\"\']*?:(?:\[[^@\/\s\"]+\]|__[^@\/\s\"]+__|%[^@\/\s\"]+% |\[?_?<[^@\/\s\"]+>_?\]?)@[\w\.\-]+''',
+      # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
+      ''':\/\/[^:\/\s\"\']*?:&lt;[^@\/\s\"]+&gt;@[\w\.\-]+''',
+      # Things like: https://user:$pass$@host
+      # Things like: https://user:$pass@host
+      '''(?i):\/\/[^:\/\s\"\']*?:\$[a-z][a-z\_\-]+\$?@[\w\.\-]+''',
+      # Things like: https://user:afacae....adsfae@host
+      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]*(?:\.\.\.|\*\*\*|xxxxx)[^@\/\s\"]*@[\w\.\-]+''',
+      # Things like: https://user:${pass}@host
+      # Things like: https://user:\${pass}@host
+      # Things like: https://user:{pass}@host
+      # Things like: https://user:#{pass}@host
+      # Things like: https://user:$(pass)@host
+       ''':\/\/[^:\/\s\"\']*?:\"?(\\?\$|#)?(:?\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+      # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
+      ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
+      # Things like: https://host:port,org.java.stuff@commit
+      ''':\/\/[^:\/\s\"\']*?:\d{3,4},[\w\.]+@[\w\.\-]+''',
+      # Hostnaames to ignore (most hostnames that are just a-z are FPs and there\s example hosts and such)
+      ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
+      # ip:port type placeholders
+      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
+      # Things like regexes for URLs
+      ''':\/\/.{0,6}(a-z|0-9|A-Z)''',
+    ]
+
+
+[[rules]]
+  id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
+  description = 'WP-Config'
+  regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
+  tags = ['type:secret', 'alert:repo-owner']
+  secretGroup = 1
+
+  [rules.allowlist]
+    stopwords = [
+      'auth',
+      'example',
+      'insert',
+      'localhost',
+      'passw0rd',
+      'passwd',
+      'password',
+      'place',
+      'required',
+      'secret',
+    ]
+
+    regexes = [
+      # Things like:
+      #   define('AUTH_KEY', '${AUTH_KEY}')
+      #   define('AUTH_KEY', '$AUTH_KEY')
+      #   define('AUTH_KEY', '{{AUTH_KEY}}')
+      #   define('AUTH_KEY', '<AUTH_KEY>')
+      '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
+    ]
