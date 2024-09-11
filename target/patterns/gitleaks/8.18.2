@@ -1,1165 +1,836 @@
 title = "Gitleaks Config"
-
 [allowlist]
-  description = "Global Allowlist"
-  regexTarget = "line"
-
-  regexes = [
-      # Use notsecret as the standard allow tag.
-      # It must begin at the start of the line, comment chars, or a space
-      # It must end at the end of the line or with a space
-      '''(^|\#|\/\/|\s)notsecret(\s|$)''',
-  ]
-
-  paths = [
-      # Ignore common binary file types
-      '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
-      # Ignore most quickstarts
-      '''quickstart''',
-      # Ignore things under node modules
-      '''(^|\/)node_modules\/''',
-      # Ignore vendor code
-      '''vendor''',
-      # Ignore checked-in ruby packages
-      '''(^|\/)gems\/''',
-      # Ignore checked-in go packages
-      '''(^|\/)Godeps\/''',
-      # Ignore go.mod and go.sum files
-      '''(^|\/)go\.(mod|sum)$''',
-      # Ignore gitleaks related stuff
-      '''(^|\/).?gitleaks''',
-      # Ignore checked-in python packages
-      '''(^|\/)lib\/python[^/]+\/site-packages''',
-      # Handle a lot of the github/docs cases
-      '''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
-      # Ignore aws secrets
-      '''(^|\/)\.?secrets.baseline$''',
-      # Ignore a github spec file
-      '''(^|\/)specs\/github\.json$''',
-  ]
-
-[[rules]]
-  id = 'c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a'
-  description = 'ArgoCD JWT'
-  # Based on shifted b64 encoded portions of '"iss":"argocd"'
-  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'imlzcyi6imfyz29jzc',
-    'jpc3mioijhcmdvy2qi',
-    'iaxnzijoiyxjnb2nki',
-  ]
-
-[[rules]]
-  id = 'ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51'
-  description = 'AWS IAM Unique Identifier'
-  # The funky not group at the beginning consists of ascii ranges
-  regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  secretGroup = 1
-  keywords = [
-    'a3t',
-    'abia',
-    'acca',
-    'agpa',
-    'aida',
-    'aipa',
-    'akia',
-    'anpa',
-    'anva',
-    'aroa',
-    'asia',
-  ]
-
-  [rules.allowlist]
-    regexTarget = 'line'
-    regexes = [
-      # Ingore example keys
-      '''\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]*)EXAMPLE\b''',
-      # Ignore presigned URLs
-      '''X-Amz-Signature''',
-      # Ignore sample/example values
-      '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
-    ]
-
-[[rules]]
-  id = '308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959'
-  description = 'AWS Secret Access Key'
-  regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 4
-  secretGroup = 1
-  keywords = [
-    'aws',
-  ]
-
-  [rules.allowlist]
-    regexTarget = 'line'
-    regexes = [
-      # Ignore ARNs here
-      '''arn:aws:iam:''',
-      # Ignore common placeholders
-      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
-      # Ignore EXAMPLE base64 encoded
-      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
-    ]
-
-[[rules]]
-  id = '2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1'
-  # Sometimes the values in the config are base64 encoded (e.g. in the case of openshift secrets)
-  description = 'Base64 Encoded AWS Secret Access Key'
-  regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'yxdzx2fjy2vzc19rzxlfaw',
-    'f3c19hy2nlc3nfa2v5x2lk',
-    'hd3nfywnjzxnzx2tlev9pz',
-  ]
-
-
-[[rules]]
-  id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
-  description = 'Container Registry Authentication'
-  regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = 'e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79'
-  description = 'Dynatrace Token'
-  regex = '''\bdt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = 'fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0'
-  description = 'Facebook Access Token'
-  regex = '''(?i)\b(\d{15,16}[|%][0-9a-z\-_]{27,40})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = '014d5c9e226a6458ec434d9a0d00f886f2fc7d8267c69daa10d510aebc5ad9b3'
-  description = 'Facebook Page Access Token'
-  regex = '''(?i)\b(EAA[MC][a-z0-9]{20,})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'eaam',
-    'eaac',
-   ]
-
-[[rules]]
-  id = '13852bbfce4794be0e9740ef28cd7cb9d06776b8d6428e3b4e8350bb03260528'
-  description = 'Facebook Secret'
-  regex = '''(?i)(?:facebook)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)(?:'|\"|\s|=|\x60){0,5}([a-f0-9]{32})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'facebook',
-  ]
-
-[[rules]]
-  id = '08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44'
-  description = 'General Secret'
-  # This one looks for tokens in files with extensions like:
-  # - app.clientSecret
-  # - cluster.token
-  # - user.password
-  path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
-  regex = '''[\S]{8,}'''
-  entropy = 3.35
-  tags = ['type:secret', 'alert:repo-owner']
-
-  [rules.allowlist]
-    stopwords = [
-      'example',
-      'insert',
-      'change',
-      'placeholder',
-    ]
-
-    paths = [
-      # Test data files are often false positives
-      '''(?:^|\/)testdata\/''',
-    ]
-
-    regexes = [
-      # Common placeholder values only have lower case letters and dashes
-      '''^[a-z\-]+$''',
-      # shebangs
-      '''^#!\s*\/''',
-    ]
-
-[[rules]]
-  id = 'cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22'
-  description = 'General Secret'
-  # Things like:
-  #   password = "value"
-  #   password_key = "value"
-  #   password-key = "value"
-  #   secret = "value"
-  #   secret = 'value'
-  #   secret_key = "value"
-  #   secret-key = "value"
-  #   secretkey = "value"
-  #   token = "value"
-  #   ...
-  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
-  entropy = 3.35
-  secretGroup = 1
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'password',
-    'secret',
-    'token',
-  ]
-
-  [rules.allowlist]
-    paths = [
-      # Test data are often false positives
-      '''(?:^|\/)testdata\/''',
-      # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it. But make sure to include the azure-cli aro modules
-      '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-      # Ignore OpenAPI spec files
-      '''(?:^|\/)openapi\.json$''',
-      '''(?i)openapi.*github[^\/]*\.json$''',
-    ]
-
-    stopwords = [
-      '/etc/',
-      '/run/',
-      '/var/',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'change',
-      'confirm',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'json',
-      'openstack',
-      'path',
-      'placeholder',
-      'private',
-      'provide',
-      'quickstart',
-      'replace',
-      'sample',
-      'secret',
-      'string',
-      'test',
-      'update',
-      'value',
-      'xxxxx',
-      'required',
-      'your_',
-      '1234',
-      'client',
-      'credentials',
-      'd3faultentry',
-      'registry',
-      'contrase',
-      'everyone',
-      'example',
-      'uuid',
-      'redhat',
-      'theblurstoftimes',
-      'token',
-      'principal',
-    ]
-
-    regexTarget = 'line'
-    regexes = [
-      # Things like:
-      #   secret = "asdfasdfas" # nosec (used by bandit)
-      '''#\s*?nosec(?:\s+|$)''',
-      #   secret = "asdfasdfas" # noqa: E501
-      '''#\s*?noqa(?::[\s\w]+)?$''',
-      #   secret = "asdfasdfas" //nolint:gosec
-      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
-      #   secret = "_PLACEHOLDER_"
-      #   secret = "<PLACEHOLDER>"
-      #   secret = "@PLACEHOLDER@"
-      #   secret = ").append("foo")
-      #   secret = "%PLACEHOLDER%"
-      #   secret = "$PLACEHOLDER$"
-      #   secret = "`PLACEHOLDER`"
-      #   secret = "[PLACEHOLDER]"
-      #   secret = "[%PLACEHOLDER%]"
-      #   secret = "$(PLACEHOLDER..."
-      #   secret = "\$(PLACEHOLDER..."
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
-      #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
-      #   secret = "{PLACEHOLDER}"
-      #   secret = "%{PLACEHOLDER}"
-      #   secret = "\%{PLACEHOLDER}"
-      #   secret = "${PLACEHOLDER}"
-      #   secret = "$\{PLACEHOLDER}"
-      #   secret = "\${PLACEHOLDER}"
-      #   secret = "#{PLACEHOLDER}"
-      #   secret = "\#{PLACEHOLDER}"
-      #   secret = "\${PLACEHOLDER}"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
-      #   secret = "Some...placeholder"
-      #   secret = "Some***placeholder"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
-      #   "secret="+some_var+"asdfa"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
-      #   secret = "(optional char)${PLACEHOLDER}(optional text)"
-      #   secret = "(optional char)#{PLACEHOLDER}(optional text)"
-      #   secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
-      #   secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
-      #   secret = "/SOME/path:${PLACEHOLDER}"
-      #   secret = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
-      #   secret = "$SOME_ENV_VARIABLE-optional-text"
-      #   secret = "'$SOME_ENV_VARIABLE-optional-text"
-      #   secret = "\$SOME_ENV_VARIABLE-optional-text"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[a-z\-]+[\"\']''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?[\"\']''',
-      # aws.* is already covered by a different rule
-      '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
-      # jq lookups
-      '''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
-      # Various words at the start and end that signify a placeholder
-      ## Starts with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|passw?[o0]?r?[dt]!?|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
-      ## Ends with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|passw?[o0]?r?[dt]\d*?!?|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
-      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
-       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
-      # Ignore things that are just escaped unicode characters for now
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:\\u[a-z0-9]{4})+[\"\']''',
-      # Already covered by the Slack Token rule
-      '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
-      # Already covered by GitHub rules
-      '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
-      '''\bgithub_pat_\w{82}\b''',
-      # Already covered byt GitLab rules
-      '''\bglpat-[\w\-]{20}\b''',
-      '''\bglptt-[0-9a-f]{40}\b''',
-      '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
-      # Ignore things that are probably password prompts in code
-      # Example: input("Enter Password:") # Something with "quotes" in it
-      '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
-    ]
-
-[[rules]]
-  id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
-  description = 'General Secret'
-  regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
-  entropy = 3.5
-  secretGroup = 1
-  tags = ['type:secret', 'alert:repo-owner']
-
-  [rules.allowlist]
-    paths = [
-      # Test data are often false positives
-      '''(?:^|\/)testdata\/''',
-      # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it. But make sure to include the azure-cli aro modules
-      '/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
-    ]
-
-    stopwords = [
-      'example',
-      'redhat',
-      '1234',
-      'token',
-      'newseveryone',
-      'clientsecret',
-      'client-secret',
-    ]
-
-    regexTarget = 'line'
-    regexes = [
-      # Things like
-      #   <secret>asdfasdfas</secret> <!-- nosec -->
-      '''(?:\s+|--)nosec(?:\s+|$)''',
-      #   <secret>asdfasdfas</secret> <!-- noqa: E501 -->
-      '''(?:\s+|--)noqa(?::[\s\w]+)?$''',
-      #   secret = "asdfasdfas" <!-- //nolint:gosec -->
-      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
-      #   <secret>$SOME_ENV_VARIABLE</secret>
-      #   <secret>SOME_ENV_VARIABLE</secret>
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?(?-i)[A-Z][0-9A-Z_]{4,}.*?(?:\]\]>)?<\/''',
-      #   <secret>${SOME_VARIABLE}</secret>
-      #   <secret>$SomeVariable$</secret>
-      #   <secret>{SOME_VARIABLE}</secret>
-      #   <secret>%{SOME_VARIABLE}</secret>
-      #   <secret>$(SOME_VARIABLE)</secret>
-      #   <secret>$\{SOME_VARIABLE}</secret>
-      #   <secret><SOME_VARIABLE></secret>
-      #   <secret>@SOME_VARIABLE@</secret>
-      #   <secret>[%SOME_VARIABLE%]</secret>
-      #   <secret>[SOME_VARIABLE]</secret>
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
-      #   <secret>SOME_CONSTANT_PREFIX_${PLACEHOLDER}</secret>
-      #   <secret>/SOME/path:${PLACEHOLDER}</secret>
-      #   <secret>/SOME/path:${PLACEHOLDER}${PLACEHOLDER}</secret>
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
-      #   <secret>asdfsadf...adfadsf</secret>(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/'
-      #   <secret>asdfsadf***asdfsa</secret>
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-      #   Base64 encoded EXAMPLE
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\]\]>)?<\/''',
-      # Various words at the start and end that signify a placeholder
-
-      ## Starts with
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC\[|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|passw?[o0]?r?[dt]!?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
-      ## Ends with
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|passw?[o0]?r?[dt]\d*?!?|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
-      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
-      # Ignore things that are just escaped unicode characters for now
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
-    ]
-
-[[rules]]
-  id = 'f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db'
-  description = 'GitHub Fine-Grained Personal Access Token'
-  regex = '''\bgithub_pat_\w{82}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'github_pat_',
-  ]
-
-[[rules]]
-  id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
-  description = 'GitHub OAuth Access Token'
-  regex = '''\bgho_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'gho_',
-  ]
-
-[[rules]]
-  id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
-  description = 'GitHub Personal Access Token'
-  regex = '''\bghp_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghp_',
-  ]
-
-[[rules]]
-  id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
-  description = 'GitHub Refresh Token'
-  regex = '''\bghr_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghr_',
-  ]
-
-[[rules]]
-  id = '357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614'
-  description = 'GitHub Server to Server Token'
-  regex = '''\bghs_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghs_',
-  ]
-
-[[rules]]
-  id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
-  description = 'GitHub User to Server Token'
-  regex = '''\bghu_[0-9A-Za-z]{36}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'ghu_',
-  ]
-
-[[rules]]
-  id = '0f6a47c693ad7a56c4a835f6aa7b38d18c343becae2f833fac2db51ecebd79e2'
-  description = 'GitLab Access Token'
-  regex = '''\bglpat-[\w\-]{20}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'glpat-',
-  ]
-
-[[rules]]
-  id = '798acef3dc3135b6c9482635a042cb405e3c050631ef0e3ccc3556dddc9254d1'
-  description = 'GitLab Pipeline Trigger Token'
-  regex = '''\bglptt-[0-9a-f]{40}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'glptt-',
-  ]
-
-[[rules]]
-  id = '7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8'
-  description = 'GitLab Runner Registration Token'
-  regex = '''\b(?:glrt-|GR1348941)[\w\-]{20}\b'''
-  entropy = 2
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'glrt-',
-    'gr1348941',
-  ]
-
-[[rules]]
-  id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
-  description = 'Google Cloud Platform API Key'
-  regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'aiza',
-  ]
-
-[[rules]]
-  id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
-  description = 'Google Cloud Platform Service Account Credentials'
-  # Should work multi line and require that at least 8 of the fields match
-  # We may need to put allowlist items with regexTarget = 'match' for ignoring
-  # example data. NOTE: This also currently doesn't handle any extra fields
-  # added in the json. Also it supports random fields on either side of the
-  # expected fields, but NOT mixed in the middle.
-  regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = '25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce'
-  description = 'Heroku API Token'
-  regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'heroku',
-  ]
-
-[[rules]]
-  id = '365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f'
-  description = 'Htpasswd File'
-  path = '''htpasswd[^\/]*?$'''
-  regex = '''[^:\s]{1,255}:(\S{1,255})'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 4
-
-  [rules.allowlist]
-    paths = [
-      # Ignore these file extensions with htpasswd in the name
-      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
-    ]
-
-    regexTarget = 'line'
-    regexes = [
-        '''^\s*#''',
-    ]
-
-[[rules]]
-  id = '35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe'
-  description = 'Hugging Face API Token'
-  regex = '''\b(hf_[a-zA-Z]{34})(?:[\'\"\s\x60;<]|$)'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'hf_',
-  ]
-
-[[rules]]
-  id = '50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49'
-  # base64 shifted versions of '"sub":"system:serviceaccount:'
-  description = 'Kubernetes System Service Account JWT'
-  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'inn1yii6inn5c3rlbtpzzxj2awnlywnjb3vudd',
-    'jzdwiioijzexn0zw06c2vydmljzwfjy291bnq6',
-    'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
-  ]
-
-[[rules]]
-  id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
-  description = 'MailChimp API Key'
-  regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '-us',
-  ]
-
-[[rules]]
-  id = '3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961'
-  description = 'Mailgun API Key'
-  regex = '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'mailgun',
-    'key-',
-  ]
-
-[[rules]]
-  id = 'c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b'
-  description = 'NPM Access Token'
-  regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.35
-  keywords = [
-    'npm_',
-  ]
-
-[[rules]]
-  id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
-  description = 'OpenShift Login Token'
-  regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 4.6
-  keywords = [
-    '--token',
-  ]
-
-[[rules]]
-  id = '0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c'
-  description = 'Password Hash'
-  regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$y$',
-  ]
-
-[[rules]]
-  id = 'd843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac'
-  description = 'Password Hash'
-  regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$gy$',
-  ]
-
-[[rules]]
-  id = 'e1074cf73d2a7d60b233984d261979b5d623277f03d0e334c67a71c99362c6c1'
-  description = 'Password Hash'
-  regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$7$',
-  ]
-
-[[rules]]
-  id = 'a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013'
-  description = 'Password Hash'
-  regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$2a$',
-    '$2b$',
-    '$2x$',
-    '$2y$',
-  ]
-
-[[rules]]
-  id = 'a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe'
-  description = 'Password Hash'
-  regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$6$',
-  ]
-
-[[rules]]
-  id = 'b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e'
-  description = 'Password Hash'
-  regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$5$',
-  ]
-
-[[rules]]
-  id = 'b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589'
-  description = 'Password Hash'
-  regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$md5',
-  ]
-
-[[rules]]
-  id = '65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077'
-  description = 'Password Hash'
-  regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    '$1$',
-  ]
-
-[[rules]]
-  id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
-  description = 'OpenAI API Key'
-  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[\'\"\s\x60;<]|$)'''
-  keywords = [
-    't3blbkfj',
-  ]
-
-[[rules]]
-  id = 'fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85'
-  # find base64 encoded versions of OpenSSH private keys
-  description = 'OpenSSH Private Key'
-  regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
-  description = 'PayPal Braintree Access Token'
-  regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'access_token$production$',
-  ]
-
-[[rules]]
-  id = 'a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb'
-  description = 'Picatic API Key'
-  regex = '''\bsk_live_[0-9a-z]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'sk_live_',
-  ]
-
-[[rules]]
-  id = 'f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587'
-  description = 'PKCS #12 File'
-  path = '''(^|\/)[^\/]+\.p12$'''
-  tags = ['type:secret', 'alert:repo-owner']
-
-[[rules]]
-  id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
-  description = 'Private Key'
-  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-      '-----begin',
-  ]
-
-  [rules.allowlist]
-    regexTarget = "line"
-    paths = [
-      # Test data are often false positives
-      '''(^|\/)testdata\/''',
-      # Ignore keys in a test(s) folder
-      '''test(s)?\/.*.(txt|der|key|pem)$''',
-      # Ignore keys with test in their name
-      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
-      # Ignore common example keys
-      '''(dummy|example).*(key|pem)''',
-      # Ignore ssh utilities that might have key headers in them
-      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
-      # Ignore libs that might have key headers in them
-      '''\/lib\w+\/lib(gnutls|ssh).so''',
-      # Ignore utils that might have key headers in them
-      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
-      # Data dirs that contain key headers to identify them
-      '''\/usr\/share\/(mime|misc)''',
-    ]
-
-    regexes = [
-      # Ignore example keys
-      '''(?i)-----BEGIN (DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',
-      # Anything less than 15 characters
-      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
-      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?(\.\.\.|\*\*\*|xxx)[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
-      # Ignore some keys assigned to test vars
-      # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
-      '''(?i)\w*(dummy|example|fake|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
-      # Things that look like code looking for headers
-      #   like: if (privateKey === "-----BEGIN RSA PRIVATE KEY-----") {
-      '''if.*==\s*?[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
-      #   like: ("-----BEGIN RSA PRIVATE KEY-----")
-      '''\([\"\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----(\\n)?[\"\']''',
-      #  things ending with stuff like # noqa: E501
-      '''#\s*?noqa(:[\s\w]+)?$''',
-    ]
-
-[[rules]]
-  id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
-  description = 'PyPI Upload Token'
-  regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'pypi-ageichlwas5vcmc',
-  ]
-
-[[rules]]
-  id = '76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa'
-  description = 'SendGrid API Key'
-  regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'sg.',
-  ]
-
-[[rules]]
-  id = '37a8264122df85941c43def588a1220665951ca17fcf91e8bccff786fc9f2ec7'
-  description = 'Shopify Access Token'
-  regex = '''\bshpat_[a-fA-F0-9]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'shpat_',
-  ]
-
-[[rules]]
-  id = '96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9'
-  description = 'Shopify Custom App Access Token'
-  regex = '''\bshpca_[a-fA-F0-9]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'shpca_',
-  ]
-
-[[rules]]
-  id = '7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512'
-  description = 'Shopify Private App Access Token'
-  regex = '''\bshppa_[a-fA-F0-9]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'shppa_',
-  ]
-
-[[rules]]
-  id = 'b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a'
-  description = 'Shopify Shared Secret'
-  regex = '''\bshpss_[a-fA-F0-9]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'shpss_',
-  ]
-
-[[rules]]
-  id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
-  description = 'Slack Bot Token'
-  regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  keywords = [
-    'xoxb-',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      '1234',
-      'some',
-      'placeholder',
-      'slack',
-    ]
-
-[[rules]]
-  id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
-  description = 'Slack Legacy Bot Token'
-  regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  keywords = [
-    'xoxb-',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      '1234',
-      'some',
-      'placeholder',
-      'slack',
-    ]
-
-[[rules]]
-  id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
-  description = 'Slack Legacy Token'
-  regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  keywords = [
-    'xoxo-',
-    'xoxs-',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      '1234',
-      'some',
-      'placeholder',
-      'slack',
-    ]
-
-[[rules]]
-  id = 'd1161f5f02c4ee44f2a3b0bf9dff89fe7b2986bf2aac52b62602d1fcd09a6b34'
-  description = 'Slack Legacy Workspace Token'
-  regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  keywords = [
-    'xoxa-',
-    'xoxr-',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      '1234',
-      'some',
-      'placeholder',
-      'slack',
-    ]
-
-[[rules]]
-  id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
-  description = 'Slack User Token'
-  regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 3.2
-  keywords = [
-    'xoxp-',
-    'xoxe-',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      '1234',
-      'some',
-      'placeholder',
-      'slack',
-    ]
-
-[[rules]]
-  id = 'df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6'
-  description = 'Slack Webhook URL'
-  regex = '''(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows)\/[A-Za-z0-9+\/]{43,46}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 4.75
-  keywords = [
-    'hooks.slack.com',
-  ]
-
-[[rules]]
-  id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
-  description = 'Square Access Token'
-  regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'sq0atp-',
-  ]
-
-[[rules]]
-  id = '8479e7e8807be5b1d3f57cad64bb6f7eede0f01d1819bf65ba5ab7867e12c869'
-  description = 'Square OAuth Secret'
-  regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'sq0csp-',
-  ]
-
-[[rules]]
-  id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
-  description = 'Stripe API Key'
-  regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'k_live_',
-  ]
-
-[[rules]]
-  id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
-  description = 'Twilio API Key'
-  regex = '''\bSK(?i)[0-9a-f]{32}\b'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'SK',
-  ]
-
-[[rules]]
-  id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
-  description = 'URL User and Password'
-  regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
-  tags = ['type:secret', 'alert:repo-owner']
-  entropy = 2.4
-  secretGroup = 1
-
-  [rules.allowlist]
-    paths = [
-      # Usually a project not owned by the user that has a lot of FPs for us when
-      # folks fork it. But make sure to include the azure-cli aro modules
-      '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-    ]
-
-    stopwords = [
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'candlepin',
-      'change',
-      'client',
-      'confirm',
-      'contrase',
-      'data',
-      'default',
-      'demo',
-      'fake',
-      'gitops',
-      'keylime',
-      'oauth-basic',
-      'openstack',
-      'passw0rd',
-      'passwd',
-      'password',
-      'pbench',
-      'placeholder',
-      'postgres',
-      'prisma',
-      'provide',
-      'rabbitmq',
-      'redhat',
-      'replace',
-      'sample',
-      'secret',
-      'telemetry',
-      'token',
-      'update',
-      'userpass',
-      'value',
-    ]
-
-    regexTarget = 'match'
-    regexes = [
-      # Things like: https://user:__pass__@host
-      # Things like: https://user:%pass%@host
-      # Things like: https://user:<pass>@host
-      # Things like: https://user:[pass]@host
-      ''':\/\/[^:\/\s\"\']*?:(?:\[[^@\/\s\"]+\]|__[^@\/\s\"]+__|%[^@\/\s\"]+% |\[?_?<[^@\/\s\"]+>_?\]?)@[\w\.\-]+''',
-      # Things like: https://user:&lt;pass&gt;@host (HTML for <pass>)
-      ''':\/\/[^:\/\s\"\']*?:&lt;[^@\/\s\"]+&gt;@[\w\.\-]+''',
-      # Things like: https://user:$pass$@host
-      # Things like: https://user:$pass@host
-      '''(?i):\/\/[^:\/\s\"\']*?:\$[a-z][a-z\_\-]+\$?@[\w\.\-]+''',
-      # Things like: https://user:afacae....adsfae@host
-      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]*(?:\.\.\.|\*\*\*|xxxxx)[^@\/\s\"]*@[\w\.\-]+''',
-      # Things like: https://user:${pass}@host
-      # Things like: https://user:\${pass}@host
-      # Things like: https://user:{pass}@host
-      # Things like: https://user:#{pass}@host
-      # Things like: https://user:$(pass)@host
-       ''':\/\/[^:\/\s\"\']*?:\"?(\\?\$|#)?(:?\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
-      # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
-      ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
-      # Things like: https://host:port,org.java.stuff@commit
-      ''':\/\/[^:\/\s\"\']*?:\d{3,4},[\w\.]+@[\w\.\-]+''',
-      # Hostnaames to ignore (most hostnames that are just a-z are FPs and there\s example hosts and such)
-      ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
-      # ip:port type placeholders
-      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
-      # Things like regexes for URLs
-      ''':\/\/.{0,6}(a-z|0-9|A-Z)''',
-    ]
-
-
-[[rules]]
-  id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
-  description = 'WP-Config'
-  regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
-  tags = ['type:secret', 'alert:repo-owner']
-  secretGroup = 1
-
-  [rules.allowlist]
-    stopwords = [
-      'auth',
-      'example',
-      'insert',
-      'localhost',
-      'passw0rd',
-      'passwd',
-      'password',
-      'place',
-      'required',
-      'secret',
-    ]
-
-    regexes = [
-      # Things like:
-      #   define('AUTH_KEY', '${AUTH_KEY}')
-      #   define('AUTH_KEY', '$AUTH_KEY')
-      #   define('AUTH_KEY', '{{AUTH_KEY}}')
-      #   define('AUTH_KEY', '<AUTH_KEY>')
-      '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
-    ]
-
-# Testing Patterns
-#
-# These patterns are the lowest presidence (i.e. 99-) because they could
-# collide with other production patterns. Since secret leak uniquness is
-# currently being determined by line (combined with some other attrs), these
-# collisions were causing things to be missed. Putting them at the end should
-# resolve that.
-#
-# The Structure of This File
-#
-# This file is broken into multiple sections. Each section starts with # [file:
-# and the filename that the patterns in that section will go into once
-# production ready.
-#
-# Tags
-#
-# All rules in this should have the group:leaktk-testing tag set and no alert:*
-# tags set in addition to the other tags called out by the README.
-#
-# Promoting to Production
-#
-# The test patterns are deployed to the pattern server just like the other
-# patterns. The leaktk-testing group and lack of alert tags put them in a sort
-# of "test mode". The general process for making them production ready is:
-#
-# 1 Deploy the patterns
-# 2 Wait 30 days
-# 3 Review the scanner results during the monthly tuning
-# 4 Tune the patterns
-# 5 If there were too many false positives in the last 30 days, repeat 1-5
-# 6 Move the test patterns to the file called out by their section
-# 7 Remove the group:leatk-testing tag and add the appropriate alert tags
-# 8 Repeat
-#
-# Note About Moving Patterns
-#
-# Try to keep patterns roughly alphabetically and/or grouped together. Or rather
-# don't spread related patterns out. Spreading them out makes it harder to
-# notice when changes need to be made in multiple places with related patterns.
-#
-
-# [file:98-general.toml]
-# TODO
-# "AWS Account ID"
-# "Base64 Encoded AWS Secret Key"
-# "General Secret"
-# "NPM Registry Auth"
-# "Password Hash"
-# "Slack App Token"
-# "Slack Config Access Token"
-# "Slack Config Refresh Token"
-# "System Service Account JWT"
-# "(Token) General Secret"
-# "(Unrestricted) Container Registry Authentication"
-# "(YAML) General Secret"
-
-[[rules]]
-  id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
-  description = 'Tines Webhook'
-  regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
-  tags = ['group:leaktk-testing', 'type:secret']
-
+description = "Global Allowlist"
+regexTarget = "line"
+regexes = [
+'''(^|\#|\/\/|\s)notsecret(\s|$)''',
+]
+paths = [
+'''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+'''quickstart''',
+'''(^|\/)node_modules\/''',
+'''vendor''',
+'''(^|\/)gems\/''',
+'''(^|\/)Godeps\/''',
+'''(^|\/)go\.(mod|sum)$''',
+'''(^|\/).?gitleaks''',
+'''(^|\/)lib\/python[^/]+\/site-packages''',
+'''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+'''(^|\/)\.?secrets.baseline$''',
+'''(^|\/)specs\/github\.json$''',
+]
+[[rules]]
+id = 'c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a'
+description = 'ArgoCD JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'imlzcyi6imfyz29jzc',
+'jpc3mioijhcmdvy2qi',
+'iaxnzijoiyxjnb2nki',
+]
+[[rules]]
+id = 'ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51'
+description = 'AWS IAM Unique Identifier'
+regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+secretGroup = 1
+keywords = [
+'a3t',
+'abia',
+'acca',
+'agpa',
+'aida',
+'aipa',
+'akia',
+'anpa',
+'anva',
+'aroa',
+'asia',
+]
+[rules.allowlist]
+regexTarget = 'line'
+regexes = [
+'''\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]*)EXAMPLE\b''',
+'''X-Amz-Signature''',
+'''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
+]
+[[rules]]
+id = '308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959'
+description = 'AWS Secret Access Key'
+regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 4
+secretGroup = 1
+keywords = [
+'aws',
+]
+[rules.allowlist]
+regexTarget = 'line'
+regexes = [
+'''arn:aws:iam:''',
+'''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
+'''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
+]
+[[rules]]
+id = '2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1'
+description = 'Base64 Encoded AWS Secret Access Key'
+regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'yxdzx2fjy2vzc19rzxlfaw',
+'f3c19hy2nlc3nfa2v5x2lk',
+'hd3nfywnjzxnzx2tlev9pz',
+]
+[[rules]]
+id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
+description = 'Container Registry Authentication'
+regex = '''\{[\s\S]*?\\?"auths\\?"\s*?:\s*?\{\s*?(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*?:\s*?\{\s*?\\?"auth\\?"\s*?:\s*?\\?".{32,}?\\?",?[\s\S]*?\},?\s*)+\}[\s\S]*}'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = 'e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79'
+description = 'Dynatrace Token'
+regex = '''\bdt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = 'fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0'
+description = 'Facebook Access Token'
+regex = '''(?i)\b(\d{15,16}[|%][0-9a-z\-_]{27,40})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = '014d5c9e226a6458ec434d9a0d00f886f2fc7d8267c69daa10d510aebc5ad9b3'
+description = 'Facebook Page Access Token'
+regex = '''(?i)\b(EAA[MC][a-z0-9]{20,})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'eaam',
+'eaac',
+]
+[[rules]]
+id = '13852bbfce4794be0e9740ef28cd7cb9d06776b8d6428e3b4e8350bb03260528'
+description = 'Facebook Secret'
+regex = '''(?i)(?:facebook)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)(?:'|\"|\s|=|\x60){0,5}([a-f0-9]{32})(?:['|\"|\n|\r|\s|\x60|;]|$)'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'facebook',
+]
+[[rules]]
+id = '08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44'
+description = 'General Secret'
+path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
+regex = '''[\S]{8,}'''
+entropy = 3.35
+tags = ['type:secret', 'alert:repo-owner']
+[rules.allowlist]
+stopwords = [
+'example',
+'insert',
+'change',
+'placeholder',
+]
+paths = [
+'''(?:^|\/)testdata\/''',
+]
+regexes = [
+'''^[a-z\-]+$''',
+'''^#!\s*\/''',
+]
+[[rules]]
+id = 'cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22'
+description = 'General Secret'
+regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
+entropy = 3.35
+secretGroup = 1
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'password',
+'secret',
+'token',
+]
+[rules.allowlist]
+paths = [
+'''(?:^|\/)testdata\/''',
+'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+'''(?:^|\/)openapi\.json$''',
+'''(?i)openapi.*github[^\/]*\.json$''',
+]
+stopwords = [
+'/etc/',
+'/run/',
+'/var/',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'bool:',
+'change',
+'confirm',
+'data/',
+'default',
+'demo',
+'django',
+'enter',
+'fake',
+'hash',
+'here',
+'invalid',
+'json',
+'openstack',
+'path',
+'placeholder',
+'private',
+'provide',
+'quickstart',
+'replace',
+'sample',
+'secret',
+'string',
+'test',
+'update',
+'value',
+'xxxxx',
+'required',
+'your_',
+'1234',
+'client',
+'credentials',
+'d3faultentry',
+'registry',
+'contrase',
+'everyone',
+'example',
+'uuid',
+'redhat',
+'theblurstoftimes',
+'token',
+'principal',
+]
+regexTarget = 'line'
+regexes = [
+'''#\s*?nosec(?:\s+|$)''',
+'''#\s*?noqa(?::[\s\w]+)?$''',
+'''\/\/\s*?nolint:gosec(?:\s+|$)''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[a-z\-]+[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?[\"\']''',
+'''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
+'''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|passw?[o0]?r?[dt]!?|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|passw?[o0]?r?[dt]\d*?!?|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?[:=]\s*?[\"\'](?:\\u[a-z0-9]{4})+[\"\']''',
+'''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
+'''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+'''\bgithub_pat_\w{82}\b''',
+'''\bglpat-[\w\-]{20}\b''',
+'''\bglptt-[0-9a-f]{40}\b''',
+'''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+'''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
+]
+[[rules]]
+id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
+description = 'General Secret'
+regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
+entropy = 3.5
+secretGroup = 1
+tags = ['type:secret', 'alert:repo-owner']
+[rules.allowlist]
+paths = [
+'''(?:^|\/)testdata\/''',
+'/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
+]
+stopwords = [
+'example',
+'redhat',
+'1234',
+'token',
+'newseveryone',
+'clientsecret',
+'client-secret',
+]
+regexTarget = 'line'
+regexes = [
+'''(?:\s+|--)nosec(?:\s+|$)''',
+'''(?:\s+|--)noqa(?::[\s\w]+)?$''',
+'''\/\/\s*?nolint:gosec(?:\s+|$)''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?(?-i)[A-Z][0-9A-Z_]{4,}.*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC\[|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|passw?[o0]?r?[dt]!?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|passw?[o0]?r?[dt]\d*?!?|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
+]
+[[rules]]
+id = 'f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db'
+description = 'GitHub Fine-Grained Personal Access Token'
+regex = '''\bgithub_pat_\w{82}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'github_pat_',
+]
+[[rules]]
+id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
+description = 'GitHub OAuth Access Token'
+regex = '''\bgho_[0-9A-Za-z]{36}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'gho_',
+]
+[[rules]]
+id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
+description = 'GitHub Personal Access Token'
+regex = '''\bghp_[0-9A-Za-z]{36}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'ghp_',
+]
+[[rules]]
+id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
+description = 'GitHub Refresh Token'
+regex = '''\bghr_[0-9A-Za-z]{36}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'ghr_',
+]
+[[rules]]
+id = '357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614'
+description = 'GitHub Server to Server Token'
+regex = '''\bghs_[0-9A-Za-z]{36}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'ghs_',
+]
+[[rules]]
+id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
+description = 'GitHub User to Server Token'
+regex = '''\bghu_[0-9A-Za-z]{36}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'ghu_',
+]
+[[rules]]
+id = '0f6a47c693ad7a56c4a835f6aa7b38d18c343becae2f833fac2db51ecebd79e2'
+description = 'GitLab Access Token'
+regex = '''\bglpat-[\w\-]{20}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'glpat-',
+]
+[[rules]]
+id = '798acef3dc3135b6c9482635a042cb405e3c050631ef0e3ccc3556dddc9254d1'
+description = 'GitLab Pipeline Trigger Token'
+regex = '''\bglptt-[0-9a-f]{40}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'glptt-',
+]
+[[rules]]
+id = '7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8'
+description = 'GitLab Runner Registration Token'
+regex = '''\b(?:glrt-|GR1348941)[\w\-]{20}\b'''
+entropy = 2
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'glrt-',
+'gr1348941',
+]
+[[rules]]
+id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
+description = 'Google Cloud Platform API Key'
+regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'aiza',
+]
+[[rules]]
+id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
+description = 'Google Cloud Platform Service Account Credentials'
+regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = '25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce'
+description = 'Heroku API Token'
+regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'heroku',
+]
+[[rules]]
+id = '365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f'
+description = 'Htpasswd File'
+path = '''htpasswd[^\/]*?$'''
+regex = '''[^:\s]{1,255}:(\S{1,255})'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 4
+[rules.allowlist]
+paths = [
+'''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+]
+regexTarget = 'line'
+regexes = [
+'''^\s*#''',
+]
+[[rules]]
+id = '35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe'
+description = 'Hugging Face API Token'
+regex = '''\b(hf_[a-zA-Z]{34})(?:[\'\"\s\x60;<]|$)'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'hf_',
+]
+[[rules]]
+id = '50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49'
+description = 'Kubernetes System Service Account JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'inn1yii6inn5c3rlbtpzzxj2awnlywnjb3vudd',
+'jzdwiioijzexn0zw06c2vydmljzwfjy291bnq6',
+'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
+]
+[[rules]]
+id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
+description = 'MailChimp API Key'
+regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'-us',
+]
+[[rules]]
+id = '3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961'
+description = 'Mailgun API Key'
+regex = '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'mailgun',
+'key-',
+]
+[[rules]]
+id = 'c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b'
+description = 'NPM Access Token'
+regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.35
+keywords = [
+'npm_',
+]
+[[rules]]
+id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
+description = 'OpenShift Login Token'
+regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 4.6
+keywords = [
+'--token',
+]
+[[rules]]
+id = '0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c'
+description = 'Password Hash'
+regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$y$',
+]
+[[rules]]
+id = 'd843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac'
+description = 'Password Hash'
+regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$gy$',
+]
+[[rules]]
+id = 'e1074cf73d2a7d60b233984d261979b5d623277f03d0e334c67a71c99362c6c1'
+description = 'Password Hash'
+regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$7$',
+]
+[[rules]]
+id = 'a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013'
+description = 'Password Hash'
+regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$2a$',
+'$2b$',
+'$2x$',
+'$2y$',
+]
+[[rules]]
+id = 'a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe'
+description = 'Password Hash'
+regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$6$',
+]
+[[rules]]
+id = 'b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e'
+description = 'Password Hash'
+regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$5$',
+]
+[[rules]]
+id = 'b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589'
+description = 'Password Hash'
+regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$md5',
+]
+[[rules]]
+id = '65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077'
+description = 'Password Hash'
+regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'$1$',
+]
+[[rules]]
+id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
+description = 'OpenAI API Key'
+regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[\'\"\s\x60;<]|$)'''
+keywords = [
+'t3blbkfj',
+]
+[[rules]]
+id = 'fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85'
+description = 'OpenSSH Private Key'
+regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
+description = 'PayPal Braintree Access Token'
+regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'access_token$production$',
+]
+[[rules]]
+id = 'a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb'
+description = 'Picatic API Key'
+regex = '''\bsk_live_[0-9a-z]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'sk_live_',
+]
+[[rules]]
+id = 'f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587'
+description = 'PKCS #12 File'
+path = '''(^|\/)[^\/]+\.p12$'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
+id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
+description = 'Private Key'
+regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'-----begin',
+]
+[rules.allowlist]
+regexTarget = "line"
+paths = [
+'''(^|\/)testdata\/''',
+'''test(s)?\/.*.(txt|der|key|pem)$''',
+'''[^\/]+test[^\/]+(txt|der|key|pem)$''',
+'''(dummy|example).*(key|pem)''',
+'''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+'''\/lib\w+\/lib(gnutls|ssh).so''',
+'''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+'''\/usr\/share\/(mime|misc)''',
+]
+regexes = [
+'''(?i)-----BEGIN (DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',
+'''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
+'''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?(\.\.\.|\*\*\*|xxx)[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
+'''(?i)\w*(dummy|example|fake|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
+'''if.*==\s*?[\"|\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\"|\']''',
+'''\([\"\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----(\\n)?[\"\']''',
+'''#\s*?noqa(:[\s\w]+)?$''',
+]
+[[rules]]
+id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
+description = 'PyPI Upload Token'
+regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'pypi-ageichlwas5vcmc',
+]
+[[rules]]
+id = '76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa'
+description = 'SendGrid API Key'
+regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'sg.',
+]
+[[rules]]
+id = '37a8264122df85941c43def588a1220665951ca17fcf91e8bccff786fc9f2ec7'
+description = 'Shopify Access Token'
+regex = '''\bshpat_[a-fA-F0-9]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'shpat_',
+]
+[[rules]]
+id = '96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9'
+description = 'Shopify Custom App Access Token'
+regex = '''\bshpca_[a-fA-F0-9]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'shpca_',
+]
+[[rules]]
+id = '7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512'
+description = 'Shopify Private App Access Token'
+regex = '''\bshppa_[a-fA-F0-9]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'shppa_',
+]
+[[rules]]
+id = 'b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a'
+description = 'Shopify Shared Secret'
+regex = '''\bshpss_[a-fA-F0-9]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'shpss_',
+]
+[[rules]]
+id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
+description = 'Slack Bot Token'
+regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxb-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
+id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
+description = 'Slack Legacy Bot Token'
+regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxb-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
+id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
+description = 'Slack Legacy Token'
+regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxo-',
+'xoxs-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
+id = 'd1161f5f02c4ee44f2a3b0bf9dff89fe7b2986bf2aac52b62602d1fcd09a6b34'
+description = 'Slack Legacy Workspace Token'
+regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxa-',
+'xoxr-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
+id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
+description = 'Slack User Token'
+regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxp-',
+'xoxe-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
+id = 'df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6'
+description = 'Slack Webhook URL'
+regex = '''(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows)\/[A-Za-z0-9+\/]{43,46}'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 4.75
+keywords = [
+'hooks.slack.com',
+]
+[[rules]]
+id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
+description = 'Square Access Token'
+regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'sq0atp-',
+]
+[[rules]]
+id = '8479e7e8807be5b1d3f57cad64bb6f7eede0f01d1819bf65ba5ab7867e12c869'
+description = 'Square OAuth Secret'
+regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'sq0csp-',
+]
+[[rules]]
+id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
+description = 'Stripe API Key'
+regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'k_live_',
+]
+[[rules]]
+id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
+description = 'Twilio API Key'
+regex = '''\bSK(?i)[0-9a-f]{32}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'SK',
+]
+[[rules]]
+id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
+description = 'URL User and Password'
+regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 2.4
+secretGroup = 1
+[rules.allowlist]
+paths = [
+'''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+]
+stopwords = [
+'1234',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'bool:',
+'candlepin',
+'change',
+'client',
+'confirm',
+'contrase',
+'data',
+'default',
+'demo',
+'fake',
+'gitops',
+'keylime',
+'oauth-basic',
+'openstack',
+'passw0rd',
+'passwd',
+'password',
+'pbench',
+'placeholder',
+'postgres',
+'prisma',
+'provide',
+'rabbitmq',
+'redhat',
+'replace',
+'sample',
+'secret',
+'telemetry',
+'token',
+'update',
+'userpass',
+'value',
+]
+regexTarget = 'match'
+regexes = [
+''':\/\/[^:\/\s\"\']*?:(?:\[[^@\/\s\"]+\]|__[^@\/\s\"]+__|%[^@\/\s\"]+% |\[?_?<[^@\/\s\"]+>_?\]?)@[\w\.\-]+''',
+''':\/\/[^:\/\s\"\']*?:&lt;[^@\/\s\"]+&gt;@[\w\.\-]+''',
+'''(?i):\/\/[^:\/\s\"\']*?:\$[a-z][a-z\_\-]+\$?@[\w\.\-]+''',
+''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]*(?:\.\.\.|\*\*\*|xxxxx)[^@\/\s\"]*@[\w\.\-]+''',
+''':\/\/[^:\/\s\"\']*?:\"?(\\?\$|#)?(:?\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
+''':\/\/[^:\/\s\"\']*?:\d{3,4},[\w\.]+@[\w\.\-]+''',
+''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
+''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
+''':\/\/.{0,6}(a-z|0-9|A-Z)''',
+]
+[[rules]]
+id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
+description = 'WP-Config'
+regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
+tags = ['type:secret', 'alert:repo-owner']
+secretGroup = 1
+[rules.allowlist]
+stopwords = [
+'auth',
+'example',
+'insert',
+'localhost',
+'passw0rd',
+'passwd',
+'password',
+'place',
+'required',
+'secret',
+]
+regexes = [
+'''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
+]
+[[rules]]
+id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
+description = 'Tines Webhook'
+regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+tags = ['group:leaktk-testing', 'type:secret']
