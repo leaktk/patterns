@@ -830,6 +830,11 @@ regexes = [
 '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
 ]
 [[rules]]
+id = '538346458f04daa723c81812eb5f5a84198efbba46e6aa01f4341d8bf325dac6'
+description = 'Snowflake OAuth Token'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
 id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
 description = 'Tines Webhook'
 regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
