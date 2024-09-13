@@ -345,5 +345,5 @@
 [[rules]]
   id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
   description = 'Testing Farm API Token'
-  regex = '''\bTESTING_FARM_API_TOKEN=[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b'''
+  regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?:[\"\']|\b)'''
   tags = ['type:secret', 'group:leaktk-testing']
