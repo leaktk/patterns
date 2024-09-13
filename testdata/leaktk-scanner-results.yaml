@@ -1386,6 +1386,22 @@
   secret: rk_live_xf2fh0Hu3LqXlqqUg2DEWhEz
 
 #
+# Testing Farm API Token
+#
+
+- rule.description: Testing Farm API Token
+  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
+  location.path: testing-farm
+  match: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
+  secret: 00f83e10-d568-41af-b350-de8675ab1d08
+
+- rule.description: Testing Farm API Token
+  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
+  location.path: testing-farm
+  match: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08
+  secret: 10f83e10-d568-41af-b350-de8675ab1d08
+
+#
 # Tines
 #
 

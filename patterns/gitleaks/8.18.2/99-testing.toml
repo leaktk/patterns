@@ -66,7 +66,13 @@
 # "(YAML) General Secret"
 
 [[rules]]
+  id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
+  description = 'Testing Farm API Token'
+  regex = '''\bTESTING_FARM_API_TOKEN=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
   id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
   description = 'Tines Webhook'
   regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
-  tags = ['group:leaktk-testing', 'type:secret']
+  tags = ['type:secret', 'group:leaktk-testing']
