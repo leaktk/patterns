@@ -347,3 +347,18 @@
   description = 'Testing Farm API Token'
   regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?:[\"\']|\b)'''
   tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  description = 'Groq API Key'
+  regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  description = 'OpenAI API Key'
+  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  description = 'Hugging Face API Token'
+  regex = '''\bhf_[a-zA-Z]{34}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
