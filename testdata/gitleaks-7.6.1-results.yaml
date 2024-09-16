@@ -289,11 +289,6 @@
   line: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
 - rule: General Secret
-  file: .npmrc
-  offender: Token=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-  line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
-
-- rule: General Secret
   file: some.secret
   offender: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
   line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
@@ -362,31 +357,6 @@
   file: general-test
   offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-
-- rule: General Secret
-  file: general-test
-  offender: 'api_key=1b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'api_key=2b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'api_key=3b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'api_key=4b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: 'api_key=5b3d576ba5a108c3b7374142bfd02992 '
-  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
 
 - rule: General Secret
   file: general-test
@@ -507,31 +477,6 @@
   file: general-test
   offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
   line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret=1b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret=2b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret=3b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret=4b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret=5b3d576ba5a108c3b7374142bfd02992 '
-  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
 
 - rule: General Secret
   file: general-test
@@ -881,19 +826,9 @@
   offender: =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
   line: SENDGRID_API_KEY=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
 
-- rule: General Secret
-  file: sendgrid
-  offender: API_KEY=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
-  line: SENDGRID_API_KEY=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
-
 - rule: SendGrid API Key
   file: sendgrid
   offender: =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
-  line: SENDGRID_API_KEY=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
-
-- rule: General Secret
-  file: sendgrid
-  offender: API_KEY=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
   line: SENDGRID_API_KEY=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
 
 - rule: Slack User Token
@@ -1039,16 +974,6 @@
   offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
   line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
 
-- rule: MailChimp API Key
-  file: mailchimp
-  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-
-- rule: General Secret
-  file: mailchimp
-  offender: api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-
 - rule: Heroku API Token
   file: semgrep-rules-examples/detected-heroku-api-key.txt
   offender: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
@@ -1068,19 +993,9 @@
   offender: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
   line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
 
-- rule: General Secret
-  file: semgrep-rules-examples/detected-slack-token.txt
-  offender: TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
-  line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
-
 - rule: Slack User Token
   file: semgrep-rules-examples/detected-slack-token.txt
   offender: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
-  line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-slack-token.txt
-  offender: TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
   line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
 
 - rule: Slack Webhook URL
@@ -1102,11 +1017,6 @@
   file: semgrep-rules-examples/detected-username-and-password-in-uri.txt
   offender: ://{get_user_name}:pwdTest123+@github.com
   line: f"https://{get_user_name}:pwdTest123+@github.com/"
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: TOKEN=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
-  line: GITHUB_TOKEN=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
 
 - rule: GitHub Personal Access Token
   file: semgrep-rules-examples/detected-github-token.txt
@@ -1148,45 +1058,10 @@
   offender: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
   line: '  "access_token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ",'
 
-- rule: General Secret
-  file: semgrep-rules-examples/detected-codeclimate.txt
-  offender: TOKEN=746b31b417ecc5cff872bac5746b31b417ecc5cff872bac51234567890abcdef
-  line: CODECLIMATE_API_TOKEN=746b31b417ecc5cff872bac5746b31b417ecc5cff872bac51234567890abcdef
-
 - rule: Password Hash
   file: semgrep-rules-examples/detected-etc-shadow.txt
   offender: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
   line: 'ubuntu:$6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1:0:99999:7:::'
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD&pretty=0&fields=id&limit=1000&after=MzQxNDM1MTE2MjQ0Njk4
-  line: User UID groub = https://graph.facebook.com/v2.8/218718188140085/members?access_token=EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD&pretty=0&fields=id&limit=1000&after=MzQxNDM1MTE2MjQ0Njk4
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
-  line: User UID comment = https://graph.facebook.com/v2.8/1513562778655613/comments?format=json&access_token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
-  line: User UID likes = https://graph.facebook.com/v2.8/1513562778655613/likes?format=json&access_token=EAAAACZAVC6ygBAAvRshdD1iGP7VZAR4JMQxRhnViVIjzoIV3nCnZBejzSsCwCgRs5aZAAbBNI837xWZBnAMCRIdZADqjjpOtZAGBDgZBcUz5l7n0IqK53MKKcyeCIBZBIDVSkaqth983q5avmR2gq61ZBfHGPiGAa64IYZD
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD&pretty=0&fields=id&limit=25&after=OTA3MjI3ODI5Mjg4ODM4
-  line: User UID Page likes = https://graph.facebook.com/v2.8/10154914419175179/likes?access_token=EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD&pretty=0&fields=id&limit=25&after=OTA3MjI3ODI5Mjg4ODM4
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
-  line: https://graph.facebook.com/me/home?fields=id&limit=1&access_token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-facebook-access-token.txt
-  offender: token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
-  line: https://graph.facebook.com/1706112245_10207208047355275/reactions?type=WOW&method=post&access_token=EAAAAZAw4FxQIBAElafKg4s32XtMxE5POc9hAHgggZBSmkK0cRPkZBSTpKWGhjpz7snU8XItOqqQwWS02ZBN8NjcMwe9aZAoVoHa5gYNQUPWckb3JNzUMRCobPwpzJ817f3eh0FZCpzVmvv78VyMNGZB51iMQZA5pi05dShw2GWVrAgZDZD
 
 - rule: GitHub Personal Access Token
   file: semgrep-rules-examples/detected-github-token.txt
@@ -1307,3 +1182,83 @@
   file: general-test
   offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
   line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+
+- rule: General Secret
+  file: general-test
+  offender: secret=3b3d576ba5a108c3b7374142bfd02992
+  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+
+- rule: General Secret
+  file: general-test
+  offender: secret=4b3d576ba5a108c3b7374142bfd02992
+  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+
+- rule: General Secret
+  file: general-test
+  offender: secret=5b3d576ba5a108c3b7374142bfd02992
+  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=1b3d576ba5a108c3b7374142bfd02992
+  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=2b3d576ba5a108c3b7374142bfd02992
+  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=3b3d576ba5a108c3b7374142bfd02992
+  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=4b3d576ba5a108c3b7374142bfd02992
+  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=5b3d576ba5a108c3b7374142bfd02992
+  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
+
+- rule: General Secret
+  file: general-test
+  offender: secret=1b3d576ba5a108c3b7374142bfd02992
+  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
+
+- rule: General Secret
+  file: general-test
+  offender: secret=2b3d576ba5a108c3b7374142bfd02992
+  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+
+- rule: PyPI Upload Token
+  file: general-test
+  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc foo
+
+- rule: General Secret
+  file: general-test
+  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+
+- rule: General Secret
+  file: mailchimp
+  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: MailChimp API Key
+  file: mailchimp
+  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: General Secret
+  file: sendgrid
+  offender: SENDGRID_API_KEY=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
+  line: SENDGRID_API_KEY=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
+
+- rule: General Secret
+  file: sendgrid
+  offender: SENDGRID_API_KEY=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
+  line: SENDGRID_API_KEY=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

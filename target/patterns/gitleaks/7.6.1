@@ -349,6 +349,38 @@ Min = "4.6"
 Max = "8"
 Group = "1"
 [[rules]]
+description = "Password Hash"
+regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+tags = ["alert:repo-owner", "password", "hash", "yescrypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
+tags = ["alert:repo-owner", "password", "hash", "gost-yescrypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
+tags = ["alert:repo-owner", "password", "hash", "scrypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
+tags = ["alert:repo-owner", "password", "hash", "bcrypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
+tags = ["alert:repo-owner", "password", "hash", "sha512crypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
+tags = ["alert:repo-owner", "password", "hash", "sha256crypt", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
+tags = ["alert:repo-owner", "password", "hash", "sunmd5", "type:secret"]
+[[rules]]
+description = "Password Hash"
+regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
+tags = ["alert:repo-owner", "password", "hash", "md5crypt", "type:secret"]
+[[rules]]
 description = "PayPal Braintree Access Token"
 regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
 tags = ["alert:repo-owner", "key", "paypal", "type:secret"]
@@ -478,75 +510,48 @@ regexes = [
 '''define(\s+)?\((\s+)?[\"\'](.+?)[\"\'](\s+)?,(\s+)?[\"\']([^\'\"]+)?(-auth(entication)?|example(.com|key)?|here|localhost|pass(w)?or(d|t)|required|secret(s|_v\d)?(key)?|string|test)[\"\'](\s+)?\)''',
 ]
 [[rules]]
-description = "Password Hash"
-regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
-tags = ["group:leaktk-testing", "password", "hash", "yescrypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
-tags = ["group:leaktk-testing", "password", "hash", "gost-yescrypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
-tags = ["group:leaktk-testing", "password", "hash", "scrypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
-tags = ["group:leaktk-testing", "password", "hash", "bcrypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
-tags = ["group:leaktk-testing", "password", "hash", "sha512crypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
-tags = ["group:leaktk-testing", "password", "hash", "sha256crypt", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
-tags = ["group:leaktk-testing", "password", "hash", "sunmd5", "type:secret"]
-[[rules]]
-description = "Password Hash"
-regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
-tags = ["group:leaktk-testing", "password", "hash", "md5crypt", "type:secret"]
-[[rules]]
 description = "General Secret"
-regex = '''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=([^\s\"\']{6,}?)(\s|$)'''
+regex = '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,})'''
 tags = ["group:leaktk-testing", "general", "env-var-no-space", "type:secret"]
 [[rules.entropies]]
 Min = "3.35"
 Max = "8"
-Group = "8"
+Group = "1"
 [rules.allowlist]
 paths = [
-'''\/lib\w*\/(sudo|sssd|systemd)''',
 '''(^|\/)testdata\/''',
-'/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)',
+'''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+'''(^|\/)openapi\.json$''',
+'''(?i)openapi.*github[^\/]*\.json$''',
+'''\/lib\w*\/(sudo|sssd|systemd)''',
 ]
 regexes = [
 '''#(\s+)?nosec(\s+|$)''',
 '''#(\s+)?noqa(:[\s\w]+)?$''',
 '''\/\/(\s+)?nolint:gosec(\s+|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\$\([a-z]{6,}.*)(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[A-Z_]{5,}?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?[\$%#]?(\\)?\{[\w\.]{6,}''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?[\$@]?\(.+?\)(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\)?\$[a-z]\w{6,}''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(\.\.\.|\*\*\*)[^\s]*?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((?-i)[A-Z_]{5,})?(.)?[\$#]\{.{4,}?\}.*?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(ask|redhat|GoodNewsEveryone)(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(RVhBTVBMR|VYQU1QTEU|FWEFNUExF)[^\s]*?(\s|$)''',
-'''(?i)(hashi_vault|mailgun|aws)(.{0,15})((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(.+?)(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=((&|\\u0026)#34;|&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_|==)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(0)?12345(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e|,|\))?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=[^\s]*?(client(-)?secret|example|redhat).*?(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\s|$)''',
-'''--[\w\-]*(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(?-i)[a-z\-]+(\s|$)''',
-'''(?i)((secret|password|token)(_|-)?(access(_|-)?)?(key)?|api(_|-)?key)=(\\u[a-z0-9]{4})+(\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=?(_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*?)(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[A-Z_]+?(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(\\)?[\$%#]?(\\)?\{.+?\}(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(\.\.\.|\*\*\*|xxxxx)[^\s\"\']*?(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:(?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[a-z\-]+(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
+'''(?i)aws(?:.{0,15})(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(pass(w)?(o|0)?(r)?(d|t)(!)?|secret|example|credentials|a-z|0-9|12345|redhat|openshift|token|placeholder)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[^\s\"\']+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(?:\s|$)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:\\u[a-z0-9]{4})+(?:\s|$)''',
+'''xox[baprs]-([0-9a-zA-Z-]{10,48})?''',
+'''gh(o|u|p|s|r)_[0-9A-Za-z]{36,}''',
+'''github_pat_\w{82}''',
+'''glpat-[\w\-]{20}''',
+'''glptt-[0-9a-f]{40}''',
+'''(glrt-|GR1348941)[\w\-]{20}''',
 ]
 [[rules]]
 description="(YAML) General Secret"
