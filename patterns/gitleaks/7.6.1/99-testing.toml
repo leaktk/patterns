@@ -256,6 +256,119 @@
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
     ]
 
+
+[[rules]]
+  # Same but with bracket. Merge back in after testing
+  description = "(Bracketd) General Secret"
+  # Things like:
+  #   config["password"] = "value"
+  #   ...
+  regex = '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
+  tags = ["alert:repo-owner", "general", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "8"
+
+  [rules.allowlist]
+    paths = [
+      # Test data are often false positives
+      '''(^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # Ignore OpenAPI spec files
+      '''(^|\/)openapi\.json$''',
+      '''(?i)openapi.*github[^\/]*\.json$''',
+    ]
+
+    regexes = [
+      # Things like:
+      #   secret = "asdfasdfas" # nosec (used by bandit)
+      '''#(\s+)?nosec(\s+|$)''',
+      #   secret = "asdfasdfas" # noqa: E501
+      '''#(\s+)?noqa(:[\s\w]+)?$''',
+      #   secret = "asdfasdfas" //nolint:gosec
+      '''\/\/(\s+)?nolint:gosec(\s+|$)''',
+      #   secret = "_PLACEHOLDER_"
+      #   secret = "<PLACEHOLDER>"
+      #   secret = "@PLACEHOLDER@"
+      #   secret = ").append("foo")
+      #   secret = "%PLACEHOLDER%"
+      #   secret = "$PLACEHOLDER$"
+      #   secret = "`PLACEHOLDER`"
+      #   secret = "[PLACEHOLDER]"
+      #   secret = "[%PLACEHOLDER%]"
+      #   secret = "$(PLACEHOLDER..."
+      #   secret = "\$(PLACEHOLDER..."
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
+      #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+?[\"\']''',
+      #   secret = "{PLACEHOLDER}"
+      #   secret = "%{PLACEHOLDER}"
+      #   secret = "\%{PLACEHOLDER}"
+      #   secret = "${PLACEHOLDER}"
+      #   secret = "$\{PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      #   secret = "#{PLACEHOLDER}"
+      #   secret = "\#{PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](\\)?[\$%#]?(\\)?\{.+?\}[\"\']''',
+      #   secret = "Some...placeholder"
+      #   secret = "Some***placeholder"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'][^\"\']*?(\.\.\.|\*\*\*|xxxxx)[^\"\']*?[\"\']''',
+      #   "secret="+some_var+"asdfa"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+      #   secret = "(optional char)${PLACEHOLDER}(optional text)"
+      #   secret = "(optional char)#{PLACEHOLDER}(optional text)"
+      #   secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?[\"\']''',
+      #   secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
+      #   secret = "$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "'$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "\$SOME_ENV_VARIABLE-optional-text"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](?-i)[a-z\-]+[\"\']''',
+      # Known full placeholder passwords
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\[(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
+      # Base64 encoded EXAMPLE in the text
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
+      # aws.* is already covered by a different rule
+      '''(?i)aws(.{0,15})(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
+      # jq lookups
+      '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password|token)(_|-)?(access(_|-)?)?(key)?''',
+      # Various words at the start and end that signify a placeholder
+      ## Starts with
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      ## Ends with
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
+      ## Contains
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'][^\'\"]*?(secret|example|credentials|a-z|0-9|12345|redhat|openshift|token)[^\'\"]*?[\"\']''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+      # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\'](\\u[a-z0-9]{4})+[\"\']''',
+      # Already covered by the Slack Token rule
+      '''xox[baprs]-([0-9a-zA-Z-]{10,48})?''',
+      # Already covered by GitHub rules
+      '''gh(o|u|p|s|r)_[0-9A-Za-z]{36,}''',
+      '''github_pat_\w{82}''',
+      # Already covered byt GitLab rules
+      '''glpat-[\w\-]{20}''',
+      '''glptt-[0-9a-f]{40}''',
+      '''(glrt-|GR1348941)[\w\-]{20}''',
+      # Ignore things that are probably password prompts in code
+      # Example: input("Enter Password:") # Something with "quotes" in it
+      '''(?i)[\"\'][\s\w]+(secret|password|token)(_|-)?(access(_|-)?)?(key)?:(\s+)?[\"\']''',
+    ]
+
 [[rules]]
   # In testing because no hits yet
   description = "NPM Registry Auth"

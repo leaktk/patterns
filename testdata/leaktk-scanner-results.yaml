@@ -153,6 +153,18 @@
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password"] = '8bxd576ba5a108c3b7374142bfd02992'
+  secret: 8bxd576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+  secret: 9bxd576ba5a108c3b7374142bfd02993
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
   match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
   secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
