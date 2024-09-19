@@ -1173,12 +1173,12 @@
   offender: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
   line: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
 
-- rule: (Bracketd) General Secret
+- rule: (Bracketed) General Secret
   file: general-test
   offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
   line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
 
-- rule: (Bracketd) General Secret
+- rule: (Bracketed) General Secret
   file: general-test
   offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
   line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
