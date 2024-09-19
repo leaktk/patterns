@@ -581,9 +581,9 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 ]
 [[rules]]
-description = "(Bracketd) General Secret"
+description = "(Bracketed) General Secret"
 regex = '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-tags = ["alert:repo-owner", "general", "type:secret"]
+tags = ["group:leaktk-testing", "general", "type:secret"]
 [[rules.entropies]]
 Min = "3.35"
 Max = "8"

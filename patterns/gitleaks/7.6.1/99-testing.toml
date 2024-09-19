@@ -224,12 +224,12 @@
 
 [[rules]]
   # Same but with bracket. Merge back in after testing
-  description = "(Bracketd) General Secret"
+  description = "(Bracketed) General Secret"
   # Things like:
   #   config["password"] = "value"
   #   ...
   regex = '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\](\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']'''
-  tags = ["alert:repo-owner", "general", "type:secret"]
+  tags = ["group:leaktk-testing", "general", "type:secret"]
 
   [[rules.entropies]]
     Min = "3.35"
