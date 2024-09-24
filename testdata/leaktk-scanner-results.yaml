@@ -899,6 +899,16 @@
   secret: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 #
+# NPM Registry Auth
+#
+
+- rule.description: NPM Registry Auth
+  rule.id: fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1
+  location.path: .npmrc
+  match: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+  secret: 6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+
+#
 # OpenAI API Key
 #
 
