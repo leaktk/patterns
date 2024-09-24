@@ -655,6 +655,22 @@
     Group = "1"
 
 [[rules]]
+  description = "Slack Config Refresh Token"
+  regex = '''(?i)\b(xoxe-\d-[a-z0-9]{146})\b'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   description = "Slack Legacy Bot Token"
   regex = '''(?i)\b(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]

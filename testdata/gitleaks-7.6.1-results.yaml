@@ -1,3 +1,23 @@
+# Use scripts/sort-and-group-in-place to sort this file
+
+#
+# (Bracketed) General Secret
+#
+
+- rule: (Bracketed) General Secret
+  file: general-test
+  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
+  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
+
+- rule: (Bracketed) General Secret
+  file: general-test
+  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+
+#
+# (YAML) General Secret
+#
+
 - rule: (YAML) General Secret
   file: k8s/secret.yaml
   offender: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
@@ -33,10 +53,23 @@
   offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
   line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
 
+#
+# AWS IAM Unique Identifier
+#
+
 - rule: AWS IAM Unique Identifier
   file: general-test
   offender: =A3TGOBTGY4DIMRXMIYGE
   line: AWS_ACCESS_KEY=A3TGOBTGY4DIMRXMIYGE
+
+#
+# AWS Secret Key
+#
+
+- rule: AWS Secret Key
+  file: general-test
+  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
+  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
 
 - rule: AWS Secret Key
   file: general-test
@@ -49,9 +82,18 @@
   line: '  AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza foo=bar'
 
 - rule: AWS Secret Key
-  file: general-test
-  offender: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
-  line: '  "aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc" foo=bar'
+  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
+- rule: AWS Secret Key
+  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
+  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
+
+#
+# ArgoCD JWT
+#
 
 - rule: ArgoCD JWT
   file: general-test
@@ -67,6 +109,16 @@
   file: general-test
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+
+#
+# Asymmetric Private Key
+#
+
+- rule: Asymmetric Private Key
+  file: gcp-credentials.json
+  offender: '-----BEGIN PRIVATE KEY-----'
+  line: '  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END
+    PRIVATE KEY-----\n",'
 
 - rule: Asymmetric Private Key
   file: general-test
@@ -105,25 +157,47 @@
   offender: '-----BEGIN PRIVATE KEY-----'
   line: '-----BEGIN PRIVATE KEY-----'
 
-- rule: Asymmetric Private Key
-  file: gcp-credentials.json
-  offender: '-----BEGIN PRIVATE KEY-----'
-  line: '  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END PRIVATE KEY-----\n",'
-
-- rule: Base64 Encoded OpenSSH Private Key
-  file: base64-encoded
-  offender: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
-  line: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+#
+# Base64 Encoded AWS Secret Key
+#
 
 - rule: Base64 Encoded AWS Secret Key
   file: aws
   offender: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
   line: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
 
+#
+# Base64 Encoded OpenSSH Private Key
+#
+
+- rule: Base64 Encoded OpenSSH Private Key
+  file: base64-encoded
+  offender: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+  line: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+
+#
+# Container Registry Authentication
+#
+
 - rule: Container Registry Authentication
   file: containers/container-auth.1.json
   offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
   line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
+
+- rule: Container Registry Authentication
+  file: containers/container-auth.2.json
+  offender: '"registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f"'
+  line: '         "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},'
+
+- rule: Container Registry Authentication
+  file: containers/container-auth.2.json
+  offender: '"registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f"'
+  line: '         "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}'
+
+- rule: Container Registry Authentication
+  file: containers/container-auth.3.json
+  offender: \"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\"
+  line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}"'
 
 - rule: Container Registry Authentication
   file: general-test
@@ -268,30 +342,18 @@
   offender: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\"'
   line: '\"quay.io\": { \"auth\": \"0ec7f53a0637bb3d78ab613e02014934\" }'
 
-- rule: Container Registry Authentication
-  file: containers/container-auth.2.json
-  offender: '"registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f"'
-  line: '         "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},'
-
-- rule: Container Registry Authentication
-  file: containers/container-auth.2.json
-  offender: '"registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f"'
-  line: '         "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}'
-
-- rule: Container Registry Authentication
-  file: containers/container-auth.3.json
-  offender: \"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\"
-  line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}"'
+#
+# Dynatrace Token
+#
 
 - rule: Dynatrace Token
   file: dynatrace-token
   offender: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
   line: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
-- rule: General Secret
-  file: some.secret
-  offender: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
-  line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+#
+# General Secret
+#
 
 - rule: General Secret
   file: foo.clientSecret
@@ -330,6 +392,11 @@
 
 - rule: General Secret
   file: general-test
+  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+
+- rule: General Secret
+  file: general-test
   offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
   line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
 
@@ -357,6 +424,31 @@
   file: general-test
   offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=1b3d576ba5a108c3b7374142bfd02992
+  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=2b3d576ba5a108c3b7374142bfd02992
+  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=3b3d576ba5a108c3b7374142bfd02992
+  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=4b3d576ba5a108c3b7374142bfd02992
+  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+
+- rule: General Secret
+  file: general-test
+  offender: api_key=5b3d576ba5a108c3b7374142bfd02992
+  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
 
 - rule: General Secret
   file: general-test
@@ -415,11 +507,6 @@
 
 - rule: General Secret
   file: general-test
-  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
-
-- rule: General Secret
-  file: general-test
   offender: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
   line: secret = "$A0b3d576ba5a108c3b7374142bfd02992", some = "other value"
 
@@ -427,11 +514,6 @@
   file: general-test
   offender: secret = "RAW(kx#2+c7a)"
   line: secret = "RAW(kx#2+c7a)"
-
-- rule: General Secret
-  file: general-test
-  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
 
 - rule: General Secret
   file: general-test
@@ -477,6 +559,31 @@
   file: general-test
   offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
   line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+
+- rule: General Secret
+  file: general-test
+  offender: secret=1b3d576ba5a108c3b7374142bfd02992
+  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
+
+- rule: General Secret
+  file: general-test
+  offender: secret=2b3d576ba5a108c3b7374142bfd02992
+  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
+
+- rule: General Secret
+  file: general-test
+  offender: secret=3b3d576ba5a108c3b7374142bfd02992
+  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
+
+- rule: General Secret
+  file: general-test
+  offender: secret=4b3d576ba5a108c3b7374142bfd02992
+  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
+
+- rule: General Secret
+  file: general-test
+  offender: secret=5b3d576ba5a108c3b7374142bfd02992
+  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
 
 - rule: General Secret
   file: general-test
@@ -579,14 +686,44 @@
   line: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
 
 - rule: General Secret
+  file: general-test
+  offender: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  line: '{"password": "3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+
+- rule: General Secret
+  file: general-test
+  offender: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
+
+- rule: General Secret
   file: ignore.d/super-secret-password.txt
   offender: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
   line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
 
 - rule: General Secret
+  file: mailchimp
+  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: General Secret
   file: secret.ignore.txt
   offender: secret = "d8d94d2c0a3bb23dd552ba921190e7df"
   line: secret = "d8d94d2c0a3bb23dd552ba921190e7df"
+
+- rule: General Secret
+  file: semgrep-rules-examples/detected-google-oauth-access-token.txt
+  offender: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
+  line: '  "access_token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ",'
+
+- rule: General Secret
+  file: sendgrid
+  offender: SENDGRID_API_KEY=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
+  line: SENDGRID_API_KEY=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
+
+- rule: General Secret
+  file: sendgrid
+  offender: SENDGRID_API_KEY=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
+  line: SENDGRID_API_KEY=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
 
 - rule: General Secret
   file: settings.py
@@ -660,49 +797,110 @@
   line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
 
 - rule: General Secret
+  file: some.secret
+  offender: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+  line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+
+- rule: General Secret
   file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+
+#
+# GitHub Fine-Grained Personal Access Token
+#
 
 - rule: GitHub Fine-Grained Personal Access Token
   file: general-test
   offender: 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
   line: <access-token>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</access-token>
 
+#
+# GitHub OAuth Access Token
+#
+
 - rule: GitHub OAuth Access Token
   file: general-test
   offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
   line: token='gho_16C7e42F292c6912E7710c838347Ae178B4a'
+
+#
+# GitHub Personal Access Token
+#
 
 - rule: GitHub Personal Access Token
   file: general-test
   offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
   line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
 
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: GITHUB_TOKEN=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
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: githubToken = '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'
+
+- rule: GitHub Personal Access Token
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: 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
+  line: github_token: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
+
+#
+# GitHub Refresh Token
+#
+
 - rule: GitHub Refresh Token
   file: general-test
   offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
   line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitHub Server to Server Token
+#
 
 - rule: GitHub Server to Server Token
   file: general-test
   offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
   line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
 
+#
+# GitHub User to Server Token
+#
+
 - rule: GitHub User to Server Token
   file: general-test
   offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
   line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
+
+#
+# GitLab Access Token
+#
 
 - rule: GitLab Access Token
   file: general-test
   offender: glpat-LwnfdsSHX1aSGxsqsPUX
   line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
 
+#
+# GitLab Pipeline Trigger Token
+#
+
 - rule: GitLab Pipeline Trigger Token
   file: general-test
   offender: glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
   line: trigger_sec=glptt-bcce2270d3c9c90c0a4320b6e8742fb450c27cc9
+
+#
+# GitLab Runner Registration Token
+#
 
 - rule: GitLab Runner Registration Token
   file: general-test
@@ -714,15 +912,61 @@
   offender: glrt-64NXmvdxFL_9cliRha7y
   line: runner_sec=glrt-64NXmvdxFL_9cliRha7y
 
+#
+# Google API Key
+#
+
 - rule: Google API Key
   file: general-test
   offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
   line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
 
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-api-key.txt
+  offender: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI=
+  line: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI==
+
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  offender: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+  line: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+
+- rule: Google API Key
+  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  offender: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+  line: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
+
+#
+# Groq API Key
+#
+
+- rule: Groq API Key
+  file: groq
+  offender: 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
+  line: groq_api_key="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"
+
+#
+# Heroku API Token
+#
+
 - rule: Heroku API Token
   file: heroku
   offender: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab
   line: heroku_token = "cf0e05d9-4eca-4948-a012-b91fe9704bab"
+
+- rule: Heroku API Token
+  file: semgrep-rules-examples/detected-heroku-api-key.txt
+  offender: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+  line: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+
+- rule: Heroku API Token
+  file: semgrep-rules-examples/detected-heroku-api-key.txt
+  offender: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+  line: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+
+#
+# Htpasswd File
+#
 
 - rule: Htpasswd File
   file: my-htpasswd-file
@@ -734,10 +978,50 @@
   offender: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
   line: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
 
+#
+# Hugging Face API Token
+#
+
+- rule: Hugging Face API Token
+  file: huggingface-api-keys
+  offender: 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
+  line: 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
+
+#
+# Kubernetes System Service Account JWT
+#
+
+- rule: Kubernetes System Service Account JWT
+  file: general-test
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+
+- rule: Kubernetes System Service Account JWT
+  file: general-test
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+
+#
+# MailChimp API Key
+#
+
+- rule: MailChimp API Key
+  file: mailchimp
+  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+#
+# Mailgun API Key
+#
+
 - rule: Mailgun API Key
   file: general-test
   offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
   line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
+
+#
+# NPM Access Token
+#
 
 - rule: NPM Access Token
   file: general-test
@@ -749,10 +1033,52 @@
   offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
   line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
+#
+# NPM Registry Auth
+#
+
 - rule: NPM Registry Auth
   file: .npmrc
   offender: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
   line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
+
+#
+# OpenAI API Key
+#
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+  line: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: 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
+  line: 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
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: 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
+  line: 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
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
+  line: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
+  line: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
+
+- rule: OpenAI API Key
+  file: openai-api-keys
+  offender: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
+  line: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
+
+#
+# OpenShift Login Token
+#
 
 - rule: OpenShift Login Token
   file: general-test
@@ -760,10 +1086,18 @@
   line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
     --foo --bar --baz
 
+#
+# PKCS #12 File
+#
+
 - rule: 'PKCS #12 File'
   file: foo.p12
   offender: 'Filename or path offender: fake-leaks/foo.p12'
   line: ''
+
+#
+# Password Hash
+#
 
 - rule: Password Hash
   file: general-test
@@ -800,21 +1134,54 @@
   offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
   line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
 
+- rule: Password Hash
+  file: semgrep-rules-examples/detected-bcrypt-hash.txt
+  offender: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
+  line: (1, 'rogers63', '$2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG',
+    1),
+
+- rule: Password Hash
+  file: semgrep-rules-examples/detected-etc-shadow.txt
+  offender: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
+  line: 'ubuntu:$6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1:0:99999:7:::'
+
+#
+# PayPal Braintree Access Token
+#
+
+- rule: PayPal Braintree Access Token
+  file: semgrep-rules-examples/detected-paypal-braintree-access-token.txt
+  offender: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+  line: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
+
+#
+# Picatic API Key
+#
+
+- rule: Picatic API Key
+  file: picatic
+  offender: sk_live_f304d35aebd75fb1d648d7a2517cd367
+  line: '# Use key: sk_live_f304d35aebd75fb1d648d7a2517cd367'
+
+#
+# PyPI Upload Token
+#
+
 - rule: PyPI Upload Token
   file: general-test
   offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
   line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
     foo
 
-- rule: SendGrid API Key
-  file: sendgrid
-  offender: "'SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922"
-  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+- rule: PyPI Upload Token
+  file: general-test
+  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
+    foo
 
-- rule: SendGrid API Key
-  file: sendgrid
-  offender: "'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"
-  line: key='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'
+#
+# SendGrid API Key
+#
 
 - rule: SendGrid API Key
   file: sendgrid
@@ -831,25 +1198,144 @@
   offender: =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
   line: SENDGRID_API_KEY=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
 
+- rule: SendGrid API Key
+  file: sendgrid
+  offender: '''SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+  line: key='SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
+
+- rule: SendGrid API Key
+  file: sendgrid
+  offender: '''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'
+  line: key='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'
+
+#
+# Shopify Access Token
+#
+
+- rule: Shopify Access Token
+  file: shopify
+  offender: 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
+  line: value="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"
+
+#
+# Shopify Custom App Access Token
+#
+
+- rule: Shopify Custom App Access Token
+  file: shopify
+  offender: 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
+  line: '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 # I be leakin'''
+
+#
+# Shopify Private App Access Token
+#
+
+- rule: Shopify Private App Access Token
+  file: shopify
+  offender: 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
+  line: '''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'''
+
+#
+# Shopify Shared Secret
+#
+
+- rule: Shopify Shared Secret
+  file: shopify
+  offender: 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
+  line: '# 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'
+
+#
+# Slack Bot Token
+#
+
+- rule: Slack Bot Token
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+  line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
+
+#
+# Slack User Token
+#
+
 - rule: Slack User Token
   file: general-test
   offender: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
   line: xoxp-9204568914-1834568914-1234568914-a53ka1rJ2KAIuj3jalakjalkjaafc
 
-- rule: Kubernetes System Service Account JWT
-  file: general-test
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+- rule: Slack User Token
+  file: semgrep-rules-examples/detected-slack-token.txt
+  offender: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
+  line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
 
-- rule: Kubernetes System Service Account JWT
-  file: general-test
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+#
+# Slack Webhook URL
+#
+
+- rule: Slack Webhook URL
+  file: semgrep-rules-examples/detected-slack-webhook.txt
+  offender: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+  line: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
+
+- rule: Slack Webhook URL
+  file: semgrep-rules-examples/detected-slack-webhook.txt
+  offender: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
+  line: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
+
+#
+# Snowflake OAuth Token
+#
+
+- rule: Snowflake OAuth Token
+  file: snowflake
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
+
+#
+# Square Access Token
+#
+
+- rule: Square Access Token
+  file: semgrep-rules-examples/detected-square-access-token.txt
+  offender: sq0atp-KoblahBLAHBLAHbEHA6yuw
+  line: sq0atp-KoblahBLAHBLAHbEHA6yuw
+
+#
+# Testing Farm API Token
+#
+
+- rule: Testing Farm API Token
+  file: testing-farm
+  offender: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08
+  line: '# ChangeMe: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08 before
+    going to prod'
+
+- rule: Testing Farm API Token
+  file: testing-farm
+  offender: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
+  line: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
+
+- rule: Testing Farm API Token
+  file: testing-farm
+  offender: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
+  line: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
+
+- rule: Testing Farm API Token
+  file: testing-farm
+  offender: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
+  line: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
+
+#
+# Tines Webhook URL
+#
 
 - rule: Tines Webhook URL
   file: general-test
-  offender: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
-  line: 'https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0'
+  offender: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
+  line: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
+
+#
+# URL User and Password
+#
 
 - rule: URL User and Password
   file: general-test
@@ -865,6 +1351,20 @@
   file: general-test
   offender: ://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
   line: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+
+- rule: URL User and Password
+  file: semgrep-rules-examples/detected-github-token.txt
+  offender: ://phaticusthiccy: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@github.com
+  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
+
+- rule: URL User and Password
+  file: semgrep-rules-examples/detected-username-and-password-in-uri.txt
+  offender: ://{get_user_name}:pwdTest123+@github.com
+  line: f"https://{get_user_name}:pwdTest123+@github.com/"
+
+#
+# WP-Config
+#
 
 - rule: WP-Config
   file: general-test
@@ -973,292 +1473,3 @@
   file: settings/wordpress/wp-config.php
   offender: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
   line: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs');
-
-- rule: Heroku API Token
-  file: semgrep-rules-examples/detected-heroku-api-key.txt
-  offender: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
-  line: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
-- rule: Heroku API Token
-  file: semgrep-rules-examples/detected-heroku-api-key.txt
-  offender: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
-  line: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
-
-- rule: PayPal Braintree Access Token
-  file: semgrep-rules-examples/detected-paypal-braintree-access-token.txt
-  offender: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
-  line: access_token$production$aaa722wk737379q3$afefae5aa65de111123a72251111e065
-
-- rule: Slack Bot Token
-  file: semgrep-rules-examples/detected-slack-token.txt
-  offender: xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
-  line: SLACK_TOKEN=xoxb-244636495000-244564491300-Wwpw98abcdabcdefabcdabcz
-
-- rule: Slack User Token
-  file: semgrep-rules-examples/detected-slack-token.txt
-  offender: xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
-  line: SLACK_TOKEN=xoxp-825568119270-820571134562-983439002315-b3358323912928aeeeeeeeeeeeeeeezz
-
-- rule: Slack Webhook URL
-  file: semgrep-rules-examples/detected-slack-webhook.txt
-  offender: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
-  line: https://hooks.slack.com/services/T12345678/B12345678/abcd1234efgh5678ijkl90zy
-
-- rule: Slack Webhook URL
-  file: semgrep-rules-examples/detected-slack-webhook.txt
-  offender: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
-  line: https://hooks.slack.com/services/T12345678/B1234567890/abcd1234efgh5678ijkl90zy
-
-- rule: Square Access Token
-  file: semgrep-rules-examples/detected-square-access-token.txt
-  offender: sq0atp-KoblahBLAHBLAHbEHA6yuw
-  line: sq0atp-KoblahBLAHBLAHbEHA6yuw
-
-- rule: URL User and Password
-  file: semgrep-rules-examples/detected-username-and-password-in-uri.txt
-  offender: ://{get_user_name}:pwdTest123+@github.com
-  line: f"https://{get_user_name}:pwdTest123+@github.com/"
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: github_token: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
-
-- rule: URL User and Password
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: ://phaticusthiccy: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@github.com
-  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: githubToken = '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'
-
-- rule: Google API Key
-  file: semgrep-rules-examples/detected-google-api-key.txt
-  offender: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI=
-  line: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI==
-
-- rule: Google API Key
-  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
-  offender: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
-  line: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
-
-- rule: Google API Key
-  file: semgrep-rules-examples/detected-google-cloud-api-key.txt
-  offender: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
-  line: AIzaSyCqhkgr\TLSOFyLyoS5gfN47TJ0HnHA_XA
-
-- rule: General Secret
-  file: semgrep-rules-examples/detected-google-oauth-access-token.txt
-  offender: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
-  line: '  "access_token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ",'
-
-- rule: Password Hash
-  file: semgrep-rules-examples/detected-etc-shadow.txt
-  offender: $6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1
-  line: 'ubuntu:$6$LnUhhUi45srUKt9i$4Hp6VRTOB2mxvsYH8mwsCfBryg6hCbm4JJjV26KplN8ewZ7EUVqQDkLKDW.O8XRHx.B76JkwXtyD3wnAXEuZN1:0:99999:7:::'
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: GITHUB_TOKEN=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
-
-- rule: AWS Secret Key
-  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
-  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
-  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
-
-- rule: AWS Secret Key
-  file: semgrep-rules-examples/detected-aws-secret-access-key.txt
-  offender: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
-  line: aws_secret_access_key = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
-
-- rule: Password Hash
-  file: semgrep-rules-examples/detected-bcrypt-hash.txt
-  offender: $2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG
-  line: (1, 'rogers63', '$2y$12$s.YfVZdfvAuO/Iz6fte5iO..ZbbEgreZnDcYOGvX4NGJskYQIstcG', 1),
-
-- rule: Picatic API Key
-  file: picatic
-  offender: sk_live_f304d35aebd75fb1d648d7a2517cd367
-  line: '# Use key: sk_live_f304d35aebd75fb1d648d7a2517cd367'
-
-- rule: Shopify Access Token
-  file: shopify
-  offender: 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
-  line: value="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"
-
-- rule: Shopify Shared Secret
-  file: shopify
-  offender: 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
-  line: '# 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'
-
-- rule: Shopify Custom App Access Token
-  file: shopify
-  offender: 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
-  line: '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 # I be leakin'''
-
-- rule: Shopify Private App Access Token
-  file: shopify
-  offender: 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
-  line: '''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'''
-
-- rule: Snowflake OAuth Token
-  file: snowflake
-  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
-  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
-
-- rule: Testing Farm API Token
-  file: testing-farm
-  offender: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
-  line: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
-
-- rule: Testing Farm API Token
-  file: testing-farm
-  offender: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08
-  line: '# ChangeMe: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08 before going to prod'
-
-- rule: Testing Farm API Token
-  file: testing-farm
-  offender: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
-  line: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
-
-- rule: Testing Farm API Token
-  file: testing-farm
-  offender: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
-  line: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
-
-- rule: Groq API Key
-  file: groq
-  offender: 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
-  line: groq_api_key="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"
-
-- rule: Hugging Face API Token
-  file: huggingface-api-keys
-  offender: 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
-  line: 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
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: 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
-  line: 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
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: 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
-  line: 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
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
-  line: sk-svcacct-hqCUiUfGXirUladeUfMjreBlRCyHi4XPt66HaQTYNCsy9dRHNT3BlbkFJBNz-ihgm_vbebhKnpaOjpGZUVGN81gwBZ2iOAZZpDFW0syp6rG
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
-  line: sk-svcacct-p3HN0fGfBSZtU1SZLNURBJKtDfjwGP-biXNehD8xtUdKwT3BlbkFJHcjP031AuuZ_lTN0zZ_U3PEO6d-jaAP-brKmmvK-ihvnQA
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
-  line: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
-
-- rule: OpenAI API Key
-  file: openai-api-keys
-  offender: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
-  line: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
-  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-
-- rule: General Secret
-  file: general-test
-  offender: secret=3b3d576ba5a108c3b7374142bfd02992
-  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: secret=4b3d576ba5a108c3b7374142bfd02992
-  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: secret=5b3d576ba5a108c3b7374142bfd02992
-  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=1b3d576ba5a108c3b7374142bfd02992
-  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=2b3d576ba5a108c3b7374142bfd02992
-  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=3b3d576ba5a108c3b7374142bfd02992
-  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=4b3d576ba5a108c3b7374142bfd02992
-  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=5b3d576ba5a108c3b7374142bfd02992
-  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-
-- rule: General Secret
-  file: general-test
-  offender: secret=1b3d576ba5a108c3b7374142bfd02992
-  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: secret=2b3d576ba5a108c3b7374142bfd02992
-  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: PyPI Upload Token
-  file: general-test
-  offender: pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc
-  line: Foo bar baz pypi-AgEIcHlwaS5vcmcCJDU0ZTIxMWRiLWNlMjYtNDM3ZS05YjJlLWYzYTk5NmE2NGJjMgACJXsicGVybWlzc2lvbnMiOiAidXNlciIsICJ2ZXJzaW9uIjogMX0AAAYgWzvnJ7sF-57Jw_YGg04aZTPCeuRpXrHBhAsPRfofZGc foo
-
-- rule: General Secret
-  file: general-test
-  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-
-- rule: General Secret
-  file: mailchimp
-  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-
-- rule: MailChimp API Key
-  file: mailchimp
-  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-
-- rule: General Secret
-  file: sendgrid
-  offender: SENDGRID_API_KEY=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
-  line: SENDGRID_API_KEY=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
-
-- rule: General Secret
-  file: sendgrid
-  offender: SENDGRID_API_KEY=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
-  line: SENDGRID_API_KEY=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

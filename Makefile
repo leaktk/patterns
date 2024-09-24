@@ -11,6 +11,8 @@ clean:
 format:
 	black tests
 	grep -lPR '\t' patterns/ | xargs -r sed -i 's/\t/  /g'
+	./scripts/sort-and-group-in-place ./testdata/leaktk-scanner-results.yaml
+	./scripts/sort-and-group-in-place ./testdata/gitleaks-7.6.1-results.yaml
 
 .PHONY: test
 test: clean $(PATTERN_FILES)

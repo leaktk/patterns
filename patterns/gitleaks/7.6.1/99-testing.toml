@@ -384,23 +384,6 @@
 
 [[rules]]
   # In testing because no hits yet
-  description = "Slack Config Refresh Token"
-  regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
-  tags = ["group:leaktk-testing", "slack", "type:secret"]
-
-  [rules.allowlist]
-    regexes = [
-      # Ignore placeholder values
-      '''(?i)xoxe-(1234|some|placeholder|slack)'''
-    ]
-
-  [[rules.entropies]]
-    Min = "0" # 3.2 probably after testing
-    Max = "8"
-    Group = "1"
-
-[[rules]]
-  # In testing because no hits yet
   description = "Tines Webhook URL"
   regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
   tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]

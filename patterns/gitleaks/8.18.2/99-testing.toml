@@ -50,29 +50,23 @@
   # - "aud":"snowflake
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ['type:secret', 'group:leaktk-testing']
-
-# TODO
-# "AWS Account ID"
-# "Base64 Encoded AWS Secret Key"
-# "General Secret"
-# "NPM Registry Auth"
-# "Password Hash"
-# "Slack App Token"
-# "Slack Config Access Token"
-# "Slack Config Refresh Token"
-# "System Service Account JWT"
-# "(Token) General Secret"
-# "(Unrestricted) Container Registry Authentication"
-# "(YAML) General Secret"
+  keywords = [
+    'c2vzc2lvbjpyb2xllwfue',
+    'nlc3npb246cm9szs1hbn',
+    'zzxnzaw9uonjvbgutyw55',
+    'c2vzc2lvbjpyb2xlo',
+    'nlc3npb246cm9szt',
+    'zzxnzaw9uonjvbgu6',
+    'imf1zci6innub3dmbgfrzs',
+    'jhdwqioijzbm93zmxha2ug',
+    'iyxvkijoic25vd2zsywtli',
+  ]
 
 [[rules]]
   id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
   description = 'Testing Farm API Token'
   regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\"\']|\b)'''
   tags = ['type:secret', 'group:leaktk-testing']
-
-[[rules]]
-  id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
-  description = 'Tines Webhook'
-  regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'testing_farm_api_token',
+  ]

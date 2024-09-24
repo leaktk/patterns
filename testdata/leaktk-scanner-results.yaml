@@ -1,27 +1,4 @@
-# Try to keep these in alphabetical order by rule.description and add a
-# header before each section
-
-#
-# ArgoCD JWts
-#
-
-- rule.description: ArgoCD JWT
-  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
-  location.path: general-test
-  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
-
-- rule.description: ArgoCD JWT
-  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
-  location.path: general-test
-  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
-
-- rule.description: ArgoCD JWT
-  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
-  location.path: general-test
-  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+# Use scripts/sort-and-group-in-place to sort this file
 
 #
 # AWS IAM Unique Identifier
@@ -52,14 +29,14 @@
 - rule.description: AWS Secret Access Key
   rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
   location.path: general-test
-  match: AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza
-  secret: af60f112a534df0cc1e4d892b5768f3easefasza
+  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+  secret: aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
 
 - rule.description: AWS Secret Access Key
   rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
   location.path: general-test
-  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
-  secret: aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+  match: AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza
+  secret: af60f112a534df0cc1e4d892b5768f3easefasza
 
 - rule.description: AWS Secret Access Key
   rule.id: 308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959
@@ -80,7 +57,29 @@
   secret: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEFUCDlEKEY
 
 #
-# Base64 Encoded AWS Secret Key
+# ArgoCD JWT
+#
+
+- rule.description: ArgoCD JWT
+  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieCIsImlzcyI6ImFyZ29jZCJ9.kHldeGEECY3basc-aTT-3eQvellg8T02h8M02M3v3c0
+
+- rule.description: ArgoCD JWT
+  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJ4IjoieHh4IiwiaXNzIjoiYXJnb2NkIn0.VJXhFqDs4FGGHPznFO8ZkwiteXL5sLMeUaGGEXS02h4
+
+- rule.description: ArgoCD JWT
+  rule.id: c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a
+  location.path: general-test
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
+
+#
+# Base64 Encoded AWS Secret Access Key
 #
 
 - rule.description: Base64 Encoded AWS Secret Access Key
@@ -126,8 +125,8 @@
 - rule.description: Container Registry Authentication
   rule.id: 3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe
   location.path: containers/container-auth.3.json
-  match: '\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}'
-  secret: '\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}'
+  match: \"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}
+  secret: \"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}
 
 #
 # Dynatrace Token
@@ -142,24 +141,6 @@
 #
 # General Secret
 #
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password"] = '8bxd576ba5a108c3b7374142bfd02992'
-  secret: 8bxd576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-  secret: 9bxd576ba5a108c3b7374142bfd02993
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
-  match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
-  secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
 
 - rule.description: General Secret
   rule.id: 08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44
@@ -180,250 +161,28 @@
   secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: General Secret
-  rule.id: 08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44
-  location.path: some.secret
-  match: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
-  secret: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: general-test
-  match: password = '1b3d576ba5a108c3b7374142bfd02992'
-  secret: 1b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
-  match: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  secret: /GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings.py
-  match: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
-  secret: zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/file with spaces
-  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/file with spaces
-  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/file with spaces
-  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/secret
-  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/secret
-  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/secret
-  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/config.ini
-  match: password = "cd7b820459d36b9339b78afb23b8c631"
-  secret: cd7b820459d36b9339b78afb23b8c631
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/config.ini
-  match: Password = "cd7b820459d36b9339b78afb23b8c631"
-  secret: cd7b820459d36b9339b78afb23b8c631
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/config.json
-  match: 'password": "cd7b820459d36b9339b78afb23b8c631"'
-  secret: cd7b820459d36b9339b78afb23b8c631
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/config.json
-  match: 'secret": "cd7b820459d36b9339b78afb23b8c631"'
-  secret: cd7b820459d36b9339b78afb23b8c631
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/generic/config.json
-  match: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
-  secret: cd7b820459d36b9339b78afb23b8c631
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: settings/django/settings.py
-  match: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
-  secret: 9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret = "RAW(kx#2+c7a)"
-  secret: RAW(kx#2+c7a)
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  match: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword>
   secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
 
 - rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: general-test
-  match: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  secret: 766a929d93c9ef30ce3d72d6384eb6fa
+  match: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret>
+  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
 
 - rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: general-test
-  match: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
-  secret: 766a929d93c9ef30ce3d72d6384eb6fa
+  match: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
+  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
 
 - rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: general-test
-  match: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
-  secret: $A0b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = "RAW(kx#2+c7a)"
-  secret: RAW(kx#2+c7a)
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
-  secret: 3ae68d9f8ccfc898ee2555a5f8f228b9
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
-  secret: l0l-1kr-th0se-k1ds-r-kr4zy
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = "Lol-IKR-those-kids-R-Krazy"
-  secret: Lol-IKR-those-kids-R-Krazy
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret= '1b3d576ba5a108c3b7374142bfd02992'
-  secret: 1b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret= '2b3d576ba5a108c3b7374142bfd02992'
-  secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
-  secret: /YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = "0b3d576ba5a108c3b7374142bfd02992"
-  secret: 0b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-  secret: aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
-  secret: 5b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992"'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992"'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992"'
-  secret: 5b3d576ba5a108c3b7374142bfd02992
+  match: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
+  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
@@ -452,8 +211,170 @@
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  match: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
   secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = "0b3d576ba5a108c3b7374142bfd02992"
+  secret: 0b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = "Lol-IKR-those-kids-R-Krazy"
+  secret: Lol-IKR-those-kids-R-Krazy
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = "RAW(kx#2+c7a)"
+  secret: RAW(kx#2+c7a)
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = "l0l-1kr-th0se-k1ds-r-kr4zy"
+  secret: l0l-1kr-th0se-k1ds-r-kr4zy
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = '1b3d576ba5a108c3b7374142bfd02992'
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = '2b3d576ba5a108c3b7374142bfd02992'
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = '3b3d576ba5a108c3b7374142bfd02992'
+  secret: 3b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = '4b3d576ba5a108c3b7374142bfd02992'
+  secret: 4b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = '5b3d576ba5a108c3b7374142bfd02992'
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password = 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: 'password": "3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  secret: 3ae68d9f8ccfc898ee2555a5f8f228b9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: password"] = '8bxd576ba5a108c3b7374142bfd02992'
+  secret: 8bxd576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret = "$A0b3d576ba5a108c3b7374142bfd02992"
+  secret: $A0b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret = "RAW(kx#2+c7a)"
+  secret: RAW(kx#2+c7a)
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: 'secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9"'
+  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+  secret: 9bxd576ba5a108c3b7374142bfd02993
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret-key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  secret: 766a929d93c9ef30ce3d72d6384eb6fa
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= '1b3d576ba5a108c3b7374142bfd02992'
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= '2b3d576ba5a108c3b7374142bfd02992'
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= '3b3d576ba5a108c3b7374142bfd02992'
+  secret: 3b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= '4b3d576ba5a108c3b7374142bfd02992'
+  secret: 4b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= '5b3d576ba5a108c3b7374142bfd02992'
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret= 'swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret='/YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  secret: /YNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
+  match: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
+  secret: aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
@@ -488,6 +409,12 @@
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
+  match: 'secret_access_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: general-test
   match: 'secret_accesskey": "1b3d576ba5a108c3b7374142bfd02992"'
   secret: 1b3d576ba5a108c3b7374142bfd02992
 
@@ -500,44 +427,32 @@
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: password = '2b3d576ba5a108c3b7374142bfd02992'
-  secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: password = '3b3d576ba5a108c3b7374142bfd02992'
+  match: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992"'
   secret: 3b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: password = '4b3d576ba5a108c3b7374142bfd02992'
+  match: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992"'
   secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: password = '5b3d576ba5a108c3b7374142bfd02992'
+  match: 'secret_accesskey": "5b3d576ba5a108c3b7374142bfd02992"'
   secret: 5b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: secret= '3b3d576ba5a108c3b7374142bfd02992'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
+  match: 'secret_accesskey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: secret= '4b3d576ba5a108c3b7374142bfd02992'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: General Secret
-  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
-  location.path: general-test
-  match: secret= '5b3d576ba5a108c3b7374142bfd02992'
-  secret: 5b3d576ba5a108c3b7374142bfd02992
+  match: secret_key = "766a929d93c9ef30ce3d72d6384eb6fa"
+  secret: 766a929d93c9ef30ce3d72d6384eb6fa
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
@@ -564,34 +479,118 @@
   secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: General Secret
-  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: <password>$A3ae68d9f8ccfc898ee2555a5f8f228b9</password>
-  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
+  match: 'secret_key": "5b3d576ba5a108c3b7374142bfd02992"'
+  secret: 5b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: General Secret
-  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: general-test
-  match: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword>
-  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
+  match: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule.description: General Secret
-  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
-  location.path: general-test
-  match: <secret>$A3ae68d9f8ccfc898ee2555a5f8f228b9</secret>
-  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
+  match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
+  secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
 
 - rule.description: General Secret
-  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
-  location.path: general-test
-  match: <FooSecret id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooSecret>
-  secret: $A3ae68d9f8ccfc898ee2555a5f8f228b9
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings.py
+  match: SECRET_KEY = "zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b"
+  secret: zeu#xlk35rk7$b0o_hg7bfr@602da3b6f339dbe9a1054228a74edd6b
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/django/settings.py
+  match: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
+  secret: 9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/config.ini
+  match: Password = "cd7b820459d36b9339b78afb23b8c631"
+  secret: cd7b820459d36b9339b78afb23b8c631
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/config.ini
+  match: password = "cd7b820459d36b9339b78afb23b8c631"
+  secret: cd7b820459d36b9339b78afb23b8c631
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/config.json
+  match: 'Password": "cd7b820459d36b9339b78afb23b8c631"'
+  secret: cd7b820459d36b9339b78afb23b8c631
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/config.json
+  match: 'password": "cd7b820459d36b9339b78afb23b8c631"'
+  secret: cd7b820459d36b9339b78afb23b8c631
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/config.json
+  match: 'secret": "cd7b820459d36b9339b78afb23b8c631"'
+  secret: cd7b820459d36b9339b78afb23b8c631
 
 - rule.description: General Secret
   rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: settings/generic/config.xml
   match: <password>cd7b820459d36b9339b78afb23b8c631</password>
   secret: cd7b820459d36b9339b78afb23b8c631
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/file with spaces
+  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/file with spaces
+  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/file with spaces
+  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/secret
+  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/secret
+  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: settings/generic/secret
+  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: General Secret
+  rule.id: 08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44
+  location.path: some.secret
+  match: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+  secret: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
+  match: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+  secret: /GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
 
 #
 # GitHub Fine-Grained Personal Access Token
@@ -604,7 +603,17 @@
   secret: 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
 
 #
-# GitHub Personal Access Token'
+# GitHub OAuth Access Token
+#
+
+- rule.description: GitHub OAuth Access Token
+  rule.id: 0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0
+  location.path: general-test
+  match: gho_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: gho_16C7e42F292c6912E7710c838347Ae178B4a
+
+#
+# GitHub Personal Access Token
 #
 
 - rule.description: GitHub Personal Access Token
@@ -628,34 +637,24 @@
 - rule.description: GitHub Personal Access Token
   rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
   location.path: semgrep-rules-examples/detected-github-token.txt
-  match: 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
-  secret: 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
+  match: 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
+  secret: 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
 
 - rule.description: GitHub Personal Access Token
   rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
   location.path: semgrep-rules-examples/detected-github-token.txt
-  match: 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
-  secret: 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
+  match: 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
+  secret: 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
 
 #
-# GitHub OAuth Access Token
+# GitHub Refresh Token
 #
 
-- rule.description: GitHub OAuth Access Token
-  rule.id: 0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0
+- rule.description: GitHub Refresh Token
+  rule.id: 86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db
   location.path: general-test
-  match: gho_16C7e42F292c6912E7710c838347Ae178B4a
-  secret: gho_16C7e42F292c6912E7710c838347Ae178B4a
-
-#
-# GitHub User to Server Token
-#
-
-- rule.description: GitHub User to Server Token
-  rule.id: afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b
-  location.path: general-test
-  match: ghu_16C7e42F292c6912E7710c838347Ae178B4a
-  secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+  match: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghr_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
 # GitHub Server to Server Token
@@ -668,14 +667,14 @@
   secret: ghs_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
-# GitHub Refresh Token
+# GitHub User to Server Token
 #
 
-- rule.description: GitHub Refresh Token
-  rule.id: 86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db
+- rule.description: GitHub User to Server Token
+  rule.id: afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b
   location.path: general-test
-  match: ghr_16C7e42F292c6912E7710c838347Ae178B4a
-  secret: ghr_16C7e42F292c6912E7710c838347Ae178B4a
+  match: ghu_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
 # GitLab Access Token
@@ -704,14 +703,14 @@
 - rule.description: GitLab Runner Registration Token
   rule.id: 7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8
   location.path: general-test
-  match: glrt-64NXmvdxFL_9cliRha7y
-  secret: glrt-64NXmvdxFL_9cliRha7y
+  match: GR134894164NXmvdxFL_9cliRha7y
+  secret: GR134894164NXmvdxFL_9cliRha7y
 
 - rule.description: GitLab Runner Registration Token
   rule.id: 7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8
   location.path: general-test
-  match: GR134894164NXmvdxFL_9cliRha7y
-  secret: GR134894164NXmvdxFL_9cliRha7y
+  match: glrt-64NXmvdxFL_9cliRha7y
+  secret: glrt-64NXmvdxFL_9cliRha7y
 
 #
 # Google Cloud Platform API Key
@@ -725,15 +724,15 @@
 
 - rule.description: Google Cloud Platform API Key
   rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
-  location.path: semgrep-rules-examples/detected-google-cloud-api-key.txt
-  match: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
-  secret: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
-
-- rule.description: Google Cloud Platform API Key
-  rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
   location.path: semgrep-rules-examples/detected-google-api-key.txt
   match: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
   secret: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
+  location.path: semgrep-rules-examples/detected-google-cloud-api-key.txt
+  match: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
+  secret: AIzaSyCqhkgrLTLSOFyLyoS5gfN47TJ0HnHA_XA
 
 - rule.description: Google Cloud Platform API Key
   rule.id: 051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba
@@ -800,14 +799,14 @@
 - rule.description: Heroku API Token
   rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
   location.path: semgrep-rules-examples/detected-heroku-api-key.txt
-  match: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
-  secret: a6264401-e60a-48a9-941f-6446e78ec164
+  match: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
+  secret: A6264401-E60A-48A9-941F-6446E78EC164
 
 - rule.description: Heroku API Token
   rule.id: 25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce
   location.path: semgrep-rules-examples/detected-heroku-api-key.txt
-  match: HEROKU_API_KEY = A6264401-E60A-48A9-941F-6446E78EC164
-  secret: A6264401-E60A-48A9-941F-6446E78EC164
+  match: heroku_api_key = a6264401-e60a-48a9-941f-6446e78ec164
+  secret: a6264401-e60a-48a9-941f-6446e78ec164
 
 #
 # Htpasswd File
@@ -816,13 +815,13 @@
 - rule.description: Htpasswd File
   rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
   location.path: my-htpasswd-file
-  match: "bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/"
+  match: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
   secret: $apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
 
 - rule.description: Htpasswd File
   rule.id: 365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f
   location.path: my-htpasswd-file
-  match: "newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/"
+  match: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
   secret: $apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
 
 #
@@ -842,14 +841,14 @@
 - rule.description: Kubernetes System Service Account JWT
   rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
   location.path: general-test
-  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
 - rule.description: Kubernetes System Service Account JWT
   rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
   location.path: general-test
-  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
 
 #
 # MailChimp API Key
@@ -906,6 +905,12 @@
 - rule.description: OpenAI API Key
   rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
   location.path: openai-api-keys
+  match: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+  secret: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
+
+- rule.description: OpenAI API Key
+  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
+  location.path: openai-api-keys
   match: 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
   secret: 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
 
@@ -930,37 +935,13 @@
 - rule.description: OpenAI API Key
   rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
   location.path: openai-api-keys
-  match: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
-  secret: sk-dFGv9W8ddVx2ExKBQRz_A8kIUzDywgeihqekfHe-ZQT3BlbkFJEPaGpGqyt-Nd2oVBq0eCrHEydWuEayXwDakgVKwdvW
-
-- rule.description: OpenAI API Key
-  rule.id: 0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76
-  location.path: openai-api-keys
   match: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
   secret: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
-
-#
-# OpenShift Login Token
-#
-
-- rule.description: OpenShift Login Token
-  rule.id: 7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c
-  location.path: general-test
-  match: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
 
 #
 # OpenSSH Private Key
 #
 
-# Base64 Encoded Singleline
-- rule.description: OpenSSH Private Key
-  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
-  location.path: base64-encoded
-  match: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
-  secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
-
-# Base64 Encoded Multiline
 - rule.description: OpenSSH Private Key
   rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
   location.path: base64-encoded
@@ -985,33 +966,41 @@
     N2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBL
     RVktLS0tLQo=
 
+- rule.description: OpenSSH Private Key
+  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
+  location.path: base64-encoded
+  match: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+  secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+
+#
+# OpenShift Login Token
+#
+
+- rule.description: OpenShift Login Token
+  rule.id: 7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c
+  location.path: general-test
+  match: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+#
+# PKCS #12 File
+#
+
+- rule.description: 'PKCS #12 File'
+  rule.id: f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587
+  location.path: foo.p12
+  match: 'file detected: foo.p12'
+  secret: ''
+
 #
 # Password Hash
 #
-
-- rule.description: Password Hash
-  rule.id: 0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c
-  location.path: general-test
-  match: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
-  secret: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
 
 - rule.description: Password Hash
   rule.id: 65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077
   location.path: general-test
   match: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
   secret: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-
-- rule.description: Password Hash
-  rule.id: d843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac
-  location.path: general-test
-  match: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  secret: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-
-- rule.description: Password Hash
-  rule.id: a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe
-  location.path: general-test
-  match: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  secret: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
 
 - rule.description: Password Hash
   rule.id: a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013
@@ -1026,10 +1015,28 @@
   secret: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
 
 - rule.description: Password Hash
+  rule.id: a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe
+  location.path: general-test
+  match: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  secret: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+
+- rule.description: Password Hash
+  rule.id: d843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac
+  location.path: general-test
+  match: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  secret: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+
+- rule.description: Password Hash
   rule.id: b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589
   location.path: general-test
   match: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
   secret: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+
+- rule.description: Password Hash
+  rule.id: 0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c
+  location.path: general-test
+  match: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
+  secret: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
 
 - rule.description: Password Hash
   rule.id: a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013
@@ -1064,18 +1071,38 @@
   secret: sk_live_f304d35aebd75fb1d648d7a2517cd367
 
 #
-# PKCS #12 File
-#
-
-- rule.description: 'PKCS #12 File'
-  rule.id: f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587
-  location.path: foo.p12
-  match: 'file detected: foo.p12'
-  secret: ''
-
-#
 # Private Key
 #
+
+- rule.description: Private Key
+  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
+  location.path: gcp-credentials.json
+  match: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END
+    PRIVATE KEY-----'
+  secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END
+    PRIVATE KEY-----'
+
+- rule.description: Private Key
+  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
+  location.path: general-test
+  match: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
+  secret: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
+
+- rule.description: Private Key
+  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
+  location.path: general-test
+  match: |-
+    -----BEGIN PGP PRIVATE KEY-----
+    0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd0299
+    20b3d576ba5a108c3b7374142bfd02992
+    -----END PGP PRIVATE KEY-----
+  secret: |-
+    -----BEGIN PGP PRIVATE KEY-----
+    0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd0299
+    20b3d576ba5a108c3b7374142bfd02992
+    -----END PGP PRIVATE KEY-----
 
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
@@ -1098,8 +1125,10 @@
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
   location.path: keys/tls/inline-server.key
-  match: -----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKXwggSjAgEAAoIBAQDW8OVrrcJ/rZxZ\n/kHlgz5THtgGS2VTbCpMzhksfrD0eFnPAzxTSW/5oDk3iT9AfKnRDWnYYogIvb6e\nEoKCqHXLbDVPIdZlFi6wRmr82u8HJAZaqGmPklwag2ajNFBpct4LXpzY70gvWt1e\n6s+kTDqEv+jw60Cl6NizUtkPmBJSJYgVUsDH2zt4lQl4A0yMr82SBpRJjrlX6jrE\nt8PjrMHKESD02SUkah096D33UI8jhD+MYhvatkucDL2dffoD8ZHUj0wPYtj4jb0m\nNd50X5YKjKZtwezbWzZ78auknHJXkaLf9lYYJW78UeDotoJ5md8wbiTVyxCVHt6V\nUtnBfWHJAgMBAAECggEAZ7XYnPo8bOrSFEIwfZO0ENtDFNZwT65TQrf3QZbnvy4K\n923yP6Whl+sNcJSSpoUAU1SLi9MPHFihjxgTTQQHwl214zbKggAQCxIPMW5aAzII\nttmoBZRzSH+6mGj3m8nHBeli+PGL/P107wWRpw749XC77vM0QFl3ph8FiRaxUFzV\nM0CMcRRoGmAB+5lsOQlM38jJIs01HWLmfoKfUd9R+ciW0uda2nsTsopaRu0rlOP7\nCOJ28c/NrFbVL+Dgs6cmCQUe/MOGF4x9KNgRLam4LiUag8x0CBmvAkcwu/vtvSD7\nJY5UaTb0slwCyAJaVzVKG4dPPVte27AZGvZEUmycmQKBgQDxhDnZPp85IqJbnoj4\npkpc2m+cSQq8Ct6OXXiqQYZTAnMEY1SOZdhXDySjyr2hPQ0HItktdj9ulNGYickV\nBqBgZURq+st7cAPl0yFsAf1TGTDzmFT7EUeR7hI6VraCyz2p17On27EGtuWTdCOD\njcIm6eBjE+ArIdohSsOu51RTywKBgQDj1K5/elTisRJMOCtMtRTfkeYzimXG+XdY\nppPhAjEF5mioyfFpiizR+RbyvwMdSqUChU6UTVIpd02Gl1dN55LRnQ5KnbHY6xLg\n0WkL1Cv5NXsKHQxAbQL9O+k66IkY6IPljMH+JMnI12XRGzi+LQw/86Sc2irJBqp+\nvF9osnv2OwKBgQC1D5f+0f+0ac6mORgesSwWqHv8ApZVmyB2QoTvvufg23k21PDT\nQG8L9YJWeOvpMUfPDcUbXAb58/+eB84EQU+CdOjx+ssJ41RIvBvWSTeNUNluBcnP\n34h0UrK/obp6G7xC1D8PnJf+nKdIAE2PlnrziWp7XK82Js7NHqvNOAf0OQKBgDwy\nYbjE9dC/wHnrDWXDIrS/s/dCRgoAuAvwV3pIPfO1IUoXsXWVUKpaCjoxRf1jT54O\n4uhEVcUnBJDfQ+4NlblUqgYFDIyn7+D+86ZwdP3vp4bQjgAnzXZjcghikHbIWLE6\nM7eWuMocP4a0jpWRCX+MPJ5E9rEO1dWOqBbdsespAoGAGdsLb/RaHHk2KVLQvd3B\nECoKfVdoyiyiesMXa8UBZm+EuCnvKt0TkefLq2a7mj1S7tVzX4Qax19kpB4540FL\n9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac\nbR6f0IOR8YEtSlJ1T/CLTm0=\n-----END PRIVATE KEY-----
-  secret: -----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKXwggSjAgEAAoIBAQDW8OVrrcJ/rZxZ\n/kHlgz5THtgGS2VTbCpMzhksfrD0eFnPAzxTSW/5oDk3iT9AfKnRDWnYYogIvb6e\nEoKCqHXLbDVPIdZlFi6wRmr82u8HJAZaqGmPklwag2ajNFBpct4LXpzY70gvWt1e\n6s+kTDqEv+jw60Cl6NizUtkPmBJSJYgVUsDH2zt4lQl4A0yMr82SBpRJjrlX6jrE\nt8PjrMHKESD02SUkah096D33UI8jhD+MYhvatkucDL2dffoD8ZHUj0wPYtj4jb0m\nNd50X5YKjKZtwezbWzZ78auknHJXkaLf9lYYJW78UeDotoJ5md8wbiTVyxCVHt6V\nUtnBfWHJAgMBAAECggEAZ7XYnPo8bOrSFEIwfZO0ENtDFNZwT65TQrf3QZbnvy4K\n923yP6Whl+sNcJSSpoUAU1SLi9MPHFihjxgTTQQHwl214zbKggAQCxIPMW5aAzII\nttmoBZRzSH+6mGj3m8nHBeli+PGL/P107wWRpw749XC77vM0QFl3ph8FiRaxUFzV\nM0CMcRRoGmAB+5lsOQlM38jJIs01HWLmfoKfUd9R+ciW0uda2nsTsopaRu0rlOP7\nCOJ28c/NrFbVL+Dgs6cmCQUe/MOGF4x9KNgRLam4LiUag8x0CBmvAkcwu/vtvSD7\nJY5UaTb0slwCyAJaVzVKG4dPPVte27AZGvZEUmycmQKBgQDxhDnZPp85IqJbnoj4\npkpc2m+cSQq8Ct6OXXiqQYZTAnMEY1SOZdhXDySjyr2hPQ0HItktdj9ulNGYickV\nBqBgZURq+st7cAPl0yFsAf1TGTDzmFT7EUeR7hI6VraCyz2p17On27EGtuWTdCOD\njcIm6eBjE+ArIdohSsOu51RTywKBgQDj1K5/elTisRJMOCtMtRTfkeYzimXG+XdY\nppPhAjEF5mioyfFpiizR+RbyvwMdSqUChU6UTVIpd02Gl1dN55LRnQ5KnbHY6xLg\n0WkL1Cv5NXsKHQxAbQL9O+k66IkY6IPljMH+JMnI12XRGzi+LQw/86Sc2irJBqp+\nvF9osnv2OwKBgQC1D5f+0f+0ac6mORgesSwWqHv8ApZVmyB2QoTvvufg23k21PDT\nQG8L9YJWeOvpMUfPDcUbXAb58/+eB84EQU+CdOjx+ssJ41RIvBvWSTeNUNluBcnP\n34h0UrK/obp6G7xC1D8PnJf+nKdIAE2PlnrziWp7XK82Js7NHqvNOAf0OQKBgDwy\nYbjE9dC/wHnrDWXDIrS/s/dCRgoAuAvwV3pIPfO1IUoXsXWVUKpaCjoxRf1jT54O\n4uhEVcUnBJDfQ+4NlblUqgYFDIyn7+D+86ZwdP3vp4bQjgAnzXZjcghikHbIWLE6\nM7eWuMocP4a0jpWRCX+MPJ5E9rEO1dWOqBbdsespAoGAGdsLb/RaHHk2KVLQvd3B\nECoKfVdoyiyiesMXa8UBZm+EuCnvKt0TkefLq2a7mj1S7tVzX4Qax19kpB4540FL\n9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac\nbR6f0IOR8YEtSlJ1T/CLTm0=\n-----END PRIVATE KEY-----
+  match: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKXwggSjAgEAAoIBAQDW8OVrrcJ/rZxZ\n/kHlgz5THtgGS2VTbCpMzhksfrD0eFnPAzxTSW/5oDk3iT9AfKnRDWnYYogIvb6e\nEoKCqHXLbDVPIdZlFi6wRmr82u8HJAZaqGmPklwag2ajNFBpct4LXpzY70gvWt1e\n6s+kTDqEv+jw60Cl6NizUtkPmBJSJYgVUsDH2zt4lQl4A0yMr82SBpRJjrlX6jrE\nt8PjrMHKESD02SUkah096D33UI8jhD+MYhvatkucDL2dffoD8ZHUj0wPYtj4jb0m\nNd50X5YKjKZtwezbWzZ78auknHJXkaLf9lYYJW78UeDotoJ5md8wbiTVyxCVHt6V\nUtnBfWHJAgMBAAECggEAZ7XYnPo8bOrSFEIwfZO0ENtDFNZwT65TQrf3QZbnvy4K\n923yP6Whl+sNcJSSpoUAU1SLi9MPHFihjxgTTQQHwl214zbKggAQCxIPMW5aAzII\nttmoBZRzSH+6mGj3m8nHBeli+PGL/P107wWRpw749XC77vM0QFl3ph8FiRaxUFzV\nM0CMcRRoGmAB+5lsOQlM38jJIs01HWLmfoKfUd9R+ciW0uda2nsTsopaRu0rlOP7\nCOJ28c/NrFbVL+Dgs6cmCQUe/MOGF4x9KNgRLam4LiUag8x0CBmvAkcwu/vtvSD7\nJY5UaTb0slwCyAJaVzVKG4dPPVte27AZGvZEUmycmQKBgQDxhDnZPp85IqJbnoj4\npkpc2m+cSQq8Ct6OXXiqQYZTAnMEY1SOZdhXDySjyr2hPQ0HItktdj9ulNGYickV\nBqBgZURq+st7cAPl0yFsAf1TGTDzmFT7EUeR7hI6VraCyz2p17On27EGtuWTdCOD\njcIm6eBjE+ArIdohSsOu51RTywKBgQDj1K5/elTisRJMOCtMtRTfkeYzimXG+XdY\nppPhAjEF5mioyfFpiizR+RbyvwMdSqUChU6UTVIpd02Gl1dN55LRnQ5KnbHY6xLg\n0WkL1Cv5NXsKHQxAbQL9O+k66IkY6IPljMH+JMnI12XRGzi+LQw/86Sc2irJBqp+\nvF9osnv2OwKBgQC1D5f+0f+0ac6mORgesSwWqHv8ApZVmyB2QoTvvufg23k21PDT\nQG8L9YJWeOvpMUfPDcUbXAb58/+eB84EQU+CdOjx+ssJ41RIvBvWSTeNUNluBcnP\n34h0UrK/obp6G7xC1D8PnJf+nKdIAE2PlnrziWp7XK82Js7NHqvNOAf0OQKBgDwy\nYbjE9dC/wHnrDWXDIrS/s/dCRgoAuAvwV3pIPfO1IUoXsXWVUKpaCjoxRf1jT54O\n4uhEVcUnBJDfQ+4NlblUqgYFDIyn7+D+86ZwdP3vp4bQjgAnzXZjcghikHbIWLE6\nM7eWuMocP4a0jpWRCX+MPJ5E9rEO1dWOqBbdsespAoGAGdsLb/RaHHk2KVLQvd3B\nECoKfVdoyiyiesMXa8UBZm+EuCnvKt0TkefLq2a7mj1S7tVzX4Qax19kpB4540FL\n9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac\nbR6f0IOR8YEtSlJ1T/CLTm0=\n-----END
+    PRIVATE KEY-----'
+  secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKXwggSjAgEAAoIBAQDW8OVrrcJ/rZxZ\n/kHlgz5THtgGS2VTbCpMzhksfrD0eFnPAzxTSW/5oDk3iT9AfKnRDWnYYogIvb6e\nEoKCqHXLbDVPIdZlFi6wRmr82u8HJAZaqGmPklwag2ajNFBpct4LXpzY70gvWt1e\n6s+kTDqEv+jw60Cl6NizUtkPmBJSJYgVUsDH2zt4lQl4A0yMr82SBpRJjrlX6jrE\nt8PjrMHKESD02SUkah096D33UI8jhD+MYhvatkucDL2dffoD8ZHUj0wPYtj4jb0m\nNd50X5YKjKZtwezbWzZ78auknHJXkaLf9lYYJW78UeDotoJ5md8wbiTVyxCVHt6V\nUtnBfWHJAgMBAAECggEAZ7XYnPo8bOrSFEIwfZO0ENtDFNZwT65TQrf3QZbnvy4K\n923yP6Whl+sNcJSSpoUAU1SLi9MPHFihjxgTTQQHwl214zbKggAQCxIPMW5aAzII\nttmoBZRzSH+6mGj3m8nHBeli+PGL/P107wWRpw749XC77vM0QFl3ph8FiRaxUFzV\nM0CMcRRoGmAB+5lsOQlM38jJIs01HWLmfoKfUd9R+ciW0uda2nsTsopaRu0rlOP7\nCOJ28c/NrFbVL+Dgs6cmCQUe/MOGF4x9KNgRLam4LiUag8x0CBmvAkcwu/vtvSD7\nJY5UaTb0slwCyAJaVzVKG4dPPVte27AZGvZEUmycmQKBgQDxhDnZPp85IqJbnoj4\npkpc2m+cSQq8Ct6OXXiqQYZTAnMEY1SOZdhXDySjyr2hPQ0HItktdj9ulNGYickV\nBqBgZURq+st7cAPl0yFsAf1TGTDzmFT7EUeR7hI6VraCyz2p17On27EGtuWTdCOD\njcIm6eBjE+ArIdohSsOu51RTywKBgQDj1K5/elTisRJMOCtMtRTfkeYzimXG+XdY\nppPhAjEF5mioyfFpiizR+RbyvwMdSqUChU6UTVIpd02Gl1dN55LRnQ5KnbHY6xLg\n0WkL1Cv5NXsKHQxAbQL9O+k66IkY6IPljMH+JMnI12XRGzi+LQw/86Sc2irJBqp+\nvF9osnv2OwKBgQC1D5f+0f+0ac6mORgesSwWqHv8ApZVmyB2QoTvvufg23k21PDT\nQG8L9YJWeOvpMUfPDcUbXAb58/+eB84EQU+CdOjx+ssJ41RIvBvWSTeNUNluBcnP\n34h0UrK/obp6G7xC1D8PnJf+nKdIAE2PlnrziWp7XK82Js7NHqvNOAf0OQKBgDwy\nYbjE9dC/wHnrDWXDIrS/s/dCRgoAuAvwV3pIPfO1IUoXsXWVUKpaCjoxRf1jT54O\n4uhEVcUnBJDfQ+4NlblUqgYFDIyn7+D+86ZwdP3vp4bQjgAnzXZjcghikHbIWLE6\nM7eWuMocP4a0jpWRCX+MPJ5E9rEO1dWOqBbdsespAoGAGdsLb/RaHHk2KVLQvd3B\nECoKfVdoyiyiesMXa8UBZm+EuCnvKt0TkefLq2a7mj1S7tVzX4Qax19kpB4540FL\n9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac\nbR6f0IOR8YEtSlJ1T/CLTm0=\n-----END
+    PRIVATE KEY-----'
 
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
@@ -1181,32 +1210,6 @@
     bR6f0IOR8YEtSlJ1T/CLTm0=
     -----END PRIVATE KEY-----
 
-- rule.description: Private Key
-  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
-  location.path: general-test
-  match: |-
-    -----BEGIN PGP PRIVATE KEY-----
-    0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd0299
-    20b3d576ba5a108c3b7374142bfd02992
-    -----END PGP PRIVATE KEY-----
-  secret: |-
-    -----BEGIN PGP PRIVATE KEY-----
-    0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd0299
-    20b3d576ba5a108c3b7374142bfd02992
-    -----END PGP PRIVATE KEY-----
-
-- rule.description: Private Key
-  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
-  location.path: general-test
-  match: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
-  secret: -----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END OPENSSH PRIVATE KEY-----
-
-- rule.description: Private Key
-  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
-  location.path: gcp-credentials.json
-  match: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END PRIVATE KEY-----'
-  secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END PRIVATE KEY-----'
-
 #
 # PyPI Upload Token
 #
@@ -1220,6 +1223,42 @@
 #
 # SendGrid API Key
 #
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
+  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
+  match: 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
+  secret: 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
+
+- rule.description: SendGrid API Key
+  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
+  location.path: sendgrid
+  match: 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
+  secret: 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
 
 - rule.description: SendGrid API Key
   rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
@@ -1248,44 +1287,8 @@
 - rule.description: SendGrid API Key
   rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
   location.path: sendgrid
-  match: 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
-  secret: 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
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: sendgrid
   match: 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
   secret: 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
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
-  match: 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
-  secret: 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
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
-  match: 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
-  secret: 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
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
-  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
-  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5c
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
-  match: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
-  secret: SG.ngeVfQFYQlKU0ufo8x5d1A.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5crt
-
-- rule.description: SendGrid API Key
-  rule.id: 76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa
-  location.path: semgrep-rules-examples/detected-sendgrid-api-key.txt
-  match: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
-  secret: SG.ngeVfQFYQlKU0ufo8x5d1.TwL2iGABf9DHoTf-09kqeF8tAmbihYzrnopKc-1s5cr
 
 #
 # Shopify Access Token
@@ -1406,18 +1409,6 @@
 - rule.description: Testing Farm API Token
   rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
   location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
-  secret: 00f83e10-d568-41af-b350-de8675ab1d08
-
-- rule.description: Testing Farm API Token
-  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
-  location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08
-  secret: 10f83e10-d568-41af-b350-de8675ab1d08
-
-- rule.description: Testing Farm API Token
-  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
-  location.path: testing-farm
   match: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
   secret: 20f83e10-d568-41af-b350-de8675ab1d08
 
@@ -1427,8 +1418,20 @@
   match: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
   secret: 30f83e10-d568-41af-b350-de8675ab1d08
 
+- rule.description: Testing Farm API Token
+  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
+  location.path: testing-farm
+  match: TESTING_FARM_API_TOKEN=00f83e10-d568-41af-b350-de8675ab1d08
+  secret: 00f83e10-d568-41af-b350-de8675ab1d08
+
+- rule.description: Testing Farm API Token
+  rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
+  location.path: testing-farm
+  match: TESTING_FARM_API_TOKEN=10f83e10-d568-41af-b350-de8675ab1d08
+  secret: 10f83e10-d568-41af-b350-de8675ab1d08
+
 #
-# Tines
+# Tines Webhook
 #
 
 - rule.description: Tines Webhook
@@ -1488,36 +1491,6 @@
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: general-test
-  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
-  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: general-test
-  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
-  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: settings/wordpress/wp-config.php
-  match: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
-  secret: 9b2f7xfe6ebb88c0ae0f2a2f4ca66c42
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: settings/wordpress/wp-config.php
-  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
-  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: settings/wordpress/wp-config.php
-  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+')
-  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: general-test
   match: define(    'DB_PASSWORD', '$c8e$743df9d386d895}')
   secret: $c8e$743df9d386d895}
 
@@ -1530,8 +1503,21 @@
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: general-test
-  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
-  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
@@ -1542,8 +1528,14 @@
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: general-test
-  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
-  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: general-test
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
@@ -1553,9 +1545,9 @@
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: general-test
-  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
-  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
+  location.path: settings/wordpress/wp-config.php
+  match: define( 'DB_PASSWORD', '9b2f7xfe6ebb88c0ae0f2a2f4ca66c42' )
+  secret: 9b2f7xfe6ebb88c0ae0f2a2f4ca66c42
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
@@ -1566,8 +1558,21 @@
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: settings/wordpress/wp-config.php
-  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
-  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
+  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
+  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_KEY',    'k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a')
+  secret: k7o7@~oee{u,MG KFBJq0M`-iJ0H0hs)m-@i/RsgwZ{No~JQ+)2A<Ryd+|t<8.[a
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('LOGGED_IN_SALT',   'WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC
+    GM!~aM=-Hqw4,+')
+  secret: WTc*{p+XT((_#^NxhoU)[7NAg};Q?`+0wpkia>oA]hF-TB2lC GM!~aM=-Hqw4,+
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
@@ -1578,17 +1583,17 @@
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: settings/wordpress/wp-config.php
-  match: define('AUTH_SALT',        '?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK')
-  secret: ?PULIL7?y%Ub=[~rw+5Pg^!$UrrOpn*Pr(MFBdF-+ZMH#oKsZ{KskZY9m/i|<pkK
+  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
+  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
+
+- rule.description: WP-Config
+  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
+  location.path: settings/wordpress/wp-config.php
+  match: define('SECURE_AUTH_KEY',  ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*')
+  secret: ',,F|NHKh>=+y.gy%B32Ff!s~MJp$L,]~xEK|e3H)7| 4hX]!/Ky@V(esZa?0D#H*'
 
 - rule.description: WP-Config
   rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
   location.path: settings/wordpress/wp-config.php
   match: define('SECURE_AUTH_SALT', 'of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs')
   secret: of~0;WuAmEBP4~rfM)1Q.Oc0U=g^t|d%h.Ui8w<v4;A47FGs0}@Hk>&g?p*hDoQs
-
-- rule.description: WP-Config
-  rule.id: 2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695
-  location.path: settings/wordpress/wp-config.php
-  match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
-  secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR

@@ -647,6 +647,22 @@ stopwords = [
 'slack',
 ]
 [[rules]]
+id = '75cfb90cdc62deb6c3cc0109f72cb98651d404bc82d091c51e15601a1e01bfc4'
+description = 'Slack Config Refresh Token'
+regex = '''(?i)\bxoxe-\d-[a-z0-9]{146}\bj'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxe-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
 id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
 description = 'Slack Legacy Bot Token'
 regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
@@ -747,12 +763,20 @@ keywords = [
 'k_live_',
 ]
 [[rules]]
+id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
+description = 'Tines Webhook'
+regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'.tines.com/webhook/',
+]
+[[rules]]
 id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
 description = 'Twilio API Key'
 regex = '''\bSK(?i)[0-9a-f]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
-'SK',
+'sk',
 ]
 [[rules]]
 id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
@@ -843,13 +867,22 @@ id = '538346458f04daa723c81812eb5f5a84198efbba46e6aa01f4341d8bf325dac6'
 description = 'Snowflake OAuth Token'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'c2vzc2lvbjpyb2xllwfue',
+'nlc3npb246cm9szs1hbn',
+'zzxnzaw9uonjvbgutyw55',
+'c2vzc2lvbjpyb2xlo',
+'nlc3npb246cm9szt',
+'zzxnzaw9uonjvbgu6',
+'imf1zci6innub3dmbgfrzs',
+'jhdwqioijzbm93zmxha2ug',
+'iyxvkijoic25vd2zsywtli',
+]
 [[rules]]
 id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
 description = 'Testing Farm API Token'
 regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\"\']|\b)'''
 tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
-id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
-description = 'Tines Webhook'
-regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
-tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'testing_farm_api_token',
+]
