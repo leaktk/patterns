@@ -700,3 +700,7 @@ tags = ['type:secret', 'group:leaktk-testing']
 description = 'Hugging Face API Token'
 regex = '''\bhf_[a-zA-Z]{34}\b'''
 tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+description = 'Facebook Access Token'
+regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
+tags = ['type:secret', 'group:leaktk-testing']

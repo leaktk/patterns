@@ -186,6 +186,7 @@
   regex = '''dt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}'''
   tags = ["alert:repo-owner", "key", "dynatrace", "type:secret"]
 
+
 [[rules]]
   description = "Facebook Secret Key"
   regex = '''(?i)(facebook)([0-9A-Za-z_-]{0,20})?(\s+)?[:|=|(](\s+)?(?-i)['\"]?[0-9a-f]{32}['\"]?'''

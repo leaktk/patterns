@@ -173,6 +173,22 @@
   secret: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
 #
+# Facebook Access Token
+#
+
+- rule.description: Facebook Access Token
+  rule.id: fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0
+  location.path: semgrep-rules-examples/detected-facebook-access-token.txt
+  match: EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD
+  secret: EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD
+
+- rule.description: Facebook Access Token
+  rule.id: fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0
+  location.path: semgrep-rules-examples/detected-facebook-access-token.txt
+  match: EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD
+  secret: EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD
+
+#
 # General Secret
 #
 

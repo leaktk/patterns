@@ -352,6 +352,20 @@
   line: dt0s01.ST2EY72KQINMH574WMNVI7YN.G3DFPBEJYMODIDAEX454M7YWBUVEFOWKPRVMWFASS64NFH52PX6BNDVFFM573RZM
 
 #
+# Facebook Access Token
+#
+
+- rule: Facebook Access Token
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD
+  line: User UID Page likes = https://graph.facebook.com/v2.8/10154914419175179/likes?access_token=EAACEdEose0cBAIWHqjHI5o2auPWv3lPP3zNYuWWpjMrSaIFxbQeve3lsLOcas5k8GhC5HgOXnbF3rXRTczOpsbNjJW0CQL8LcQEMhZAWAJzI0AzmLriWuuZByFAia5aFl0Q4Xv4u2QVoAdH0mcJbZAHRpyJKIAyDKUEBzz0GgZDZD&pretty=0&fields=id&limit=25&after=OTA3MjI3ODI5Mjg4ODM4
+
+- rule: Facebook Access Token
+  file: semgrep-rules-examples/detected-facebook-access-token.txt
+  offender: EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD
+  line: User UID groub = https://graph.facebook.com/v2.8/218718188140085/members?access_token=EAACEdEose0cBAMF99BFdceBHS5UcaEPIDbhKT1nbE0DaulfIS8ZCJTHrkD6IxkfKZCObCHzUsHcdhBISYuv7L4oiylZCmNztRy6s9KBgmZBYbJxZBBk1Csjl8PXFnZA3rt5WwZB7dZCB9M04a6FI7XwCFXfNV4ZB76y6SjltVc4AP4gZDZD&pretty=0&fields=id&limit=1000&after=MzQxNDM1MTE2MjQ0Njk4
+
+#
 # General Secret
 #
 
