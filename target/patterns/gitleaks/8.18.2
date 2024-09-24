@@ -88,11 +88,17 @@ id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
 description = 'Container Registry Authentication'
 regex = '''\\?"auths\\?"\s*:\s*\{\s*(?:\\?"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\?"\s*:\s*\{\s*\\?"auth\\?"\s*:\s*\\?".{32,}?\\?"[\s\S]*?\},?\s*)+\}'''
 tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'"auths',
+]
 [[rules]]
 id = 'e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79'
 description = 'Dynatrace Token'
 regex = '''\bdt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}\b'''
 tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'dt0',
+]
 [[rules]]
 id = 'fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0'
 description = 'Facebook Access Token'
@@ -237,6 +243,11 @@ regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(
 entropy = 3.5
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'password',
+'secret',
+'token',
+]
 [rules.allowlist]
 paths = [
 '''(?:^|\/)testdata\/''',
@@ -361,13 +372,25 @@ id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
 description = 'Google Cloud Platform Service Account Credentials'
 regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
 tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'"type"',
+'"project_id"',
+'"private_key_id"',
+'"private_key"',
+'"client_email"',
+'"client_id"',
+'"auth_uri"',
+'"token_uri"',
+'"auth_provider_x509_cert_url"',
+'"client_x509_cert_url"',
+'"universe_domain"',
+]
 [[rules]]
 id = '33dc3d2c2470b17d9a29bd1f66d650f36dfab0e01ada76b8d7e254cd5da93ed9'
 description = 'Groq API Key'
 regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
-'gsk_',
 'wgdyb3fy',
 ]
 [[rules]]
@@ -526,6 +549,14 @@ id = 'fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85'
 description = 'Base64 Encoded OpenSSH Private Key'
 regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
 tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'qkvhsu4gt1bftlntscbquklw',
+'jfr0loie9qru5tu0ggufjjv',
+'crudjtibpuevou1niifbssv',
+'ru5eie9qru5tu0ggufjjv',
+'vorcbpuevou1niifbssv',
+'ftkqgt1bftlntscbquklw',
+]
 [[rules]]
 id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
 description = 'PayPal Braintree Access Token'
@@ -779,6 +810,9 @@ regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 2.4
 secretGroup = 1
+keywords = [
+'://',
+]
 [rules.allowlist]
 paths = [
 '''/azure-(cli.+\/command_modules\/([^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
@@ -840,6 +874,9 @@ description = 'WP-Config'
 regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
 tags = ['type:secret', 'alert:repo-owner']
 secretGroup = 1
+keywords = [
+'define',
+]
 [rules.allowlist]
 stopwords = [
 'auth',
