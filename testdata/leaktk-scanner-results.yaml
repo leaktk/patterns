@@ -1357,6 +1357,16 @@
   secret: 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
 
 #
+# Slack App Token
+#
+
+- rule.description: Slack App Token
+  rule.id: 2f2bd1d768b6950cc2c4d84b0368c07fc423872e403bb4774a75e1d7072704d2
+  location.path: slack
+  match: xapp-1-IEMF8IMY1OQ-4037076220459-85c370b433e366de369c4ef5abdf41253519266982439a75af74a3d68d543fb6
+  secret: xapp-1-IEMF8IMY1OQ-4037076220459-85c370b433e366de369c4ef5abdf41253519266982439a75af74a3d68d543fb6
+
+#
 # Slack Bot Token
 #
 

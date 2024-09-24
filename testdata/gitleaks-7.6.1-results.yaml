@@ -1259,6 +1259,15 @@
   line: '# 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'
 
 #
+# Slack App Token
+#
+
+- rule: Slack App Token
+  file: slack
+  offender: xapp-1-IEMF8IMY1OQ-4037076220459-85c370b433e366de369c4ef5abdf41253519266982439a75af74a3d68d543fb6
+  line: 'headers={"Authorization": f"Bearer xapp-1-IEMF8IMY1OQ-4037076220459-85c370b433e366de369c4ef5abdf41253519266982439a75af74a3d68d543fb6"}'
+
+#
 # Slack Bot Token
 #
 

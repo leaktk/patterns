@@ -656,6 +656,22 @@ keywords = [
 'shpss_',
 ]
 [[rules]]
+id = '2f2bd1d768b6950cc2c4d84b0368c07fc423872e403bb4774a75e1d7072704d2'
+description = 'Slack App Token'
+regex = '''(?i)\bxapp-\d-[a-z0-9]+-\d+-[a-z0-9]+\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xapp-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
 id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
 description = 'Slack Bot Token'
 regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
