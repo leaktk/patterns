@@ -1,0 +1,29 @@
+#! /usr/bin/env bash
+
+function rules {
+  field="$1"
+  patterns="$2"
+
+  grep -Po "(?<=${field} = [\\'\\\"])[^\\'\\\"]+(?=[\\'\\\"])" "${patterns}" \
+    | grep -v 'Global Allowlist'
+}
+
+function check {
+  field="$1"
+  patterns="$2"
+  testfile="$3"
+  echo "  ${patterns}:"
+  IFS=$'\n'
+  for rule in $(rules "${field}" "${patterns}")
+  do
+    if ! grep "${rule}" "${testfile}" &> /dev/null
+    then
+      echo "    ${field} = '${rule}'"
+    fi
+  done
+  echo
+}
+
+echo "Untested Patterns:"
+check "description" "target/patterns/gitleaks/7.6.1" "testdata/gitleaks-7.6.1-results.yaml"
+check "id" "target/patterns/gitleaks/8.18.2" "testdata/leaktk-scanner-results.yaml"

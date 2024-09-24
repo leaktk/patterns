@@ -6,3 +6,6 @@ git submodule update --init --recursive
 
 export PATH="$(pwd)/scripts:${PATH}"
 python3 -m unittest
+
+# Display any untested patterns (this should just be a warning)
+./scripts/check-not-tested
