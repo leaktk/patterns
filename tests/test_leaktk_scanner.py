@@ -43,8 +43,7 @@ class TestLeakTKScanner(TestCase):
         # Load the response
         response = json.loads(completed_process.stdout)
         # Spot check that we got the right response back
-        self.assertEqual(response["request"]["id"], "test-scan")
-        self.assertEqual(response["request"]["kind"], "Files")
+        self.assertEqual(response["request_id"], "test-scan")
 
         # Generate the results
         actual = [
