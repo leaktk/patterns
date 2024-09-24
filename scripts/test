@@ -4,6 +4,9 @@ set -euo pipefail
 # Make sure the fake-leaks folder is there
 git submodule update --init --recursive
 
+# Make sure there's no duplicate ids
+./scripts/check-dup-ids
+
 export PATH="$(pwd)/scripts:${PATH}"
 python3 -m unittest
 

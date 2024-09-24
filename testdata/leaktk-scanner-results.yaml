@@ -1,6 +1,100 @@
 # Use scripts/sort-and-group-in-place to sort this file
 
 #
+# (Env Var) General Secret
+#
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: foo/libexec/sudo/sudoers.so
+  match: password=V1tXb7WBGlKIVAWqGw==
+  secret: V1tXb7WBGlKIVAWqGw==
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=1b3d576ba5a108c3b7374142bfd02992
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=2b3d576ba5a108c3b7374142bfd02992
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=3b3d576ba5a108c3b7374142bfd02992
+  secret: 3b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=4b3d576ba5a108c3b7374142bfd02992
+  secret: 4b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=5b3d576ba5a108c3b7374142bfd02992
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=1b3d576ba5a108c3b7374142bfd02992
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=2b3d576ba5a108c3b7374142bfd02992
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=3b3d576ba5a108c3b7374142bfd02992
+  secret: 3b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=4b3d576ba5a108c3b7374142bfd02992
+  secret: 4b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=5b3d576ba5a108c3b7374142bfd02992
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: general-test
+  match: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: some-file
+  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
+  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: some.yaml
+  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
+  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
+
+#
 # (YAML) General Secret
 #
 
