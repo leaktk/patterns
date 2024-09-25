@@ -429,6 +429,18 @@ Min = "3.2"
 Max = "8"
 Group = "1"
 [[rules]]
+description = "Slack Config Refresh Token"
+regex = '''(?i)\b(xoxe-\d-[a-z0-9]{146})\b'''
+tags = ["alert:repo-owner", "slack", "type:secret"]
+[rules.allowlist]
+regexes = [
+'''(?i)xoxe-(1234|some|placeholder|slack)'''
+]
+[[rules.entropies]]
+Min = "3.2"
+Max = "8"
+Group = "1"
+[[rules]]
 description = "Slack Legacy Bot Token"
 regex = '''(?i)\b(xoxb-[0-9]{8,14}\-[a-z0-9]{18,26})\b'''
 tags = ["alert:repo-owner", "slack", "type:secret"]
@@ -660,18 +672,6 @@ Min = "0" # 3.2 probably after testing
 Max = "8"
 Group = "1"
 [[rules]]
-description = "Slack Config Refresh Token"
-regex = '''(?i)(xoxe-\d-[a-z0-9]{146})'''
-tags = ["group:leaktk-testing", "slack", "type:secret"]
-[rules.allowlist]
-regexes = [
-'''(?i)xoxe-(1234|some|placeholder|slack)'''
-]
-[[rules.entropies]]
-Min = "0" # 3.2 probably after testing
-Max = "8"
-Group = "1"
-[[rules]]
 description = "Tines Webhook URL"
 regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
 tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]
@@ -699,4 +699,8 @@ tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'Hugging Face API Token'
 regex = '''\bhf_[a-zA-Z]{34}\b'''
+tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+description = 'Facebook Access Token'
+regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
 tags = ['type:secret', 'group:leaktk-testing']
