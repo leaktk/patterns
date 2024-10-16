@@ -458,6 +458,72 @@
     Group = "5"
 
 [[rules]]
+  # This handles UNQUOTED values in YAML files (the other rules should be able
+  # to handle quoted values).
+  description="General Secret"
+  path='''\.y(a)?ml$'''
+  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s*?([^\"\'\s]+?)\s*?(?:#|$)'''
+  tags = ["alert:repo-owner", "yaml", "key", "secret", "general", "type:secret"]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "1"
+
+  [rules.allowlist]
+    paths = [
+      # Test data files are often false positives
+      '''(^|\/)testdata\/''',
+    ]
+
+    regexes = [
+      # Things like:
+      #   secret = "asdfasdfas" # nosec (used by bandit)
+      '''#\s*?nosec(\s+|$)''',
+      #   secret = "asdfasdfas" # noqa: E501
+      '''#\s*?noqa(:[\s\w]+)?$''',
+      #   - secret: <PLACEHOLDER>
+      #   - secret: @PLACEHOLDER@
+      #   - secret: %PLACEHOLDER%
+      #   - secret: $PLACEHOLDER$
+      #   - secret: __PLACEHOLDER__
+      #   - secret: _PLACEHOLDER_
+      #   - secret: ALL_UPPER_LETTERS_OR_UNDERSCORS
+      #   - secret: {PLACEHOLDER}
+      #   - secret: ${PLACEHOLDER}
+      #   - secret: %{PLACEHOLDER}
+      #   - secret: update-your-postgres-pass-here # a common placeholder setup
+      #   - secret: Some...placeholder
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|(?-i)[A-Z_]{5,}?|(\$|%)?\{.+?\}|(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?|.*\.\.\..*)''',
+      #   - secret: [%PLACEHOLDER%]"
+      #   - secret: [PLACEHOLDER]
+      #   - secret: $(PLACEHOLDER...
+      #   - secret: \$(PLACEHOLDER...
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
+      #   - secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   - secret: /SOME/path:${PLACEHOLDER}...
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
+      #   - secret: $SOME_ENV_VARIABLE-optional-text
+      #   - secret: \$SOME_ENV_VARIABLE-optional-text
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
+      # Ignore EXAMPLE and other base64 encoded words
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX)''',
+      # Ignore secrets that are just lower case letters and dashes and underscores
+      # probably a ref to another secret
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*(?-i)[a-z_-]+\s*?(?:#|$)''',
+      # Various words at the start and end that signify a placeholder
+      # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
+      ## Starts with
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      ## Contains
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|openshift|token|password|release)[^\"\'\s]*?\s*?(?:#|$)''',
+      ## Ends with
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
+    ]
+
+[[rules]]
   description = "GitHub Fine-Grained Personal Access Token"
   regex = '''(github_pat_\w{82})'''
   tags = ["alert:repo-owner", "key", "github", "fine-grained", "access", "token", "type:secret"]

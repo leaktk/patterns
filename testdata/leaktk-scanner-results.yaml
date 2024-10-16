@@ -95,58 +95,6 @@
   secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
 
 #
-# (YAML) General Secret
-#
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: k8s/valid/secret-after.yaml
-  match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-  secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: k8s/valid/secret-before-comment.yaml
-  match: 'password: UyFCXCpkJHpEc2I9'
-  secret: UyFCXCpkJHpEc2I9
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}
-
-#
 # AWS IAM Unique Identifier
 #
 
@@ -699,6 +647,18 @@
   secret: UyFCXCpkJHpEc2I9
 
 - rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-after.yaml
+  match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+  secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-before-comment.yaml
+  match: 'password: UyFCXCpkJHpEc2I9'
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
   rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
   location.path: maven/valid/settings-proxy-password.xml
   match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
@@ -805,6 +765,42 @@
   location.path: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   match: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   secret: /GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}
 
 #
 # GitHub Fine-Grained Personal Access Token

@@ -1,50 +1,6 @@
 # Use scripts/sort-and-group-in-place to sort this file
 
 #
-# (YAML) General Secret
-#
-
-- rule: (YAML) General Secret
-  file: k8s/valid/secret-after.yaml
-  offender: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-  line: '  token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-
-- rule: (YAML) General Secret
-  file: k8s/valid/secret-before-comment.yaml
-  offender: 'password: UyFCXCpkJHpEc2I9'
-  line: '  password: UyFCXCpkJHpEc2I9'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-
-#
 # AWS IAM Unique Identifier
 #
 
@@ -726,6 +682,16 @@
   line: '  password: ''UyFCXCpkJHpEc2I9'''
 
 - rule: General Secret
+  file: k8s/valid/secret-after.yaml
+  offender: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+  line: '  token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+
+- rule: General Secret
+  file: k8s/valid/secret-before-comment.yaml
+  offender: 'password: UyFCXCpkJHpEc2I9'
+  line: '  password: UyFCXCpkJHpEc2I9'
+
+- rule: General Secret
   file: mailchimp
   offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
   line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
@@ -835,6 +801,36 @@
   file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
 
 #
 # GitHub Fine-Grained Personal Access Token
