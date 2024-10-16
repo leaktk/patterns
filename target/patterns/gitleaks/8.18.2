@@ -822,6 +822,22 @@ keywords = [
 'hooks.slack.com',
 ]
 [[rules]]
+id = '538346458f04daa723c81812eb5f5a84198efbba46e6aa01f4341d8bf325dac6'
+description = 'Snowflake OAuth Token'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'c2vzc2lvbjpyb2xllwfue',
+'nlc3npb246cm9szs1hbn',
+'zzxnzaw9uonjvbgutyw55',
+'c2vzc2lvbjpyb2xlo',
+'nlc3npb246cm9szt',
+'zzxnzaw9uonjvbgu6',
+'imf1zci6innub3dmbgfrzs',
+'jhdwqioijzbm93zmxha2ug',
+'iyxvkijoic25vd2zsywtli',
+]
+[[rules]]
 id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
 description = 'Square Access Token'
 regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
@@ -958,22 +974,6 @@ stopwords = [
 ]
 regexes = [
 '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
-]
-[[rules]]
-id = '538346458f04daa723c81812eb5f5a84198efbba46e6aa01f4341d8bf325dac6'
-description = 'Snowflake OAuth Token'
-regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
-keywords = [
-'c2vzc2lvbjpyb2xllwfue',
-'nlc3npb246cm9szs1hbn',
-'zzxnzaw9uonjvbgutyw55',
-'c2vzc2lvbjpyb2xlo',
-'nlc3npb246cm9szt',
-'zzxnzaw9uonjvbgu6',
-'imf1zci6innub3dmbgfrzs',
-'jhdwqioijzbm93zmxha2ug',
-'iyxvkijoic25vd2zsywtli',
 ]
 [[rules]]
 id = '89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9'

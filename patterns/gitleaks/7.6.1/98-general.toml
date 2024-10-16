@@ -801,6 +801,15 @@
     Group = "3"
 
 [[rules]]
+  description = 'Snowflake OAuth Token'
+  # Based on shifted b64 encoded portions any of:
+  # - session:role-any
+  # - session:role:
+  # - "aud":"snowflake
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "Square Access Token"
   regex = '''sq0atp-[0-9A-Za-z\-_]{22}'''
   tags = ["alert:repo-owner", "key", "square", "type:secret"]
