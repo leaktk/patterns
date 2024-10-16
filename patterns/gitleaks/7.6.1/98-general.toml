@@ -811,6 +811,11 @@
   tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
 
 [[rules]]
+  description = "Tines Webhook URL"
+  regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+  tags = ["alert:repo-owner", "tines", "webhook", "type:secret"]
+
+[[rules]]
   description = "Twilio API Key"
   regex = '''(?i)twilio(.{0,20})?SK[0-9a-f]{32}'''
   tags = ["alert:repo-owner", "key", "twilio", "type:secret"]

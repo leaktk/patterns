@@ -546,6 +546,10 @@ description = "Stripe API Key"
 regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
 tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
 [[rules]]
+description = "Tines Webhook URL"
+regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
+tags = ["alert:repo-owner", "tines", "webhook", "type:secret"]
+[[rules]]
 description = "Twilio API Key"
 regex = '''(?i)twilio(.{0,20})?SK[0-9a-f]{32}'''
 tags = ["alert:repo-owner", "key", "twilio", "type:secret"]
@@ -629,22 +633,6 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 ]
-[[rules]]
-description = "Slack Config Access Token"
-regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
-tags = ["group:leaktk-testing", "slack", "type:secret"]
-[rules.allowlist]
-regexes = [
-'''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
-]
-[[rules.entropies]]
-Min = "0" # 3.2 probably after testing
-Max = "8"
-Group = "1"
-[[rules]]
-description = "Tines Webhook URL"
-regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
-tags = ["group:leaktk-testing", "tines", "webhook", "type:secret"]
 [[rules]]
 description = 'Base64 Encoded OpenSSH Private Key'
 regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
