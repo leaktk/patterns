@@ -138,6 +138,10 @@ description = "Dynatrace Token"
 regex = '''dt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}'''
 tags = ["alert:repo-owner", "key", "dynatrace", "type:secret"]
 [[rules]]
+description = 'Facebook Access Token'
+regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "Facebook Secret Key"
 regex = '''(?i)(facebook)([0-9A-Za-z_-]{0,20})?(\s+)?[:|=|(](\s+)?(?-i)['\"]?[0-9a-f]{32}['\"]?'''
 tags = ["alert:repo-owner", "key", "facebook", "type:secret"]
@@ -165,6 +169,10 @@ paths = [
 Min = "4"
 Max = "8"
 Group = "1"
+[[rules]]
+description = 'Hugging Face API Token'
+regex = '''\bhf_[a-zA-Z]{34}\b'''
+tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
 description = "Kubernetes System Service Account JWT"
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
@@ -392,6 +400,10 @@ regexes = [
 Min = "3.35"
 Max = "8"
 Group = "1"
+[[rules]]
+description = 'OpenAI API Key'
+regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
+tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
 description = "OpenShift Login Token"
 regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
@@ -653,15 +665,3 @@ regexes = [
 '''glptt-[0-9a-f]{40}''',
 '''(glrt-|GR1348941)[\w\-]{20}''',
 ]
-[[rules]]
-description = 'OpenAI API Key'
-regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
-tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
-description = 'Hugging Face API Token'
-regex = '''\bhf_[a-zA-Z]{34}\b'''
-tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
-description = 'Facebook Access Token'
-regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
-tags = ['type:secret', 'group:leaktk-testing']

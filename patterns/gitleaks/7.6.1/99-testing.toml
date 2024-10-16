@@ -153,18 +153,3 @@
       '''glptt-[0-9a-f]{40}''',
       '''(glrt-|GR1348941)[\w\-]{20}''',
     ]
-
-[[rules]]
-  description = 'OpenAI API Key'
-  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
-  tags = ['type:secret', 'group:leaktk-testing']
-
-[[rules]]
-  description = 'Hugging Face API Token'
-  regex = '''\bhf_[a-zA-Z]{34}\b'''
-  tags = ['type:secret', 'group:leaktk-testing']
-
-[[rules]]
-  description = 'Facebook Access Token'
-  regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
-  tags = ['type:secret', 'group:leaktk-testing']

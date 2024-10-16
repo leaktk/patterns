@@ -199,6 +199,11 @@
   tags = ["alert:repo-owner", "key", "dynatrace", "type:secret"]
 
 [[rules]]
+  description = 'Facebook Access Token'
+  regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "Facebook Secret Key"
   regex = '''(?i)(facebook)([0-9A-Za-z_-]{0,20})?(\s+)?[:|=|(](\s+)?(?-i)['\"]?[0-9a-f]{32}['\"]?'''
   tags = ["alert:repo-owner", "key", "facebook", "type:secret"]
@@ -234,6 +239,11 @@
     Min = "4"
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description = 'Hugging Face API Token'
+  regex = '''\bhf_[a-zA-Z]{34}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
@@ -644,6 +654,11 @@
     Min = "3.35"
     Max = "8"
     Group = "1"
+
+[[rules]]
+  description = 'OpenAI API Key'
+  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
+  tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]
   description = "OpenShift Login Token"
