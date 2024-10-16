@@ -962,6 +962,16 @@ keywords = [
 'sq0csp-',
 ]
 [[rules]]
+id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
+description = 'StackRox JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'imlzcyi6imh0dhbzoi8vc3rhy2tyb3guaw8vand0i',
+'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
+'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
+]
+[[rules]]
 id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
 description = 'Stripe API Key'
 regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
