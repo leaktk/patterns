@@ -811,6 +811,11 @@
   tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
 
 [[rules]]
+  description = 'Testing Farm API Token'
+  regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "Tines Webhook URL"
   regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
   tags = ["alert:repo-owner", "tines", "webhook", "type:secret"]

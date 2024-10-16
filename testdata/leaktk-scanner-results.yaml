@@ -1609,13 +1609,13 @@
 - rule.description: Testing Farm API Token
   rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
   location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
+  match: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08
   secret: 20f83e10-d568-41af-b350-de8675ab1d08
 
 - rule.description: Testing Farm API Token
   rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
   location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
+  match: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08
   secret: 30f83e10-d568-41af-b350-de8675ab1d08
 
 - rule.description: Testing Farm API Token

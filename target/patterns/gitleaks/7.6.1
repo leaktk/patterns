@@ -546,6 +546,10 @@ description = "Stripe API Key"
 regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
 tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
 [[rules]]
+description = 'Testing Farm API Token'
+regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "Tines Webhook URL"
 regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
 tags = ["alert:repo-owner", "tines", "webhook", "type:secret"]
@@ -640,11 +644,6 @@ tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'Snowflake OAuth Token'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
-id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
-description = 'Testing Farm API Token'
-regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?:[\"\']|\b)'''
 tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'Groq API Key'

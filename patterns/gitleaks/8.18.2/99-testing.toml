@@ -63,15 +63,6 @@
   ]
 
 [[rules]]
-  id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
-  description = 'Testing Farm API Token'
-  regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\"\']|\b)'''
-  tags = ['type:secret', 'group:leaktk-testing']
-  keywords = [
-    'testing_farm_api_token',
-  ]
-
-[[rules]]
   id = '89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9'
   # Captures things like normal General Secret but handles the case where
   # the value is unqoted and in the format secret=value and has nothing
