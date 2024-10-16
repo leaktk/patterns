@@ -99,6 +99,12 @@
   tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 
 [[rules]]
+  # find base64 encoded versions of OpenSSH private keys
+  description = 'Base64 Encoded OpenSSH Private Key'
+  regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "Container Registry Authentication"
   # Works for quay, openshift, redhat, and docker registries
   # Example match: "quay.io": {"auth": "token-token-token-token"

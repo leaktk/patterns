@@ -222,12 +222,6 @@
     ]
 
 [[rules]]
-  # find base64 encoded versions of OpenSSH private keys
-  description = 'Base64 Encoded OpenSSH Private Key'
-  regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
-  tags = ['type:secret', 'group:leaktk-testing']
-
-[[rules]]
   description = 'OpenAI API Key'
   regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']

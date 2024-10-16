@@ -79,6 +79,10 @@ description = "Base64 Encoded AWS Secret Key"
 regex = '''[a-zA-Z0-9\/\+]*(YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
 tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 [[rules]]
+description = 'Base64 Encoded OpenSSH Private Key'
+regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "Container Registry Authentication"
 regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
 tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
@@ -645,10 +649,6 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 ]
-[[rules]]
-description = 'Base64 Encoded OpenSSH Private Key'
-regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
-tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'OpenAI API Key'
 regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
