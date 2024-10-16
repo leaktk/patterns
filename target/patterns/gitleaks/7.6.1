@@ -333,6 +333,10 @@ Min = "2"
 Max = "8"
 Group = "1"
 [[rules]]
+description = 'Groq API Key'
+regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "NPM Access Token"
 regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
 tags = ["alert:repo-owner", "type:secret", "npm", "access", "token"]
@@ -644,10 +648,6 @@ tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'Snowflake OAuth Token'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
-description = 'Groq API Key'
-regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
 tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'OpenAI API Key'

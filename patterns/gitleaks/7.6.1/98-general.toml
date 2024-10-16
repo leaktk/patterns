@@ -536,6 +536,11 @@
     Group = "1"
 
 [[rules]]
+  description = 'Groq API Key'
+  regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "NPM Access Token"
   regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
   tags = ["alert:repo-owner", "type:secret", "npm", "access", "token"]
