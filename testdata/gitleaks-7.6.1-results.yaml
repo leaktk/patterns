@@ -1,20 +1,6 @@
 # Use scripts/sort-and-group-in-place to sort this file
 
 #
-# (Bracketed) General Secret
-#
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
-  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-
-#
 # (YAML) General Secret
 #
 
@@ -468,6 +454,16 @@
   file: general-test
   offender: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
   line: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule: General Secret
+  file: general-test
+  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
+  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
+
+- rule: General Secret
+  file: general-test
+  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
 
 - rule: General Secret
   file: general-test
