@@ -377,6 +377,7 @@
       # Already covered byt GitLab rules
       '''glpat-[\w\-]{20}''',
       '''glptt-[0-9a-f]{40}''',
+
       '''(glrt-|GR1348941)[\w\-]{20}''',
       # Ignore things that are probably password prompts in code
       # Example: input("Enter Password:") # Something with "quotes" in it
@@ -417,7 +418,8 @@
       #   <secret>@SOME_VARIABLE@</secret>
       #   <secret>[%SOME_VARIABLE%]</secret>
       #   <secret>[SOME_VARIABLE]</secret>
-      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\)?(\$|%)?(\\)?(\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(\]\]>)?<\/''',
+      #   <secret><%=SOME_VARIABLE]%></secret>
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\)?(\$|%)?(\\)?(\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(\]\]>)?<\/''',
       #   <secret>SOME_CONSTANT_PREFIX_${PLACEHOLDER}</secret>
       #   <secret>/SOME/path:${PLACEHOLDER}</secret>
       #   <secret>/SOME/path:${PLACEHOLDER}${PLACEHOLDER}</secret>

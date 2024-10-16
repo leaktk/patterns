@@ -100,9 +100,15 @@
 
 - rule.description: (YAML) General Secret
   rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: k8s/secret.yaml
+  location.path: k8s/valid/secret-after.yaml
   match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
   secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
+
+- rule.description: (YAML) General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-before-comment.yaml
+  match: 'password: UyFCXCpkJHpEc2I9'
+  secret: UyFCXCpkJHpEc2I9
 
 - rule.description: (YAML) General Secret
   rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
@@ -679,6 +685,24 @@
   location.path: general-test
   match: 'secret_key": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-double.yml
+  match: 'password: "UyFCXCpkJHpEc2I9"'
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-single.yml
+  match: 'password: ''UyFCXCpkJHpEc2I9'''
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
+  location.path: maven/valid/settings-proxy-password.xml
+  match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
+  secret: rr84lr6WKq73PDKhXJJOXFVggzj4
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
