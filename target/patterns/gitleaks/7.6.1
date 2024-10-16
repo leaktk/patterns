@@ -82,6 +82,10 @@ tags = ["alert:repo-owner", "key", "aws", "type:secret"]
 description = 'Base64 Encoded OpenSSH Private Key'
 regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
 tags = ['type:secret', 'alert:repo-owner']
+[rules.allowlist]
+regexes = [
+'''(ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
+]
 [[rules]]
 description = "Container Registry Authentication"
 regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''

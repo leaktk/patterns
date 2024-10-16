@@ -104,6 +104,12 @@
   regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
   tags = ['type:secret', 'alert:repo-owner']
 
+  [rules.allowlist]
+    regexes = [
+      # Base64 shifted versions of: example and EXAMPLE
+      '''(ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
+    ]
+
 [[rules]]
   description = "Container Registry Authentication"
   # Works for quay, openshift, redhat, and docker registries
