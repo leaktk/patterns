@@ -713,6 +713,23 @@ stopwords = [
 'slack',
 ]
 [[rules]]
+id = '5e4528622af53164487f2cefbe87742689bd324fcf555da4dae3ae8cf63339f2'
+description = 'Slack Config Access Token'
+regex = '''(?i)\bxoxe.xox[bp]-\d-[a-z0-9]{163,166}\b'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.2
+keywords = [
+'xoxe.xoxb-',
+'xoxe.xoxp-',
+]
+[rules.allowlist]
+stopwords = [
+'1234',
+'some',
+'placeholder',
+'slack',
+]
+[[rules]]
 id = '75cfb90cdc62deb6c3cc0109f72cb98651d404bc82d091c51e15601a1e01bfc4'
 description = 'Slack Config Refresh Token'
 regex = '''(?i)\bxoxe-\d-[a-z0-9]{146}\bj'''

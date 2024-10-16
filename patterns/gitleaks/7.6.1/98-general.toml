@@ -658,6 +658,22 @@
   tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 
 [[rules]]
+  description = "Slack App Token"
+  regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xapp-(1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   description = "Slack Bot Token"
   regex = '''(?i)\b(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)\b'''
   tags = ["alert:repo-owner", "slack", "type:secret"]
@@ -666,6 +682,22 @@
     regexes = [
       # Ignore placeholder values
       '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.2"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
+  description = "Slack Config Access Token"
+  regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
+  tags = ["alert:repo-owner", "slack", "type:secret"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore placeholder values
+      '''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
     ]
 
   [[rules.entropies]]

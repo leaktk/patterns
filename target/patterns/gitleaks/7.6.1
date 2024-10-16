@@ -430,12 +430,36 @@ description = "Shopify Shared Secret"
 regex = '''shpss_[a-fA-F0-9]{32}'''
 tags = ["alert:repo-owner", "key", "shopify", "type:secret"]
 [[rules]]
+description = "Slack App Token"
+regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
+tags = ["alert:repo-owner", "slack", "type:secret"]
+[rules.allowlist]
+regexes = [
+'''(?i)xapp-(1234|some|placeholder|slack)'''
+]
+[[rules.entropies]]
+Min = "3.2"
+Max = "8"
+Group = "1"
+[[rules]]
 description = "Slack Bot Token"
 regex = '''(?i)\b(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*)\b'''
 tags = ["alert:repo-owner", "slack", "type:secret"]
 [rules.allowlist]
 regexes = [
 '''(?i)\bxoxb-(?:1234|some|placeholder|slack)'''
+]
+[[rules.entropies]]
+Min = "3.2"
+Max = "8"
+Group = "1"
+[[rules]]
+description = "Slack Config Access Token"
+regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
+tags = ["alert:repo-owner", "slack", "type:secret"]
+[rules.allowlist]
+regexes = [
+'''(?i)xoxe.xox[bp]-(1234|some|placeholder|slack)'''
 ]
 [[rules.entropies]]
 Min = "3.2"
@@ -605,18 +629,6 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 ]
-[[rules]]
-description = "Slack App Token"
-regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
-tags = ["group:leaktk-testing", "slack", "type:secret"]
-[rules.allowlist]
-regexes = [
-'''(?i)xapp-(1234|some|placeholder|slack)'''
-]
-[[rules.entropies]]
-Min = "0" # 3.2 probably after testing
-Max = "8"
-Group = "1"
 [[rules]]
 description = "Slack Config Access Token"
 regex = '''(?i)(xoxe.xox[bp]-\d-[a-z0-9]{163,166})'''
