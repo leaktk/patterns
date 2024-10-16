@@ -546,6 +546,23 @@
     Group = "0"
 
 [[rules]]
+  description = "NPM Registry Auth"
+  regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
+  path = '''(^|\/)[^\/]+npmrc$'''
+  tags = ["alert:repo-owner", "type:secret", "npm", "registry", "auth"]
+
+  [rules.allowlist]
+    regexes = [
+      # Ignore things like _authToken=${NPM_AUTH_TOKEN}
+      '''_(?:auth(?:Token)?|password)\s*=\s*\$\{.+?\}'''
+    ]
+
+  [[rules.entropies]]
+    Min = "3.35"
+    Max = "8"
+    Group = "1"
+
+[[rules]]
   description = "OpenShift Login Token"
   regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
   tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]

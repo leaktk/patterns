@@ -223,20 +223,6 @@
 
 [[rules]]
   # In testing because no hits yet
-  description = "NPM Registry Auth"
-  regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
-  path = '''(^|\/)[^\/]+npmrc$'''
-  # TODO: s/group:leaktk-testing/alert:repo-owner/ after testing
-  tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
-
-  [[rules.entropies]]
-    # TODO: set Min to 3.35 after testing if all true hits are above that
-    Min = "0"
-    Max = "8"
-    Group = "1"
-
-[[rules]]
-  # In testing because no hits yet
   description = "Slack App Token"
   regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''
   tags = ["group:leaktk-testing", "slack", "type:secret"]

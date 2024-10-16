@@ -470,6 +470,22 @@ keywords = [
 'npm_',
 ]
 [[rules]]
+id = 'fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1'
+description = 'NPM Registry Auth'
+regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
+path = '''(^|\/)[^\/]+npmrc$'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.35
+keywords = [
+'_auth',
+'_password',
+]
+[rules.allowlist]
+regexTarget = 'secret'
+regexes = [
+'''\$\{.+?\}''',
+]
+[[rules]]
 id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
 description = 'OpenShift Login Token'
 regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
@@ -933,16 +949,6 @@ keywords = [
 'imf1zci6innub3dmbgfrzs',
 'jhdwqioijzbm93zmxha2ug',
 'iyxvkijoic25vd2zsywtli',
-]
-[[rules]]
-id = 'fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1'
-description = 'NPM Registry Auth'
-regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
-path = '''(^|\/)[^\/]+npmrc$'''
-tags = ['type:secret', 'group:leaktk-testing']
-keywords = [
-'_auth',
-'_password',
 ]
 [[rules]]
 id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'

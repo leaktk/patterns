@@ -63,20 +63,6 @@
   ]
 
 [[rules]]
-  id = 'fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1'
-  # In testing because no hits yet
-  description = 'NPM Registry Auth'
-  regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
-  path = '''(^|\/)[^\/]+npmrc$'''
-  tags = ['type:secret', 'group:leaktk-testing']
-  # TODO: set entropy to 3.35 after testing if all true hits are above that
-  # entropy = 3.35
-  keywords = [
-    '_auth',
-    '_password',
-  ]
-
-[[rules]]
   id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
   description = 'Testing Farm API Token'
   regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?:[\"\']|\b)'''

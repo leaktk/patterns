@@ -341,6 +341,19 @@ Min = "3.35"
 Max = "8"
 Group = "0"
 [[rules]]
+description = "NPM Registry Auth"
+regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
+path = '''(^|\/)[^\/]+npmrc$'''
+tags = ["alert:repo-owner", "type:secret", "npm", "registry", "auth"]
+[rules.allowlist]
+regexes = [
+'''_(?:auth(?:Token)?|password)\s*=\s*\$\{.+?\}'''
+]
+[[rules.entropies]]
+Min = "3.35"
+Max = "8"
+Group = "1"
+[[rules]]
 description = "OpenShift Login Token"
 regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
 tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]
@@ -592,15 +605,6 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 ]
-[[rules]]
-description = "NPM Registry Auth"
-regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
-path = '''(^|\/)[^\/]+npmrc$'''
-tags = ["group:leaktk-testing", "type:secret", "npm", "registry", "auth"]
-[[rules.entropies]]
-Min = "0"
-Max = "8"
-Group = "1"
 [[rules]]
 description = "Slack App Token"
 regex = '''(?i)(xapp-\d-[a-z0-9]+-\d+-[a-z0-9]+)'''

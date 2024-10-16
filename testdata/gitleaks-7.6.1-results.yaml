@@ -1054,21 +1054,21 @@
 #
 
 - rule: NPM Access Token
-  file: general-test
-  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-
-- rule: NPM Access Token
-  file: general-test
+  file: npm/valid/access-token-assigned-to-a-vairable
   offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
   line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+
+- rule: NPM Access Token
+  file: npm/valid/access-token-by-itself
+  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 #
 # NPM Registry Auth
 #
 
 - rule: NPM Registry Auth
-  file: .npmrc
+  file: npm/valid/registry-auth-in-npmrc/.npmrc
   offender: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
   line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
