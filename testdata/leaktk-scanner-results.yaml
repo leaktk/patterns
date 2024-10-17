@@ -95,52 +95,6 @@
   secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
 
 #
-# (YAML) General Secret
-#
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: k8s/secret.yaml
-  match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-  secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yaml
-  match: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  secret: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}
-
-- rule.description: (YAML) General Secret
-  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
-  location.path: yaml-test.yml
-  match: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}
-
-#
 # AWS IAM Unique Identifier
 #
 
@@ -234,7 +188,13 @@
 
 - rule.description: Base64 Encoded OpenSSH Private Key
   rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
-  location.path: base64-encoded
+  location.path: ssh/valid/b64-encoded-openssh-private-key
+  match: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+  secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
+
+- rule.description: Base64 Encoded OpenSSH Private Key
+  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
+  location.path: ssh/valid/multi-line-b64-encoded-openssh-private-key
   match: |-
     LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFB
     QUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hB
@@ -255,12 +215,6 @@
     WUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHds
     N2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBL
     RVktLS0tLQo=
-
-- rule.description: Base64 Encoded OpenSSH Private Key
-  rule.id: fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85
-  location.path: base64-encoded
-  match: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
-  secret: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
 
 #
 # Container Registry Authentication
@@ -682,6 +636,36 @@
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-double.yml
+  match: 'password: "UyFCXCpkJHpEc2I9"'
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-single.yml
+  match: 'password: ''UyFCXCpkJHpEc2I9'''
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-after.yaml
+  match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+  secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-before-comment.yaml
+  match: 'password: UyFCXCpkJHpEc2I9'
+  secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
+  location.path: maven/valid/settings-proxy-password.xml
+  match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
+  secret: rr84lr6WKq73PDKhXJJOXFVggzj4
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
   match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
   secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
@@ -781,6 +765,42 @@
   location.path: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   match: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   secret: /GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yaml
+  match: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  secret: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: yaml-test.yml
+  match: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}
 
 #
 # GitHub Fine-Grained Personal Access Token
@@ -977,6 +997,43 @@
   secret: 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
 
 #
+# HashiCorp Vault AppRole SecretID
+#
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/ansible-vault-lookup-via-app-role
+  match: vault.vault_read', 'auth/approle/role/role-name/role-id', url='https://vault:8201',
+    secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  secret: dd3cf500-f9f9-4052-a768-1f22ac57d107
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/multiline-ansible-vault-lookup-via-app-role
+  match: |-
+    vault.vault_read',
+            'auth/approle/role/role-name/role-id',
+            url='https://vault:8201',
+            secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  secret: dd3cf500-f9f9-4052-a768-1f22ac57d107
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/multiline-vault-cli-approle-login
+  match: |-
+    vault write auth/approle/login \
+        role_id=db02de05-fa39-4855-059b-67221c5c2f63 \
+        secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  secret: 6a174c20-f6de-a53c-74d2-6018fcceff64
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/vault-cli-approle-login
+  match: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  secret: 6a174c20-f6de-a53c-74d2-6018fcceff64
+
+#
 # Heroku API Token
 #
 
@@ -1078,15 +1135,15 @@
 
 - rule.description: NPM Access Token
   rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
-  location.path: general-test
-  match: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  secret: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  location.path: npm/valid/access-token-assigned-to-a-vairable
+  match: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 - rule.description: NPM Access Token
   rule.id: c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b
-  location.path: general-test
-  match: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  secret: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  location.path: npm/valid/access-token-by-itself
+  match: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  secret: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 #
 # NPM Registry Auth
@@ -1094,7 +1151,7 @@
 
 - rule.description: NPM Registry Auth
   rule.id: fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1
-  location.path: .npmrc
+  location.path: npm/valid/registry-auth-in-npmrc/.npmrc
   match: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
   secret: 6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
@@ -1251,14 +1308,6 @@
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
   location.path: general-test
-  match: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
-    OPENSSH PRIVATE KEY-----'
-  secret: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
-    OPENSSH PRIVATE KEY-----'
-
-- rule.description: Private Key
-  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
-  location.path: general-test
   match: |-
     -----BEGIN PGP PRIVATE KEY-----
     0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd0299
@@ -1375,6 +1424,14 @@
     9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac
     bR6f0IOR8YEtSlJ1T/CLTm0=
     -----END PRIVATE KEY-----
+
+- rule.description: Private Key
+  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
+  location.path: ssh/valid/inline-key
+  match: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
+  secret: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
 
 #
 # PyPI Upload Token
@@ -1563,6 +1620,16 @@
   secret: sq0atp-KoblahBLAHBLAHbEHA6yuw
 
 #
+# StackRox JWT
+#
+
+- rule.description: StackRox JWT
+  rule.id: d4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520
+  location.path: stackrox/valid/api-token
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC1zb3VyY2VzI2FwaS10b2tlbnMiLCJleHAiOjE3MjkxMTIxMjUsImlhdCI6MTcyOTExMjEyNSwiaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3QiLCJqdGkiOiI5OTQ5N2I3Yy1mMjllLTRkNGUtYWE1ZS0yYzM0N2E1Y2U0MjAiLCJuYW1lIjoicm94X2FwaV90b2tlbiIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.zFbfszkOPuH8eJ8vjxrsLAHVBS6jg7V8V3ZEpOhkLRA
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC1zb3VyY2VzI2FwaS10b2tlbnMiLCJleHAiOjE3MjkxMTIxMjUsImlhdCI6MTcyOTExMjEyNSwiaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3QiLCJqdGkiOiI5OTQ5N2I3Yy1mMjllLTRkNGUtYWE1ZS0yYzM0N2E1Y2U0MjAiLCJuYW1lIjoicm94X2FwaV90b2tlbiIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.zFbfszkOPuH8eJ8vjxrsLAHVBS6jg7V8V3ZEpOhkLRA
+
+#
 # Stripe API Key
 #
 
@@ -1585,13 +1652,13 @@
 - rule.description: Testing Farm API Token
   rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
   location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
+  match: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08
   secret: 20f83e10-d568-41af-b350-de8675ab1d08
 
 - rule.description: Testing Farm API Token
   rule.id: 2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c
   location.path: testing-farm
-  match: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
+  match: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08
   secret: 30f83e10-d568-41af-b350-de8675ab1d08
 
 - rule.description: Testing Farm API Token
@@ -1612,7 +1679,7 @@
 
 - rule.description: Tines Webhook
   rule.id: 44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7
-  location.path: general-test
+  location.path: tines/valid/webhook-url
   match: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
   secret: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
 

@@ -1,59 +1,6 @@
 # Use scripts/sort-and-group-in-place to sort this file
 
 #
-# (Bracketed) General Secret
-#
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
-  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
-
-- rule: (Bracketed) General Secret
-  file: general-test
-  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
-
-#
-# (YAML) General Secret
-#
-
-- rule: (YAML) General Secret
-  file: k8s/secret.yaml
-  offender: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-  line: '  token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yaml
-  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
-
-- rule: (YAML) General Secret
-  file: yaml-test.yml
-  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
-
-#
 # AWS IAM Unique Identifier
 #
 
@@ -122,12 +69,6 @@
 
 - rule: Asymmetric Private Key
   file: general-test
-  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
-  line: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
-    OPENSSH PRIVATE KEY-----'
-
-- rule: Asymmetric Private Key
-  file: general-test
   offender: '-----BEGIN PGP PRIVATE KEY-----'
   line: '-----BEGIN PGP PRIVATE KEY-----'
 
@@ -157,6 +98,12 @@
   offender: '-----BEGIN PRIVATE KEY-----'
   line: '-----BEGIN PRIVATE KEY-----'
 
+- rule: Asymmetric Private Key
+  file: ssh/valid/inline-key
+  offender: '-----BEGIN OPENSSH PRIVATE KEY-----'
+  line: '-----BEGIN OPENSSH PRIVATE KEY-----\n0b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd029920b3d576ba5a108c3b7374142bfd02992\n-----END
+    OPENSSH PRIVATE KEY-----'
+
 #
 # Base64 Encoded AWS Secret Key
 #
@@ -171,7 +118,7 @@
 #
 
 - rule: Base64 Encoded OpenSSH Private Key
-  file: base64-encoded
+  file: ssh/valid/b64-encoded-openssh-private-key
   offender: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
   line: LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQ21GbGN6STFOaTFqZEhJQUFBQUdZbU55ZVhCMEFBQUFHQUFBQUJEZkFXZzdPVQpPRE96b3hBWVUwcWVYRUFBQUFFQUFBQUFFQUFBQXpBQUFBQzNOemFDMWxaREkxTlRFNUFBQUFJQjJwY1dha09PR0xVaCswCk5id2RXTzh6UGk2YzR5QlRKL0pxWEMzZ2M4NWNBQUFBb1B0Vm1NS1pqOEdHNUpNa2ZNekxKeVFZcmNLVjBSODN6WTNGSEUKS2swcnRjdC9PMDlnQ0xrb2h0VGJhbzloWXBSaXljSTRKcXU1bUIrekxpVXQ5Q2VnakdnMm05VUxrOFdzOTRCcXhWQVpSTwpzclJnV2pVOWljTlFBbkkwYk5EWnJUWUI4WEJTQ2lYdkc3V3pmTkRTc3M5UVQyY0FEQVpFZnlhMDFxb0dYOS9WOExNU1NOClUwdzlmTHdsN2FNc0lkRmdwdllqeXFvSmc3VVcweHZBdjlaNGc9Ci0tLS0tRU5EIE9QRU5TU0ggUFJJVkFURSBLRVktLS0tLQo=
 
@@ -471,6 +418,16 @@
 
 - rule: General Secret
   file: general-test
+  offender: password"] = '8bxd576ba5a108c3b7374142bfd02992'
+  line: config["password"] = '8bxd576ba5a108c3b7374142bfd02992'
+
+- rule: General Secret
+  file: general-test
+  offender: secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+  line: config['secret'] = "9bxd576ba5a108c3b7374142bfd02993"
+
+- rule: General Secret
+  file: general-test
   offender: password = "0b3d576ba5a108c3b7374142bfd02992"
   line: password = "0b3d576ba5a108c3b7374142bfd02992", some = "other value", example="example"
 
@@ -715,9 +672,34 @@
   line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
 
 - rule: General Secret
+  file: k8s/valid/secret-after-quotes-double.yml
+  offender: 'password: "UyFCXCpkJHpEc2I9"'
+  line: '  password: "UyFCXCpkJHpEc2I9"'
+
+- rule: General Secret
+  file: k8s/valid/secret-after-quotes-single.yml
+  offender: 'password: ''UyFCXCpkJHpEc2I9'''
+  line: '  password: ''UyFCXCpkJHpEc2I9'''
+
+- rule: General Secret
+  file: k8s/valid/secret-after.yaml
+  offender: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+  line: '  token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
+
+- rule: General Secret
+  file: k8s/valid/secret-before-comment.yaml
+  offender: 'password: UyFCXCpkJHpEc2I9'
+  line: '  password: UyFCXCpkJHpEc2I9'
+
+- rule: General Secret
   file: mailchimp
   offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
   line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule: General Secret
+  file: maven/valid/settings-proxy-password.xml
+  offender: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</
+  line: '            <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>'
 
 - rule: General Secret
   file: secret.ignore.txt
@@ -819,6 +801,36 @@
   file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'Secret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+  line: 'clientSecret: /GNvEGgEXY9BS/YNvEasdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+  line: 'secret: /XNvEGXEXY9B9/YNvEasdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yaml
+  offender: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'secretKey: /GNvEGXEXm9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'Token: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'accessToken: /ANvEGX1XY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+  line: 'secret-key: /GNvEGXElY9BS/YNvE:asdf.YNvEGXEXY9BS}'
+
+- rule: General Secret
+  file: yaml-test.yml
+  offender: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
+  line: 'secret: /LNvEGXEXY9Bx/YNvE{asdf.YNvEGXEXY9BS}'
 
 #
 # GitHub Fine-Grained Personal Access Token
@@ -960,6 +972,25 @@
   line: groq_api_key="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"
 
 #
+# HashiCorp Vault AppRole SecretID
+#
+
+- rule: HashiCorp Vault AppRole SecretID
+  file: hashicorp-vault/valid/ansible-vault-lookup-via-app-role
+  offender: vault.vault_read', 'auth/approle/role/role-name/role-id', url='https://vault:8201',
+    secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  line: '  msg: "{{ lookup(''community.hashi_vault.vault_read'', ''auth/approle/role/role-name/role-id'',
+    url=''https://vault:8201'', secret_id=''dd3cf500-f9f9-4052-a768-1f22ac57d107'')
+    }}"'
+
+- rule: HashiCorp Vault AppRole SecretID
+  file: hashicorp-vault/valid/vault-cli-approle-login
+  offender: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  line: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+
+#
 # Heroku API Token
 #
 
@@ -1038,21 +1069,21 @@
 #
 
 - rule: NPM Access Token
-  file: general-test
-  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
-
-- rule: NPM Access Token
-  file: general-test
+  file: npm/valid/access-token-assigned-to-a-vairable
   offender: npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
   line: value=npm_1Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+
+- rule: NPM Access Token
+  file: npm/valid/access-token-by-itself
+  offender: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
+  line: npm_0Uad0raLM5saR4HOZsEpRxar6x2Kji2ULDcl
 
 #
 # NPM Registry Auth
 #
 
 - rule: NPM Registry Auth
-  file: .npmrc
+  file: npm/valid/registry-auth-in-npmrc/.npmrc
   offender: _authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
   line: //npm.pkg.github.com/:_authToken=6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
@@ -1323,6 +1354,15 @@
   line: sq0atp-KoblahBLAHBLAHbEHA6yuw
 
 #
+# StackRox JWT
+#
+
+- rule: StackRox JWT
+  file: stackrox/valid/api-token
+  offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC1zb3VyY2VzI2FwaS10b2tlbnMiLCJleHAiOjE3MjkxMTIxMjUsImlhdCI6MTcyOTExMjEyNSwiaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3QiLCJqdGkiOiI5OTQ5N2I3Yy1mMjllLTRkNGUtYWE1ZS0yYzM0N2E1Y2U0MjAiLCJuYW1lIjoicm94X2FwaV90b2tlbiIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.zFbfszkOPuH8eJ8vjxrsLAHVBS6jg7V8V3ZEpOhkLRA
+  line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC1zb3VyY2VzI2FwaS10b2tlbnMiLCJleHAiOjE3MjkxMTIxMjUsImlhdCI6MTcyOTExMjEyNSwiaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3QiLCJqdGkiOiI5OTQ5N2I3Yy1mMjllLTRkNGUtYWE1ZS0yYzM0N2E1Y2U0MjAiLCJuYW1lIjoicm94X2FwaV90b2tlbiIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.zFbfszkOPuH8eJ8vjxrsLAHVBS6jg7V8V3ZEpOhkLRA
+
+#
 # Testing Farm API Token
 #
 
@@ -1334,12 +1374,12 @@
 
 - rule: Testing Farm API Token
   file: testing-farm
-  offender: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
+  offender: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08
   line: TESTING_FARM_API_TOKEN="20f83e10-d568-41af-b350-de8675ab1d08"
 
 - rule: Testing Farm API Token
   file: testing-farm
-  offender: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
+  offender: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08
   line: TESTING_FARM_API_TOKEN='30f83e10-d568-41af-b350-de8675ab1d08'
 
 - rule: Testing Farm API Token
@@ -1352,7 +1392,7 @@
 #
 
 - rule: Tines Webhook URL
-  file: general-test
+  file: tines/valid/webhook-url
   offender: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
   line: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
 
