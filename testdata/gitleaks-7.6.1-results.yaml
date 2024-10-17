@@ -972,6 +972,25 @@
   line: groq_api_key="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"
 
 #
+# HashiCorp Vault AppRole SecretID
+#
+
+- rule: HashiCorp Vault AppRole SecretID
+  file: hashicorp-vault/valid/ansible-vault-lookup-via-app-role
+  offender: vault.vault_read', 'auth/approle/role/role-name/role-id', url='https://vault:8201',
+    secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  line: '  msg: "{{ lookup(''community.hashi_vault.vault_read'', ''auth/approle/role/role-name/role-id'',
+    url=''https://vault:8201'', secret_id=''dd3cf500-f9f9-4052-a768-1f22ac57d107'')
+    }}"'
+
+- rule: HashiCorp Vault AppRole SecretID
+  file: hashicorp-vault/valid/vault-cli-approle-login
+  offender: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  line: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+
+#
 # Heroku API Token
 #
 

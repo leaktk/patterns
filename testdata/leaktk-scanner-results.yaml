@@ -997,6 +997,43 @@
   secret: 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
 
 #
+# HashiCorp Vault AppRole SecretID
+#
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/ansible-vault-lookup-via-app-role
+  match: vault.vault_read', 'auth/approle/role/role-name/role-id', url='https://vault:8201',
+    secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  secret: dd3cf500-f9f9-4052-a768-1f22ac57d107
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/multiline-ansible-vault-lookup-via-app-role
+  match: |-
+    vault.vault_read',
+            'auth/approle/role/role-name/role-id',
+            url='https://vault:8201',
+            secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
+  secret: dd3cf500-f9f9-4052-a768-1f22ac57d107
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/multiline-vault-cli-approle-login
+  match: |-
+    vault write auth/approle/login \
+        role_id=db02de05-fa39-4855-059b-67221c5c2f63 \
+        secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  secret: 6a174c20-f6de-a53c-74d2-6018fcceff64
+
+- rule.description: HashiCorp Vault AppRole SecretID
+  rule.id: a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943
+  location.path: hashicorp-vault/valid/vault-cli-approle-login
+  match: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
+    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
+  secret: 6a174c20-f6de-a53c-74d2-6018fcceff64
+
+#
 # Heroku API Token
 #
 

@@ -159,3 +159,8 @@
   # Based on shifted b64 encoded portions of '"iss":"https://stackrox.io/jwt"'
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
   tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  description = 'HashiCorp Vault AppRole SecretID'
+  regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']

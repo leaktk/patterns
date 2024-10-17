@@ -1195,3 +1195,11 @@ keywords = [
 'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
 'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
 ]
+[[rules]]
+id = 'a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943'
+description = 'HashiCorp Vault AppRole SecretID'
+regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'secret_id',
+]
