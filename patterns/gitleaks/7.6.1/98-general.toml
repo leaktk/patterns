@@ -399,7 +399,6 @@
       # Already covered byt GitLab rules
       '''glpat-[\w\-]{20}''',
       '''glptt-[0-9a-f]{40}''',
-
       '''(glrt-|GR1348941)[\w\-]{20}''',
       # Ignore things that are probably password prompts in code
       # Example: input("Enter Password:") # Something with "quotes" in it
