@@ -407,7 +407,7 @@
 [[rules]]
   id = 'dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2'
   # Captures things like normal General Secret but handles the case where
-  # the value in a yaml file is unqoted
+  # the value in a yaml file is unquoted
   description = 'General Secret'
   path='''\.y(a)?ml$'''
   regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
