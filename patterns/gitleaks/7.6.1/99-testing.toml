@@ -153,3 +153,9 @@
       '''glptt-[0-9a-f]{40}''',
       '''(glrt-|GR1348941)[\w\-]{20}''',
     ]
+
+[[rules]]
+  description = 'StackRox JWT'
+  # Based on shifted b64 encoded portions of '"iss":"https://stackrox.io/jwt"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'group:leaktk-testing']
