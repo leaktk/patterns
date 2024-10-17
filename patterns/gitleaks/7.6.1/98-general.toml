@@ -100,6 +100,7 @@
 
 [[rules]]
   # find base64 encoded versions of OpenSSH private keys
+  # Base64 shifted versions of "BEGIN OPENSSH PRIV" and "END OPENSSH PRIV"
   description = 'Base64 Encoded OpenSSH Private Key'
   regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
   tags = ['type:secret', 'alert:repo-owner']
