@@ -1185,21 +1185,3 @@ tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'secret_id',
 ]
-[[rules]]
-id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
-description = 'Google Cloud Platform Service Account Credentials'
-regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
-tags = ['type:secret', 'group:leaktk-testing']
-keywords = [
-'"type"',
-'"project_id"',
-'"private_key_id"',
-'"private_key"',
-'"client_email"',
-'"client_id"',
-'"auth_uri"',
-'"token_uri"',
-'"auth_provider_x509_cert_url"',
-'"client_x509_cert_url"',
-'"universe_domain"',
-]
