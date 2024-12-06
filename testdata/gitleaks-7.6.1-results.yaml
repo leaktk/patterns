@@ -328,8 +328,8 @@
 
 - rule: General Secret
   file: azure/valid/ad-keys.env
-  offender: AZURE_CLIENT_SECRET=h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
-  line: AZURE_CLIENT_SECRET=h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
+  offender: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
+  line: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
 
 - rule: General Secret
   file: dropbox/valid/legacy-long-lived-access-token
