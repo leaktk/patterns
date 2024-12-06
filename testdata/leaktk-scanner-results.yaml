@@ -637,8 +637,20 @@
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
   location.path: k8s/valid/secret-after-quotes-double.yml
+  match: 'password: "S!B\*d$zDsb="'
+  secret: S!B\*d$zDsb=
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-double.yml
   match: 'password: "UyFCXCpkJHpEc2I9"'
   secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-after-quotes-single.yml
+  match: 'password: ''S!B\*d$zDsb='''
+  secret: S!B\*d$zDsb=
 
 - rule.description: General Secret
   rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
@@ -651,6 +663,12 @@
   location.path: k8s/valid/secret-after.yaml
   match: 'token: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg=='
   secret: SGV5IG8vIGJhc2U2NCBpcyBub3Qgc2VjdXJlLiAgR28gYmFjayB0byByZWFkaW5nIHRoZSBhcnRpY2xlLg==
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-before-comment.yaml
+  match: 'password: S!B\*d$zDsb='
+  secret: S!B\*d$zDsb=
 
 - rule.description: General Secret
   rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
@@ -1388,6 +1406,28 @@
     9HnGt3Wj19PfHr6WSW7cVhXZ0QoCP4+1+VpuJJitQcfZhMTOn2sAx4lRR3po/zac
     bR6f0IOR8YEtSlJ1T/CLTm0=
     -----END PRIVATE KEY-----
+
+- rule.description: Private Key
+  rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
+  location.path: ssh/valid/b64-encoded-openssh-private-key
+  match: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxAYU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOOGLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfMzLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrTYB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
+    -----END OPENSSH PRIVATE KEY-----
+  secret: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxAYU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOOGLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfMzLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrTYB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
+    -----END OPENSSH PRIVATE KEY-----
 
 - rule.description: Private Key
   rule.id: d5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98
