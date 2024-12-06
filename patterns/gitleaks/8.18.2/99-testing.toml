@@ -271,6 +271,17 @@
     'sl.',
   ]
 
+[[rules]]
+  id = '2c2cec078f547f39f2951ce131d2a18dcb5d9feb5d031679212b79f0d3cb5162'
+  description = 'Azure Active Directory Client Secret'
+  regex = '''(?i)azure[\.\w-]{0,32}client[_-]?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?\s*([a-z0-9~-]{32,})'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3
+  secretGroup = 1
+  keywords = [
+    'azure',
+  ]
+
 # This rule WAY WAY overmatches at the moment and can cause the scanner to
 # time out on large json files.
 #

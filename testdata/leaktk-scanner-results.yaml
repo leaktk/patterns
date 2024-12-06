@@ -6,6 +6,12 @@
 
 - rule.description: (Env Var) General Secret
   rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
+  location.path: azure/valid/ad-keys.env
+  match: AZURE_CLIENT_SECRET=h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
+  secret: h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
+
+- rule.description: (Env Var) General Secret
+  rule.id: 89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9
   location.path: foo/libexec/sudo/sudoers.so
   match: password=V1tXb7WBGlKIVAWqGw==
   secret: V1tXb7WBGlKIVAWqGw==
@@ -203,6 +209,22 @@
     AUTH0_CLIENT_ID="xRvPY11pC3Jp2ty9dDDlm9Dyqu1VIPmY"
     AUTH0_CLIENT_SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
   secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
+
+#
+# Azure Active Directory Client Secret
+#
+
+- rule.description: Azure Active Directory Client Secret
+  rule.id: 2c2cec078f547f39f2951ce131d2a18dcb5d9feb5d031679212b79f0d3cb5162
+  location.path: azure/valid/ad-keys.env
+  match: AZURE_CLIENT_SECRET=h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
+  secret: h1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLh
+
+- rule.description: Azure Active Directory Client Secret
+  rule.id: 2c2cec078f547f39f2951ce131d2a18dcb5d9feb5d031679212b79f0d3cb5162
+  location.path: azure/valid/ad-keys.properties
+  match: azure.active-directory.credential.client-secret=a1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLz
+  secret: a1ioDDXmtxK4HOg~TWwjIFebcdywbc~LuPM7iqLz
 
 #
 # Base64 Encoded AWS Secret Access Key
