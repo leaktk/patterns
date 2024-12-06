@@ -317,6 +317,16 @@
 #
 
 - rule: General Secret
+  file: auth0/valid/oauth-config.yaml
+  offender: 'secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP'
+  line: 'client_secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP'
+
+- rule: General Secret
+  file: auth0/valid/oauth-env.sh
+  offender: SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
+  line: AUTH0_CLIENT_SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
+
+- rule: General Secret
   file: foo.clientSecret
   offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
@@ -690,6 +700,36 @@
   file: k8s/valid/secret-before-comment.yaml
   offender: 'password: UyFCXCpkJHpEc2I9'
   line: '  password: UyFCXCpkJHpEc2I9'
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-after-quotes-double.yml
+  offender: 'PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+  line: '  DATABASE_PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-after-quotes-single.yaml
+  offender: 'SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+  line: '  JWT_SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-after.yml
+  offender: 'Password: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
+  line: '  rconPassword: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-before-quotes-double.yml
+  offender: 'PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+  line: '  DATABASE_PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-before-quotes-single.yaml
+  offender: 'SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+  line: '  JWT_SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+
+- rule: General Secret
+  file: k8s/valid/secret-stringdata-before.yml
+  offender: 'Password: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
+  line: '  rconPassword: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
 
 - rule: General Secret
   file: mailchimp
@@ -1414,6 +1454,16 @@
   file: general-test
   offender: ://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
   line: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
+
+- rule: URL User and Password
+  file: k8s/valid/secret-stringdata-after-quotes-single.yaml
+  offender: ://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  line: '  MONGODB_URL: ''mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017/gtfseditor'''
+
+- rule: URL User and Password
+  file: k8s/valid/secret-stringdata-before-quotes-single.yaml
+  offender: ://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  line: '  MONGODB_URL: ''mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017/gtfseditor'''
 
 - rule: URL User and Password
   file: semgrep-rules-examples/detected-github-token.txt

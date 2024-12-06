@@ -173,6 +173,28 @@
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJsZWFrdGsiLCJub3RlIjoiZm9yIHRlc3RpbmcgQXJnb0NEIG1hdGNoZXMiLCJpc3MiOiJhcmdvY2QifQ.IMSC5Gl6CavUctOoILAcHN4YAsH3ihQz7l6mDobClXw
 
 #
+# Auth0 OAuth Client Secret
+#
+
+- rule.description: Auth0 OAuth Client Secret
+  rule.id: d6cdf13aa9b7b02a7f259b6f116bcbe24e4a30a01f566a418211c6e02e39fd79
+  location.path: auth0/valid/oauth-config.yaml
+  match: |-
+    auth0.com
+    client_id: xRvPY11pC3Jp2ty9dDDlm9Dyqu1VIPmY
+    client_secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP
+  secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP
+
+- rule.description: Auth0 OAuth Client Secret
+  rule.id: d6cdf13aa9b7b02a7f259b6f116bcbe24e4a30a01f566a418211c6e02e39fd79
+  location.path: auth0/valid/oauth-env.sh
+  match: |-
+    AUTH0_DOMAIN="some-domain.auth0.com"
+    AUTH0_CLIENT_ID="xRvPY11pC3Jp2ty9dDDlm9Dyqu1VIPmY"
+    AUTH0_CLIENT_SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
+  secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
+
+#
 # Base64 Encoded AWS Secret Access Key
 #
 
@@ -285,6 +307,18 @@
 #
 # General Secret
 #
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: auth0/valid/oauth-config.yaml
+  match: 'secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP'
+  secret: ft2bEnamwiIbpIP_zkeChaoaMRlb5X3gq_DZwQZZOY-_GuheOAGQZ1q6uK3V_FnP
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: auth0/valid/oauth-env.sh
+  match: SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
+  secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
 
 - rule.description: General Secret
   rule.id: 08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44
@@ -675,6 +709,42 @@
   location.path: k8s/valid/secret-before-comment.yaml
   match: 'password: UyFCXCpkJHpEc2I9'
   secret: UyFCXCpkJHpEc2I9
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-stringdata-after-quotes-double.yml
+  match: 'PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+  secret: a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-stringdata-after-quotes-single.yaml
+  match: 'SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+  secret: bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-stringdata-after.yml
+  match: 'Password: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
+  secret: JdxWjqhjWLTB7wn9qtNH2TXwW4p
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-stringdata-before-quotes-double.yml
+  match: 'PASSWORD: "a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd"'
+  secret: a765b22179964c53c8a32acccf5dd90d5fc832607bdd14fccaaaa0062adfd
+
+- rule.description: General Secret
+  rule.id: cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22
+  location.path: k8s/valid/secret-stringdata-before-quotes-single.yaml
+  match: 'SECRET: ''bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am'''
+  secret: bafkreicysg23kiwv34eg2d7qweipxwosdo2py4ldv42nbauguluen5v6am
+
+- rule.description: General Secret
+  rule.id: dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2
+  location.path: k8s/valid/secret-stringdata-before.yml
+  match: 'Password: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
+  secret: JdxWjqhjWLTB7wn9qtNH2TXwW4p
 
 - rule.description: General Secret
   rule.id: a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e
@@ -1718,6 +1788,18 @@
   location.path: general-test
   match: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
   secret: 9d902de68e4113f5855a6c88314cec6a
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: k8s/valid/secret-stringdata-after-quotes-single.yaml
+  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  secret: zCGp9*ghPmt#ezFjdrqo6nyI
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: k8s/valid/secret-stringdata-before-quotes-single.yaml
+  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  secret: zCGp9*ghPmt#ezFjdrqo6nyI
 
 - rule.description: URL User and Password
   rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e

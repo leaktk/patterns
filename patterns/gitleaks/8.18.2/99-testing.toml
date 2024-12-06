@@ -222,6 +222,16 @@
     'secret_id',
   ]
 
+[[rules]]
+  id = 'd6cdf13aa9b7b02a7f259b6f116bcbe24e4a30a01f566a418211c6e02e39fd79'
+  description = 'Auth0 OAuth Client Secret'
+  regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'client_secret',
+    'clientsecret',
+  ]
+
 # This rule WAY WAY overmatches at the moment and can cause the scanner to
 # time out on large json files.
 #
