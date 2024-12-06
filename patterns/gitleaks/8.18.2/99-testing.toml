@@ -43,10 +43,10 @@
 
 [[rules]]
   id = '89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9'
-  # Captures things like normal General Secret but handles the case where
+  # Captures things like normal Generic Secret but handles the case where
   # the value is unquoted and in the format secret=value and has nothing
   # infront of it other than spaces or starts the line or is a comment
-  description = '(Env Var) General Secret'
+  description = '(Env Var) Generic Secret'
   regex = '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,})'''
   entropy = 3.35
   secretGroup = 1
