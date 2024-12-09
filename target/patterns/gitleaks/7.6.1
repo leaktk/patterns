@@ -28,17 +28,18 @@ regex = '''-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----'''
 tags = ["alert:repo-owner", "key", "asymmetric-private-key", "type:secret"]
 [rules.allowlist]
 paths = [
-'''(^|\/)testdata\/''',
-'''test(s)?\/.*.(txt|der|key|pem)$''',
-'''[^\/]+test[^\/]+(txt|der|key|pem)$''',
-'''(dummy|example).*(key|pem)''',
-'''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
-'''\/lib\w+\/lib(gnutls|ssh).so''',
-'''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
-'''\/usr\/share\/(mime|misc)''',
+'''(:?^|\/)testdata\/''',
+'''tests?\/.*.(:?txt|der|key|pem)$''',
+'''[^\/]+test[^\/]+(:?txt|der|key|pem)$''',
+'''(:?dummy|example).*(:?key|pem)''',
+'''\/s?bin\/ssh(:?-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+'''\/lib\w+\/lib(:?gnutls|ssh).so''',
+'''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
+'''\/usr\/share\/(:?mime|misc)''',
+'''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
 ]
 regexes = [
-'''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+'''PRIVATE KEY( BLOCK)?-----.{0,128}-----END''',
 '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
 '''PRIVATE KEY( BLOCK)?-----.*?(\.\.\.|\*\*\*|xxx).*?-----END''',
 '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(\[)?\s*(\"\"\"|\"|\'|`)?-----BEGIN''',
@@ -225,12 +226,12 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](\\)?[\$%#]?(\\)?\{.+?\}[\"\']''',
+'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(\.\.\.|\*\*\*|xxxxx)[^\"\']*?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z\-]+[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
 '''(?i)aws(.{0,15})(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
@@ -279,7 +280,7 @@ Group = "5"
 [[rules]]
 description="General Secret"
 path='''\.y(a)?ml$'''
-regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s*?([^\"\'\s]+?)\s*?(?:#|$)'''
+regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s+?([^\"\'\s]+?)\s*?(?:#|$)'''
 tags = ["alert:repo-owner", "yaml", "key", "secret", "general", "type:secret"]
 [[rules.entropies]]
 Min = "3.35"
