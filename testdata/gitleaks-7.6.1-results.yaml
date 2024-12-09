@@ -712,6 +712,11 @@
   line: '{"secret": "$A3ae68d9f8ccfc898ee2555a5f8f228b9", "foo": "bar"}'
 
 - rule: General Secret
+  file: generic/valid/secret-access-key.xml
+  offender: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</
+  line: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
+
+- rule: General Secret
   file: ignore.d/super-secret-password.txt
   offender: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
   line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
