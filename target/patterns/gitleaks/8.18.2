@@ -704,14 +704,15 @@ keywords = [
 [rules.allowlist]
 regexTarget = "line"
 paths = [
-'''(^|\/)testdata\/''',
-'''test(s)?\/.*.(txt|der|key|pem)$''',
-'''[^\/]+test[^\/]+(txt|der|key|pem)$''',
-'''(dummy|example).*(key|pem)''',
-'''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
-'''\/lib\w+\/lib(gnutls|ssh).so''',
-'''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
-'''\/usr\/share\/(mime|misc)''',
+'''(:?^|\/)testdata\/''',
+'''tests?\/.*.(:?txt|der|key|pem)$''',
+'''[^\/]+test[^\/]+(:?txt|der|key|pem)$''',
+'''(:?dummy|example).*(:?key|pem)''',
+'''\/s?bin\/ssh(:?-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+'''\/lib\w+\/lib(:?gnutls|ssh).so''',
+'''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
+'''\/usr\/share\/(:?mime|misc)''',
+'''(:?^|\/)jdk\/sun\/security\/ssl\/''',
 ]
 regexes = [
 '''(?i)-----BEGIN (DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',

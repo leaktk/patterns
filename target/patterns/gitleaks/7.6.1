@@ -28,14 +28,15 @@ regex = '''-----BEGIN ((DSA|EC|OPENSSH|PGP|RSA) )?PRIVATE KEY( BLOCK)?-----'''
 tags = ["alert:repo-owner", "key", "asymmetric-private-key", "type:secret"]
 [rules.allowlist]
 paths = [
-'''(^|\/)testdata\/''',
-'''test(s)?\/.*.(txt|der|key|pem)$''',
-'''[^\/]+test[^\/]+(txt|der|key|pem)$''',
-'''(dummy|example).*(key|pem)''',
-'''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
-'''\/lib\w+\/lib(gnutls|ssh).so''',
-'''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
-'''\/usr\/share\/(mime|misc)''',
+'''(:?^|\/)testdata\/''',
+'''tests?\/.*.(:?txt|der|key|pem)$''',
+'''[^\/]+test[^\/]+(:?txt|der|key|pem)$''',
+'''(:?dummy|example).*(:?key|pem)''',
+'''\/s?bin\/ssh(:?-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+'''\/lib\w+\/lib(:?gnutls|ssh).so''',
+'''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
+'''\/usr\/share\/(:?mime|misc)''',
+'''(:?^|\/)jdk\/sun\/security\/ssl\/''',
 ]
 regexes = [
 '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
