@@ -29,13 +29,13 @@
       '''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
       # Data dirs that contain key headers to identify them
       '''\/usr\/share\/(:?mime|misc)''',
-      # OpenJDK SSL Tests
-      '''(:?^|\/)jdk\/sun\/security\/ssl\/''',
+      # OpenJDK tests with private keys
+      '''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
     ]
 
     regexes = [
-      # Anything less than 15 characters
-      '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+      # Anything less than 128 characters
+      '''PRIVATE KEY( BLOCK)?-----.{0,128}-----END''',
       # The key has spaces in it so it's probably a placeholder
       '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
       # The key has a redacted portion

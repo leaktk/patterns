@@ -36,10 +36,10 @@ paths = [
 '''\/lib\w+\/lib(:?gnutls|ssh).so''',
 '''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
 '''\/usr\/share\/(:?mime|misc)''',
-'''(:?^|\/)jdk\/sun\/security\/ssl\/''',
+'''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
 ]
 regexes = [
-'''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+'''PRIVATE KEY( BLOCK)?-----.{0,128}-----END''',
 '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
 '''PRIVATE KEY( BLOCK)?-----.*?(\.\.\.|\*\*\*|xxx).*?-----END''',
 '''(?i)\w*(fake|example|test)\w*\s*[:=]+\s*(\[)?\s*(\"\"\"|\"|\'|`)?-----BEGIN''',
