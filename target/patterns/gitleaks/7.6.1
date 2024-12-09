@@ -279,7 +279,7 @@ Group = "5"
 [[rules]]
 description="General Secret"
 path='''\.y(a)?ml$'''
-regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s*?([^\"\'\s]+?)\s*?(?:#|$)'''
+regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s+?([^\"\'\s]+?)\s*?(?:#|$)'''
 tags = ["alert:repo-owner", "yaml", "key", "secret", "general", "type:secret"]
 [[rules.entropies]]
 Min = "3.35"
