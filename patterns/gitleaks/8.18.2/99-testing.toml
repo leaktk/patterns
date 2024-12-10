@@ -179,7 +179,7 @@
       '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\s|$)''',
+      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\s|$)''',
       ## Ends with
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|raw\(|ya?ml)(?:&gt;|\\u003e|&#34;)?(?:\s|$)''',
        # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
