@@ -688,7 +688,7 @@
   [rules.allowlist]
     paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+      '''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
     ]
 
     regexTarget = 'line'
