@@ -116,7 +116,7 @@
 
 [[rules]]
   id = '08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44'
-  description = 'General Secret'
+  description = 'Generic Secret'
   # This one looks for tokens in files with extensions like:
   # - app.clientSecret
   # - cluster.token
@@ -151,7 +151,7 @@
 
 [[rules]]
   id = 'cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22'
-  description = 'General Secret'
+  description = 'Generic Secret'
   # Things like:
   #   password = "value"
   #   password_key = "value"
@@ -274,6 +274,9 @@
       #   secret = "\#{PLACEHOLDER}"
       #   secret = "\${PLACEHOLDER}"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
+      #   secret = "insert_your_password_here"
+      #   secret = "some-ca.crt"
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
       #   secret = "Some...placeholder"
       #   secret = "Some***placeholder"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
@@ -291,17 +294,15 @@
       #   secret = "'$SOME_ENV_VARIABLE-optional-text"
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[a-z\-]+[\"\']''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?[\"\']''',
+      # Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?[\"\']''',
       # aws.* is already covered by a different rule
       '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # jq lookups
       '''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
       ## Ends with
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
@@ -326,7 +327,7 @@
 
 [[rules]]
   id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
-  description = 'General Secret'
+  description = 'Generic Secret'
   regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
   entropy = 3.5
   secretGroup = 1
@@ -390,12 +391,12 @@
       #   <secret>asdfsadf...adfadsf</secret>(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/'
       #   <secret>asdfsadf***asdfsa</secret>
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-      #   Base64 encoded EXAMPLE
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\]\]>)?<\/''',
+      #   Base64 encoded EXAMPLE, change and 12345
+      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(:?RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
 
       ## Starts with
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC\[|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
+      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
       ## Ends with
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
@@ -406,11 +407,11 @@
 
 [[rules]]
   id = 'dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2'
-  # Captures things like normal General Secret but handles the case where
+  # Captures things like normal Generic Secret but handles the case where
   # the value in a yaml file is unquoted
-  description = 'General Secret'
+  description = 'Generic Secret'
   path='''\.y(a)?ml$'''
-  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
+  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
   entropy = 3.35
   secretGroup = 1
   tags = ['type:secret', 'alert:repo-owner']
@@ -477,6 +478,7 @@
       'string',
       'test',
       'theblurstoftimes',
+      'todo',
       'token',
       'update',
       'uuid',
@@ -531,11 +533,11 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*?(?:\n|#|$)''',
       # Secrets that are allow lower case and optionally contain dashes are most often placeholders
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\n|#|$)''',
+      # Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC\[|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\n|#|$)''',
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\n|#|$)''',
       ## Ends with
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\n|#|$)''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
@@ -686,7 +688,7 @@
   [rules.allowlist]
     paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+      '''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
     ]
 
     regexTarget = 'line'
@@ -910,7 +912,7 @@
 [[rules]]
   id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
   description = 'Private Key'
-  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
+  regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S]*?(?:[a-z0-9\/+]{64}[\s\S]*?){2}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
       '-----begin',
@@ -920,29 +922,29 @@
     regexTarget = "line"
     paths = [
       # Test data are often false positives
-      '''(^|\/)testdata\/''',
+      '''(:?^|\/)testdata\/''',
       # Ignore keys in a test(s) folder
-      '''test(s)?\/.*.(txt|der|key|pem)$''',
+      '''tests?\/.*.(:?txt|der|key|pem)$''',
       # Ignore keys with test in their name
-      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
+      '''[^\/]+test[^\/]+(:?txt|der|key|pem)$''',
       # Ignore common example keys
-      '''(dummy|example).*(key|pem)''',
+      '''(:?dummy|example).*(:?key|pem)''',
       # Ignore ssh utilities that might have key headers in them
-      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+      '''\/s?bin\/ssh(:?-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
       # Ignore libs that might have key headers in them
-      '''\/lib\w+\/lib(gnutls|ssh).so''',
+      '''\/lib\w+\/lib(:?gnutls|ssh).so''',
       # Ignore utils that might have key headers in them
-      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+      '''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
       # Data dirs that contain key headers to identify them
-      '''\/usr\/share\/(mime|misc)''',
+      '''\/usr\/share\/(:?mime|misc)''',
+      # OpenJDK tests with private keys
+      '''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
     ]
 
     regexes = [
       # Ignore example keys
       '''(?i)-----BEGIN (DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',
-      # Anything less than 15 characters
-      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]{0,15}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
-      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S-]*?(\.\.\.|\*\*\*|xxx)[\s\S-]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
+      '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----[\s\S]*?(\.\.\.|\*\*\*|xxx)[\s\S]*?-----END[ A-Z0-9_-]{0,100}PRIVATE KEY( BLOCK)?-----''',
       # Ignore some keys assigned to test vars
       # e.g. TEST_SERVER_KEY = """-----BEGIN RSA PRIVATE KEY-----
       '''(?i)\w*(dummy|example|fake|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
@@ -1300,7 +1302,7 @@
       'value',
     ]
 
-    regexTarget = 'match'
+    regexTarget = 'line'
     regexes = [
       # Things like: https://user:__pass__@host
       # Things like: https://user:%pass%@host
@@ -1328,6 +1330,8 @@
       ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
       # ip:port type placeholders
       ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
+      # Is regex
+      '''re\.compile\(\s*?r?[\'\"]''',
     ]
 
 

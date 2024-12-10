@@ -14,26 +14,28 @@
   [rules.allowlist]
     paths = [
       # Test data are often false positives
-      '''(^|\/)testdata\/''',
+      '''(:?^|\/)testdata\/''',
       # Ignore keys in a test(s) folder
-      '''test(s)?\/.*.(txt|der|key|pem)$''',
+      '''tests?\/.*.(:?txt|der|key|pem)$''',
       # Ignore keys with test in their name
-      '''[^\/]+test[^\/]+(txt|der|key|pem)$''',
+      '''[^\/]+test[^\/]+(:?txt|der|key|pem)$''',
       # Ignore common example keys
-      '''(dummy|example).*(key|pem)''',
+      '''(:?dummy|example).*(:?key|pem)''',
       # Ignore ssh utilities that might have key headers in them
-      '''\/(s)?bin\/ssh(-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+      '''\/s?bin\/ssh(:?-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
       # Ignore libs that might have key headers in them
-      '''\/lib\w+\/lib(gnutls|ssh).so''',
+      '''\/lib\w+\/lib(:?gnutls|ssh).so''',
       # Ignore utils that might have key headers in them
-      '''\/lib\w+\/(cockpit-|openssh\/ssh-)''',
+      '''\/lib\w+\/(:?cockpit-|openssh\/ssh-)''',
       # Data dirs that contain key headers to identify them
-      '''\/usr\/share\/(mime|misc)''',
+      '''\/usr\/share\/(:?mime|misc)''',
+      # OpenJDK tests with private keys
+      '''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
     ]
 
     regexes = [
-      # Anything less than 15 characters
-      '''PRIVATE KEY( BLOCK)?-----.{0,15}-----END''',
+      # Anything less than 128 characters
+      '''PRIVATE KEY( BLOCK)?-----.{0,128}-----END''',
       # The key has spaces in it so it's probably a placeholder
       '''PRIVATE KEY( BLOCK)?-----.*?(\s).*?-----END''',
       # The key has a redacted portion
@@ -165,33 +167,38 @@
       # Things like: https://user:$pass@host
       '''(?i):\/\/([^:\/\s\"\']+)?:\$[a-z][a-z\_\-]+(\$)?@[\w\.\-]+''',
       # Things like: https://user:afacae....adsfae@host
-      ''':\/\/([^:\/\s\"\']+)?:[^@\/\s\"]*(\.\.\.|\*\*\*)[^@\/\s\"]*@[\w\.\-]+''',
+      ''':\/\/(?:[^:\/\s\"\']+)?:[^@\/\s\"]*(?:\.\.\.|\*\*\*)[^@\/\s\"]*@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(\")?\$\{[^@\/\s]+\}(\")?@[\w\.\-]+''',
       # Things like: https://user:{pass}@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:\{[^@\/\s]+\}@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:[pass]@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:\[[^@\/\s]+\]@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:\[[^@\/\s]+\]@[\w\.\-]+''',
       # Things like: https://user:${pass}@host
       # Things like: https://user:\${pass}@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:(\\)?\$\{[^@\/\s]+\}@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(\\)?\$\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$(pass)@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:\$\([^@\/\s]+\)@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:\$\([^@\/\s]+\)@[\w\.\-]+''',
       # Things like: https://user:#{pass}@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:\#\{[^@\/\s]+\}@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
-      '''(?i):\/\/([^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(?-i)(")?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?(")?@[\w\.\-]+''',
       # Things like: https://host:port,org.java.stuff@commit
-      ''':\/\/([^:\/\s\"\']+)?:\d{3,4},[\w\.]+@[\w\.\-]+''',
+      ''':\/\/(?:[^:\/\s\"\']+)?:\d{3,4},[\w\.]+@[\w\.\-]+''',
       # Hostnaames to ignore (most hostnames that are just a-z are FPs and there\s example hosts and such)
       ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
       # ip:port type placeholders
-      ''':\/\/([^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(ip|host):port''',
+      ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(ip|host):port''',
+      # Is regex
+      '''re\.compile\(\s*?r?[\'\"]''',
       # Common spammy placeholder creds
-      '''(?i):\/\/([^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
-      # Various words at the start and end that signify a placeholder
-      '''(?i):\/\/([^:\/\s\"\']+)?:(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
-      '''(?i):\/\/([^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|-encryption|-tls|_id|_private|(0)?1234(5)?(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
+      # Starts with
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|provide|path|quickstart|replace|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
+      # Contains
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:[^@\/\s\"]*?(?:example|placeholder|12345|userpass|passw?(o|0)?r?(d|t)!?|sample|secret)[^@\/\s\"]*?@[\w\.\-]+''',
+      # Ends with
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|-encryption|-tls|_id|_private|(0)?1234(5)?(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|principal|raw\(|registry|required|string|test|token|uuid|value|xxxxx|y(a)?ml)@[\w\.\-]+''',
     ]
 
 [[rules]]
@@ -233,7 +240,7 @@
 
     paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+      '''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
     ]
 
   [[rules.entropies]]
@@ -352,6 +359,9 @@
       #   secret = "\#{PLACEHOLDER}"
       #   secret = "\${PLACEHOLDER}"
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](\\)?[\$%#]?(\\)?\{.+?\}[\"\']''',
+      #   secret = "insert_your_password_here"
+      #   secret = "some-ca.crt"
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
       #   secret = "Some...placeholder"
       #   secret = "Some***placeholder"
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(\.\.\.|\*\*\*|xxxxx)[^\"\']*?[\"\']''',
@@ -369,19 +379,17 @@
       #   secret = "'$SOME_ENV_VARIABLE-optional-text"
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
-      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z\-]+[\"\']''',
       # Known full placeholder passwords
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
+      # Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)[^\"\']*?[\"\']''',
       # aws.* is already covered by a different rule
       '''(?i)aws(.{0,15})(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
       # jq lookups
       '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password|token)(_|-)?(access(_|-)?)?(key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
       ## Ends with
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
       ## Contains
@@ -449,11 +457,11 @@
       #   <secret>asdfsadf...adfadsf</secret>
       #   <secret>asdfsadf***asdfsa</secret>
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(\.\.\.|\*\*\*).*?(\]\]>)?<\/''',
-      #   Base64 encoded EXAMPLE
-      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(\]\]>)?<\/''',
+      #   Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
+      '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
       ## Ends with
       '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(0)?1234(5)?(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(\]\]>)?<\/''',
       # UUIDs
@@ -472,7 +480,7 @@
   # to handle quoted values).
   description="General Secret"
   path='''\.y(a)?ml$'''
-  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s*?([^\"\'\s]+?)\s*?(?:#|$)'''
+  regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s+?([^\"\'\s]+?)\s*?(?:#|$)'''
   tags = ["alert:repo-owner", "yaml", "key", "secret", "general", "type:secret"]
 
   [[rules.entropies]]
@@ -517,16 +525,16 @@
       #   - secret: \$SOME_ENV_VARIABLE-optional-text
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
       # Ignore EXAMPLE and other base64 encoded words
-      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX)''',
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)''',
       # Ignore secrets that are just lower case letters and dashes and underscores
       # probably a ref to another secret
       '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*(?-i)[a-z_-]+\s*?(?:#|$)''',
       # Various words at the start and end that signify a placeholder
       # THESE WILL NEED TO BE UPDATED AFTER MOVING OVER TO MATCH THE OTHER LISTS
       ## Starts with
-      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|confirm|contrase|demo|dict|django-insecure-|(ENC\[|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
+      '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
       ## Contains
-      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|openshift|token|password|release|theblurstoftimes)[^\"\'\s]*?\s*?(?:#|$)''',
+      '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|openshift|todo|token|password|release|theblurstoftimes)[^\"\'\s]*?\s*?(?:#|$)''',
       ## Ends with
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
       # Ignore things that are just escaped unicode characters for now
