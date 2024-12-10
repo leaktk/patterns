@@ -1331,7 +1331,7 @@
       # ip:port type placeholders
       ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
       # Is regex
-      '''re\.compile\(\s?r?[\'\"]''',
+      '''re\.compile\(\s*?r?[\'\"]''',
     ]
 
 

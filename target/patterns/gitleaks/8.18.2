@@ -1040,7 +1040,7 @@ regexes = [
 ''':\/\/[^:\/\s\"\']*?:\d{3,4},[\w\.]+@[\w\.\-]+''',
 ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
 ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(ip|host):port''',
-'''re\.compile\(\s?r?[\'\"]''',
+'''re\.compile\(\s*?r?[\'\"]''',
 ]
 [[rules]]
 id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
@@ -1209,7 +1209,7 @@ keywords = [
 [[rules]]
 id = '6cb7e194180b90306cc5952b4e74698177970f9a3f121339476b9891805820ca'
 description = 'Dropbox Refresh Token'
-regex = '''(?:^|[^A-Za-z0-9])([A-Za-z0-9]{11}(AAAAAAAAAA)[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
+regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}(AAAAAAAAAA)[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'dropbox',
@@ -1217,7 +1217,7 @@ keywords = [
 [[rules]]
 id = '9e617f6025412a3b8d7dcd12e6242416c32c1524845239892612230b0ca227d5'
 description = 'Dropbox Short-Lived Offline Access Token'
-regex = '''(?i)(?:^|[^a-z0-9\-=_])(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'sl.u.',
@@ -1225,7 +1225,7 @@ keywords = [
 [[rules]]
 id = 'eebe1f7351c8edb9aadc710be96072b4cf592aeaefe63a425fed3db21f04451f'
 description = 'Dropbox Short-Lived Access Token'
-regex = '''(?i)(?:^|[^a-z0-9\-=_])(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'sl.',

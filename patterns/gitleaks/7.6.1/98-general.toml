@@ -190,7 +190,7 @@
       # ip:port type placeholders
       ''':\/\/(?:[^:\/\s\"\']+)?:([^@\/\s\"]{3,})@(ip|host):port''',
       # Is regex
-      '''re\.compile\(\s?r?[\'\"]''',
+      '''re\.compile\(\s*?r?[\'\"]''',
       # Common spammy placeholder creds
       '''(?i):\/\/(?:[^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Starts with
