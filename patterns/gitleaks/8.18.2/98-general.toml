@@ -294,8 +294,8 @@
       #   secret = "'$SOME_ENV_VARIABLE-optional-text"
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?[\"\']''',
+      # Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?[\"\']''',
       # aws.* is already covered by a different rule
       '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # jq lookups
@@ -391,8 +391,8 @@
       #   <secret>asdfsadf...adfadsf</secret>(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/'
       #   <secret>asdfsadf***asdfsa</secret>
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-      #   Base64 encoded EXAMPLE
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\]\]>)?<\/''',
+      #   Base64 encoded EXAMPLE, change and 12345
+      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(:?RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
 
       ## Starts with
@@ -533,8 +533,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*?(?:\n|#|$)''',
       # Secrets that are allow lower case and optionally contain dashes are most often placeholders
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\n|#|$)''',
+      # Base64 encoded EXAMPLE, change, and 12345
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\n|#|$)''',

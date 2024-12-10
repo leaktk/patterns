@@ -164,7 +164,7 @@ regexes = [
 '''^\s*#''',
 ]
 paths = [
-'''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+'''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
 ]
 [[rules.entropies]]
 Min = "4"
@@ -233,7 +233,7 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
-'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF)[^\"\']*?[\"\']''',
+'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)[^\"\']*?[\"\']''',
 '''(?i)aws(.{0,15})(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']([^\"\s]+?)[\"\']''',
 '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password|token)(_|-)?(access(_|-)?)?(key)?''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
@@ -267,7 +267,7 @@ regexes = [
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(\\)?(\$|%)?(\\)?(\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(\]\]>)?<\/''',
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(\]\]>)?<\/''',
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(\.\.\.|\*\*\*).*?(\]\]>)?<\/''',
-'''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(\]\]>)?<\/''',
+'''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?.*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(\]\]>)?<\/''',
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|(0)?12345|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|example|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?(\]\]>)?<\/''',
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?[^<]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(0)?1234(5)?(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|example(.com|key)?|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(\]\]>)?<\/''',
 '''(?i)<(\s+)?(\w+)?(password|secret)([\s\w\"\'=]+)?>(<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(\]\]>)?<\/''',
@@ -297,7 +297,7 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\[%.+%\]|\[.+?\]|(\\)?\$\(.*)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(?-i)(\\)?\$[A-Z][0-9A-Z_]{4,}([\w\-]+)?''',
-'''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX)''',
+'''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)''',
 '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*(?-i)[a-z_-]+\s*?(?:#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
 '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|openshift|todo|token|password|release|theblurstoftimes)[^\"\'\s]*?\s*?(?:#|$)''',

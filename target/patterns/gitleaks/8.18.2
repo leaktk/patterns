@@ -226,7 +226,7 @@ regexes = [
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?[\"\']''',
 '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
 '''jq\s+([\w\-\s]+)?.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?[\"\']''',
@@ -280,7 +280,7 @@ regexes = [
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(:?RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
@@ -373,7 +373,7 @@ regexes = [
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}\s*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\n|#|$)''',
@@ -501,7 +501,7 @@ tags = ['type:secret', 'alert:repo-owner']
 entropy = 4
 [rules.allowlist]
 paths = [
-'''.+?\.(?:c|go|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+'''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
 ]
 regexTarget = 'line'
 regexes = [
