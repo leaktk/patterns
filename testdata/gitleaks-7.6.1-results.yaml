@@ -912,7 +912,7 @@
 #
 
 - rule: GitHub Fine-Grained Personal Access Token
-  file: general-test
+  file: github/valid/fine-grained-personal-access-token
   offender: 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
   line: <access-token>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</access-token>
 
@@ -921,7 +921,7 @@
 #
 
 - rule: GitHub OAuth Access Token
-  file: general-test
+  file: github/valid/oauth-access-token
   offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
   line: token='gho_16C7e42F292c6912E7710c838347Ae178B4a'
 
@@ -930,36 +930,26 @@
 #
 
 - rule: GitHub Personal Access Token
-  file: general-test
-  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
-  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
+  file: github/valid/personal-access-token-env-var
   offender: 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
   line: GITHUB_TOKEN=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
 
 - rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
+  file: github/valid/personal-access-token-in-url
   offender: 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
   line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
 
 - rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: githubToken = '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'
-
-- rule: GitHub Personal Access Token
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: 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
-  line: github_token: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
+  file: github/valid/personal-access-token-in-xml
+  offender: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  line: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</access-token>
 
 #
 # GitHub Refresh Token
 #
 
 - rule: GitHub Refresh Token
-  file: general-test
+  file: github/valid/refresh-token
   offender: ghr_16C7e42F292c6912E7710c838347Ae178B4a
   line: ghr_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -968,7 +958,7 @@
 #
 
 - rule: GitHub Server to Server Token
-  file: general-test
+  file: github/valid/server-to-server-token
   offender: ghs_16C7e42F292c6912E7710c838347Ae178B4a
   line: ghs_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -977,7 +967,7 @@
 #
 
 - rule: GitHub User to Server Token
-  file: general-test
+  file: github/valid/user-to-server-token
   offender: ghu_16C7e42F292c6912E7710c838347Ae178B4a
   line: '''gt-token'': ''ghu_16C7e42F292c6912E7710c838347Ae178B4a'''
 
@@ -1491,6 +1481,11 @@
   line: rsync://username:9d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
 
 - rule: URL User and Password
+  file: github/valid/personal-access-token-in-url
+  offender: ://phaticusthiccy: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@github.com
+  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
+
+- rule: URL User and Password
   file: k8s/valid/secret-stringdata-after-quotes-single.yaml
   offender: ://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   line: '  MONGODB_URL: ''mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017/gtfseditor'''
@@ -1499,11 +1494,6 @@
   file: k8s/valid/secret-stringdata-before-quotes-single.yaml
   offender: ://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   line: '  MONGODB_URL: ''mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017/gtfseditor'''
-
-- rule: URL User and Password
-  file: semgrep-rules-examples/detected-github-token.txt
-  offender: ://phaticusthiccy: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@github.com
-  line: clone="git clone https://phaticusthiccy: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@github.com/phaticusthiccy/WhatsAsenaDuplicated"
 
 - rule: URL User and Password
   file: semgrep-rules-examples/detected-username-and-password-in-uri.txt

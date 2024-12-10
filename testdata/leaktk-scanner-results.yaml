@@ -1012,7 +1012,7 @@
 
 - rule.description: GitHub Fine-Grained Personal Access Token
   rule.id: f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db
-  location.path: general-test
+  location.path: github/valid/fine-grained-personal-access-token
   match: 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
   secret: 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
 
@@ -1022,7 +1022,7 @@
 
 - rule.description: GitHub OAuth Access Token
   rule.id: 0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0
-  location.path: general-test
+  location.path: github/valid/oauth-access-token
   match: gho_16C7e42F292c6912E7710c838347Ae178B4a
   secret: gho_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -1032,33 +1032,27 @@
 
 - rule.description: GitHub Personal Access Token
   rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
-  location.path: general-test
-  match: ghp_16C7e42F292c6912E7710c838347Ae178B4a
-  secret: ghp_16C7e42F292c6912E7710c838347Ae178B4a
-
-- rule.description: GitHub Personal Access Token
-  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
-  location.path: semgrep-rules-examples/detected-github-token.txt
+  location.path: github/valid/personal-access-token-env-var
   match: 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
   secret: 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
 
 - rule.description: GitHub Personal Access Token
   rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
-  location.path: semgrep-rules-examples/detected-github-token.txt
+  location.path: github/valid/personal-access-token-env-var
   match: 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
   secret: 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
 
 - rule.description: GitHub Personal Access Token
   rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
-  location.path: semgrep-rules-examples/detected-github-token.txt
-  match: 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
-  secret: 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
-
-- rule.description: GitHub Personal Access Token
-  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
-  location.path: semgrep-rules-examples/detected-github-token.txt
+  location.path: github/valid/personal-access-token-in-url
   match: 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
   secret: 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
+
+- rule.description: GitHub Personal Access Token
+  rule.id: a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7
+  location.path: github/valid/personal-access-token-in-xml
+  match: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  secret: ghp_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
 # GitHub Refresh Token
@@ -1066,7 +1060,7 @@
 
 - rule.description: GitHub Refresh Token
   rule.id: 86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db
-  location.path: general-test
+  location.path: github/valid/refresh-token
   match: ghr_16C7e42F292c6912E7710c838347Ae178B4a
   secret: ghr_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -1076,7 +1070,7 @@
 
 - rule.description: GitHub Server to Server Token
   rule.id: 357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614
-  location.path: general-test
+  location.path: github/valid/server-to-server-token
   match: ghs_16C7e42F292c6912E7710c838347Ae178B4a
   secret: ghs_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -1086,7 +1080,7 @@
 
 - rule.description: GitHub User to Server Token
   rule.id: afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b
-  location.path: general-test
+  location.path: github/valid/user-to-server-token
   match: ghu_16C7e42F292c6912E7710c838347Ae178B4a
   secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
 
@@ -1875,6 +1869,12 @@
 
 - rule.description: URL User and Password
   rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
+  location.path: github/valid/personal-access-token-in-url
+  match: https://phaticusthiccy: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@github.com
+  secret: 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
+
+- rule.description: URL User and Password
+  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
   location.path: k8s/valid/secret-stringdata-after-quotes-single.yaml
   match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
@@ -1884,12 +1884,6 @@
   location.path: k8s/valid/secret-stringdata-before-quotes-single.yaml
   match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
-
-- rule.description: URL User and Password
-  rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
-  location.path: semgrep-rules-examples/detected-github-token.txt
-  match: https://phaticusthiccy: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@github.com
-  secret: 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
 
 - rule.description: URL User and Password
   rule.id: 76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e
