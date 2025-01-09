@@ -412,6 +412,9 @@
       # Ignore things that are probably password prompts in code
       # Example: input("Enter Password:") # Something with "quotes" in it
       '''(?i)[\"\'][\s\w]+(secret|password|token)(_|-)?(access(_|-)?)?(key)?:(\s+)?[\"\']''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
@@ -539,6 +542,9 @@
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
       # Ignore things that are just escaped unicode characters for now
       '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]

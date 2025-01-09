@@ -324,6 +324,9 @@
       # Ignore things that are probably password prompts in code
       # Example: input("Enter Password:") # Something with "quotes" in it
       '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
@@ -557,6 +560,9 @@
       '''\bglpat-[\w\-]{20}\b''',
       '''\bglptt-[0-9a-f]{40}\b''',
       '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
