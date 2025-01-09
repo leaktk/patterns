@@ -602,6 +602,10 @@ description = "Square OAuth Secret"
 regex = '''sq0csp-[0-9A-Za-z\\-_]{43}'''
 tags = ["alert:repo-owner", "key", "square", "type:secret"]
 [[rules]]
+description = 'StackRox JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "Stripe API Key"
 regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
 tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
@@ -670,10 +674,6 @@ regexes = [
 '''glptt-[0-9a-f]{40}''',
 '''(glrt-|GR1348941)[\w\-]{20}''',
 ]
-[[rules]]
-description = 'StackRox JWT'
-regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
 [[rules]]
 description = 'HashiCorp Vault AppRole SecretID'
 regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''

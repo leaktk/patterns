@@ -927,6 +927,12 @@
   tags = ["alert:repo-owner", "key", "square", "type:secret"]
 
 [[rules]]
+  description = 'StackRox JWT'
+  # Based on shifted b64 encoded portions of '"iss":"https://stackrox.io/jwt"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+
+[[rules]]
   description = "Stripe API Key"
   regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
   tags = ["alert:repo-owner", "key", "stripe", "type:secret"]

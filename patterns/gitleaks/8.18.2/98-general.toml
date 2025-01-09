@@ -1199,6 +1199,18 @@
   ]
 
 [[rules]]
+  id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
+  description = 'StackRox JWT'
+  # Based on shifted b64 encoded portions of '"iss":"https://stackrox.io/jwt"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'imlzcyi6imh0dhbzoi8vc3rhy2tyb3guaw8vand0i',
+    'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
+    'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
+  ]
+
+[[rules]]
   id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
   description = 'Square Access Token'
   regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
