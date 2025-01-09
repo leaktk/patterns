@@ -676,3 +676,7 @@ tags = ['type:secret', 'group:leaktk-testing']
 description = 'HashiCorp Vault AppRole SecretID'
 regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
 tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+description = "Kubernetes System Service Account JWT"
+regex = '''[a-zA-Z0-9-_+\/]+(?:SW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZE|luTjFZaUk2SW5ONWMzUmxiVHB6WlhKMmFXTmxZV05qYjNWdWRE|Jbk4xWWlJNkluTjVjM1JsYlRwelpYSjJhV05sWVdOamIzVnVkR|SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUT|p6ZFdJaU9pSnplWE4wWlcwNmMyVnlkbWxqWldGalkyOTFiblE2|KemRXSWlPaUp6ZVhOMFpXMDZjMlZ5ZG1salpXRmpZMjkxYm5RN|aWMzVmlJam9pYzNsemRHVnRPbk5sY25acFkyVmhZMk52ZFc1ME|ljM1ZpSWpvaWMzbHpkR1Z0T25ObGNuWnBZMlZoWTJOdmRXNTBP|pYzNWaUlqb2ljM2x6ZEdWdE9uTmxjblpwWTJWaFkyTnZkVzUwT)[a-zA-Z0-9-_+\/]+={0,2}'''
+tags = ['type:secret', 'group:leaktk-testing']
