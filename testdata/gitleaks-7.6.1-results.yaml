@@ -100,6 +100,33 @@
   line: '-----BEGIN EC PRIVATE KEY-----'
 
 #
+# Authorization Header
+#
+
+- rule: Authorization Header
+  file: generic/valid/authorization-header
+  offender: '''Authorization: Bearer arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
+  line: 'curl -H ''Authorization: Bearer arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g''
+    https://github.com'
+
+- rule: Authorization Header
+  file: generic/valid/authorization-header-with-basic-auth
+  offender: '''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA=='
+  line: 'curl -H ''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA==''
+    https://github.com'
+
+- rule: Authorization Header
+  file: generic/valid/authorization-header-with-flat-token
+  offender: '''Authorization: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
+  line: 'curl -H ''Authorization: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g''
+    https://github.com'
+
+- rule: Authorization Header
+  file: mailchimp
+  offender: '"Authorization: Bearer ae54fcc23ade65fa404a65e78c56f898-us1'
+  line: 'curl -H "Authorization: Bearer ae54fcc23ade65fa404a65e78c56f898-us1" https://api.linode.com/v4/account'
+
+#
 # Base64 Encoded AWS Secret Key
 #
 
@@ -1102,12 +1129,17 @@
 #
 
 - rule: Kubernetes System Service Account JWT
-  file: general-test
+  file: k8s/valid/ad-hoc-service-account-token
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
 - rule: Kubernetes System Service Account JWT
-  file: general-test
+  file: k8s/valid/double-encoded-service-account-token
+  offender: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUTZabTl2SWl3aWJtRnRaU0k2SWtwdmFHNGdSRzlsSWl3aWFXRjBJam94TlRFMk1qTTVNREl5ZlEuNjhneHBxVHFoT2hDR3hYUGUzRDg2eGJsTW5SYzJjaUdZbi1TTUc3OElERQo=
+  line: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUTZabTl2SWl3aWJtRnRaU0k2SWtwdmFHNGdSRzlsSWl3aWFXRjBJam94TlRFMk1qTTVNREl5ZlEuNjhneHBxVHFoT2hDR3hYUGUzRDg2eGJsTW5SYzJjaUdZbi1TTUc3OElERQo=
+
+- rule: Kubernetes System Service Account JWT
+  file: k8s/valid/prometheus-k8s-service-account-token
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
 

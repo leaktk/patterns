@@ -214,6 +214,7 @@
       'here',
       'invalid',
       'json',
+      'manager',
       'openstack',
       'passw0rd',
       'passwd',
@@ -323,6 +324,9 @@
       # Ignore things that are probably password prompts in code
       # Example: input("Enter Password:") # Something with "quotes" in it
       '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
@@ -459,6 +463,7 @@
       'here',
       'invalid',
       'json',
+      'manager',
       'openstack',
       'passw0rd',
       'passwd',
@@ -555,6 +560,9 @@
       '''\bglpat-[\w\-]{20}\b''',
       '''\bglptt-[0-9a-f]{40}\b''',
       '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
@@ -1188,6 +1196,18 @@
     'imf1zci6innub3dmbgfrzs',
     'jhdwqioijzbm93zmxha2ug',
     'iyxvkijoic25vd2zsywtli',
+  ]
+
+[[rules]]
+  id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
+  description = 'StackRox JWT'
+  # Based on shifted b64 encoded portions of '"iss":"https://stackrox.io/jwt"'
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'imlzcyi6imh0dhbzoi8vc3rhy2tyb3guaw8vand0i',
+    'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
+    'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
   ]
 
 [[rules]]

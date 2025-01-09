@@ -240,7 +240,7 @@ regexes = [
 '''jq\s+([\w\-\s]+)?.*\.\w*(secret|password|token)(_|-)?(access(_|-)?)?(key)?''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
-'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(secret|example|credentials|a-z|0-9|12345|redhat|openshift|token)[^\'\"]*?[\"\']''',
+'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(secret|example|credentials|a-z|0-9|12345|manager|redhat|openshift|token)[^\'\"]*?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](\\u[a-z0-9]{4})+[\"\']''',
@@ -251,6 +251,7 @@ regexes = [
 '''glptt-[0-9a-f]{40}''',
 '''(glrt-|GR1348941)[\w\-]{20}''',
 '''(?i)[\"\'][\s\w]+(secret|password|token)(_|-)?(access(_|-)?)?(key)?:(\s+)?[\"\']''',
+'''\bAg[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
 description = "General Secret"
@@ -302,9 +303,10 @@ regexes = [
 '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)''',
 '''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*(?-i)[a-z_-]+\s*?(?:#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(&lt;|\\u201c|\\u003c|\$)?(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|pass(w)?(o|0)?(r)?(d|t)(!)?|provide|path|quickstart|replace|sample|(my)?secret|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_).*''',
-'''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|openshift|todo|token|password|release|theblurstoftimes)[^\"\'\s]*?\s*?(?:#|$)''',
+'''(?i)(?:secret|password|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*:\s*[^\"\'\s]*?(?:secret|example|bucket|client|credential|12345|redhat|manager|openshift|todo|token|password|release|theblurstoftimes)[^\"\'\s]*?\s*?(?:#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
+'''\bAg[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
 description = "GitHub Fine-Grained Personal Access Token"
@@ -600,6 +602,10 @@ description = "Square OAuth Secret"
 regex = '''sq0csp-[0-9A-Za-z\\-_]{43}'''
 tags = ["alert:repo-owner", "key", "square", "type:secret"]
 [[rules]]
+description = 'StackRox JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+[[rules]]
 description = "Stripe API Key"
 regex = '''(?i)stripe(.{0,20})?[sr]k_live_[0-9a-zA-Z]{24}'''
 tags = ["alert:repo-owner", "key", "stripe", "type:secret"]
@@ -657,7 +663,7 @@ regexes = [
 '''(?i)aws(?:.{0,15})(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=''',
 '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:&lt;|\\u201c|\\u003c|\$)?(#!\/|\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|http(s)?:\/\/|installation_prefix|invalid|libvirt|none|not|provide|path|quickstart|replace|sample|self|ssh|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)''',
 '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?(?:\s|$)''',
-'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(pass(w)?(o|0)?(r)?(d|t)(!)?|secret|example|credentials|a-z|0-9|12345|redhat|openshift|token|placeholder)''',
+'''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=[^\s\"\']*?(pass(w)?(o|0)?(r)?(d|t)(!)?|secret|example|credentials|a-z|0-9|12345|redhat|openshift|manager|token|placeholder)''',
 '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\s|$)''',
 '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[^\s\"\']+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(?:\s|$)''',
 '''(?:^|\s)\w*?(?i)(?:(?:secret|password|token)_?(?:access_?)?(?:key)?|api_?key)=(?:\\u[a-z0-9]{4})+(?:\s|$)''',
@@ -669,10 +675,18 @@ regexes = [
 '''(glrt-|GR1348941)[\w\-]{20}''',
 ]
 [[rules]]
-description = 'StackRox JWT'
-regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
-[[rules]]
 description = 'HashiCorp Vault AppRole SecretID'
 regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
 tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+description = 'Kubernetes System Service Account JWT'
+regex = '''[a-zA-Z0-9-_+\/]+(?:SW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZE|luTjFZaUk2SW5ONWMzUmxiVHB6WlhKMmFXTmxZV05qYjNWdWRE|Jbk4xWWlJNkluTjVjM1JsYlRwelpYSjJhV05sWVdOamIzVnVkR|SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUT|p6ZFdJaU9pSnplWE4wWlcwNmMyVnlkbWxqWldGalkyOTFiblE2|KemRXSWlPaUp6ZVhOMFpXMDZjMlZ5ZG1salpXRmpZMjkxYm5RN|aWMzVmlJam9pYzNsemRHVnRPbk5sY25acFkyVmhZMk52ZFc1ME|ljM1ZpSWpvaWMzbHpkR1Z0T25ObGNuWnBZMlZoWTJOdmRXNTBP|pYzNWaUlqb2ljM2x6ZEdWdE9uTmxjblpwWTJWaFkyTnZkVzUwT)[a-zA-Z0-9-_+\/]+={0,2}'''
+tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+description = 'Authorization Header'
+regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?[^\s\"\']+'''
+tags = ['type:secret', 'group:leaktk-testing']
+[rules.allowlist]
+regexes = [
+'''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?[^\s\"\']*(?:insert|password|placeholder|replace|token)[^\s\"\']*''',
+]

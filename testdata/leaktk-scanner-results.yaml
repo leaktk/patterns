@@ -211,6 +211,40 @@
   secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
 
 #
+# Authorization Header
+#
+
+- rule.description: Authorization Header
+  rule.id: 193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a
+  location.path: generic/valid/authorization-header
+  match: '''Authorization: Bearer arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
+  secret: arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g
+
+- rule.description: Authorization Header
+  rule.id: 193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a
+  location.path: generic/valid/authorization-header-with-basic-auth
+  match: '''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA=='
+  secret: YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA==
+
+- rule.description: Authorization Header
+  rule.id: 193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a
+  location.path: generic/valid/authorization-header-with-basic-auth
+  match: '''Authorization: Basic admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4'
+  secret: admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4
+
+- rule.description: Authorization Header
+  rule.id: 193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a
+  location.path: generic/valid/authorization-header-with-flat-token
+  match: '''Authorization: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
+  secret: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g
+
+- rule.description: Authorization Header
+  rule.id: 193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a
+  location.path: mailchimp
+  match: '"Authorization: Bearer ae54fcc23ade65fa404a65e78c56f898-us1'
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+#
 # Azure Active Directory Client Secret
 #
 
@@ -1249,13 +1283,19 @@
 
 - rule.description: Kubernetes System Service Account JWT
   rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
-  location.path: general-test
+  location.path: k8s/valid/ad-hoc-service-account-token
   match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
 
 - rule.description: Kubernetes System Service Account JWT
   rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
-  location.path: general-test
+  location.path: k8s/valid/double-encoded-service-account-token
+  match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
+
+- rule.description: Kubernetes System Service Account JWT
+  rule.id: 50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49
+  location.path: k8s/valid/prometheus-k8s-service-account-token
   match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
 

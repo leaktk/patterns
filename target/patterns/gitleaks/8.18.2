@@ -186,6 +186,7 @@ stopwords = [
 'here',
 'invalid',
 'json',
+'manager',
 'openstack',
 'passw0rd',
 'passwd',
@@ -241,6 +242,7 @@ regexes = [
 '''\bglptt-[0-9a-f]{40}\b''',
 '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
 '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
+'''\bAg[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
 id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
@@ -333,6 +335,7 @@ stopwords = [
 'here',
 'invalid',
 'json',
+'manager',
 'openstack',
 'passw0rd',
 'passwd',
@@ -385,6 +388,7 @@ regexes = [
 '''\bglpat-[\w\-]{20}\b''',
 '''\bglptt-[0-9a-f]{40}\b''',
 '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+'''\bAg[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
 id = 'f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db'
@@ -929,6 +933,16 @@ keywords = [
 'iyxvkijoic25vd2zsywtli',
 ]
 [[rules]]
+id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
+description = 'StackRox JWT'
+regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'imlzcyi6imh0dhbzoi8vc3rhy2tyb3guaw8vand0i',
+'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
+'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
+]
+[[rules]]
 id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
 description = 'Square Access Token'
 regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
@@ -1114,6 +1128,7 @@ stopwords = [
 'here',
 'invalid',
 'json',
+'manager',
 'openstack',
 'passw0rd',
 'passwd',
@@ -1168,16 +1183,6 @@ regexes = [
 '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
 '''TESTING_FARM_API_TOKEN''',
 '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b''',
-]
-[[rules]]
-id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
-description = 'StackRox JWT'
-regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-tags = ['type:secret', 'group:leaktk-testing']
-keywords = [
-'imlzcyi6imh0dhbzoi8vc3rhy2tyb3guaw8vand0i',
-'jpc3mioijodhrwczovl3n0ywnrcm94lmlvl2p3dc',
-'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
 ]
 [[rules]]
 id = 'a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943'
@@ -1237,3 +1242,20 @@ regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})
 tags = ['type:secret', 'group:leaktk-testing']
 entropy = 3
 secretGroup = 1
+[[rules]]
+id = '193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a'
+description = 'Authorization Header'
+regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?([^\s\"\']+)'''
+tags = ['type:secret', 'group:leaktk-testing']
+secretGroup = 1
+keywords = [
+'authorization',
+]
+[rules.allowlist]
+stopwords = [
+'insert',
+'password',
+'placeholder',
+'replace',
+'token',
+]
