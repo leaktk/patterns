@@ -308,3 +308,22 @@
 #     '"client_x509_cert_url"',
 #     '"universe_domain"',
 #   ]
+
+[[rules]]
+  id = '193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a'
+  description = 'Authorization Header'
+  regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?([^\s\"\']+)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  secretGroup = 1
+  keywords = [
+    'authorization',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      'insert',
+      'password',
+      'placeholder',
+      'replace',
+      'token',
+    ]
