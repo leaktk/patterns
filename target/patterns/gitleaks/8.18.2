@@ -505,7 +505,7 @@ tags = ['type:secret', 'alert:repo-owner']
 entropy = 4
 [rules.allowlist]
 paths = [
-'''.+?\.(?:c|go|json|java|js(?:\.map)?|html|md|py|rb|sh|ya?ml)$''',
+'''\.(?:c|go|json|java|js|html|md|py|rb|sh|ya?ml)(?:\.\w+)*$''',
 ]
 regexTarget = 'line'
 regexes = [
