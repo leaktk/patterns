@@ -251,7 +251,7 @@ regexes = [
 '''glptt-[0-9a-f]{40}''',
 '''(glrt-|GR1348941)[\w\-]{20}''',
 '''(?i)[\"\'][\s\w]+(secret|password|token)(_|-)?(access(_|-)?)?(key)?:(\s+)?[\"\']''',
-'''\bAg[A-Za-z0-9+\/]{256,}''',
+'''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
 description = "General Secret"
