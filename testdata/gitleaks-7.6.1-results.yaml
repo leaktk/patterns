@@ -131,7 +131,7 @@
 #
 
 - rule: Base64 Encoded AWS Secret Key
-  file: aws
+  file: aws/valid/b64-encoded-k8s-secret-with-aws-creds
   offender: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
   line: YXBpVmVyc2lvbjogdjEKZGF0YToKICBhd3NfYWNjZXNzX2tleV9pZDogUVV0SlFWaFlXRmhZV0ZoWVdGaFlXRmhZV0ZnPQogIGF3c19zZWNyZXRfYWNjZXNzX2tleTogVURSc1JqUlFlalprWjFwaFlsRjBLM0JrVWxCUUsyczNkbk01Um1GMFFWWnVkR2hZU3pkakNnPT0Ka2luZDogU2VjcmV0Cm1ldGFkYXRhOgogIG5hbWVzcGFjZTogZXhhbXBsZQogIG5hbWU6IGF3cy1jcmVkcwo=
 
@@ -149,24 +149,31 @@
 #
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.1.json
-  offender: '"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l"'
-  line: '{"auths":{"cloud.openshift.com":{"auth":"9106fd90g0a38a434847b293xcdx65x8l","email":"example@example.com"},"quay.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.connect.redhat.com":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}}'
+  file: containers/valid/container-auth.1.json
+  offender: '"cloud.openshift.com":{"auth":"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg"'
+  line: '{"auths":{"cloud.openshift.com":{"auth":"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg","email":"user@leaktk.org"},"quay.io":{"auth":"jj8AYnG-gSfo-v_JwtBSWCoVXi3q5-PEuuPkA2sWVeZwefdNrjBOvsdofE49hJNSDlu4sbFIUyXzKfGMTRgvxw","email":"user@leaktk.org"},"registry.connect.redhat.com":{"auth":"vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA","email":"user@leaktk.org"},"registry.redhat.io":{"auth":"SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw","email":"user@leaktk.org"}}}'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.2.json
-  offender: '"registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f"'
-  line: '         "registry.connect.redhat.com": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}},'
+  file: containers/valid/container-auth.2.json
+  offender: '"registry.connect.redhat.com": { "auth": "vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA"'
+  line: '    "registry.connect.redhat.com": { "auth": "vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA",
+    "email": "user@leaktk.org" },'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.2.json
-  offender: '"registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f"'
-  line: '         "registry.connect.redhat.com/foo/bar": {"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"},"registry.redhat.io":{"auth":"046fd90fda38a434347b273ccd16588f","email":"example@example.com"}}'
+  file: containers/valid/container-auth.2.json
+  offender: '"registry.redhat.io": { "auth": "SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw"'
+  line: '    "registry.redhat.io": { "auth": "SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw",
+    "email": "user@leaktk.org" }'
 
 - rule: Container Registry Authentication
-  file: containers/container-auth.3.json
-  offender: \"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\"
-  line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"9106fd90g0a38a434847b293xcdx65x8l\",\"email\":\"example@example.com\"},\"quay.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.connect.redhat.com\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"},\"registry.redhat.io\":{\"auth\":\"046fd90fda38a434347b273ccd16588f\",\"email\":\"example@example.com\"}}}"'
+  file: containers/valid/container-auth.3.json
+  offender: \"cloud.openshift.com\":{\"auth\":\"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg\"
+  line: '"{\"auths\":{\"cloud.openshift.com\":{\"auth\":\"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg\",\"email\":\"user@leaktk.org\"},\"quay.io\":{\"auth\":\"jj8AYnG-gSfo-v_JwtBSWCoVXi3q5-PEuuPkA2sWVeZwefdNrjBOvsdofE49hJNSDlu4sbFIUyXzKfGMTRgvxw\",\"email\":\"user@leaktk.org\"},\"registry.connect.redhat.com\":{\"auth\":\"vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA\",\"email\":\"user@leaktk.org\"},\"registry.redhat.io\":{\"auth\":\"SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw\",\"email\":\"user@leaktk.org\"}}}"'
+
+- rule: Container Registry Authentication
+  file: containers/valid/container-auth.4.json
+  offender: \\\"cloud.openshift.com\\\":{\\\"auth\\\":\\\"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg\\\"
+  line: '"\"{\\\"auths\\\":{\\\"cloud.openshift.com\\\":{\\\"auth\\\":\\\"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"quay.io\\\":{\\\"auth\\\":\\\"jj8AYnG-gSfo-v_JwtBSWCoVXi3q5-PEuuPkA2sWVeZwefdNrjBOvsdofE49hJNSDlu4sbFIUyXzKfGMTRgvxw\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"registry.connect.redhat.com\\\":{\\\"auth\\\":\\\"vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"registry.redhat.io\\\":{\\\"auth\\\":\\\"SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw\\\",\\\"email\\\":\\\"user@leaktk.org\\\"}}}\""'
 
 - rule: Container Registry Authentication
   file: general-test
@@ -739,6 +746,11 @@
   line: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
 
 - rule: General Secret
+  file: generic/valid/secret-in-config
+  offender: secret="GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw"
+  line: user_secret="GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw"
+
+- rule: General Secret
   file: ignore.d/super-secret-password.txt
   offender: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
   line: password = "809520a1d42176b33a147c2decc80c334117d041ab91696ce4c64932a849f81c4346d2bf1f526d55c6cc3898e0108bcbcda56abeb675c1f39ed7ecb192bcba4b"
@@ -1106,14 +1118,9 @@
 #
 
 - rule: Htpasswd File
-  file: my-htpasswd-file
+  file: htpasswd/valid/simple.htpasswd
   offender: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
   line: bob123:$apr1$FaPYZHMz$jYiw5.ExmVKeLbjex5Jvr34uA/
-
-- rule: Htpasswd File
-  file: my-htpasswd-file
-  offender: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
-  line: newUser2:$apr1$mCCHcVhc$ExmVKeLbjex5Jvr34uA/
 
 #
 # Hugging Face API Token
