@@ -21,17 +21,19 @@
     # Quickstarts are FP heavy
     '''quickstart''',
     # Handle a lot of the github/docs cases
-    '''lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+    '''(?:^|\/)lib\/rest\/static\/.+\/(?:.*?github.+\.json|ghes.+\.json)''',
     # Ignore checked-in python packages
     '''lib\/python[^\/]+\/site-packages''',
     # Common extensions to ignore
-    '''(.*?)(png|jpg|gif|doc|docx|pdf|bin|xls|pyc|zip|css)$''',
+    '''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?|zip)$''',
     # Ignore go mod files
-    '''(^|\/)(go.mod|go.sum)$''',
+    '''(?:^|\/)go\.(?:mod|sum)$''',
     # Ignore gitleaks related stuff
-    '''(^|\/).?gitleaks''',
+    '''(?:^|\/).?gitleaks''',
     # Ignore aws secrets check baseline file
-    '''(^|\/)\.?secrets.baseline$''',
+    '''(?:^|\/)\.?secrets.baseline$''',
     # Ignore a github spec file
-    '''(^|\/)specs\/github\.json$''',
+    '''(?:^|\/)specs\/github\.json$''',
+    # Ignore yarn release files
+    '''(?:^|\/).yarn\/releases\/''',
   ]

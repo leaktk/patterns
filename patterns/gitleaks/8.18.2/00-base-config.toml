@@ -13,27 +13,29 @@ title = "Gitleaks Config"
 
   paths = [
       # Ignore common binary file types
-      '''\.(bin|css|docx|doc|gif|jpg|pdf|png|pyc|socket|svg|xls|zip)$''',
+      '''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?|zip)$''',
       # Ignore most quickstarts
       '''quickstart''',
-      # Ignore things under node modules
-      '''(^|\/)node_modules\/''',
       # Ignore vendor code
       '''vendor''',
+      # Ignore things under node modules
+      '''(?:^|\/)node_modules\/''',
       # Ignore checked-in ruby packages
-      '''(^|\/)gems\/''',
+      '''(?:^|\/)gems\/''',
       # Ignore checked-in go packages
-      '''(^|\/)Godeps\/''',
+      '''(?:^|\/)Godeps\/''',
       # Ignore go.mod and go.sum files
-      '''(^|\/)go\.(mod|sum)$''',
+      '''(?:^|\/)go\.(?:mod|sum)$''',
       # Ignore gitleaks related stuff
-      '''(^|\/).?gitleaks''',
+      '''(?:^|\/).?gitleaks''',
       # Ignore checked-in python packages
-      '''(^|\/)lib\/python[^/]+\/site-packages''',
+      '''(?:^|\/)lib\/python[^/]+\/site-packages''',
       # Handle a lot of the github/docs cases
-      '''(^|\/)lib\/rest\/static\/.+\/((.+)?github.+\.json|ghes.+\.json)''',
+      '''(?:^|\/)lib\/rest\/static\/.+\/(?:.*?github.+\.json|ghes.+\.json)''',
       # Ignore aws secrets
-      '''(^|\/)\.?secrets.baseline$''',
+      '''(?:^|\/)\.?secrets.baseline$''',
       # Ignore a github spec file
-      '''(^|\/)specs\/github\.json$''',
+      '''(?:^|\/)specs\/github\.json$''',
+      # Ignore yarn release files
+      '''(?:^|\/).yarn\/releases\/''',
   ]

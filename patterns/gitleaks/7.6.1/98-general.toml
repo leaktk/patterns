@@ -119,18 +119,20 @@
   # Example match: "quay.io": {"auth": "token-token-token-token"
   # It also tries to ignore space around the json
   # (Note: this only works when it's all on a single line)
-  regex = '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]{32,})(\\)?\"'''
+  regex = '''\\*\"[^\"]*?(?:docker|quay|openshift|openshiftapps|redhat)\.(?:io|com|org)[^\"]*?\\*"\s*:\s*\{[\s\S]*?\\*\"auth\\*\"\s*:\s*\\*\"([\w\/+-]{32,}={0,2})\\*\"'''
   tags = ["alert:repo-owner", "type:secret", "container-registry", "auth"]
 
   [[rules.entropies]]
     Min = "3.2"
     Max = "8"
-    Group = "15"
+    Group = "1"
 
   [rules.allowlist]
     regexes = [
       # Ignore redacted...secrets
-      '''(\\)?\"([^\"]+)?(docker|quay|openshift|openshiftapps|redhat)\.(io|com|org)([^\"]+)?(\\)?"(\s+)?:(\s+)?\{(\s+)?(\\)?\"auth(\\)?\"(\s+)?:(\s+)?(\\)?\"([^\"]+(\.\.\.|\*\*\*)[^\"]+)(\\)?\"''',
+      '''\\*\"[^\"]*?(?:docker|quay|openshift|openshiftapps|redhat)\.(?:io|com|org)[^\"]*?\\*"\s*:\s*\{[\s\S]*?\\*\"auth\\*\"\s*:\s*\\*\"[^"]*(\.\.\.|\*\*\*)[^"]*\\*\"''',
+      # Ignore example emails
+      '''\\*\"[^\"]*?(?:docker|quay|openshift|openshiftapps|redhat)\.(?:io|com|org)[^\"]*?\\*"\s*:\s*\{[\s\S]*?\\*\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
     ]
 
 [[rules]]
@@ -194,9 +196,9 @@
       # Common spammy placeholder creds
       '''(?i):\/\/(?:[^:\/\s\"\']+)?:(candlepin|default|keylime|rabbitmq|pbench|postgres|prisma|gitops|telemetry|x-oath-basic|redhat)@[\w\.\-]+''',
       # Starts with
-      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|provide|path|quickstart|replace|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:(\/etc\/|data\/|\/path\/|(\/var)?\/run\/|abc(d|12)|admin|ansible|auto|bool:|change|client|confirm|contrase|demo|dict|django-insecure-|(ENC[\[\(]|RU5DW|VOQ|FTk)|enter_|fake|false|file:|fixme|grub|installation_prefix|invalid|libvirt|none|not|provide|path|quickstart|replace|self|spec\.|str:|(my)?t(e)?mp|test|this|update|value|your_)(.+?)?@[\w\.\-]+''',
       # Contains
-      '''(?i):\/\/(?:[^:\/\s\"\']+)?:[^@\/\s\"]*?(?:example|placeholder|12345|userpass|passw?(o|0)?r?(d|t)!?|sample|secret)[^@\/\s\"]*?@[\w\.\-]+''',
+      '''(?i):\/\/(?:[^:\/\s\"\']+)?:[^@\/\s\"]*?(?:example|placeholder|12345|userpass|passw?(o|0)?r?(d|t)!?|sample|secret|open(?:stack|shift))[^@\/\s\"]*?@[\w\.\-]+''',
       # Ends with
       '''(?i):\/\/(?:[^:\/\s\"\']+)?:.+?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-oauth-basic|-demo|-encryption|-tls|_id|_private|(0)?1234(5)?(6)?|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|principal|raw\(|registry|required|string|test|token|uuid|value|xxxxx|y(a)?ml)@[\w\.\-]+''',
     ]
@@ -240,7 +242,7 @@
 
     paths = [
       # Ignore these file extensions with htpasswd in the name
-      '''\.(?:c|go|json|java|js|html|md|py|rb|sh|ya?ml)(?:\.\w+)*$''',
+      '''\.(?:adoc|c|go|json|java|js|html|md|py|rb|sh|ya?ml)(?:\.\w+)*$''',
     ]
 
   [[rules.entropies]]
@@ -381,6 +383,8 @@
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)(\')?(\\)?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
       # Known full placeholder passwords
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](ask|redhat|GoodNewsEveryone|D3faultEntry|TheBlurstOfTimes)[\"\']''',
+      # Ignore these variable prefixes (add to this list as needed for different prefixes
+      '''(?i)(?:mock|example|fake)[\w-]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']''',
       # Base64 encoded EXAMPLE, change, and 12345
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2)[^\"\']*?[\"\']''',
       # aws.* is already covered by a different rule
@@ -393,7 +397,7 @@
       ## Ends with
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|client|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|string|test|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?[\"\']''',
       ## Contains
-      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(secret|example|credentials|a-z|0-9|12345|manager|redhat|openshift|token)[^\'\"]*?[\"\']''',
+      '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\'\"]*?(secret|example|credentials|a-z|0-9|12345|manager|redhat|openshift|token|login)[^\'\"]*?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
