@@ -8,7 +8,7 @@ title = "Gitleaks Config"
       # Use notsecret as the standard allow tag.
       # It must begin at the start of the line, comment chars, or a space
       # It must end at the end of the line or with a space
-      '''(^|\#|\/\/|\s)notsecret(\s|$)''',
+      '''(?:^|\#|\/\/|\s)notsecret(?:\s|$)''',
   ]
 
   paths = [
