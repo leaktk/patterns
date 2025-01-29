@@ -1434,44 +1434,44 @@
 #
 
 - rule.description: Password Hash
-  rule.id: 65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077
-  location.path: general-test
-  match: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-  secret: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  rule.id: b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589
+  location.path: password-hash/valid/SunMD5
+  match: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
+  secret: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
 
 - rule.description: Password Hash
   rule.id: a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013
-  location.path: general-test
+  location.path: password-hash/valid/bcrypt
   match: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
   secret: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
 
 - rule.description: Password Hash
+  rule.id: d843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac
+  location.path: password-hash/valid/gost-yescrypt
+  match: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  secret: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+
+- rule.description: Password Hash
+  rule.id: 65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077
+  location.path: password-hash/valid/md5crypt
+  match: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  secret: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+
+- rule.description: Password Hash
   rule.id: b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e
-  location.path: general-test
+  location.path: password-hash/valid/sha256crypt
   match: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
   secret: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
 
 - rule.description: Password Hash
   rule.id: a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe
-  location.path: general-test
+  location.path: password-hash/valid/sha512crypt
   match: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
   secret: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
 
 - rule.description: Password Hash
-  rule.id: d843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac
-  location.path: general-test
-  match: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  secret: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-
-- rule.description: Password Hash
-  rule.id: b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589
-  location.path: general-test
-  match: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-  secret: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
-
-- rule.description: Password Hash
   rule.id: 0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c
-  location.path: general-test
+  location.path: password-hash/valid/yescrypt
   match: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
   secret: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
 

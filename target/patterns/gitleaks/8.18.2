@@ -51,9 +51,11 @@ keywords = [
 'asia',
 ]
 [rules.allowlist]
+stopwords = [
+'example',
+]
 regexTarget = 'line'
 regexes = [
-'''\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]*)EXAMPLE\b''',
 '''X-Amz-Signature''',
 '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
 ]
@@ -68,10 +70,28 @@ keywords = [
 'aws',
 ]
 [rules.allowlist]
+stopwords = [
+'abcdef',
+'cert',
+'conf',
+'cont',
+'curl',
+'example',
+'fake',
+'get',
+'name',
+'profile',
+'resource',
+'role',
+'sample',
+'serv',
+'spec',
+'test',
+'xxxxx',
+]
 regexTarget = 'line'
 regexes = [
 '''arn:aws:iam:''',
-'''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
 '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
 ]
 [[rules]]

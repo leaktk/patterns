@@ -1249,37 +1249,37 @@
 #
 
 - rule: Password Hash
-  file: general-test
-  offender: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-  line: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
-
-- rule: Password Hash
-  file: general-test
-  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
-
-- rule: Password Hash
-  file: general-test
-  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
-
-- rule: Password Hash
-  file: general-test
-  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
-
-- rule: Password Hash
-  file: general-test
-  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
-
-- rule: Password Hash
-  file: general-test
+  file: password-hash/valid/SunMD5
   offender: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
   line: $md5,rounds=89650$IU7ELX9N$$VUWQHUYZkb7n3SpAmBHq0/
 
 - rule: Password Hash
-  file: general-test
+  file: password-hash/valid/bcrypt
+  offender: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+  line: $2b$05$YuHSRtnwiF7AbEd3Xe9rauK0N8EHKHoajjAPQz/29QMGdbisxy.3.
+
+- rule: Password Hash
+  file: password-hash/valid/gost-yescrypt
+  offender: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+  line: $gy$j9T$7Q9Z.KDwQ06akx6VxwMpn.$en8X0EUE.xdbTSDZlftyzqDEcXaU7rORvdWLhaPygB2
+
+- rule: Password Hash
+  file: password-hash/valid/md5crypt
+  offender: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+  line: $1$lMsBjmBR$3UpSfv5QTMtGoneFKCIJW1
+
+- rule: Password Hash
+  file: password-hash/valid/sha256crypt
+  offender: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+  line: $5$8pFTUnUr.HhP3O52$Fl1S4nX1p0PONBIcG7PN5jTQAtulYNf2AQCJyXV6Dt.
+
+- rule: Password Hash
+  file: password-hash/valid/sha512crypt
+  offender: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+  line: $6$cjvUY6xnMEVNYUv6$ttG2bz2lglfS4rliP.T7Ozaak7bPVg5ccZ.E.H5F09jIOfvG/yJb5nfQ3tN6uMiH7Z1t/AXDHUgD5xdqE6MUu1
+
+- rule: Password Hash
+  file: password-hash/valid/yescrypt
   offender: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
   line: $y$j9T$OO/cvWZ17nxP6XzO1jNt5/$wtUrYmUAzg6p1hdQ/WJtsjq7gJ6if4dP6LcDlXedZU6
 

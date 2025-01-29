@@ -33,10 +33,12 @@
   ]
 
   [rules.allowlist]
+    stopwords = [
+      'example',
+    ]
+
     regexTarget = 'line'
     regexes = [
-      # Ingore example keys
-      '''\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]*)EXAMPLE\b''',
       # Ignore presigned URLs
       '''X-Amz-Signature''',
       # Ignore sample/example values
@@ -55,12 +57,30 @@
   ]
 
   [rules.allowlist]
+    stopwords = [
+      'abcdef',
+      'cert',
+      'conf',
+      'cont',
+      'curl',
+      'example',
+      'fake',
+      'get',
+      'name',
+      'profile',
+      'resource',
+      'role',
+      'sample',
+      'serv',
+      'spec',
+      'test',
+      'xxxxx',
+    ]
+
     regexTarget = 'line'
     regexes = [
       # Ignore ARNs here
       '''arn:aws:iam:''',
-      # Ignore common placeholders
-      '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?:e[xs]ample|abcdef|get|fake|name|serv|spec|profile|role|resource|test|curl|cont|conf|cert|xxxxx)''',
       # Ignore EXAMPLE base64 encoded
       '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
     ]
