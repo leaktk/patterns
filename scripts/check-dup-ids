@@ -1,9 +1,10 @@
 #! /usr/bin/env bash
+set -euo pipefail
 patterns='target/patterns/gitleaks/8.18.2'
 
 for id in $(grep -Po "(?<=id = ').+?(?=')" < "${patterns}")
 do
-  id_count="$(grep "${id}" "${patterns}" | wc -l)"
+  id_count="$(grep -- "${id}" "${patterns}" | wc -l)"
 
   if [[ "${id_count}" -gt 1 ]]
   then

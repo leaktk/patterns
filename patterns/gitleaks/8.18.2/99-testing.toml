@@ -42,7 +42,7 @@
 # [file:98-general.toml]
 
 [[rules]]
-  id = '89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9'
+  id = 'hG-qMjbXGro'
   # Captures things like normal Generic Secret but handles the case where
   # the value is unquoted and in the format secret=value and has nothing
   # infront of it other than spaces or starts the line or is a comment
@@ -203,7 +203,7 @@
     ]
 
 [[rules]]
-  id = 'a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943'
+  id = 'rZUmm0ozLWQ'
   description = 'HashiCorp Vault AppRole SecretID'
   regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -212,7 +212,7 @@
   ]
 
 [[rules]]
-  id = 'd6cdf13aa9b7b02a7f259b6f116bcbe24e4a30a01f566a418211c6e02e39fd79'
+  id = '-bDTAD8YMJg'
   description = 'Auth0 OAuth Client Secret'
   regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -222,7 +222,7 @@
   ]
 
 [[rules]]
-  id = '4467285558ee1cc8f1fd91a98bb0109432c4e7684851a2a616ba20ec8154fd9b'
+  id = 'o3-Wm5oL1D4'
   description = 'Auth0 JWT'
   # Based on base64 shifted segments of: ".auth0.com/",
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:LmF1dGgwLmNvbS8iL|5hdXRoMC5jb20vIi|uYXV0aDAuY29tLyIs)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
@@ -234,7 +234,7 @@
   ]
 
 [[rules]]
-  id = '6cb7e194180b90306cc5952b4e74698177970f9a3f121339476b9891805820ca'
+  id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
   regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}(AAAAAAAAAA)[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -243,7 +243,7 @@
   ]
 
 [[rules]]
-  id = '9e617f6025412a3b8d7dcd12e6242416c32c1524845239892612230b0ca227d5'
+  id = 'tvqG--ROt7U'
   description = 'Dropbox Short-Lived Offline Access Token'
   regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -252,7 +252,7 @@
   ]
 
 [[rules]]
-  id = 'eebe1f7351c8edb9aadc710be96072b4cf592aeaefe63a425fed3db21f04451f'
+  id = 'vtSSaD-DcYo'
   description = 'Dropbox Short-Lived Access Token'
   regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -261,7 +261,7 @@
   ]
 
 [[rules]]
-  id = '2c2cec078f547f39f2951ce131d2a18dcb5d9feb5d031679212b79f0d3cb5162'
+  id = 'zl044yuux24'
   description = 'Azure Active Directory Client Secret'
   regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:[^a-zA-Z0-9_~.-]|\z)'''
   tags = ['type:secret', 'group:leaktk-testing']
@@ -274,7 +274,7 @@
 # TODO: fix the scoping
 #
 # [[rules]]
-#   id = '0c46f7bbe4578544244b854d1329cb4fc181f42be956fd47397ae7b13b5490fe'
+#   id = 'lgA0jzBEvQo'
 #   description = 'Google Cloud Platform Service Account Credentials'
 #   # Should work multi line and require that at least 8 of the fields match
 #   # We may need to put allowlist items with regexTarget = 'match' for ignoring
@@ -298,7 +298,7 @@
 #   ]
 
 [[rules]]
-  id = '193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a'
+  id = 'QqS4RvI6Zmg'
   description = 'Authorization Header'
   regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?([^\s\"\']+)'''
   tags = ['type:secret', 'group:leaktk-testing']
