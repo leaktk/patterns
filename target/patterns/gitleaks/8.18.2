@@ -21,7 +21,7 @@ paths = [
 '''(?:^|\/).yarn\/releases\/''',
 ]
 [[rules]]
-id = 'c42a367392fc3aadefbf9caa4de4582a790b8746ed72e6e97fca6f962502597a'
+id = 'nPY_Rcj4gzY'
 description = 'ArgoCD JWT'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -31,7 +31,7 @@ keywords = [
 'iaxnzijoiyxjnb2nki',
 ]
 [[rules]]
-id = 'ab58b5955845a843962cb6ac631b1d44a0cef6a37e060988e7e58b039706ca51'
+id = 'LAJoYTdoQH4'
 description = 'AWS IAM Unique Identifier'
 regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -60,7 +60,7 @@ regexes = [
 '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
 ]
 [[rules]]
-id = '308f20b091650166decc757badd05c51384601ac6d10c11d5282c37004fff959'
+id = '9j_rmwDeioM'
 description = 'AWS Secret Access Key'
 regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -95,7 +95,7 @@ regexes = [
 '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
 ]
 [[rules]]
-id = '2eefe8aec9ce2ef59bd4e258d84ed17a0303dee93e6dffb49002acc877d33ee1'
+id = 'd01DtP9iA8I'
 description = 'Base64 Encoded AWS Secret Access Key'
 regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -105,7 +105,7 @@ keywords = [
 'hd3nfywnjzxnzx2tlev9pz',
 ]
 [[rules]]
-id = '3161082b147ad645b6d3637f68edcfa87949a79b45004efeef036e2cb7a0edfe'
+id = 'gpfGmO3HH64'
 description = 'Container Registry Authentication'
 regex = '''\\*\"auths\\*\"\s*:\s*\{\s*(?:\\*\"(?:[a-z0-9\-]{1,63}\.)+(?:[a-z0-9\-]{1,63})\\*\"\s*:\s*\{\s*\\*\"auth\\*\"\s*:\s*\\*\"[\w\/+-]{32,}={0,2}\\*\"[\s\S]*?\},?\s*)+\}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -119,7 +119,7 @@ regexes = [
 '''\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
 ]
 [[rules]]
-id = 'e0e0ef11399b51b8efa864542979614bd1bb2288f3cb8bd2aa786e1a4aee9e79'
+id = 'me-TlU0uKS8'
 description = 'Dynatrace Token'
 regex = '''\bdt0[a-zA-Z]{1}[0-9]{2}\.[A-Z0-9]{24}\.[A-Z0-9]{64}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -127,7 +127,7 @@ keywords = [
 'dt0',
 ]
 [[rules]]
-id = 'fc611155cdab32cb4ac3edf51045a9f73e066eee77c2c8d9771b29e7849212c0'
+id = 'bzBQF-LMlZU'
 description = 'Facebook Access Token'
 regex = '''\bEAACEdEose0cBA(?i)[a-z0-9]{128,256}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -135,7 +135,7 @@ keywords = [
 'eaacedeose0cba',
 ]
 [[rules]]
-id = '13852bbfce4794be0e9740ef28cd7cb9d06776b8d6428e3b4e8350bb03260528'
+id = 'fdc8WJ7tfUA'
 description = 'Facebook Secret'
 regex = '''(?i)(?:facebook)(?:[0-9a-z\-_\t .]{0,20})(?:[\s|']|[\s|"]){0,3}(?:=|>|:{1,3}=|\|\|:|<=|=>|:|\?=)(?:'|\"|\s|=|\x60){0,5}([a-f0-9]{32})(?:[\'\"\s\x60;,]|$)'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -143,7 +143,7 @@ keywords = [
 'facebook',
 ]
 [[rules]]
-id = '08147f6d4edc040aa8cc8d9313221aad0f0826de534f250b9987e6357bf8ae44'
+id = 'mC5kOxQ6kn4'
 description = 'Generic Secret'
 path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
 regex = '''[\S]{8,}'''
@@ -167,7 +167,7 @@ regexes = [
 '''^#!\s*\/''',
 ]
 [[rules]]
-id = 'cdcf75b34688c4e0d60fa7a6e76fb4ca38f979b3278c4bfed23ebb1366790e22'
+id = '_-9w6-yrc-4'
 description = 'Generic Secret'
 regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
 entropy = 3.35
@@ -275,7 +275,7 @@ regexes = [
 '''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
-id = 'a8d78f8de4bad0b519a8a14b625bc6d8ae3055bd8d8de6fc5c4b0b31bac4249e'
+id = 'eCOHX_SKGzA'
 description = 'Generic Secret'
 regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
 entropy = 3.5
@@ -319,7 +319,7 @@ regexes = [
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
 ]
 [[rules]]
-id = 'dd85b788ea6c12f4968c38091c2576ff17ce23565d8d14f2a3b34d44dccddec2'
+id = 'rnWF160pWNg'
 description = 'Generic Secret'
 path='''\.y(a)?ml$'''
 regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
@@ -421,7 +421,7 @@ regexes = [
 '''\bAg[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
-id = 'f71af8c158940a1539bfb08feaa24e36bf584c9c819002ea989c6aa35319d2db'
+id = 'kX_PwM0MFvE'
 description = 'GitHub Fine-Grained Personal Access Token'
 regex = '''\bgithub_pat_\w{82}\b'''
 entropy = 2
@@ -430,7 +430,7 @@ keywords = [
 'github_pat_',
 ]
 [[rules]]
-id = '0e347181fa64a66c62628972058788e0caf23a3c6a5be7822a01f29b65a6a9f0'
+id = '3J1l0v_MrA0'
 description = 'GitHub OAuth Access Token'
 regex = '''\bgho_[0-9A-Za-z]{36}\b'''
 entropy = 2
@@ -439,7 +439,7 @@ keywords = [
 'gho_',
 ]
 [[rules]]
-id = 'a4ec986531bed1c154627c941eda6a95ef016481574cdfcb34249b648eb85ec7'
+id = 'gODCNuGzuKQ'
 description = 'GitHub Personal Access Token'
 regex = '''\bghp_[0-9A-Za-z]{36}\b'''
 entropy = 2
@@ -448,7 +448,7 @@ keywords = [
 'ghp_',
 ]
 [[rules]]
-id = '86141b0de6dfc25b4ff6fe7c74c9283367a1d1c9c2d4df99ad9b8948e5d462db'
+id = 'ReSYq_S3Ou0'
 description = 'GitHub Refresh Token'
 regex = '''\bghr_[0-9A-Za-z]{36}\b'''
 entropy = 2
@@ -457,7 +457,7 @@ keywords = [
 'ghr_',
 ]
 [[rules]]
-id = '357286368ed645f842a99b4b1bf585181a6edf2e466287fa97fa8e887729e614'
+id = 'YmXj5Lk-jw4'
 description = 'GitHub Server to Server Token'
 regex = '''\bghs_[0-9A-Za-z]{36}\b'''
 entropy = 2
@@ -466,7 +466,7 @@ keywords = [
 'ghs_',
 ]
 [[rules]]
-id = 'afe1c727a3b8fb95f9b4e08ff05d501c5faab40e3c621ebc95468bae6dfb7d1b'
+id = 'MMuUwURWAhM'
 description = 'GitHub User to Server Token'
 regex = '''\bghu_[0-9A-Za-z]{36}\b'''
 entropy = 2
@@ -475,7 +475,7 @@ keywords = [
 'ghu_',
 ]
 [[rules]]
-id = '0f6a47c693ad7a56c4a835f6aa7b38d18c343becae2f833fac2db51ecebd79e2'
+id = 'KJX2Vbp6_jY'
 description = 'GitLab Access Token'
 regex = '''\bglpat-[\w\-]{20}\b'''
 entropy = 2
@@ -484,7 +484,7 @@ keywords = [
 'glpat-',
 ]
 [[rules]]
-id = '798acef3dc3135b6c9482635a042cb405e3c050631ef0e3ccc3556dddc9254d1'
+id = 'IOimnsNGyvw'
 description = 'GitLab Pipeline Trigger Token'
 regex = '''\bglptt-[0-9a-f]{40}\b'''
 entropy = 2
@@ -493,7 +493,7 @@ keywords = [
 'glptt-',
 ]
 [[rules]]
-id = '7561d77130281f0e7b2339650a591ca94bf46c41dd9ca8cfe137fd4a1953d1b8'
+id = '5eH7BIYmpNo'
 description = 'GitLab Runner Registration Token'
 regex = '''\b(?:glrt-|GR1348941)[\w\-]{20}\b'''
 entropy = 2
@@ -503,7 +503,7 @@ keywords = [
 'gr1348941',
 ]
 [[rules]]
-id = '051eedb0bcb561306cadb6f5d310147c71edc1965d29b07ab38df8c54a623aba'
+id = 'HysINeDft8k'
 description = 'Google Cloud Platform API Key'
 regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -511,7 +511,7 @@ keywords = [
 'aiza',
 ]
 [[rules]]
-id = '33dc3d2c2470b17d9a29bd1f66d650f36dfab0e01ada76b8d7e254cd5da93ed9'
+id = 'F8ySDDFvEPA'
 description = 'Groq API Key'
 regex = '''\bgsk_[A-Za-z0-9]{52}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -519,7 +519,7 @@ keywords = [
 'wgdyb3fy',
 ]
 [[rules]]
-id = '25a1be50e7c5c93b6f7d468adaadd6ff0f62dea6f60af64c9415f5b6ccbee8ce'
+id = '6Tfk9iWtINY'
 description = 'Heroku API Token'
 regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -527,7 +527,7 @@ keywords = [
 'heroku',
 ]
 [[rules]]
-id = '365926758922192ee27da4b29bc2cb6ee7b3af1bbf75cfd479283b57c909a58f'
+id = '8nWBN4ZoGf8'
 description = 'Htpasswd File'
 path = '''htpasswd[^\/]*?$'''
 regex = '''[^:\s]{1,255}:(\S{1,255})'''
@@ -542,7 +542,7 @@ regexes = [
 '''^\s*#''',
 ]
 [[rules]]
-id = '35dfcd9a65eaa32f3ba685014cdfc0963b411b48853263df5a5582bb3620d0fe'
+id = 'ROB1tToGkqM'
 description = 'Hugging Face API Token'
 regex = '''\bhf_[a-zA-Z]{34}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -550,7 +550,7 @@ keywords = [
 'hf_',
 ]
 [[rules]]
-id = '50ed3470a6a293dd257ba4786f2e08da9e6eec64442c606f81859150f29e9b49'
+id = 'vAAom0bPHy8'
 description = 'Kubernetes System Service Account JWT'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:InN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudD|JzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6|ic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50O)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -560,7 +560,7 @@ keywords = [
 'ic3viijoic3lzdgvtonnlcnzpy2vhy2nvdw50o',
 ]
 [[rules]]
-id = '0dc120e36dbbe5eec937807366ca120ce22e0ee28543f6e08fcb09039fb1b8dc'
+id = 'Evwi072oSOU'
 description = 'MailChimp API Key'
 regex = '''\b[0-9a-f]{32}-us[0-9]{1,2}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -568,7 +568,7 @@ keywords = [
 '-us',
 ]
 [[rules]]
-id = '3bbe47102af6d87aaba1814062eae73dc0a840adcec38451a6cb5689d74a6961'
+id = '0Fj-HDkaBWM'
 description = 'Mailgun API Key'
 regex = '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -577,7 +577,7 @@ keywords = [
 'key-',
 ]
 [[rules]]
-id = 'c23ef58e849f9272eddd95bb6f9ea503341d4b7f6f043088b227252e8ebefe8b'
+id = 'tBcMT24UjGQ'
 description = 'NPM Access Token'
 regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -586,7 +586,7 @@ keywords = [
 'npm_',
 ]
 [[rules]]
-id = 'fd46ccfd70fb3b77859e535635c0fe3cb51c7d5be6f23f9cc40c5d0d226f59a1'
+id = 'tSFtnbvWdlk'
 description = 'NPM Registry Auth'
 regex = '''_(?:auth(?:Token)?|password)\s*=\s*(.+)'''
 path = '''(^|\/)[^\/]+npmrc$'''
@@ -602,7 +602,7 @@ regexes = [
 '''\$\{.+?\}''',
 ]
 [[rules]]
-id = '7c288b0becc8b6186eb504a34fc56ea0102837ee0aaa1e573c4c82fa7aec808c'
+id = 'DaAdIBwZoGE'
 description = 'OpenShift Login Token'
 regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -611,7 +611,7 @@ keywords = [
 '--token',
 ]
 [[rules]]
-id = '0f75ca0dd1fd85ed8160b8a693107cdf3904edf31d0985edf84fabf7500f2c2c'
+id = 'bYudTkTa56I'
 description = 'Password Hash'
 regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -619,7 +619,7 @@ keywords = [
 '$y$',
 ]
 [[rules]]
-id = 'd843e3b5ee1a726c2570c8fb14e26509d699d8bb1aa2426b9c5ec6127670abac'
+id = 'fqtWnpN0lfA'
 description = 'Password Hash'
 regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -627,7 +627,7 @@ keywords = [
 '$gy$',
 ]
 [[rules]]
-id = 'e1074cf73d2a7d60b233984d261979b5d623277f03d0e334c67a71c99362c6c1'
+id = 'MxYvbqkT9IM'
 description = 'Password Hash'
 regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -635,7 +635,7 @@ keywords = [
 '$7$',
 ]
 [[rules]]
-id = 'a0e89d6e0593122ed5f0fcf19b54f480b63767b925a4c844f1da27dbf5462013'
+id = 'RX7HEzTc6dI'
 description = 'Password Hash'
 regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -646,7 +646,7 @@ keywords = [
 '$2y$',
 ]
 [[rules]]
-id = 'a83ee4469a916041850c68b13b9d21dc85bfebc28b69b2f97273b61d5ba760fe'
+id = 'amXYPF5An5s'
 description = 'Password Hash'
 regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -654,7 +654,7 @@ keywords = [
 '$6$',
 ]
 [[rules]]
-id = 'b402738f45253e5ebae94f8ed3d8ed5c8499ff6e2a5709ed7aae0e4e33116f3e'
+id = 'u9MfgjhX7SI'
 description = 'Password Hash'
 regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -662,7 +662,7 @@ keywords = [
 '$5$',
 ]
 [[rules]]
-id = 'b9a128e8a1782a7670b73aac71f5a909d64c3e570ee700baddd8aa4afa0e7589'
+id = 'iGgJnI-f5Xk'
 description = 'Password Hash'
 regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -670,7 +670,7 @@ keywords = [
 '$md5',
 ]
 [[rules]]
-id = '65af234cecb9abc2f22a3cf70a11c3ebf952a95a70a33d79da9875e7158ff077'
+id = 'AeVJW2sPHGs'
 description = 'Password Hash'
 regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -678,7 +678,7 @@ keywords = [
 '$1$',
 ]
 [[rules]]
-id = '0e0e2ecf6a3b0b450004b49f0b7b7a1a3e67c07ff0465cc4363ade5d4ee43a76'
+id = 'LSd2f7avYkQ'
 description = 'OpenAI API Key'
 regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -686,7 +686,7 @@ keywords = [
 't3blbkfj',
 ]
 [[rules]]
-id = 'fe1cc0c882af5eac1fc66d4d357a6a9c508586fdb7d01f61c53f7ad926ccaa85'
+id = 'RVee3wT2Z4I'
 description = 'Base64 Encoded OpenSSH Private Key'
 regex = '''[A-Za-z0-9+\/_\-]*?(?:QkVHSU4gT1BFTlNTSCBQUklW|JFR0lOIE9QRU5TU0ggUFJJV|CRUdJTiBPUEVOU1NIIFBSSV)[A-Za-z0-9+\/_\-\s]{256,}(?:RU5EIE9QRU5TU0ggUFJJV|VORCBPUEVOU1NIIFBSSV|FTkQgT1BFTlNTSCBQUklW)[A-Za-z0-9+\/_\-\s]*={0,3}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -708,7 +708,7 @@ stopwords = [
 'fwefnuexf',
 ]
 [[rules]]
-id = '18f3e8e86fa5995e6c64c1479f82019d34e4c076967cdfc1f759db0c783c4498'
+id = 'NSjjvv0VeYg'
 description = 'PayPal Braintree Access Token'
 regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -716,7 +716,7 @@ keywords = [
 'access_token$production$',
 ]
 [[rules]]
-id = 'a84e30dd04b2e829ba75f341f16fb1f4bb2371f8e82e8442b14c594bbad482cb'
+id = 'K3ZNQj2_kTE'
 description = 'Picatic API Key'
 regex = '''\bsk_live_[0-9a-z]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -724,12 +724,12 @@ keywords = [
 'sk_live_',
 ]
 [[rules]]
-id = 'f77b54d43771f272fb0b6e385431dfac83c3170c3105f353db7db4f3dcaa9587'
+id = 'RA8jFaMQxIg'
 description = 'PKCS #12 File'
 path = '''(^|\/)[^\/]+\.p12$'''
 tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
-id = 'd5929654009ea640795908a2dcdb07f2f0ebbef42d1ac472bace4b4cd458ce98'
+id = 'ePK9whPQPpY'
 description = 'Private Key'
 regex = '''(?i)-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----[\s\S]*?(?:[a-z0-9\/+]{64}[\s\S]*?){2}-----END[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -758,7 +758,7 @@ regexes = [
 '''#\s*?noqa(:[\s\w]+)?$''',
 ]
 [[rules]]
-id = 'e28317dbb1b2104c7fca5911047d8315152fd6f230bd07d5188fc9e461154559'
+id = 'ZeqrEVYyN7A'
 description = 'PyPI Upload Token'
 regex = '''pypi-AgEIcHlwaS5vcmc[A-Za-z0-9-_]{50,1000}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -766,7 +766,7 @@ keywords = [
 'pypi-ageichlwas5vcmc',
 ]
 [[rules]]
-id = '76b4d3b89d4af399881204c7d8520e0c88a78f2662f31a3f674c51d4d64c8baa'
+id = 'fJqKYcYx3bk'
 description = 'SendGrid API Key'
 regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -774,7 +774,7 @@ keywords = [
 'sg.',
 ]
 [[rules]]
-id = '37a8264122df85941c43def588a1220665951ca17fcf91e8bccff786fc9f2ec7'
+id = 'Rn1i7_84x3E'
 description = 'Shopify Access Token'
 regex = '''\bshpat_[a-fA-F0-9]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -782,7 +782,7 @@ keywords = [
 'shpat_',
 ]
 [[rules]]
-id = '96e0c0f3da0e818283af13398ad43b51ff5be7c2c38dd6ef3b3bafae181dafb9'
+id = '2yT2HilWNWU'
 description = 'Shopify Custom App Access Token'
 regex = '''\bshpca_[a-fA-F0-9]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -790,7 +790,7 @@ keywords = [
 'shpca_',
 ]
 [[rules]]
-id = '7d4c55c2eaad8ec04d6c035009f797144c1f04b661d1054fced4e48771a90512'
+id = 'Q3_9607B5YA'
 description = 'Shopify Private App Access Token'
 regex = '''\bshppa_[a-fA-F0-9]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -798,7 +798,7 @@ keywords = [
 'shppa_',
 ]
 [[rules]]
-id = 'b840bb3f6dccc679a425bfa5573540fe3bacbed4d48f166dcfc496235025a40a'
+id = 'xgtaj9NNvtQ'
 description = 'Shopify Shared Secret'
 regex = '''\bshpss_[a-fA-F0-9]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -806,7 +806,7 @@ keywords = [
 'shpss_',
 ]
 [[rules]]
-id = '2f2bd1d768b6950cc2c4d84b0368c07fc423872e403bb4774a75e1d7072704d2'
+id = 'PdsUpd2VsLw'
 description = 'Slack App Token'
 regex = '''(?i)\bxapp-\d-[a-z0-9]+-\d+-[a-z0-9]+\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -822,7 +822,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = 'e94a2be853d40c0833ab7d9efa7e4c3987350be8044d82c2630de95b1aa512f2'
+id = 'AHqBipAQalU'
 description = 'Slack Bot Token'
 regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -838,7 +838,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = '5e4528622af53164487f2cefbe87742689bd324fcf555da4dae3ae8cf63339f2'
+id = 'ADpHU5Pfr_w'
 description = 'Slack Config Access Token'
 regex = '''(?i)\bxoxe.xox[bp]-\d-[a-z0-9]{163,166}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -855,7 +855,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = '75cfb90cdc62deb6c3cc0109f72cb98651d404bc82d091c51e15601a1e01bfc4'
+id = 'VitPJ4tk46E'
 description = 'Slack Config Refresh Token'
 regex = '''(?i)\bxoxe-\d-[a-z0-9]{146}\bj'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -871,7 +871,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = '63986b8dff1459cb21692e28f9347aed55cb5f85ae21cc0c7227b710eb068cea'
+id = 'qWJ75vwX7O8'
 description = 'Slack Legacy Bot Token'
 regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -887,7 +887,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = '1f21cc3e057a03719c1284c31a917bf1601ed1725b4a3d7cd2982560be6f46b7'
+id = 'L7sVfqv1KDs'
 description = 'Slack Legacy Token'
 regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -904,7 +904,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = 'd1161f5f02c4ee44f2a3b0bf9dff89fe7b2986bf2aac52b62602d1fcd09a6b34'
+id = 'Yjg2P_IaYK8'
 description = 'Slack Legacy Workspace Token'
 regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -921,7 +921,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = '71ecced1b8ebb3c4fd316f5ef68c0208703e7fd757b3548808dca2f585de5275'
+id = '6mKbEmEYQDY'
 description = 'Slack User Token'
 regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -938,7 +938,7 @@ stopwords = [
 'slack',
 ]
 [[rules]]
-id = 'df8c74800f04ca32c33c1b94100e03a70ae0941c78c97ed556e71121781c91f6'
+id = 'CPcj1txuB2g'
 description = 'Slack Webhook URL'
 regex = '''(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows)\/[A-Za-z0-9+\/]{43,46}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -947,7 +947,7 @@ keywords = [
 'hooks.slack.com',
 ]
 [[rules]]
-id = '538346458f04daa723c81812eb5f5a84198efbba46e6aa01f4341d8bf325dac6'
+id = 'pcwMvzsYJ5U'
 description = 'Snowflake OAuth Token'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:c2Vzc2lvbjpyb2xlLWFue|Nlc3Npb246cm9sZS1hbn|zZXNzaW9uOnJvbGUtYW55|c2Vzc2lvbjpyb2xlO|Nlc3Npb246cm9sZT|zZXNzaW9uOnJvbGU6|ImF1ZCI6InNub3dmbGFrZS|JhdWQiOiJzbm93Zmxha2Ug|iYXVkIjoic25vd2ZsYWtlI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -963,7 +963,7 @@ keywords = [
 'iyxvkijoic25vd2zsywtli',
 ]
 [[rules]]
-id = 'd4d9fc7b1e757e23c3bee62914079b1e1df294fafa025814db41be41d3312520'
+id = 'FrTqjJHAoEY'
 description = 'StackRox JWT'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0I|Jpc3MiOiJodHRwczovL3N0YWNrcm94LmlvL2p3dC|iaXNzIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qi)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -973,7 +973,7 @@ keywords = [
 'iaxnzijoiahr0chm6ly9zdgfja3jvec5pby9qd3qi',
 ]
 [[rules]]
-id = '7ff01b130235b65837366618698b00f6ae038c42f40ea2ef5ed3dd084b0703c6'
+id = 'fZHzd4gAHrs'
 description = 'Square Access Token'
 regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -981,7 +981,7 @@ keywords = [
 'sq0atp-',
 ]
 [[rules]]
-id = '8479e7e8807be5b1d3f57cad64bb6f7eede0f01d1819bf65ba5ab7867e12c869'
+id = 'YX55Boo0gwk'
 description = 'Square OAuth Secret'
 regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -989,7 +989,7 @@ keywords = [
 'sq0csp-',
 ]
 [[rules]]
-id = '08786b3a6732a572e87937bee1a7b033c9d8a47893a1a5c488ae57a2b1edc191'
+id = 'CSHGj8J1lUs'
 description = 'Stripe API Key'
 regex = '''(?i)\b[sr]k_live_[0-9a-zA-Z]{24}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -997,7 +997,7 @@ keywords = [
 'k_live_',
 ]
 [[rules]]
-id = '2fd47406ee312ed2fe6a9331f2d8759dca28f427cc71cba16e547e52c04ed60c'
+id = 'lSFsU9hapFQ'
 description = 'Testing Farm API Token'
 regex = '''\bTESTING_FARM_API_TOKEN=[\"\']?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -1005,7 +1005,7 @@ keywords = [
 'testing_farm_api_token',
 ]
 [[rules]]
-id = '44e5461c5358d708f9b9387d50c976907320173c36e6a68d52b61152d76d5da7'
+id = 'TiwMt5e05g4'
 description = 'Tines Webhook'
 regex = '''(?i)(?:https:\/\/)?[\w\-]+\.tines\.com\/webhook\/[a-z0-9]{32}\/[a-z0-9]{32}'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -1013,7 +1013,7 @@ keywords = [
 '.tines.com/webhook/',
 ]
 [[rules]]
-id = '5fd1363bdb194ec6981ebff1be9f2b5591c10f5f6acb7dbaf129b48df83d707e'
+id = 'hRAjGfP0Zao'
 description = 'Twilio API Key'
 regex = '''\bSK(?i)[0-9a-f]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -1021,7 +1021,7 @@ keywords = [
 'sk',
 ]
 [[rules]]
-id = '76475708ab8cf6060eb30ea8cb33e964d89860c3c4eb57dd64d583cf835be84e'
+id = 'NoSStdj9pfY'
 description = 'URL User and Password'
 regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -1088,7 +1088,7 @@ regexes = [
 '''re\.compile\(\s*?r?[\'\"]''',
 ]
 [[rules]]
-id = '2ed9686c92f697123e4a9e031c14544486247659900fe2806078110a5c0cf695'
+id = 'FxXgdaIgf7Y'
 description = 'WP-Config'
 regex = '''define\s*?\(\s*?[\"\'](?:DB_HOST|DB_NAME|DB_USER|DB_PASSWORD|AUTH_KEY|SECURE_AUTH_KEY|LOGGED_IN_KEY|NONCE_KEY|AUTH_SALT|SECURE_AUTH_SALT|LOGGED_IN_SALT|NONCE_SALT)[\"\']\s*?,\s*?[\"\'](.+?)[\"\']\s*?\)'''
 tags = ['type:secret', 'alert:repo-owner']
@@ -1113,7 +1113,7 @@ regexes = [
 '''^(?:<.+?>|\{\{.+?\}\}|\$\{.+?\}|\$\w+)$''',
 ]
 [[rules]]
-id = '89a8be38a22feb55f458df682131f7d028c0f48885e8496f74cb3621337200b9'
+id = 'hG-qMjbXGro'
 description = '(Env Var) Generic Secret'
 regex = '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,})'''
 entropy = 3.35
@@ -1216,7 +1216,7 @@ regexes = [
 '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b''',
 ]
 [[rules]]
-id = 'a4618135ef6270cf16be1c2aca72038a86e781645fa2df8e4d8165848bb7e943'
+id = 'rZUmm0ozLWQ'
 description = 'HashiCorp Vault AppRole SecretID'
 regex = '''vault[\s\S]{0,128}secret_id[\'\"]?\s*[:=]\s*[\'\"]?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1224,7 +1224,7 @@ keywords = [
 'secret_id',
 ]
 [[rules]]
-id = 'd6cdf13aa9b7b02a7f259b6f116bcbe24e4a30a01f566a418211c6e02e39fd79'
+id = '-bDTAD8YMJg'
 description = 'Auth0 OAuth Client Secret'
 regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1233,7 +1233,7 @@ keywords = [
 'clientsecret',
 ]
 [[rules]]
-id = '4467285558ee1cc8f1fd91a98bb0109432c4e7684851a2a616ba20ec8154fd9b'
+id = 'o3-Wm5oL1D4'
 description = 'Auth0 JWT'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:LmF1dGgwLmNvbS8iL|5hdXRoMC5jb20vIi|uYXV0aDAuY29tLyIs)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1243,7 +1243,7 @@ keywords = [
 'uyxv0adauy29tlyis',
 ]
 [[rules]]
-id = '6cb7e194180b90306cc5952b4e74698177970f9a3f121339476b9891805820ca'
+id = 'qUN8svLm9sk'
 description = 'Dropbox Refresh Token'
 regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}(AAAAAAAAAA)[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1251,7 +1251,7 @@ keywords = [
 'dropbox',
 ]
 [[rules]]
-id = '9e617f6025412a3b8d7dcd12e6242416c32c1524845239892612230b0ca227d5'
+id = 'tvqG--ROt7U'
 description = 'Dropbox Short-Lived Offline Access Token'
 regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1259,7 +1259,7 @@ keywords = [
 'sl.u.',
 ]
 [[rules]]
-id = 'eebe1f7351c8edb9aadc710be96072b4cf592aeaefe63a425fed3db21f04451f'
+id = 'vtSSaD-DcYo'
 description = 'Dropbox Short-Lived Access Token'
 regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
 tags = ['type:secret', 'group:leaktk-testing']
@@ -1267,14 +1267,14 @@ keywords = [
 'sl.',
 ]
 [[rules]]
-id = '2c2cec078f547f39f2951ce131d2a18dcb5d9feb5d031679212b79f0d3cb5162'
+id = 'zl044yuux24'
 description = 'Azure Active Directory Client Secret'
 regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:[^a-zA-Z0-9_~.-]|\z)'''
 tags = ['type:secret', 'group:leaktk-testing']
 entropy = 3
 secretGroup = 1
 [[rules]]
-id = '193ff72dae32b07dfa5773a929ba5d3f5bc166a8c4b5c10aa266c3fc613e545a'
+id = 'QqS4RvI6Zmg'
 description = 'Authorization Header'
 regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?([^\s\"\']+)'''
 tags = ['type:secret', 'group:leaktk-testing']
