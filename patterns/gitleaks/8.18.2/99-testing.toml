@@ -334,6 +334,6 @@
 
     regexTarget = "secret"
     regexes = [
-      # Only SP should allow a dash in the category or dissem
+      # Only SP should allow a dash in the category
       '''[^S][^P]-''',
     ]
