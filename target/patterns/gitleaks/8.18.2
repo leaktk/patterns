@@ -17,7 +17,7 @@ paths = [
 '''(?:^|\/)lib\/python[^/]+\/site-packages''',
 '''(?:^|\/)lib\/rest\/static\/.+\/(?:.*?github.+\.json|ghes.+\.json)''',
 '''(?:^|\/)\.?secrets.baseline$''',
-'''(?:^|\/)specs\/github\.json$''',
+'''(?:^|\/)specs\/github\.(?:ya?ml|json)$''',
 '''(?:^|\/).yarn\/releases\/''',
 ]
 [[rules]]
@@ -1289,4 +1289,22 @@ stopwords = [
 'placeholder',
 'replace',
 'token',
+]
+[[rules]]
+id = '12NI0Yd57gc'
+description = 'Controlled Unclassified Information'
+regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
+tags = ['type:cui', 'group:leaktk-testing']
+keywords = [
+'cui',
+'controlled',
+]
+[rules.allowlist]
+stopwords = [
+'dissem',
+'categories',
+]
+regexTarget = "secret"
+regexes = [
+'''[^S][^P]-''',
 ]

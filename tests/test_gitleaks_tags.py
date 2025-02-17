@@ -29,7 +29,7 @@ class TestGitleaks(TestCase):
             r"\s*tags\s*=\s*\[(?:\s*[\"\'][a-z]*:?[a-z0-9\-]+[\"\'],?\s*)+\]\s*"
         )
         type_re = re.compile(r"[\"\']type:([a-z0-9\-]+)[\"\']")
-        valid_types = {"secret", "infra", "ioc", "pii", "vuln"}
+        valid_types = {"secret", "cui", "infra", "ioc", "pii", "vuln"}
 
         for tag_line in self.tag_lines():
             # Check the tag format

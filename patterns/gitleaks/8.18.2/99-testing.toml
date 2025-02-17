@@ -315,3 +315,25 @@
       'replace',
       'token',
     ]
+
+[[rules]]
+  id = '12NI0Yd57gc'
+  description = 'Controlled Unclassified Information'
+  regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
+  tags = ['type:cui', 'group:leaktk-testing']
+  keywords = [
+    'cui',
+    'controlled',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      'dissem',
+      'categories',
+    ]
+
+    regexTarget = "secret"
+    regexes = [
+      # Only SP should allow a dash in the category or dissem
+      '''[^S][^P]-''',
+    ]

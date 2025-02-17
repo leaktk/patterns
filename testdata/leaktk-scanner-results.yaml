@@ -357,6 +357,58 @@
   secret: \\\"auths\\\":{\\\"cloud.openshift.com\\\":{\\\"auth\\\":\\\"WqQm513Gn8MFE9h8LyozXt5n2tg7_5e55oEFG3Ll6LMmZL0cH0qfOaaSgYb0ymxDMHqeoMIKfvgL7Ho5fqOzpg\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"quay.io\\\":{\\\"auth\\\":\\\"jj8AYnG-gSfo-v_JwtBSWCoVXi3q5-PEuuPkA2sWVeZwefdNrjBOvsdofE49hJNSDlu4sbFIUyXzKfGMTRgvxw\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"registry.connect.redhat.com\\\":{\\\"auth\\\":\\\"vPrPu21bd8cKc8bEa6aNYsgEIZmueurPRCqHwRL6VrbVuCWZw_G0qX34oYbNEd2rFmkVsn98slBoQjl4WnPVmA\\\",\\\"email\\\":\\\"user@leaktk.org\\\"},\\\"registry.redhat.io\\\":{\\\"auth\\\":\\\"SxeHVLwn_0k9FS2WSbKvgnODlYGygS-kOdTIqIp5-3sZLorIeloe4iKXfu0t7TdlZ_hoYNgGf0lFGnTzEMSYnw\\\",\\\"email\\\":\\\"user@leaktk.org\\\"}}
 
 #
+# Controlled Unclassified Information
+#
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/basic
+  match: CUI//BASIC
+  secret: CUI//BASIC
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/controlled-basic
+  match: CONTROLLED//BASIC
+  secret: CONTROLLED//BASIC
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/controlled-dissem-only
+  match: CONTROLLED//FEDCON
+  secret: CONTROLLED//FEDCON
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/controlled-specified-category
+  match: CONTROLLED//SP-CTI
+  secret: CONTROLLED//SP-CTI
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/controlled-specified-category-with-sub
+  match: CONTROLLED//SP-CTI/SP-EXPT
+  secret: CONTROLLED//SP-CTI/SP-EXPT
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/dissem-only
+  match: CUI//FEDCON
+  secret: CUI//FEDCON
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/specified-category
+  match: CUI//SP-CTI
+  secret: CUI//SP-CTI
+
+- rule.description: Controlled Unclassified Information
+  rule.id: 12NI0Yd57gc
+  location.path: cui/valid/specified-category-with-sub
+  match: CUI//SP-CTI/SP-EXPT
+  secret: CUI//SP-CTI/SP-EXPT
+
+#
 # Dropbox Refresh Token
 #
 
