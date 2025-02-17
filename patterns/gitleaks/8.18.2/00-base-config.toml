@@ -35,7 +35,7 @@ title = "Gitleaks Config"
       # Ignore aws secrets
       '''(?:^|\/)\.?secrets.baseline$''',
       # Ignore a github spec file
-      '''(?:^|\/)specs\/github\.json$''',
+      '''(?:^|\/)specs\/github\.(?:ya?ml|json)$''',
       # Ignore yarn release files
       '''(?:^|\/).yarn\/releases\/''',
   ]
