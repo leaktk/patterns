@@ -569,6 +569,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\n|#|$)''',
       # Secrets that are allow lower case and optionally contain dashes are most often placeholders
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
+      # Secrets like SOME_PLACEHOLER_P1 or some_sneaky_password01
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\n|#|$)''',
       # Base64 encoded EXAMPLE, change, and 12345
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
       # Various words at the start and end that signify a placeholder
