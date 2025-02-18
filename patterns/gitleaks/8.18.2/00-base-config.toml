@@ -3,7 +3,6 @@ title = "Gitleaks Config"
 [allowlist]
   description = "Global Allowlist"
   regexTarget = "line"
-
   regexes = [
       # Use notsecret as the standard allow tag.
       # It must begin at the start of the line, comment chars, or a space

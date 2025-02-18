@@ -164,6 +164,7 @@
       'passwd',
       'password',
       'placeholder',
+      'test',
     ]
 
     paths = [
@@ -394,6 +395,7 @@
       'passwd',
       'password',
       'redhat',
+      'test',
       'token',
     ]
 
