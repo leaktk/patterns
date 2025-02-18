@@ -177,12 +177,12 @@
       # Base64 encoded EXAMPLE in the text
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
       # aws.* is already covered by a different rule
-      '''(?i)aws(.{0,15})(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
+      '''(?i)aws.{0,15}(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
-      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(my)?t(e)?mp|this).*?(?:\s|$)''',
+      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\s|$)''',
       ## Ends with
-      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-encryption|-tls|_id|conf(ig(uration)?)?|cred(ential)?(s)?|data|devel(opment)|key|(_|-)pwd|raw\(|ya?ml)(?:&gt;|\\u003e|&#34;)?(?:\s|$)''',
+      '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e|&#34;)?(?:\s|$)''',
        # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(?:\s|$)''',
       # Ignore things that are just escaped unicode characters for now
@@ -199,7 +199,7 @@
       # Already covered in the testing farm rule
       '''TESTING_FARM_API_TOKEN''',
       # Already covered by the Mailgun rule
-      '''(?i)(?:mailgun|mg).{0,20}?\b(key-[0-9a-z]{32})\b''',
+      '''(?i)(?:mailgun|mg).{0,20}?\bkey-[0-9a-z]{32}\b''',
     ]
 
 [[rules]]
@@ -236,7 +236,7 @@
 [[rules]]
   id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
-  regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}(AAAAAAAAAA)[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
+  regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
     'dropbox',
