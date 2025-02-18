@@ -95,6 +95,13 @@ regexes = [
 '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
 ]
 [[rules]]
+id = 'zl044yuux24'
+description = 'Azure Active Directory Client Secret'
+regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:[^a-zA-Z0-9_~.-]|\z)'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3
+secretGroup = 1
+[[rules]]
 id = 'd01DtP9iA8I'
 description = 'Base64 Encoded AWS Secret Access Key'
 regex = '''[a-zA-Z0-9\/\+]*(?:YXdzX2FjY2Vzc19rZXlfaW|F3c19hY2Nlc3Nfa2V5X2lk|hd3NfYWNjZXNzX2tleV9pZ)[a-zA-Z0-9\/\+]*(?:QUtJQ|FLSU|BS0lB|UVV0Sl|FVdEpR|RVXRKU|RkxTV|ZMU1|GTFNV|QlMwbE|JTMGxC|CUzBsQ)[a-zA-Z0-9\/\+]*(?:YXdzX3NlY3JldF9hY2Nlc3Nfa2V5|F3c19zZWNyZXRfYWNjZXNzX2tle|hd3Nfc2VjcmV0X2FjY2Vzc19rZX)[a-zA-Z0-9\/\+]+={0,2}'''
@@ -1129,6 +1136,8 @@ paths = [
 '''(?i)openapi.*github[^\/]*\.json$''',
 ]
 stopwords = [
+'***',
+'...',
 '/etc/',
 '/run/',
 '/var/',
@@ -1140,6 +1149,7 @@ stopwords = [
 'bool:',
 'change',
 'client',
+'configuration',
 'confirm',
 'contrase',
 'credentials',
@@ -1156,10 +1166,11 @@ stopwords = [
 'here',
 'invalid',
 'json',
+'login',
 'manager',
 'openstack',
-'passw',
 'passp',
+'passw',
 'path',
 'placeholder',
 'principal',
@@ -1187,21 +1198,22 @@ regexes = [
 '''#\s*?nosec(?:\s+|$)''',
 '''#\s*?noqa(?::[\s\w]+)?$''',
 '''\/\/\s*?nolint:gosec(?:\s+|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?-i)[A-Z_]{5,}?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=\\?[\$%#]?\\?\{.+?\}(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\s|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{8,}?\}.*?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?-i)\\?\$[A-Z][0-9A-Z_]{8,}.*?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?-i)[a-z\-]+(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
-'''(?i)aws.{0,15}(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e|&#34;)?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(?:\s|$)''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?=(?:\\u[a-z0-9]{4})+(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[A-Z_]{5,}?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=\\?[\$%#]?\\?\{.+?\}(?:\s|$)''',
+'''(?i)(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{8,}?\}.*?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)\\?\$[A-Z][0-9A-Z_]{8,}.*?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,}),\s''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[a-z\-]+(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[A-Z0-9]{2,16}[_\.][A-Z0-9_\.]{2,32}|[a-z0-9]{2,16}[_\.][a-z0-9_\.])''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
+'''(?i)aws.{0,15}(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e|&#34;)?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?:\\u[a-z0-9]{4})+(?:\s|$)''',
 '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
 '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
 '''\bgithub_pat_\w{82}\b''',
@@ -1262,13 +1274,6 @@ tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'sl.',
 ]
-[[rules]]
-id = 'zl044yuux24'
-description = 'Azure Active Directory Client Secret'
-regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:[^a-zA-Z0-9_~.-]|\z)'''
-tags = ['type:secret', 'group:leaktk-testing']
-entropy = 3
-secretGroup = 1
 [[rules]]
 id = 'QqS4RvI6Zmg'
 description = 'Authorization Header'

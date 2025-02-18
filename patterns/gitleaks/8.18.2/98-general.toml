@@ -86,6 +86,14 @@
     ]
 
 [[rules]]
+  id = 'zl044yuux24'
+  description = 'Azure Active Directory Client Secret'
+  regex = '''(?:[^a-zA-Z0-9_~.-]|\A)([a-zA-Z0-9_~.-]{3}\dQ~[a-zA-Z0-9_~.-]{31,34})(?:[^a-zA-Z0-9_~.-]|\z)'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3
+  secretGroup = 1
+
+[[rules]]
   id = 'd01DtP9iA8I'
   # Sometimes the values in the config are base64 encoded (e.g. in the case of openshift secrets)
   description = 'Base64 Encoded AWS Secret Access Key'
