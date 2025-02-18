@@ -299,8 +299,9 @@
 [[rules]]
   id = 'QqS4RvI6Zmg'
   description = 'Authorization Header'
-  regex = '''(?i)(?:\A|[^\w-])authorization:\s*(?:\w+\s+)?([^\s\"\']+)'''
+  regex = '''(?i)(?:\A|[^\w-])authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
   tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3.35
   secretGroup = 1
   keywords = [
     'authorization',
@@ -308,12 +309,22 @@
 
   [rules.allowlist]
     stopwords = [
+      'auth',
+      'bearer',
+      'header',
       'insert',
-      'passw',
       'passp',
+      'passw',
       'placeholder',
       'replace',
       'token',
+      'credential',
+    ]
+
+    regexTarget = "secret"
+    regexes = [
+      # Vars for the values
+      '''^\$\{?[A-Z][A-Z0-9_]{2,16}''',
     ]
 
 [[rules]]

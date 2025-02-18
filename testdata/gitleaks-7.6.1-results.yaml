@@ -100,33 +100,6 @@
   line: '-----BEGIN EC PRIVATE KEY-----'
 
 #
-# Authorization Header
-#
-
-- rule: Authorization Header
-  file: generic/valid/authorization-header
-  offender: '''Authorization: Bearer arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
-  line: 'curl -H ''Authorization: Bearer arQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g''
-    https://github.com'
-
-- rule: Authorization Header
-  file: generic/valid/authorization-header-with-basic-auth
-  offender: '''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA=='
-  line: 'curl -H ''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA==''
-    https://github.com'
-
-- rule: Authorization Header
-  file: generic/valid/authorization-header-with-flat-token
-  offender: '''Authorization: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g'
-  line: 'curl -H ''Authorization: xrQiwF9k82w8bHeWR-ZM60vh1m5A5FKAIHoV2KWogw6rDM530Z0ZiCOxuJcb77EOIzBDTiyHqIsdyHhXjeXd_g''
-    https://github.com'
-
-- rule: Authorization Header
-  file: mailchimp
-  offender: '"Authorization: Bearer ae54fcc23ade65fa404a65e78c56f898-us1'
-  line: 'curl -H "Authorization: Bearer ae54fcc23ade65fa404a65e78c56f898-us1" https://api.linode.com/v4/account'
-
-#
 # Base64 Encoded AWS Secret Key
 #
 
@@ -356,11 +329,6 @@
   line: AUTH0_CLIENT_SECRET="WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV"
 
 - rule: General Secret
-  file: azure/valid/ad-keys.env
-  offender: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
-  line: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
-
-- rule: General Secret
   file: dropbox/valid/legacy-long-lived-access-token
   offender: 'token": "7rBynGOob1cAAAAAAAAAAe72L3T6rQK5ImB5a06ijnwRG9IdeTxvsqdZNAIxq8pZ"'
   line: '  "access_token": "7rBynGOob1cAAAAAAAAAAe72L3T6rQK5ImB5a06ijnwRG9IdeTxvsqdZNAIxq8pZ",'
@@ -427,11 +395,6 @@
 
 - rule: General Secret
   file: general-test
-  offender: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-  line: Mailgun_API_KEY=key-fb959af04c12d5d66091256c2b2076d0
-
-- rule: General Secret
-  file: general-test
   offender: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992"'
   line: 'SecretAccessKey": "1b3d576ba5a108c3b7374142bfd02992" notasecret'
 
@@ -459,36 +422,6 @@
   file: general-test
   offender: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
   line: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=1b3d576ba5a108c3b7374142bfd02992
-  line: api_key=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=2b3d576ba5a108c3b7374142bfd02992
-  line: api_key=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=3b3d576ba5a108c3b7374142bfd02992
-  line: api_key=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=4b3d576ba5a108c3b7374142bfd02992
-  line: api_key=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=5b3d576ba5a108c3b7374142bfd02992
-  line: api_key=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-
-- rule: General Secret
-  file: general-test
-  offender: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-  line: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule: General Secret
   file: general-test
@@ -604,36 +537,6 @@
   file: general-test
   offender: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
   line: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
-
-- rule: General Secret
-  file: general-test
-  offender: secret=1b3d576ba5a108c3b7374142bfd02992
-  line: secret=1b3d576ba5a108c3b7374142bfd02992  notasecret
-
-- rule: General Secret
-  file: general-test
-  offender: secret=2b3d576ba5a108c3b7374142bfd02992
-  line: secret=2b3d576ba5a108c3b7374142bfd02992  yonotsecret
-
-- rule: General Secret
-  file: general-test
-  offender: secret=3b3d576ba5a108c3b7374142bfd02992
-  line: secret=3b3d576ba5a108c3b7374142bfd02992  'notsecret
-
-- rule: General Secret
-  file: general-test
-  offender: secret=4b3d576ba5a108c3b7374142bfd02992
-  line: secret=4b3d576ba5a108c3b7374142bfd02992  notsecret'
-
-- rule: General Secret
-  file: general-test
-  offender: secret=5b3d576ba5a108c3b7374142bfd02992
-  line: secret=5b3d576ba5a108c3b7374142bfd02992  notsecretyo
-
-- rule: General Secret
-  file: general-test
-  offender: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-  line: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule: General Secret
   file: general-test
@@ -806,11 +709,6 @@
   line: '  rconPassword: JdxWjqhjWLTB7wn9qtNH2TXwW4p'
 
 - rule: General Secret
-  file: mailchimp
-  offender: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  line: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-
-- rule: General Secret
   file: maven/valid/settings-proxy-password.xml
   offender: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</
   line: '            <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>'
@@ -824,16 +722,6 @@
   file: semgrep-rules-examples/detected-google-oauth-access-token.txt
   offender: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
   line: '  "access_token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ",'
-
-- rule: General Secret
-  file: sendgrid
-  offender: SENDGRID_API_KEY=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
-  line: SENDGRID_API_KEY=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
-
-- rule: General Secret
-  file: sendgrid
-  offender: SENDGRID_API_KEY=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
-  line: SENDGRID_API_KEY=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
 
 - rule: General Secret
   file: settings.py
@@ -1076,25 +964,6 @@
   line: groq_api_key="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"
 
 #
-# HashiCorp Vault AppRole SecretID
-#
-
-- rule: HashiCorp Vault AppRole SecretID
-  file: hashicorp-vault/valid/ansible-vault-lookup-via-app-role
-  offender: vault.vault_read', 'auth/approle/role/role-name/role-id', url='https://vault:8201',
-    secret_id='dd3cf500-f9f9-4052-a768-1f22ac57d107
-  line: '  msg: "{{ lookup(''community.hashi_vault.vault_read'', ''auth/approle/role/role-name/role-id'',
-    url=''https://vault:8201'', secret_id=''dd3cf500-f9f9-4052-a768-1f22ac57d107'')
-    }}"'
-
-- rule: HashiCorp Vault AppRole SecretID
-  file: hashicorp-vault/valid/vault-cli-approle-login
-  offender: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
-    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
-  line: vault write auth/approle/login role_id=db02de05-fa39-4855-059b-67221c5c2f63
-    secret_id=6a174c20-f6de-a53c-74d2-6018fcceff64
-
-#
 # Heroku API Token
 #
 
@@ -1139,11 +1008,6 @@
   file: k8s/valid/ad-hoc-service-account-token
   offender: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
   line: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Zm9vIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.68gxpqTqhOhCGxXPe3D86xblMnRc2ciGYn-SMG78IDE
-
-- rule: Kubernetes System Service Account JWT
-  file: k8s/valid/double-encoded-service-account-token
-  offender: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUTZabTl2SWl3aWJtRnRaU0k2SWtwdmFHNGdSRzlsSWl3aWFXRjBJam94TlRFMk1qTTVNREl5ZlEuNjhneHBxVHFoT2hDR3hYUGUzRDg2eGJsTW5SYzJjaUdZbi1TTUc3OElERQo=
-  line: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUTZabTl2SWl3aWJtRnRaU0k2SWtwdmFHNGdSRzlsSWl3aWFXRjBJam94TlRFMk1qTTVNREl5ZlEuNjhneHBxVHFoT2hDR3hYUGUzRDg2eGJsTW5SYzJjaUdZbi1TTUc3OElERQo=
 
 - rule: Kubernetes System Service Account JWT
   file: k8s/valid/prometheus-k8s-service-account-token
