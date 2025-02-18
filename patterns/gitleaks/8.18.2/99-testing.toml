@@ -99,9 +99,8 @@
       'json',
       'manager',
       'openstack',
-      'passw0rd',
-      'passwd',
-      'password',
+      'passw',
+      'passp',
       'path',
       'placeholder',
       'principal',
@@ -310,7 +309,8 @@
   [rules.allowlist]
     stopwords = [
       'insert',
-      'password',
+      'passw',
+      'passp',
       'placeholder',
       'replace',
       'token',
