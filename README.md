@@ -64,6 +64,7 @@ that file for further instructions regarding testing patterns.
 These are the supported, predefined `type` tags:
 
 * `type:secret` - data that should never be in a repo
+* `type:cui` - controlled unclassified information
 * `type:infra` - infrastructure, host names, etc
 * `type:ioc` - an indicator of compromise
 * `type:pii` - personally identifiable information
