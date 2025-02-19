@@ -902,7 +902,7 @@
 [[rules]]
   id = 'LSd2f7avYkQ'
   description = 'OpenAI API Key'
-  regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
+  regex = '''\b(sk-[\w-]{16,}T3BlbkFJ[\w-]{16,})(?:[^\w-]|$)'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     't3blbkfj',
