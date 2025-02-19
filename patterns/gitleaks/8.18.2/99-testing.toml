@@ -178,8 +178,8 @@
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[a-z\-]+(?:\s|$)''',
       # Things like foo-bar-baz os.environ["asdfasdf"] etc
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[A-Z0-9]{2,16}[_\.][A-Z0-9_\.]{2,32}|[a-z0-9]{2,16}[_\.][a-z0-9_\.])''',
-      # Base64 encoded EXAMPLE in the text
-      '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=.*?(?:RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
+      # Base64 encoded example, EXAMPLE in the text
+      '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=.*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
       # aws.* is already covered by a different rule
       '''(?i)aws.{0,15}(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)''',
       # Various words at the start and end that signify a placeholder
@@ -345,3 +345,10 @@
       # Only SP should allow a dash in the category
       '''[^S][^P]-''',
     ]
+
+[[rules]]
+  # Merge this rule with id = 'RA8jFaMQxIg'
+  id = 'DleFZeoenP0'
+  description = 'PKCS #12 File'
+  path = '''(?:^|\/)[^\/]+\.pfx$'''
+  tags = ['type:secret', 'group:leaktk-testing']
