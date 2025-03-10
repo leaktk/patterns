@@ -42,7 +42,9 @@
     regexTarget = 'line'
     regexes = [
       # Ignore presigned URLs
-      '''X-Amz-Signature''',
+      # The b64 versions are due to an issue with decoding not applying for regexTarget line
+      # GH Issue: https://github.com/gitleaks/gitleaks/issues/1782
+      '''X-Amz-Signature|WC1BbXotU2lnbmF0dXJl|gtQW16LVNpZ25hdHVyZ|YLUFtei1TaWduYXR1cm''',
       # Ignore sample/example values
       '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
     ]
