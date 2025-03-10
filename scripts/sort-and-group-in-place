@@ -31,7 +31,7 @@ with open(sys.argv[1], "w", encoding="UTF-8") as results_file:
     results_file.write("# Use scripts/sort-and-group-in-place to sort this file\n")
     for group in sorted(groups):
         results = groups[group]
-        keys = list(sorted(results[0].keys()))
+        keys = list(filter(lambda x: x != "__meta__", sorted(results[0].keys())))
         results = list(sorted(results, key=lambda r: tuple(map(r.get, keys))))
         results_file.write(f"\n#\n# {group}\n#\n")
 

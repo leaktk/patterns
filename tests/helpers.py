@@ -21,7 +21,18 @@ def str_presenter(dumper, data):
 yaml.add_representer(str, str_presenter)
 
 
+def strip_meta(result):
+    """
+    Strip the __meta__ information from a result. It's not relevant for
+    comparing matches. It's only there for adding additional notes and data.
+    """
+    return {k: v for k, v in result.items() if k != "__meta__"}
+
+
 def assert_equal_results(tc, expected, actual):
+    # Remove meta info from the test results
+    expected = list(map(strip_meta, expected))
+
     # This is used to format the results
     output = {
         "Description": "Below are the results found in one list but not the other",

@@ -1573,6 +1573,24 @@
 
 - rule.description: Private Key
   rule.id: ePK9whPQPpY
+  location.path: pki/invalid/ignored-by-config
+  __meta__:
+    comment: 'Fixed by: https://github.com/leaktk/scanner/pull/107'
+  match: |-
+    -----BEGIN EC PRIVATE KEY-----
+    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
+    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
+    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
+    -----END EC PRIVATE KEY-----
+  secret: |-
+    -----BEGIN EC PRIVATE KEY-----
+    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
+    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
+    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
+    -----END EC PRIVATE KEY-----
+
+- rule.description: Private Key
+  rule.id: ePK9whPQPpY
   location.path: pki/valid/b64-encoded-openssh-private-key
   match: |-
     -----BEGIN OPENSSH PRIVATE KEY-----

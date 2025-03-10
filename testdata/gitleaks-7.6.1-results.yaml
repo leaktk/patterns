@@ -73,6 +73,11 @@
   line: '-----BEGIN PRIVATE KEY-----'
 
 - rule: Asymmetric Private Key
+  file: pki/invalid/ignored-by-config
+  offender: '-----BEGIN EC PRIVATE KEY-----'
+  line: '-----BEGIN EC PRIVATE KEY-----'
+
+- rule: Asymmetric Private Key
   file: pki/invalid/too-short-gpg-key.asc
   offender: '-----BEGIN PGP PRIVATE KEY-----'
   line: '-----BEGIN PGP PRIVATE KEY-----'
