@@ -32,3 +32,7 @@ target/patterns/gitleaks/8.18.2: target/patterns/gitleaks $(wildcard patterns/gi
 	for pattern_file in $$(ls patterns/gitleaks/8.18.2/*); do \
 		cat $$pattern_file | grep -vE '^\s*(#|$$)' | sed 's/^ *//g' >> $@; \
 	done
+
+update-fake-leaks:
+	cd testdata/fake-leaks && git checkout main && git pull
+	if [[ -n "$$(git status -s)" ]]; then git add testdata/fake-leaks && git commit -m "Update fake-leaks commit"; fi
