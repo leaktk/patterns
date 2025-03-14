@@ -717,6 +717,13 @@
     'aiza',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '...',
+      '***',
+      'xxxxx',
+    ]
+
 [[rules]]
   id = 'F8ySDDFvEPA'
   description = 'Groq API Key'
