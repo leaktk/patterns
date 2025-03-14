@@ -639,6 +639,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$y$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'fqtWnpN0lfA'
 description = 'Password Hash'
@@ -647,6 +655,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$gy$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'MxYvbqkT9IM'
 description = 'Password Hash'
@@ -654,6 +670,14 @@ regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$7$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'RX7HEzTc6dI'
@@ -666,6 +690,14 @@ keywords = [
 '$2x$',
 '$2y$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'amXYPF5An5s'
 description = 'Password Hash'
@@ -673,6 +705,14 @@ regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$6$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'u9MfgjhX7SI'
@@ -682,6 +722,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$5$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'iGgJnI-f5Xk'
 description = 'Password Hash'
@@ -690,6 +738,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$md5',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'AeVJW2sPHGs'
 description = 'Password Hash'
@@ -697,6 +753,14 @@ regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$1$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'LSd2f7avYkQ'

@@ -852,6 +852,18 @@
     '$y$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'fqtWnpN0lfA'
   description = 'Password Hash'
@@ -861,6 +873,18 @@
     '$gy$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'MxYvbqkT9IM'
   description = 'Password Hash'
@@ -869,6 +893,18 @@
   keywords = [
     '$7$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'RX7HEzTc6dI'
@@ -882,6 +918,18 @@
     '$2y$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'amXYPF5An5s'
   description = 'Password Hash'
@@ -890,6 +938,18 @@
   keywords = [
     '$6$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'u9MfgjhX7SI'
@@ -900,6 +960,18 @@
     '$5$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'iGgJnI-f5Xk'
   description = 'Password Hash'
@@ -909,6 +981,18 @@
     '$md5',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'AeVJW2sPHGs'
   description = 'Password Hash'
@@ -917,6 +1001,18 @@
   keywords = [
     '$1$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'LSd2f7avYkQ'
