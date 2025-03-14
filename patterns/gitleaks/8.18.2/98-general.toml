@@ -322,7 +322,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
       #   secret = "insert_your_password_here"
       #   secret = "some-ca.crt"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
+      #   token = "SOME.VALUE.HERE"
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
       #   secret = "Some...placeholder"
       #   secret = "Some***placeholder"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
