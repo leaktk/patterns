@@ -4,10 +4,22 @@ title = "Gitleaks Config"
   description = "Global Allowlist"
   regexTarget = "line"
   regexes = [
-      # Use notsecret as the standard allow tag.
-      # It must begin at the start of the line, comment chars, or a space
-      # It must end at the end of the line or with a space
-      '''(?:^|\#|\/\/|\s)notsecret(?:\s|$)''',
+      # Use 'notsecret' as the standard allow tag anywhere in the result
+      # context.
+      #
+      # Example:
+      #
+      #   some_secret="-VPUsquZ_RA" # notsecret
+      #
+      # Also currently ignores formats like:
+      #
+      #   - NOTSECRET
+      #   - NotSecret
+      #   - not_secret
+      #   - not-secret
+      #   - not secret
+      #
+      '''(?i)\bnot[\t\x20\-\_]*secret\b'''
   ]
 
   paths = [

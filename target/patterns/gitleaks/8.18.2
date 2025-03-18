@@ -3,7 +3,7 @@ title = "Gitleaks Config"
 description = "Global Allowlist"
 regexTarget = "line"
 regexes = [
-'''(?:^|\#|\/\/|\s)notsecret(?:\s|$)''',
+'''(?i)\bnot[\t\x20\-\_]*secret\b'''
 ]
 paths = [
 '''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?|zip)$''',
