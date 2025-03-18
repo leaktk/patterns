@@ -58,6 +58,8 @@
   ]
 
   [rules.allowlist]
+    # pragma: include "common_stopwords"
+
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
@@ -67,65 +69,6 @@
       # Ignore OpenAPI spec files
       '''(?:^|\/)openapi\.json$''',
       '''(?i)openapi.*github[^\/]*\.json$''',
-    ]
-
-    stopwords = [
-      '***',
-      '...',
-      '/etc/',
-      '/run/',
-      '/var/',
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'change',
-      'client',
-      'configuration',
-      'confirm',
-      'contrase',
-      'credentials',
-      'd3faultentry',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'everyone',
-      'example',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'json',
-      'login',
-      'manager',
-      'openstack',
-      'passp',
-      'passw',
-      'path',
-      'placeholder',
-      'principal',
-      'private',
-      'provide',
-      'quickstart',
-      'redhat',
-      'registry',
-      'replace',
-      'required',
-      'sample',
-      'secret',
-      'string',
-      'test',
-      'theblurstoftimes',
-      'token',
-      'update',
-      'uuid',
-      'value',
-      'xxxxx',
-      'your_',
     ]
 
     regexTarget = 'line'
@@ -174,8 +117,8 @@
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)\\?\$[A-Z][0-9A-Z_]{8,}.*?(?:\s|$)''',
       # Things like secret=asdfsadfsfsafd, bar=asdfsadfsdf, ...
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,}),\s''',
-      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
-      '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[a-z\-]+(?:\s|$)''',
+      # Secrets that are often code or placeholders
+      '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[a-z\.\_\(\,\[]{0,32}|[A-Z\.\_\(\,\[]{0,32})(?:\s|$)''',
       # Things like foo-bar-baz os.environ["asdfasdf"] etc
       '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[A-Z0-9]{2,16}[_\.][A-Z0-9_\.]{2,32}|[a-z0-9]{2,16}[_\.][a-z0-9_\.])''',
       # Base64 encoded example, EXAMPLE in the text

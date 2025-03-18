@@ -1,8 +1,8 @@
 PATTERN_FILES := target/patterns/gitleaks/7.6.1
 PATTERN_FILES += target/patterns/gitleaks/8.18.2
 
-.PHONY: all
-all: $(PATTERN_FILES)
+.PHONY: build
+build: $(PATTERN_FILES)
 
 .PHONY: clean
 clean:
@@ -15,23 +15,17 @@ format:
 	./scripts/sort-and-group-in-place ./testdata/gitleaks-7.6.1-results.yaml
 
 .PHONY: test
-test: clean $(PATTERN_FILES)
+test: clean build
 	@./scripts/$@
 
 target/patterns/gitleaks:
 	mkdir -p $@
 
 target/patterns/gitleaks/7.6.1: target/patterns/gitleaks $(wildcard patterns/gitleaks/7.6.1/*)
-	rm -f $@
-	for pattern_file in $$(ls patterns/gitleaks/7.6.1/*); do \
-		cat $$pattern_file | grep -vE '^\s*(#|$$)' | sed 's/^ *//g' >> $@; \
-	done
+	./scripts/compile patterns/gitleaks/7.6.1 > $@
 
 target/patterns/gitleaks/8.18.2: target/patterns/gitleaks $(wildcard patterns/gitleaks/8.18.2/*)
-	rm -f $@
-	for pattern_file in $$(ls patterns/gitleaks/8.18.2/*); do \
-		cat $$pattern_file | grep -vE '^\s*(#|$$)' | sed 's/^ *//g' >> $@; \
-	done
+	./scripts/compile patterns/gitleaks/8.18.2 > $@
 
 update-fake-leaks:
 	cd testdata/fake-leaks && git checkout main && git pull

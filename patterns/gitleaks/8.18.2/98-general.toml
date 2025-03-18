@@ -216,6 +216,8 @@
   ]
 
   [rules.allowlist]
+    # pragma: include "common_stopwords"
+
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
@@ -225,66 +227,6 @@
       # Ignore OpenAPI spec files
       '''(?:^|\/)openapi\.json$''',
       '''(?i)openapi.*github[^\/]*\.json$''',
-    ]
-
-    stopwords = [
-      '/etc/',
-      '/run/',
-      '/var/',
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'change',
-      'client',
-      'configuration',
-      'confirm',
-      'contrase',
-      'credentials',
-      'd3faultentry',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'everyone',
-      'example',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'java',
-      'json',
-      'login',
-      'manager',
-      'openstack',
-      'passp',
-      'passw',
-      'path',
-      'placeholder',
-      'principal',
-      'private',
-      'provide',
-      'quickstart',
-      'redhat',
-      'registry',
-      'replace',
-      'required',
-      'sample',
-      'schema',
-      'secret',
-      'service',
-      'string',
-      'test',
-      'theblurstoftimes',
-      'token',
-      'update',
-      'uuid',
-      'value',
-      'xxxxx',
-      'your_',
     ]
 
     regexTarget = 'line'
@@ -476,71 +418,14 @@
   ]
 
   [rules.allowlist]
+    # pragma: include "common_stopwords"
+
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-    ]
-
-    stopwords = [
-      '/etc/',
-      '/run/',
-      '/var/',
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'bucket',
-      'change',
-      'client',
-      'confirm',
-      'contrase',
-      'credentials',
-      'd3faultentry',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'everyone',
-      'example',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'java',
-      'json',
-      'manager',
-      'openstack',
-      'passw',
-      'passp',
-      'path',
-      'placeholder',
-      'principal',
-      'private',
-      'provide',
-      'quickstart',
-      'redhat',
-      'registry',
-      'replace',
-      'required',
-      'sample',
-      'secret',
-      'service',
-      'string',
-      'test',
-      'theblurstoftimes',
-      'todo',
-      'token',
-      'update',
-      'uuid',
-      'value',
-      'xxxxx',
-      'your_',
     ]
 
     regexTarget = 'line'

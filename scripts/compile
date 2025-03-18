@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+import sys
+import re
+
+from pathlib import Path
+
+
+include_re = re.compile(r"[\t\x20]*#[\t\x20]*pragma:[\t\x20]*include[\t\x20]*[\"\']([^\"\']+)[\"\']")
+pattern_dir = Path(sys.argv[1])
+include_dir = pattern_dir / "include"
+pattern_file_paths = [p for p in sorted(pattern_dir.iterdir()) if p.is_file()]
+include_cache = {}
+
+
+def _sub_include(match):
+    include_target = match.group(1)
+
+    if include_target not in include_cache:
+        with (include_dir / include_target).open() as include_file:
+            include_cache[include_target] = clean(include_file.read())
+
+    return include_cache[include_target]
+
+
+def apply_includes(data):
+    """
+    Replace `# pragma: include "file_name"` with content from:
+
+        pattern_dir / "include" / "file_name"
+    """
+    return include_re.sub(_sub_include, data)
+
+
+def clean(data):
+    """
+    Remove comments, empty lines, and trim whitespace
+    """
+    return (
+        "\n".join(
+            line
+            for line in map(str.strip, data.splitlines())
+            if line and not line.startswith("#")
+        )
+        + "\n"
+    )
+
+
+stages = [
+    apply_includes,
+    clean,
+    # TODO: add step to optimize regexes
+]
+
+for path in pattern_file_paths:
+    with path.open() as file:
+        data = file.read()
+
+    for stage in stages:
+        data = stage(data)
+
+    sys.stdout.write(data)
+
+sys.stdout.flush()
