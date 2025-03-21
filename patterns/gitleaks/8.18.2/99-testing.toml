@@ -58,7 +58,9 @@
   ]
 
   [rules.allowlist]
-    # pragma: include "common_stopwords"
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
 
     paths = [
       # Test data are often false positives
@@ -239,7 +241,7 @@
 [[rules]]
   id = 'QqS4RvI6Zmg'
   description = 'Authorization Header'
-  regex = '''(?i)(?:\A|[^\w-])authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+  regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
   tags = ['type:secret', 'group:leaktk-testing']
   entropy = 3.35
   secretGroup = 1
@@ -251,20 +253,29 @@
     stopwords = [
       'auth',
       'bearer',
+      'credential',
       'header',
       'insert',
+      'name',
       'passp',
       'passw',
       'placeholder',
       'replace',
+      'service',
       'token',
-      'credential',
+      'user',
     ]
 
-    regexTarget = "secret"
+    paths = [
+      # pragma: include "doc_file_paths"
+    ]
+
+    regexTarget = "line"
     regexes = [
       # Vars for the values
-      '''^\$\{?[A-Z][A-Z0-9_]{2,16}''',
+      '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+      # Indicating that the line is part of an example
+      '''(?:example|description)''',
     ]
 
 [[rules]]
@@ -288,10 +299,3 @@
       # Only SP should allow a dash in the category
       '''[^S][^P]-''',
     ]
-
-[[rules]]
-  # Merge this rule with id = 'RA8jFaMQxIg'
-  id = 'DleFZeoenP0'
-  description = 'PKCS #12 File'
-  path = '''(?:^|\/)[^\/]+\.pfx$'''
-  tags = ['type:secret', 'group:leaktk-testing']

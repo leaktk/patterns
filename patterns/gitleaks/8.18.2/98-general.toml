@@ -216,7 +216,9 @@
   ]
 
   [rules.allowlist]
-    # pragma: include "common_stopwords"
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
 
     paths = [
       # Test data are often false positives
@@ -418,7 +420,9 @@
   ]
 
   [rules.allowlist]
-    # pragma: include "common_stopwords"
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
 
     paths = [
       # Test data are often false positives
@@ -955,7 +959,7 @@
 [[rules]]
   id = 'RA8jFaMQxIg'
   description = 'PKCS #12 File'
-  path = '''(?:^|\/)[^\/]+\.p12$'''
+  path = '''(?:^|\/)[^\/]+\.p(?:12|fx)$'''
   tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]

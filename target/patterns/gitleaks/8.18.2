@@ -880,7 +880,7 @@ keywords = [
 [[rules]]
 id = 'RA8jFaMQxIg'
 description = 'PKCS #12 File'
-path = '''(?:^|\/)[^\/]+\.p12$'''
+path = '''(?:^|\/)[^\/]+\.p(?:12|fx)$'''
 tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
 id = 'ePK9whPQPpY'
@@ -1466,7 +1466,7 @@ keywords = [
 [[rules]]
 id = 'QqS4RvI6Zmg'
 description = 'Authorization Header'
-regex = '''(?i)(?:\A|[^\w-])authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
 tags = ['type:secret', 'group:leaktk-testing']
 entropy = 3.35
 secretGroup = 1
@@ -1477,18 +1477,25 @@ keywords = [
 stopwords = [
 'auth',
 'bearer',
+'credential',
 'header',
 'insert',
+'name',
 'passp',
 'passw',
 'placeholder',
 'replace',
+'service',
 'token',
-'credential',
+'user',
 ]
-regexTarget = "secret"
+paths = [
+'''\.(?:html|md|adoc|rst)$''',
+]
+regexTarget = "line"
 regexes = [
-'''^\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:example|description)''',
 ]
 [[rules]]
 id = '12NI0Yd57gc'
@@ -1508,8 +1515,3 @@ regexTarget = "secret"
 regexes = [
 '''[^S][^P]-''',
 ]
-[[rules]]
-id = 'DleFZeoenP0'
-description = 'PKCS #12 File'
-path = '''(?:^|\/)[^\/]+\.pfx$'''
-tags = ['type:secret', 'group:leaktk-testing']
