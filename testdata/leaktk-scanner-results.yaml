@@ -31,18 +31,6 @@
 - rule.description: (Env Var) Generic Secret
   rule.id: hG-qMjbXGro
   location.path: general-test
-  match: api_key=3b3d576ba5a108c3b7374142bfd02992
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: api_key=4b3d576ba5a108c3b7374142bfd02992
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
   match: api_key=5b3d576ba5a108c3b7374142bfd02992
   secret: 5b3d576ba5a108c3b7374142bfd02992
 
@@ -63,18 +51,6 @@
   location.path: general-test
   match: secret=2b3d576ba5a108c3b7374142bfd02992
   secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=3b3d576ba5a108c3b7374142bfd02992
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=4b3d576ba5a108c3b7374142bfd02992
-  secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: (Env Var) Generic Secret
   rule.id: hG-qMjbXGro
@@ -585,18 +561,6 @@
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: general-test
-  match: 'SecretAccessKey": "3b3d576ba5a108c3b7374142bfd02992"'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'SecretAccessKey": "4b3d576ba5a108c3b7374142bfd02992"'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
   match: 'SecretAccessKey": "5b3d576ba5a108c3b7374142bfd02992"'
   secret: 5b3d576ba5a108c3b7374142bfd02992
 
@@ -641,18 +605,6 @@
   location.path: general-test
   match: password = '2b3d576ba5a108c3b7374142bfd02992'
   secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: password = '3b3d576ba5a108c3b7374142bfd02992'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: password = '4b3d576ba5a108c3b7374142bfd02992'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -729,18 +681,6 @@
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: general-test
-  match: secret= '3b3d576ba5a108c3b7374142bfd02992'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: secret= '4b3d576ba5a108c3b7374142bfd02992'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
   match: secret= '5b3d576ba5a108c3b7374142bfd02992'
   secret: 5b3d576ba5a108c3b7374142bfd02992
 
@@ -777,18 +717,6 @@
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: general-test
-  match: 'secret_access_key": "3b3d576ba5a108c3b7374142bfd02992"'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'secret_access_key": "4b3d576ba5a108c3b7374142bfd02992"'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
   match: 'secret_access_key": "5b3d576ba5a108c3b7374142bfd02992"'
   secret: 5b3d576ba5a108c3b7374142bfd02992
 
@@ -809,18 +737,6 @@
   location.path: general-test
   match: 'secret_accesskey": "2b3d576ba5a108c3b7374142bfd02992"'
   secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'secret_accesskey": "3b3d576ba5a108c3b7374142bfd02992"'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'secret_accesskey": "4b3d576ba5a108c3b7374142bfd02992"'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -851,18 +767,6 @@
   location.path: general-test
   match: 'secret_key": "2b3d576ba5a108c3b7374142bfd02992"'
   secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'secret_key": "3b3d576ba5a108c3b7374142bfd02992"'
-  secret: 3b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: general-test
-  match: 'secret_key": "4b3d576ba5a108c3b7374142bfd02992"'
-  secret: 4b3d576ba5a108c3b7374142bfd02992
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1570,6 +1474,24 @@
     PRIVATE KEY-----'
   secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END
     PRIVATE KEY-----'
+
+- rule.description: Private Key
+  rule.id: ePK9whPQPpY
+  location.path: pki/invalid/ignored-by-config
+  __meta__:
+    comment: 'Fixed by: https://github.com/leaktk/scanner/pull/107'
+  match: |-
+    -----BEGIN EC PRIVATE KEY-----
+    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
+    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
+    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
+    -----END EC PRIVATE KEY-----
+  secret: |-
+    -----BEGIN EC PRIVATE KEY-----
+    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
+    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
+    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
+    -----END EC PRIVATE KEY-----
 
 - rule.description: Private Key
   rule.id: ePK9whPQPpY

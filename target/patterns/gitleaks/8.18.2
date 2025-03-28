@@ -3,7 +3,7 @@ title = "Gitleaks Config"
 description = "Global Allowlist"
 regexTarget = "line"
 regexes = [
-'''(?:^|\#|\/\/|\s)notsecret(?:\s|$)''',
+'''(?i)\bnot[\t\x20\-\_]*secret\b'''
 ]
 paths = [
 '''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?|zip)$''',
@@ -58,7 +58,7 @@ stopwords = [
 ]
 regexTarget = 'line'
 regexes = [
-'''X-Amz-Signature''',
+'''X-Amz-Signature|WC1BbXotU2lnbmF0dXJl|gtQW16LVNpZ25hdHVyZ|YLUFtei1TaWduYXR1cm''',
 '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
 ]
 [[rules]]
@@ -188,13 +188,9 @@ keywords = [
 'token',
 ]
 [rules.allowlist]
-paths = [
-'''(?:^|\/)testdata\/''',
-'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-'''(?:^|\/)openapi\.json$''',
-'''(?i)openapi.*github[^\/]*\.json$''',
-]
 stopwords = [
+'***',
+'...',
 '/etc/',
 '/run/',
 '/var/',
@@ -203,54 +199,93 @@ stopwords = [
 'abcd',
 'admin',
 'ansible',
-'bool:',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
 'change',
 'client',
-'configuration',
-'confirm',
-'contrase',
-'credentials',
-'d3faultentry',
-'data/',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
 'default',
 'demo',
+'dissem',
 'django',
 'enter',
+'entry',
+'environ',
 'everyone',
 'example',
 'fake',
+'gitops',
 'hash',
+'header',
 'here',
+'insert',
 'invalid',
 'java',
 'json',
+'keylime',
+'local',
 'login',
 'manager',
-'openstack',
+'name',
+'oauth-basic',
+'opens',
 'passp',
 'passw',
 'path',
+'pbench',
+'place',
 'placeholder',
+'postgres',
 'principal',
+'prisma',
 'private',
+'profile',
 'provide',
 'quickstart',
+'rabbitmq',
 'redhat',
 'registry',
 'replace',
 'required',
+'resource',
+'role',
 'sample',
 'schema',
 'secret',
+'serv',
+'service',
+'slack',
+'snip',
+'some',
+'spec',
 'string',
+'telemetry',
 'test',
 'theblurstoftimes',
+'todo',
 'token',
 'update',
+'user',
 'uuid',
 'value',
 'xxxxx',
-'your_',
+'your',
+]
+paths = [
+'''(?:^|\/)testdata\/''',
+'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+'''(?:^|\/)openapi\.json$''',
+'''(?i)openapi.*github[^\/]*\.json$''',
 ]
 regexTarget = 'line'
 regexes = [
@@ -260,14 +295,14 @@ regexes = [
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
 '''(?i)(?:mock|example|fake)[\w-]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?[\"\']''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
 '''(?i)aws.{0,15}(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
 '''jq\s+[\w\-\s]*.*\.\w*(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?[\"\']''',
@@ -324,7 +359,7 @@ regexes = [
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\]\]>)?<\/''',
+'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(?:my)?secret|self|ssh|spec\.|str:|(?:my)?te?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-demo|-encryption|-tls|_id|_private|client|(?:change|fix)me|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|default|devel(?:opment)|hash|here|json|key|[_-]pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
@@ -344,11 +379,9 @@ keywords = [
 'token',
 ]
 [rules.allowlist]
-paths = [
-'''(?:^|\/)testdata\/''',
-'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-]
 stopwords = [
+'***',
+'...',
 '/etc/',
 '/run/',
 '/var/',
@@ -357,53 +390,91 @@ stopwords = [
 'abcd',
 'admin',
 'ansible',
-'bool:',
+'auth',
+'base',
+'bearer',
+'bool',
 'bucket',
+'candlepin',
+'categories',
+'cert',
 'change',
 'client',
-'confirm',
-'contrase',
-'credentials',
-'d3faultentry',
-'data/',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
 'default',
 'demo',
+'dissem',
 'django',
 'enter',
+'entry',
+'environ',
 'everyone',
 'example',
 'fake',
+'gitops',
 'hash',
+'header',
 'here',
+'insert',
 'invalid',
 'java',
 'json',
+'keylime',
+'local',
+'login',
 'manager',
-'openstack',
-'passw',
+'name',
+'oauth-basic',
+'opens',
 'passp',
+'passw',
 'path',
+'pbench',
+'place',
 'placeholder',
+'postgres',
 'principal',
+'prisma',
 'private',
+'profile',
 'provide',
 'quickstart',
+'rabbitmq',
 'redhat',
 'registry',
 'replace',
 'required',
+'resource',
+'role',
 'sample',
+'schema',
 'secret',
+'serv',
+'service',
+'slack',
+'snip',
+'some',
+'spec',
 'string',
+'telemetry',
 'test',
 'theblurstoftimes',
 'todo',
 'token',
 'update',
+'user',
 'uuid',
 'value',
 'xxxxx',
-'your_',
+'your',
+]
+paths = [
+'''(?:^|\/)testdata\/''',
+'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
 ]
 regexTarget = 'line'
 regexes = [
@@ -419,7 +490,7 @@ regexes = [
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\n|#|$)''',
 '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\n|#|$)''',
@@ -522,6 +593,12 @@ regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'aiza',
+]
+[rules.allowlist]
+stopwords = [
+'...',
+'***',
+'xxxxx',
 ]
 [[rules]]
 id = 'F8ySDDFvEPA'
@@ -631,6 +708,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$y$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'fqtWnpN0lfA'
 description = 'Password Hash'
@@ -639,6 +724,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$gy$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'MxYvbqkT9IM'
 description = 'Password Hash'
@@ -646,6 +739,14 @@ regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$7$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'RX7HEzTc6dI'
@@ -658,6 +759,14 @@ keywords = [
 '$2x$',
 '$2y$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'amXYPF5An5s'
 description = 'Password Hash'
@@ -665,6 +774,14 @@ regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$6$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'u9MfgjhX7SI'
@@ -674,6 +791,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$5$',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'iGgJnI-f5Xk'
 description = 'Password Hash'
@@ -682,6 +807,14 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$md5',
 ]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 id = 'AeVJW2sPHGs'
 description = 'Password Hash'
@@ -689,6 +822,14 @@ regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 '$1$',
+]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
 ]
 [[rules]]
 id = 'LSd2f7avYkQ'
@@ -739,7 +880,7 @@ keywords = [
 [[rules]]
 id = 'RA8jFaMQxIg'
 description = 'PKCS #12 File'
-path = '''(?:^|\/)[^\/]+\.p12$'''
+path = '''(?:^|\/)[^\/]+\.p(?:12|fx)$'''
 tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
 id = 'ePK9whPQPpY'
@@ -1085,6 +1226,7 @@ stopwords = [
 'replace',
 'sample',
 'secret',
+'service',
 'telemetry',
 'token',
 'update',
@@ -1141,12 +1283,6 @@ keywords = [
 'token',
 ]
 [rules.allowlist]
-paths = [
-'''(?:^|\/)testdata\/''',
-'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-'''(?:^|\/)openapi\.json$''',
-'''(?i)openapi.*github[^\/]*\.json$''',
-]
 stopwords = [
 '***',
 '...',
@@ -1158,52 +1294,93 @@ stopwords = [
 'abcd',
 'admin',
 'ansible',
-'bool:',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
 'change',
 'client',
-'configuration',
-'confirm',
-'contrase',
-'credentials',
-'d3faultentry',
-'data/',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
 'default',
 'demo',
+'dissem',
 'django',
 'enter',
+'entry',
+'environ',
 'everyone',
 'example',
 'fake',
+'gitops',
 'hash',
+'header',
 'here',
+'insert',
 'invalid',
+'java',
 'json',
+'keylime',
+'local',
 'login',
 'manager',
-'openstack',
+'name',
+'oauth-basic',
+'opens',
 'passp',
 'passw',
 'path',
+'pbench',
+'place',
 'placeholder',
+'postgres',
 'principal',
+'prisma',
 'private',
+'profile',
 'provide',
 'quickstart',
+'rabbitmq',
 'redhat',
 'registry',
 'replace',
 'required',
+'resource',
+'role',
 'sample',
+'schema',
 'secret',
+'serv',
+'service',
+'slack',
+'snip',
+'some',
+'spec',
 'string',
+'telemetry',
 'test',
 'theblurstoftimes',
+'todo',
 'token',
 'update',
+'user',
 'uuid',
 'value',
 'xxxxx',
-'your_',
+'your',
+]
+paths = [
+'''(?:^|\/)testdata\/''',
+'''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+'''(?:^|\/)openapi\.json$''',
+'''(?i)openapi.*github[^\/]*\.json$''',
 ]
 regexTarget = 'line'
 regexes = [
@@ -1218,7 +1395,7 @@ regexes = [
 '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\s|$)''',
 '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)\\?\$[A-Z][0-9A-Z_]{8,}.*?(?:\s|$)''',
 '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\']{6,}),\s''',
-'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)[a-z\-]+(?:\s|$)''',
+'''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[a-z\.\_\(\,\[]{0,32}|[A-Z\.\_\(\,\[]{0,32})(?:\s|$)''',
 '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=(?-i)(?:[A-Z0-9]{2,16}[_\.][A-Z0-9_\.]{2,32}|[a-z0-9]{2,16}[_\.][a-z0-9_\.])''',
 '''(?i)(?:^|\n)[#\s]*?\w*?(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=.*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF).*?(?:\s|$)''',
 '''(?i)aws.{0,15}(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)''',
@@ -1289,7 +1466,7 @@ keywords = [
 [[rules]]
 id = 'QqS4RvI6Zmg'
 description = 'Authorization Header'
-regex = '''(?i)(?:\A|[^\w-])authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
 tags = ['type:secret', 'group:leaktk-testing']
 entropy = 3.35
 secretGroup = 1
@@ -1300,18 +1477,25 @@ keywords = [
 stopwords = [
 'auth',
 'bearer',
+'credential',
 'header',
 'insert',
+'name',
 'passp',
 'passw',
 'placeholder',
 'replace',
+'service',
 'token',
-'credential',
+'user',
 ]
-regexTarget = "secret"
+paths = [
+'''\.(?:html|md|adoc|rst)$''',
+]
+regexTarget = "line"
 regexes = [
-'''^\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:example|description)''',
 ]
 [[rules]]
 id = '12NI0Yd57gc'
@@ -1331,8 +1515,3 @@ regexTarget = "secret"
 regexes = [
 '''[^S][^P]-''',
 ]
-[[rules]]
-id = 'DleFZeoenP0'
-description = 'PKCS #12 File'
-path = '''(?:^|\/)[^\/]+\.pfx$'''
-tags = ['type:secret', 'group:leaktk-testing']

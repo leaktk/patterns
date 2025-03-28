@@ -154,6 +154,10 @@ tags = ["alert:repo-owner", "key", "facebook", "type:secret"]
 description = "Google API Key"
 regex = '''AIza[0-9A-Za-z\\-_]{35}([^0-9A-Za-z\\-_]|$)'''
 tags = ["alert:repo-owner", "key", "google", "type:secret"]
+[rules.allowlist]
+regexes = [
+'''AIza(?i)[0-9a-z\\-_]{0,32}(?:\.\.\.|\*\*\*|xxxxx)''',
+]
 [[rules]]
 description = "Heroku API Token"
 regex = '''(?i)heroku(?:.{0,20})?\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'''
@@ -230,7 +234,7 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|(\\)?\$\(.*)[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[A-Z_]+?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](\\)?[\$%#]?(\\)?\{.+?\}[\"\']''',
-'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
+'''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\'][^\"\']*?(\.\.\.|\*\*\*|xxxxx)[^\"\']*?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']\+.+?\+[\"\'].+?[\"\']''',
 '''(?i)(secret|password|token)(_|-)?(access(_|-)?)?(key)?[\"\']?\s*?\]?(\s+)?[:=](\s+)?[\"\']((?-i)[A-Z_]{6,})?(.)?[\$#]\{.{4,}?\}.*?[\"\']''',
@@ -424,34 +428,98 @@ Group = "1"
 description = "Password Hash"
 regex = '''\$y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
 tags = ["alert:repo-owner", "password", "hash", "yescrypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$gy\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}\$[.\/A-Za-z0-9]{43}'''
 tags = ["alert:repo-owner", "password", "hash", "gost-yescrypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$7\$[.\/A-Za-z0-9]{11,97}\$[.\/A-Za-z0-9]{43}'''
 tags = ["alert:repo-owner", "password", "hash", "scrypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$2[abxy]\$[0-9]{2}\$[.\/A-Za-z0-9]{53}'''
 tags = ["alert:repo-owner", "password", "hash", "bcrypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$6\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{86}'''
 tags = ["alert:repo-owner", "password", "hash", "sha512crypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$5\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}\$[.\/0-9A-Za-z]{43}'''
 tags = ["alert:repo-owner", "password", "hash", "sha256crypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}\${1,2}[.\/0-9A-Za-z]{22}'''
 tags = ["alert:repo-owner", "password", "hash", "sunmd5", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "Password Hash"
 regex = '''\$1\$[^$:\n]{1,8}\$[.\/0-9A-Za-z]{22}'''
 tags = ["alert:repo-owner", "password", "hash", "md5crypt", "type:secret"]
+[rules.allowlist]
+paths = [
+'''\.html$''',
+]
+regexTarget = 'line'
+regexes = [
+'''test|example|assert''',
+]
 [[rules]]
 description = "PayPal Braintree Access Token"
 regex = '''access_token\$production\$[0-9a-z]{16}\$[0-9a-f]{32}'''

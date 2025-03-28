@@ -42,7 +42,9 @@
     regexTarget = 'line'
     regexes = [
       # Ignore presigned URLs
-      '''X-Amz-Signature''',
+      # The b64 versions are due to an issue with decoding not applying for regexTarget line
+      # GH Issue: https://github.com/gitleaks/gitleaks/issues/1782
+      '''X-Amz-Signature|WC1BbXotU2lnbmF0dXJl|gtQW16LVNpZ25hdHVyZ|YLUFtei1TaWduYXR1cm''',
       # Ignore sample/example values
       '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
     ]
@@ -214,6 +216,10 @@
   ]
 
   [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
@@ -223,65 +229,6 @@
       # Ignore OpenAPI spec files
       '''(?:^|\/)openapi\.json$''',
       '''(?i)openapi.*github[^\/]*\.json$''',
-    ]
-
-    stopwords = [
-      '/etc/',
-      '/run/',
-      '/var/',
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'change',
-      'client',
-      'configuration',
-      'confirm',
-      'contrase',
-      'credentials',
-      'd3faultentry',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'everyone',
-      'example',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'java',
-      'json',
-      'login',
-      'manager',
-      'openstack',
-      'passp',
-      'passw',
-      'path',
-      'placeholder',
-      'principal',
-      'private',
-      'provide',
-      'quickstart',
-      'redhat',
-      'registry',
-      'replace',
-      'required',
-      'sample',
-      'schema',
-      'secret',
-      'string',
-      'test',
-      'theblurstoftimes',
-      'token',
-      'update',
-      'uuid',
-      'value',
-      'xxxxx',
-      'your_',
     ]
 
     regexTarget = 'line'
@@ -319,7 +266,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
       #   secret = "insert_your_password_here"
       #   secret = "some-ca.crt"
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[a-z._-]{0,32}[\"\']''',
+      #   token = "SOME.VALUE.HERE"
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
       #   secret = "Some...placeholder"
       #   secret = "Some***placeholder"
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
@@ -339,8 +287,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
       # Ignore these variable prefixes (add to this list as needed for different prefixes
       '''(?i)(?:mock|example|fake)[\w-]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
-      # Base64 encoded example, EXAMPLE, change, and 12345
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?[\"\']''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
       # aws.* is already covered by a different rule
       '''(?i)aws.{0,15}(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?''',
       # jq lookups
@@ -441,8 +389,8 @@
       #   <secret>asdfsadf...adfadsf</secret>(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/'
       #   <secret>asdfsadf***asdfsa</secret>
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-      #   Base64 encoded example, EXAMPLE, change and 12345
-      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\]\]>)?<\/''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\]\]>)?<\/''',
       # Various words at the start and end that signify a placeholder
 
       ## Starts with
@@ -472,70 +420,16 @@
   ]
 
   [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-    ]
-
-    stopwords = [
-      '/etc/',
-      '/run/',
-      '/var/',
-      '1234',
-      'abc123',
-      'abcd',
-      'admin',
-      'ansible',
-      'bool:',
-      'bucket',
-      'change',
-      'client',
-      'confirm',
-      'contrase',
-      'credentials',
-      'd3faultentry',
-      'data/',
-      'default',
-      'demo',
-      'django',
-      'enter',
-      'everyone',
-      'example',
-      'fake',
-      'hash',
-      'here',
-      'invalid',
-      'java',
-      'json',
-      'manager',
-      'openstack',
-      'passw',
-      'passp',
-      'path',
-      'placeholder',
-      'principal',
-      'private',
-      'provide',
-      'quickstart',
-      'redhat',
-      'registry',
-      'replace',
-      'required',
-      'sample',
-      'secret',
-      'string',
-      'test',
-      'theblurstoftimes',
-      'todo',
-      'token',
-      'update',
-      'uuid',
-      'value',
-      'xxxxx',
-      'your_',
     ]
 
     regexTarget = 'line'
@@ -586,8 +480,8 @@
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
       # Secrets like SOME_PLACEHOLER_P1 or some_sneaky_password01
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\n|#|$)''',
-      # Base64 encoded example, EXAMPLE, change, and 12345
-      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|cGFzc3dvcm|Bhc3N3b3Jk|wYXNzd29yZ|cmVkaGF0|JlZGhhd|yZWRoYX|MTIzND|EyMzQ1|xMjM0N|Y2hhbmdl|NoYW5nZ|jaGFuZ2).*?(?:\n|#|$)''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\n|#|$)''',
       # Various words at the start and end that signify a placeholder
       ## Starts with
       '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\n|#|$)''',
@@ -712,6 +606,13 @@
   keywords = [
     'aiza',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      '...',
+      '***',
+      'xxxxx',
+    ]
 
 [[rules]]
   id = 'F8ySDDFvEPA'
@@ -840,6 +741,18 @@
     '$y$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'fqtWnpN0lfA'
   description = 'Password Hash'
@@ -849,6 +762,18 @@
     '$gy$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'MxYvbqkT9IM'
   description = 'Password Hash'
@@ -857,6 +782,18 @@
   keywords = [
     '$7$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'RX7HEzTc6dI'
@@ -870,6 +807,18 @@
     '$2y$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'amXYPF5An5s'
   description = 'Password Hash'
@@ -878,6 +827,18 @@
   keywords = [
     '$6$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'u9MfgjhX7SI'
@@ -888,6 +849,18 @@
     '$5$',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'iGgJnI-f5Xk'
   description = 'Password Hash'
@@ -897,6 +870,18 @@
     '$md5',
   ]
 
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
+
 [[rules]]
   id = 'AeVJW2sPHGs'
   description = 'Password Hash'
@@ -905,6 +890,18 @@
   keywords = [
     '$1$',
   ]
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      '''\.html$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # High FP rate from tests, docs, etc
+      '''test|example|assert''',
+    ]
 
 [[rules]]
   id = 'LSd2f7avYkQ'
@@ -962,7 +959,7 @@
 [[rules]]
   id = 'RA8jFaMQxIg'
   description = 'PKCS #12 File'
-  path = '''(?:^|\/)[^\/]+\.p12$'''
+  path = '''(?:^|\/)[^\/]+\.p(?:12|fx)$'''
   tags = ['type:secret', 'alert:repo-owner']
 
 [[rules]]
@@ -1369,6 +1366,7 @@
       'replace',
       'sample',
       'secret',
+      'service',
       'telemetry',
       'token',
       'update',
