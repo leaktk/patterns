@@ -980,6 +980,7 @@
     ]
 
     paths = [
+      # pragma: include "doc_file_paths"
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
       # Ignore keys in a test(s) folder
