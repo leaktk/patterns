@@ -1135,13 +1135,37 @@
 - rule.description: Google Cloud Platform API Key
   rule.id: HysINeDft8k
   location.path: general-test
-  match: AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ
+  match: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
   secret: AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ
 
 - rule.description: Google Cloud Platform API Key
   rule.id: HysINeDft8k
   location.path: semgrep-rules-examples/detected-google-api-key.txt
-  match: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
+  match: AIzaSyAtUXpd8JxrpUH2Sd-xO2U_vWGVfoF5-XM
+  secret: AIzaSyAtUXpd8JxrpUH2Sd-xO2U_vWGVfoF5-XM
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: HysINeDft8k
+  location.path: semgrep-rules-examples/detected-google-api-key.txt
+  match: AIzaSyAxgKw8qkRZvR1QjpTh7red4-HuesZItIs
+  secret: AIzaSyAxgKw8qkRZvR1QjpTh7red4-HuesZItIs
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: HysINeDft8k
+  location.path: semgrep-rules-examples/detected-google-api-key.txt
+  match: AIzaSyAxgKw8qkRZvR1QjpTh7red4-HuesZItIs&
+  secret: AIzaSyAxgKw8qkRZvR1QjpTh7red4-HuesZItIs
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: HysINeDft8k
+  location.path: semgrep-rules-examples/detected-google-api-key.txt
+  match: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5--h6xtI
+  secret: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5--h6xtI
+
+- rule.description: Google Cloud Platform API Key
+  rule.id: HysINeDft8k
+  location.path: semgrep-rules-examples/detected-google-api-key.txt
+  match: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI=
   secret: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI
 
 - rule.description: Google Cloud Platform API Key

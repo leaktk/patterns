@@ -589,7 +589,8 @@ keywords = [
 [[rules]]
 id = 'HysINeDft8k'
 description = 'Google Cloud Platform API Key'
-regex = '''\bAIza[0-9A-Za-z\\-_]{35}\b'''
+regex = '''\b(AIza[\w\\\-]{35})(?:[^\w\\\-]|$)'''
+secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'aiza',
@@ -898,6 +899,7 @@ stopwords = [
 'xxx',
 ]
 paths = [
+'''\.(?:html|md|adoc|rst)$''',
 '''(?:^|\/)testdata\/''',
 '''tests?\/.*.(?:txt|der|key|pem)$''',
 '''[^\/]+test[^\/]+(?:txt|der|key|pem)$''',
