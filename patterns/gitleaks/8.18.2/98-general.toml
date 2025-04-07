@@ -14,7 +14,7 @@
   id = 'LAJoYTdoQH4'
   description = 'AWS IAM Unique Identifier'
   # The funky not group at the beginning consists of ascii ranges
-  regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16})\b'''
+  regex = '''(?:^|[^!$-&\(-9<>-~])((?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z2-7]{16})\b'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.2
   secretGroup = 1
