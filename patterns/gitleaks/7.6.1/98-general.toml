@@ -31,6 +31,8 @@
       '''\/usr\/share\/(:?mime|misc)''',
       # OpenJDK tests with private keys
       '''(:?^|\/)test\/jdk\/sun\/security\/ssl\/''',
+      # Ignore the redhat/keys/stub_key.priv key
+      '''(?:^|\/)redhat\/keys\/stub_key\.priv''',
     ]
 
     regexes = [
