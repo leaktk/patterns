@@ -1016,6 +1016,8 @@
       '''\([\"\']-----BEGIN[ A-Z0-9_-]{0,100}PRIVATE KEY(?: BLOCK)?-----(\\n)?[\"\']''',
       #  things ending with stuff like # noqa: E501
       '''#\s*?noqa(?::[\s\w]+)?$''',
+      # redhat/keys/stub_key.priv
+      '''MIIJQwIBADANBgkqhkiG9w0BAQEFAASCCS0wggkpAgEAAoICAQCq9HeRqe2cYffi''',
     ]
 
 [[rules]]

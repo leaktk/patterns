@@ -781,6 +781,24 @@
   secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: generic/valid/b64-double-encoded-secret
+  match: secret="GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw"
+  secret: GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: generic/valid/b64-encoded-secret.yml
+  match: secret="GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw"
+  secret: GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw
+
+- rule.description: Generic Secret
+  rule.id: rnWF160pWNg
+  location.path: generic/valid/b64-url-encoded.yaml
+  match: 'secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D'
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: generic/valid/secret-access-key.xml
   match: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
@@ -791,6 +809,42 @@
   location.path: generic/valid/secret-in-config
   match: secret="GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw"
   secret: GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-aws.gradle.kts
+  match: Token = "C3r%U9#p!Za4"
+  secret: C3r%U9#p!Za4
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-aws.gradle.kts
+  match: secretKey = "H5l@N8!9p#Yq"
+  secret: H5l@N8!9p#Yq
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-ext-credentials.gradle
+  match: password = "L5&nQ3@wR7!xT9Z#pX2Kl"
+  secret: L5&nQ3@wR7!xT9Z#pX2Kl
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-plugin-credentials.gradle
+  match: 'password: ''d1P#Wq9@Lz!F'''
+  secret: d1P#Wq9@Lz!F
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-repository-credentials-equalsign.gradle
+  match: password = "P8x#Lr9!mQ@7T2Z&pKlEw!dC"
+  secret: P8x#Lr9!mQ@7T2Z&pKlEw!dC
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: gradle/valid/build-repository-credentials.gradle.kts
+  match: password = "A6p!qR1@7Xv#9WtZk4F!xL"
+  secret: A6p!qR1@7Xv#9WtZk4F!xL
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1898,6 +1952,36 @@
 #
 # URL User and Password
 #
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
+  location.path: ftp/valid/cli-arg.py
+  match: ftp://boost:5pelV8XUxfO3@ftp.lizardconman.net
+  secret: 5pelV8XUxfO3
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
+  location.path: ftp/valid/cli-arg.py
+  match: ftp://boost:5pelV8XUxfO3@ftp.lizardconman.net
+  secret: 5pelV8XUxfO3
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
+  location.path: ftp/valid/ip-host.c.patch
+  match: ftp://user123:ZxY!9kLm@19.253.172.76
+  secret: ZxY!9kLm
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
+  location.path: ftp/valid/password-encoded.txt
+  match: ftp://ftp:pj790819%40outbox%2Eru@ftp.delegatez.org
+  secret: pj790819%40outbox%2Eru
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
+  location.path: ftp/valid/username-with-dashes.yml
+  match: ftp://oc-ccl-data:ELaiWa%298ae@oceancolor.net
+  secret: ELaiWa%298ae
 
 - rule.description: URL User and Password
   rule.id: NoSStdj9pfY
