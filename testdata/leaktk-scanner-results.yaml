@@ -105,19 +105,19 @@
 - rule.description: AWS Secret Access Key
   rule.id: 9j_rmwDeioM
   location.path: general-test
-  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
+  match: AWSSecretKey="aF6/f1+2a534df0cc1e4d892b5768f3easefaszb"
   secret: aF6/f1+2a534df0cc1e4d892b5768f3easefaszb
 
 - rule.description: AWS Secret Access Key
   rule.id: 9j_rmwDeioM
   location.path: general-test
-  match: AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza
+  match: 'AWSSecretKey=af60f112a534df0cc1e4d892b5768f3easefasza '
   secret: af60f112a534df0cc1e4d892b5768f3easefasza
 
 - rule.description: AWS Secret Access Key
   rule.id: 9j_rmwDeioM
   location.path: general-test
-  match: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc'
+  match: 'aws_secret_key": "Af60f112a534df0cc1e4d892b5768f3easef/+zc"'
   secret: Af60f112a534df0cc1e4d892b5768f3easef/+zc
 
 - rule.description: AWS Secret Access Key
@@ -1396,7 +1396,7 @@
 - rule.description: OpenShift Login Token
   rule.id: DaAdIBwZoGE
   location.path: general-test
-  match: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  match: "oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw "
   secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
 
 #
@@ -1688,13 +1688,13 @@
 - rule.description: SendGrid API Key
   rule.id: fJqKYcYx3bk
   location.path: sendgrid
-  match: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
+  match: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922'
   secret: SG.9C07-916Ee9X80Yd0b32M3f27922.9C07-916-e9XL0Yaaxad0b32M3f27922
 
 - rule.description: SendGrid API Key
   rule.id: fJqKYcYx3bk
   location.path: sendgrid
-  match: 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
+  match: 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'
   secret: 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
 
 - rule.description: SendGrid API Key
