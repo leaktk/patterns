@@ -64,7 +64,7 @@ regexes = [
 [[rules]]
 id = '9j_rmwDeioM'
 description = 'AWS Secret Access Key'
-regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})\b'''
+regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})(?:[^a-z0-9\/+]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 4
 secretGroup = 1
@@ -561,7 +561,7 @@ keywords = [
 [[rules]]
 id = 'KJX2Vbp6_jY'
 description = 'GitLab Access Token'
-regex = '''\bglpat-[\w\-]{20}\b'''
+regex = '''\b(glpat-[\w\-]{20})(?:[^\w\-]|\z)'''
 entropy = 2
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
@@ -579,7 +579,7 @@ keywords = [
 [[rules]]
 id = '5eH7BIYmpNo'
 description = 'GitLab Runner Registration Token'
-regex = '''\b(?:glrt-|GR1348941)[\w\-]{20}\b'''
+regex = '''\b((?:glrt-|GR1348941)[\w\-]{20})(?:[^\w\-]|\z)'''
 entropy = 2
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
@@ -695,7 +695,7 @@ regexes = [
 [[rules]]
 id = 'DaAdIBwZoGE'
 description = 'OpenShift Login Token'
-regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
+regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[\w-]{16,})(?:[^\w-]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 4.6
 keywords = [
@@ -930,7 +930,7 @@ keywords = [
 [[rules]]
 id = 'fJqKYcYx3bk'
 description = 'SendGrid API Key'
-regex = '''\bSG\.[\w\-]{16,32}\.[\w\-]{16,64}\b'''
+regex = '''\b(SG\.[\w\-]{16,32}\.[\w\-]{16,64})(?:[^\w\-]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'sg.',
@@ -986,7 +986,7 @@ stopwords = [
 [[rules]]
 id = 'AHqBipAQalU'
 description = 'Slack Bot Token'
-regex = '''(?i)\bxoxb-[0-9]{10,13}\-[0-9]{10,13}[a-z0-9-]*\b'''
+regex = '''\b(xoxb-[0-9]{10,13}\-[0-9]{10,13}[a-zA-Z0-9-]*)(?:[^a-zA-Z0-9-]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1002,7 +1002,7 @@ stopwords = [
 [[rules]]
 id = 'ADpHU5Pfr_w'
 description = 'Slack Config Access Token'
-regex = '''(?i)\bxoxe.xox[bp]-\d-[a-z0-9]{163,166}\b'''
+regex = '''\bxoxe.xox[bp]-\d-[a-zA-Z0-9]{163,166}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1019,7 +1019,7 @@ stopwords = [
 [[rules]]
 id = 'VitPJ4tk46E'
 description = 'Slack Config Refresh Token'
-regex = '''(?i)\bxoxe-\d-[a-z0-9]{146}\bj'''
+regex = '''\b(xoxe-\d-[a-zA-Z0-9]{146})\b'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1035,7 +1035,7 @@ stopwords = [
 [[rules]]
 id = 'qWJ75vwX7O8'
 description = 'Slack Legacy Bot Token'
-regex = '''(?i)\bxoxb-[0-9]{8,14}\-[a-z0-9]{18,26}\b'''
+regex = '''\b(xoxb-[0-9]{8,14}\-[a-zA-Z0-9]{18,26})\b'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1051,7 +1051,7 @@ stopwords = [
 [[rules]]
 id = 'L7sVfqv1KDs'
 description = 'Slack Legacy Token'
-regex = '''(?i)\bxox[os]-\d+-\d+-\d+-[a-f\d]+\b'''
+regex = '''\b(xox[os]-\d+-\d+-\d+-[a-fA-F\d]+)\b'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1068,7 +1068,7 @@ stopwords = [
 [[rules]]
 id = 'Yjg2P_IaYK8'
 description = 'Slack Legacy Workspace Token'
-regex = '''(?i)\bxox[ar]-(?:\d-)?[0-9a-z]{8,48}\b'''
+regex = '''\b(xox[ar]-(?:\d-)?[0-9a-zA-Z]{8,48})\b'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
@@ -1085,7 +1085,7 @@ stopwords = [
 [[rules]]
 id = '6mKbEmEYQDY'
 description = 'Slack User Token'
-regex = '''(?i)\bxox[pe](?:-[0-9]{10,13}){3}-[a-z0-9-]{28,34}\b'''
+regex = '''\b(xox[pe](?:-[0-9]{10,13}){3}-[a-zA-Z0-9-]{28,34})(?:[^a-z0-9-]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.2
 keywords = [
