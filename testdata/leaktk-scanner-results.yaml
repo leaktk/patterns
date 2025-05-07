@@ -847,6 +847,12 @@
   secret: A6p!qR1@7Xv#9WtZk4F!xL
 
 - rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: groq
+  match: api_key="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"
+  secret: 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
+
+- rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: k8s/valid/secret-after-quotes-double.yml
   match: 'password: "S!B\*d$zDsb="'
@@ -929,6 +935,24 @@
   location.path: maven/valid/settings-proxy-password.xml
   match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
   secret: rr84lr6WKq73PDKhXJJOXFVggzj4
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/dash-on-the-end.ts
+  match: API_KEY = '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'
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/nvidia-integrate-api.py
+  match: api_key="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"
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/nvidia-ngc-in-var.ts
+  match: API_KEY = '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'
+  secret: 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
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
