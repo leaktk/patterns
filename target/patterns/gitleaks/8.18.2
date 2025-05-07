@@ -1673,3 +1673,11 @@ regexes = [
 '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
 '''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
 ]
+[[rules]]
+id = 'JH9jBKr63QI'
+description = 'Label Studio API Key'
+regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'label_studio_api_key',
+]
