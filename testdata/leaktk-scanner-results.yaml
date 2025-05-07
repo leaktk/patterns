@@ -1950,6 +1950,22 @@
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
 
 #
+# SonarQube Token
+#
+
+- rule.description: SonarQube Token
+  rule.id: X2X0u9K8QKY
+  location.path: sonarqube/valid/cli-arg
+  match: sonar.login=d81afdd966e73e0341929425660e841640700da5
+  secret: d81afdd966e73e0341929425660e841640700da5
+
+- rule.description: SonarQube Token
+  rule.id: X2X0u9K8QKY
+  location.path: sonarqube/valid/env-var
+  match: SONAR_TOKEN="7ea869254117f250374ff4a60e254a076a102c47
+  secret: 7ea869254117f250374ff4a60e254a076a102c47
+
+#
 # Square Access Token
 #
 

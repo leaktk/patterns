@@ -444,3 +444,10 @@
   keywords = [
     'label_studio_api_key',
   ]
+
+[[rules]]
+  id = 'X2X0u9K8QKY'
+  description = 'SonarQube Token'
+  regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
+  keywords = ["sonar"]
+  tags = ['type:secret', 'group:leaktk-testing']

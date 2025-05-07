@@ -840,6 +840,16 @@
   line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
 
 - rule: General Secret
+  file: sonarqube/invalid/wrong-chars
+  offender: TOKEN="7RvXPfVj/pmFs9PYVUJFmc8cKxQBK7Azg847TYH4"
+  line: SONAR_TOKEN="7RvXPfVj/pmFs9PYVUJFmc8cKxQBK7Azg847TYH4"
+
+- rule: General Secret
+  file: sonarqube/valid/env-var
+  offender: TOKEN="7ea869254117f250374ff4a60e254a076a102c47"
+  line: SONAR_TOKEN="7ea869254117f250374ff4a60e254a076a102c47"
+
+- rule: General Secret
   file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'

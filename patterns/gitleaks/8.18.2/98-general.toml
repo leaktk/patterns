@@ -309,6 +309,8 @@
       # Already covered by GitHub rules
       '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
       '''\bgithub_pat_\w{82}\b''',
+      # Already covered by SonarQube rules
+      '''(?i)(?:sonar[_.-]?(?:login|token))\b''',
       # Already covered byt GitLab rules
       '''\bglpat-[\w\-]{20}\b''',
       '''\bglptt-[0-9a-f]{40}\b''',
