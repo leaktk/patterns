@@ -1134,7 +1134,7 @@
 #
 
 - rule: OpenShift Login Token
-  file: general-test
+  file: k8s/valid/oc-login
   offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
   line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
     --foo --bar --baz
