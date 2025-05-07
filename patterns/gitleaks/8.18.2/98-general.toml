@@ -747,7 +747,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -768,7 +768,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -789,7 +789,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -813,7 +813,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -834,7 +834,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -855,7 +855,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -876,7 +876,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
@@ -897,7 +897,7 @@
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
-      '''\.html$''',
+      # pragma: include "doc_file_paths"
     ]
 
     regexTarget = 'line'
