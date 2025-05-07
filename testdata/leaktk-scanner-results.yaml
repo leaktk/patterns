@@ -931,6 +931,12 @@
   secret: JdxWjqhjWLTB7wn9qtNH2TXwW4p
 
 - rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: label-studio/valid/learn.ipynb
+  match: API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0'
+  secret: f05c3f9783427a18fc9382ba51197d615d85bec0
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: maven/valid/settings-proxy-password.xml
   match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
@@ -1368,6 +1374,22 @@
   location.path: k8s/valid/prometheus-k8s-service-account-token
   match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
+
+#
+# Label Studio API Key
+#
+
+- rule.description: Label Studio API Key
+  rule.id: JH9jBKr63QI
+  location.path: label-studio/valid/env
+  match: LABEL_STUDIO_API_KEY=2ad7b4d0714e5269ed524f7ecf8369f682894059
+  secret: 2ad7b4d0714e5269ed524f7ecf8369f682894059
+
+- rule.description: Label Studio API Key
+  rule.id: JH9jBKr63QI
+  location.path: label-studio/valid/learn.ipynb
+  match: LABEL_STUDIO_API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0
+  secret: f05c3f9783427a18fc9382ba51197d615d85bec0
 
 #
 # MailChimp API Key
