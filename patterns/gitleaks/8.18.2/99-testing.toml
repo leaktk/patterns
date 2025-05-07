@@ -299,3 +299,10 @@
       # Only SP should allow a dash in the category
       '''[^S][^P]-''',
     ]
+
+[[rules]]
+  id = 'w2Sz3reUlWk'
+  description = 'NVIDIA API Key'
+  regex = '''\b(nvapi-[\w\-]{64})(?:[^\w\-]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 4

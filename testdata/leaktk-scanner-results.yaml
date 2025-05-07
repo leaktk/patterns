@@ -1404,6 +1404,28 @@
   secret: 6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
 #
+# NVIDIA API Key
+#
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/dash-on-the-end.ts
+  match: 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'
+  secret: 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
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/nvidia-integrate-api.py
+  match: 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"
+  secret: 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
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/nvidia-ngc-in-var.ts
+  match: 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'
+  secret: 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
+
+#
 # OpenAI API Key
 #
 
