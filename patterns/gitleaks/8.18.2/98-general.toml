@@ -50,6 +50,34 @@
     ]
 
 [[rules]]
+  id = 'QqS4RvI6Zmg'
+  description = 'Authorization Header'
+  regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+  tags = ['type:secret', 'alert:repo-owner']
+  entropy = 3.35
+  secretGroup = 1
+  keywords = [
+    'authorization',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+    paths = [
+      # pragma: include "doc_file_paths"
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # Vars for the values
+      '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+      # Indicating that the line is part of an example
+      '''(?:example|description)''',
+    ]
+
+[[rules]]
   id = '9j_rmwDeioM'
   description = 'AWS Secret Access Key'
   regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})(?:[^a-z0-9\/+]|\z)'''
@@ -126,6 +154,28 @@
       '''\"auth\\*\"\s*:\s*\\*\"[^"]*(?:\.\.\.|\*\*\*)[^"]*\\?\"''',
       # Ignore emails containing example
       '''\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
+    ]
+
+[[rules]]
+  id = '12NI0Yd57gc'
+  description = 'Controlled Unclassified Information'
+  regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'cui',
+    'controlled',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      'dissem',
+      'categories',
+    ]
+
+    regexTarget = 'secret'
+    regexes = [
+      # Only SP should allow a dash in the category
+      '''[^S][^P]-''',
     ]
 
 [[rules]]
@@ -1006,7 +1056,7 @@
       '''(?:^|\/)test\/jdk\/sun\/security\/ssl\/''',
     ]
 
-    regexTarget = "line"
+    regexTarget = 'line'
     regexes = [
       # Ignore example keys
       '''(?i)-----BEGIN (?:DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',

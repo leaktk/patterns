@@ -66,6 +66,24 @@
 
 - rule.description: (Env Var) Generic Secret
   rule.id: hG-qMjbXGro
+  location.path: mailchimp
+  match: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
   location.path: some-file
   match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
   secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
@@ -201,12 +219,6 @@
   location.path: generic/valid/authorization-header-with-basic-auth
   match: '''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA=='
   secret: YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA==
-
-- rule.description: Authorization Header
-  rule.id: QqS4RvI6Zmg
-  location.path: generic/valid/authorization-header-with-basic-auth
-  match: '''Authorization: Basic admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4'
-  secret: admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4
 
 - rule.description: Authorization Header
   rule.id: QqS4RvI6Zmg

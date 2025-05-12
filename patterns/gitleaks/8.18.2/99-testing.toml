@@ -52,6 +52,7 @@
   secretGroup = 1
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
+    'key',
     'password',
     'secret',
     'token',
@@ -63,6 +64,8 @@
     ]
 
     paths = [
+      # pragma: include "doc_file_paths"
+
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
@@ -237,68 +240,6 @@
 #     '"client_x509_cert_url"',
 #     '"universe_domain"',
 #   ]
-
-[[rules]]
-  id = 'QqS4RvI6Zmg'
-  description = 'Authorization Header'
-  regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
-  tags = ['type:secret', 'group:leaktk-testing']
-  entropy = 3.35
-  secretGroup = 1
-  keywords = [
-    'authorization',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      'auth',
-      'bearer',
-      'credential',
-      'header',
-      'insert',
-      'name',
-      'passp',
-      'passw',
-      'placeholder',
-      'replace',
-      'service',
-      'token',
-      'user',
-    ]
-
-    paths = [
-      # pragma: include "doc_file_paths"
-    ]
-
-    regexTarget = "line"
-    regexes = [
-      # Vars for the values
-      '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
-      # Indicating that the line is part of an example
-      '''(?:example|description)''',
-    ]
-
-[[rules]]
-  id = '12NI0Yd57gc'
-  description = 'Controlled Unclassified Information'
-  regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
-  tags = ['type:cui', 'group:leaktk-testing']
-  keywords = [
-    'cui',
-    'controlled',
-  ]
-
-  [rules.allowlist]
-    stopwords = [
-      'dissem',
-      'categories',
-    ]
-
-    regexTarget = "secret"
-    regexes = [
-      # Only SP should allow a dash in the category
-      '''[^S][^P]-''',
-    ]
 
 [[rules]]
   id = 'w2Sz3reUlWk'

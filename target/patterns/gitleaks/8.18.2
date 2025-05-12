@@ -62,6 +62,119 @@ regexes = [
 '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
 ]
 [[rules]]
+id = 'QqS4RvI6Zmg'
+description = 'Authorization Header'
+regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 3.35
+secretGroup = 1
+keywords = [
+'authorization',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
+paths = [
+'''\.(?:html|md|adoc|rst)$''',
+]
+regexTarget = 'line'
+regexes = [
+'''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:example|description)''',
+]
+[[rules]]
 id = '9j_rmwDeioM'
 description = 'AWS Secret Access Key'
 regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})(?:[^a-z0-9\/+]|\z)'''
@@ -126,6 +239,24 @@ regexTarget = 'match'
 regexes = [
 '''\"auth\\*\"\s*:\s*\\*\"[^"]*(?:\.\.\.|\*\*\*)[^"]*\\?\"''',
 '''\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
+]
+[[rules]]
+id = '12NI0Yd57gc'
+description = 'Controlled Unclassified Information'
+regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'cui',
+'controlled',
+]
+[rules.allowlist]
+stopwords = [
+'dissem',
+'categories',
+]
+regexTarget = 'secret'
+regexes = [
+'''[^S][^P]-''',
 ]
 [[rules]]
 id = 'me-TlU0uKS8'
@@ -195,6 +326,7 @@ stopwords = [
 '/run/',
 '/var/',
 '1234',
+'_key',
 'abc123',
 'abcd',
 'admin',
@@ -387,6 +519,7 @@ stopwords = [
 '/run/',
 '/var/',
 '1234',
+'_key',
 'abc123',
 'abcd',
 'admin',
@@ -912,7 +1045,7 @@ paths = [
 '''\/usr\/share\/(?:mime|misc)''',
 '''(?:^|\/)test\/jdk\/sun\/security\/ssl\/''',
 ]
-regexTarget = "line"
+regexTarget = 'line'
 regexes = [
 '''(?i)-----BEGIN (?:DUMMY|EXAMPLE|FAKE|TEST) PRIVATE KEY(?: BLOCK)?-----''',
 '''(?i)\w*(?:dummy|example|fake|test)\w*\s*[:=]+\s*(?:\[)?\s*(?:\"\"\"|\"|\'|`)?-----BEGIN''',
@@ -1283,6 +1416,7 @@ entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
+'key',
 'password',
 'secret',
 'token',
@@ -1295,6 +1429,7 @@ stopwords = [
 '/run/',
 '/var/',
 '1234',
+'_key',
 'abc123',
 'abcd',
 'admin',
@@ -1382,6 +1517,7 @@ stopwords = [
 'your',
 ]
 paths = [
+'''\.(?:html|md|adoc|rst)$''',
 '''(?:^|\/)testdata\/''',
 '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
 '''(?:^|\/)openapi\.json$''',
@@ -1469,58 +1605,6 @@ keywords = [
 'sl.',
 ]
 [[rules]]
-id = 'QqS4RvI6Zmg'
-description = 'Authorization Header'
-regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
-tags = ['type:secret', 'group:leaktk-testing']
-entropy = 3.35
-secretGroup = 1
-keywords = [
-'authorization',
-]
-[rules.allowlist]
-stopwords = [
-'auth',
-'bearer',
-'credential',
-'header',
-'insert',
-'name',
-'passp',
-'passw',
-'placeholder',
-'replace',
-'service',
-'token',
-'user',
-]
-paths = [
-'''\.(?:html|md|adoc|rst)$''',
-]
-regexTarget = "line"
-regexes = [
-'''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
-'''(?:example|description)''',
-]
-[[rules]]
-id = '12NI0Yd57gc'
-description = 'Controlled Unclassified Information'
-regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
-tags = ['type:cui', 'group:leaktk-testing']
-keywords = [
-'cui',
-'controlled',
-]
-[rules.allowlist]
-stopwords = [
-'dissem',
-'categories',
-]
-regexTarget = "secret"
-regexes = [
-'''[^S][^P]-''',
-]
-[[rules]]
 id = 'w2Sz3reUlWk'
 description = 'NVIDIA API Key'
 regex = '''\b(nvapi-[\w\-]{64})(?:[^\w\-]|$)'''
@@ -1551,6 +1635,7 @@ stopwords = [
 '/run/',
 '/var/',
 '1234',
+'_key',
 'abc123',
 'abcd',
 'admin',
