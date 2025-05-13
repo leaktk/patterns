@@ -1450,7 +1450,7 @@
 - rule.description: OpenShift Login Token
   rule.id: DaAdIBwZoGE
   location.path: general-test
-  match: "oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw "
+  match: 'oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
   secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
 
 #
