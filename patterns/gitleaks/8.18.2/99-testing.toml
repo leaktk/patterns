@@ -306,3 +306,13 @@
   regex = '''\b(nvapi-[\w\-]{64})(?:[^\w\-]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
   entropy = 4
+
+
+[[rules]]
+  # TODO: replace DaAdIBwZoGE with this
+  id = "sOZiHxUBVFc"
+  description = 'OpenShift User Token'
+  regex = '''\b(sha256~[\w-]{43})(?:[^\w-]|\z)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3.5
+  keywords = ["sha256~"]

@@ -1476,6 +1476,22 @@
   secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
 
 #
+# OpenShift User Token
+#
+
+- rule.description: OpenShift User Token
+  rule.id: sOZiHxUBVFc
+  location.path: k8s/valid/oc-login
+  match: 'sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
+  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+- rule.description: OpenShift User Token
+  rule.id: sOZiHxUBVFc
+  location.path: k8s/valid/openshift-user-token
+  match: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
+  secret: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
+
+#
 # PKCS #12 File
 #
 
