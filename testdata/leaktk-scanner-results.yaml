@@ -66,6 +66,24 @@
 
 - rule.description: (Env Var) Generic Secret
   rule.id: hG-qMjbXGro
+  location.path: mailchimp
+  match: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
+
+- rule.description: (Env Var) Generic Secret
+  rule.id: hG-qMjbXGro
   location.path: some-file
   match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
   secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
@@ -201,12 +219,6 @@
   location.path: generic/valid/authorization-header-with-basic-auth
   match: '''Authorization: Basic YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA=='
   secret: YWRtaW46STdSTnVJaDV3S3FLbTRaZzk3UFBrQThCNGRWVU1qUkJLY1NCbkVCdTBvNA==
-
-- rule.description: Authorization Header
-  rule.id: QqS4RvI6Zmg
-  location.path: generic/valid/authorization-header-with-basic-auth
-  match: '''Authorization: Basic admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4'
-  secret: admin:I7RNuIh5wKqKm4Zg97PPkA8B4dVUMjRBKcSBnEBu0o4
 
 - rule.description: Authorization Header
   rule.id: QqS4RvI6Zmg
@@ -847,6 +859,12 @@
   secret: A6p!qR1@7Xv#9WtZk4F!xL
 
 - rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: groq
+  match: api_key="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"
+  secret: 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
+
+- rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: k8s/valid/secret-after-quotes-double.yml
   match: 'password: "S!B\*d$zDsb="'
@@ -925,10 +943,34 @@
   secret: JdxWjqhjWLTB7wn9qtNH2TXwW4p
 
 - rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: label-studio/valid/learn.ipynb
+  match: API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0'
+  secret: f05c3f9783427a18fc9382ba51197d615d85bec0
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: maven/valid/settings-proxy-password.xml
   match: <password>rr84lr6WKq73PDKhXJJOXFVggzj4</password>
   secret: rr84lr6WKq73PDKhXJJOXFVggzj4
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/dash-on-the-end.ts
+  match: API_KEY = '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'
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/nvidia-integrate-api.py
+  match: api_key="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"
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: RP7YygNHZcs
+  location.path: nvapi/valid/nvidia-ngc-in-var.ts
+  match: API_KEY = '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'
+  secret: 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
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1346,6 +1388,22 @@
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6b3BlbnNoaWZ0LW1vbml0b3Jpbmc6cHJvbWV0aGV1cy1rOHMiLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE1MTYyMzkwMjJ9.ipzDwTMDecOi1y3PCnr18juUFF9KryIreesxYUlC3AI
 
 #
+# Label Studio API Key
+#
+
+- rule.description: Label Studio API Key
+  rule.id: JH9jBKr63QI
+  location.path: label-studio/valid/env
+  match: LABEL_STUDIO_API_KEY=2ad7b4d0714e5269ed524f7ecf8369f682894059
+  secret: 2ad7b4d0714e5269ed524f7ecf8369f682894059
+
+- rule.description: Label Studio API Key
+  rule.id: JH9jBKr63QI
+  location.path: label-studio/valid/learn.ipynb
+  match: LABEL_STUDIO_API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0
+  secret: f05c3f9783427a18fc9382ba51197d615d85bec0
+
+#
 # MailChimp API Key
 #
 
@@ -1404,6 +1462,28 @@
   secret: 6bM3d5xWYGcmXM01Ht77f4ga8xESVerk13uuS
 
 #
+# NVIDIA API Key
+#
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/dash-on-the-end.ts
+  match: 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'
+  secret: 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
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/nvidia-integrate-api.py
+  match: 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"
+  secret: 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
+
+- rule.description: NVIDIA API Key
+  rule.id: w2Sz3reUlWk
+  location.path: nvapi/valid/nvidia-ngc-in-var.ts
+  match: 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'
+  secret: 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
+
+#
 # OpenAI API Key
 #
 
@@ -1449,9 +1529,25 @@
 
 - rule.description: OpenShift Login Token
   rule.id: DaAdIBwZoGE
-  location.path: general-test
+  location.path: k8s/valid/oc-login
   match: 'oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
   secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+#
+# OpenShift User Token
+#
+
+- rule.description: OpenShift User Token
+  rule.id: sOZiHxUBVFc
+  location.path: k8s/valid/oc-login
+  match: 'sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
+  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+- rule.description: OpenShift User Token
+  rule.id: sOZiHxUBVFc
+  location.path: k8s/valid/openshift-user-token
+  match: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
+  secret: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
 
 #
 # PKCS #12 File
@@ -1864,6 +1960,22 @@
   location.path: snowflake
   match: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
   secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MjYyNDU1OTUsImlhdCI6MTcyNjI0NTU5NSwianRpIjoiZjExODIzZTItNGUzZS00ZTE1LTg5NjEtNzI4NzVkOTgzY2Q3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuaW50ZXJuYWwiLCJhdWQiOiJzbm93Zmxha2VfZXhhbXBsZSIsInN1YiI6IjNkYTlmYjQ2LWYxY2EtNDkwOS1iNzM1LWJkNWRjNjQzNDRkOCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudCIsInNjb3BlIjoic2Vzc2lvbjpyb2xlLWFueSJ9.Kv1x-VxlJwPzf6WNjgz6WDu8OxVutdkIVNgfDXcxN7Q
+
+#
+# SonarQube Token
+#
+
+- rule.description: SonarQube Token
+  rule.id: X2X0u9K8QKY
+  location.path: sonarqube/valid/cli-arg
+  match: sonar.login=d81afdd966e73e0341929425660e841640700da5
+  secret: d81afdd966e73e0341929425660e841640700da5
+
+- rule.description: SonarQube Token
+  rule.id: X2X0u9K8QKY
+  location.path: sonarqube/valid/env-var
+  match: SONAR_TOKEN="7ea869254117f250374ff4a60e254a076a102c47
+  secret: 7ea869254117f250374ff4a60e254a076a102c47
 
 #
 # Square Access Token

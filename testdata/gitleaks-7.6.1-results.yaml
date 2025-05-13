@@ -840,6 +840,16 @@
   line: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
 
 - rule: General Secret
+  file: sonarqube/invalid/wrong-chars
+  offender: TOKEN="7RvXPfVj/pmFs9PYVUJFmc8cKxQBK7Azg847TYH4"
+  line: SONAR_TOKEN="7RvXPfVj/pmFs9PYVUJFmc8cKxQBK7Azg847TYH4"
+
+- rule: General Secret
+  file: sonarqube/valid/env-var
+  offender: TOKEN="7ea869254117f250374ff4a60e254a076a102c47"
+  line: SONAR_TOKEN="7ea869254117f250374ff4a60e254a076a102c47"
+
+- rule: General Secret
   file: src/azure-cli/azure/cli/command_modules/aro/tests/latest/recordings/foo.yml
   offender: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
   line: secret='/GNvEGXEXY9BS/YNvE:${asdf.YNvEGXEXY9BS}'
@@ -1134,7 +1144,7 @@
 #
 
 - rule: OpenShift Login Token
-  file: general-test
+  file: k8s/valid/oc-login
   offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
   line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
     --foo --bar --baz

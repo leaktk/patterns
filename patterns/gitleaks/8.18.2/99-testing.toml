@@ -52,6 +52,7 @@
   secretGroup = 1
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
+    'key',
     'password',
     'secret',
     'token',
@@ -63,6 +64,8 @@
     ]
 
     paths = [
+      # pragma: include "doc_file_paths"
+
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
       # Usually a project not owned by the user that has a lot of FPs for us when
@@ -239,63 +242,153 @@
 #   ]
 
 [[rules]]
-  id = 'QqS4RvI6Zmg'
-  description = 'Authorization Header'
-  regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+  id = 'w2Sz3reUlWk'
+  description = 'NVIDIA API Key'
+  regex = '''\b(nvapi-[\w\-]{64})(?:[^\w\-]|$)'''
   tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 4
+
+
+[[rules]]
+  # TODO: replace DaAdIBwZoGE with this
+  id = "sOZiHxUBVFc"
+  description = 'OpenShift User Token'
+  regex = '''\b(sha256~[\w-]{43})(?:[^\w-]|\z)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3.5
+  keywords = ["sha256~"]
+
+[[rules]]
+  # Merge with _-9w6-yrc-4
+  # This adds api_key, apiKey, api-key etc...
+  id = 'RP7YygNHZcs'
+  description = 'Generic Secret'
+  regex = '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
   entropy = 3.35
   secretGroup = 1
+  tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
-    'authorization',
+    'key',
   ]
 
   [rules.allowlist]
     stopwords = [
-      'auth',
-      'bearer',
-      'credential',
-      'header',
-      'insert',
-      'name',
-      'passp',
-      'passw',
-      'placeholder',
-      'replace',
-      'service',
-      'token',
-      'user',
+      # pragma: include "common_stopwords"
     ]
 
     paths = [
-      # pragma: include "doc_file_paths"
+      # Test data are often false positives
+      '''(?:^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # Ignore OpenAPI spec files
+      '''(?:^|\/)openapi\.json$''',
+      '''(?i)openapi.*github[^\/]*\.json$''',
     ]
 
-    regexTarget = "line"
+    regexTarget = 'line'
     regexes = [
-      # Vars for the values
-      '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
-      # Indicating that the line is part of an example
-      '''(?:example|description)''',
+      # Things like:
+      #   secret = "asdfasdfas" # nosec (used by bandit)
+      '''#\s*?nosec(?:\s+|$)''',
+      #   secret = "asdfasdfas" # noqa: E501
+      '''#\s*?noqa(?::[\s\w]+)?$''',
+      #   secret = "asdfasdfas" //nolint:gosec
+      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
+      #   secret = "_PLACEHOLDER_"
+      #   secret = "<PLACEHOLDER>"
+      #   secret = "@PLACEHOLDER@"
+      #   secret = ").append("foo")
+      #   secret = "%PLACEHOLDER%"
+      #   secret = "$PLACEHOLDER$"
+      #   secret = "`PLACEHOLDER`"
+      #   secret = "[PLACEHOLDER]"
+      #   secret = "[%PLACEHOLDER%]"
+      #   secret = "$(PLACEHOLDER..."
+      #   secret = "\$(PLACEHOLDER..."
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
+      #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
+      #   secret = "{PLACEHOLDER}"
+      #   secret = "%{PLACEHOLDER}"
+      #   secret = "\%{PLACEHOLDER}"
+      #   secret = "${PLACEHOLDER}"
+      #   secret = "$\{PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      #   secret = "#{PLACEHOLDER}"
+      #   secret = "\#{PLACEHOLDER}"
+      #   secret = "\${PLACEHOLDER}"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
+      #   secret = "insert_your_password_here"
+      #   secret = "some-ca.crt"
+      #   token = "SOME.VALUE.HERE"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
+      #   secret = "Some...placeholder"
+      #   secret = "Some***placeholder"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
+      #   "secret="+some_var+"asdfa"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+      #   secret = "(optional char)${PLACEHOLDER}(optional text)"
+      #   secret = "(optional char)#{PLACEHOLDER}(optional text)"
+      #   secret = "FOO_BAR=($|#){PLACEHOLDER}(optional text)"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
+      #   secret = "SOME_CONSTANT_PREFIX_${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}"
+      #   secret = "/SOME/path:${PLACEHOLDER}${PLACEHOLDER}"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
+      #   secret = "$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "'$SOME_ENV_VARIABLE-optional-text"
+      #   secret = "\$SOME_ENV_VARIABLE-optional-text"
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+      # Ignore these variable prefixes (add to this list as needed for different prefixes
+      '''(?i)(?:mock|example|fake)[\w-]+api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
+      # aws.* is already covered by a different rule
+      '''(?i)aws.{0,15}api(?:_|-)?key''',
+      # jq lookups
+      '''jq\s+[\w\-\s]*.*\.\w*(?i)api(?:_|-)?key''',
+      # Various words at the start and end that signify a placeholder
+      ## Starts with
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?[\"\']''',
+      ## Ends with
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)api(?:_|-)?key[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:\\u[a-z0-9]{4})+[\"\']''',
+      # Already covered by the Slack Token rule
+      '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
+      # Already covered by GitHub rules
+      '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+      '''\bgithub_pat_\w{82}\b''',
+      # Already covered byt GitLab rules
+      '''\bglpat-[\w\-]{20}\b''',
+      '''\bglptt-[0-9a-f]{40}\b''',
+      '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+      # Ignore things that are probably password prompts in code
+      # Example: input("Enter Password:") # Something with "quotes" in it
+      '''(?i)[\"\'][\s\w]+(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:\s*?[\"\']''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
     ]
 
 [[rules]]
-  id = '12NI0Yd57gc'
-  description = 'Controlled Unclassified Information'
-  regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
-  tags = ['type:cui', 'group:leaktk-testing']
+  id = 'JH9jBKr63QI'
+  description = 'Label Studio API Key'
+  regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
-    'cui',
-    'controlled',
+    'label_studio_api_key',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      'dissem',
-      'categories',
-    ]
-
-    regexTarget = "secret"
-    regexes = [
-      # Only SP should allow a dash in the category
-      '''[^S][^P]-''',
-    ]
+[[rules]]
+  id = 'X2X0u9K8QKY'
+  description = 'SonarQube Token'
+  regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
+  keywords = ["sonar"]
+  tags = ['type:secret', 'group:leaktk-testing']
