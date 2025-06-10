@@ -21,7 +21,7 @@ class TestLeakTKScanner(TestCase):
         """
         completed_process = subprocess.run(
             [
-                f"leaktk-scanner",
+                f"leaktk",
                 "scan",
                 "--id=test-scan",
                 "--kind=Files",
