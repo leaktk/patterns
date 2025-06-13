@@ -418,11 +418,11 @@ description = 'OpenAI API Key'
 regex = '''\b(sk-(?:proj-|svcacct-)?[A-Za-z0-9_\-]{32,80}T3BlbkFJ[A-Za-z0-9_\-]{32,})(?:[^A-Za-z0-9_\-]|$)'''
 tags = ['type:secret', 'alert:repo-owner']
 [[rules]]
-description = "OpenShift Login Token"
-regex='''\boc\s+login\s+.*?--token\s*=?\s*(sha256~[^<\s]{16,})\b'''
+description = "OpenShift User Token"
+regex = '''\b(sha256~[\w-]{43})(?:[^\w-]|\z)'''
 tags = ["alert:repo-owner", "openshift-login", "token", "type:secret"]
 [[rules.entropies]]
-Min = "4.6"
+Min = "3.5"
 Max = "8"
 Group = "1"
 [[rules]]
