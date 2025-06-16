@@ -310,7 +310,7 @@ regexes = [
 [[rules]]
 id = '_-9w6-yrc-4'
 description = 'Generic Secret'
-regex = '''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
+regex = '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
 entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -427,24 +427,24 @@ regexes = [
 '''#\s*?nosec(?:\s+|$)''',
 '''#\s*?noqa(?::[\s\w]+)?$''',
 '''\/\/\s*?nolint:gosec(?:\s+|$)''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?(?:%|\)s)|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-'''(?i)(?:mock|example|fake)[\w-]+(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
-'''(?i)aws.{0,15}(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)''',
-'''jq\s+[\w\-\s]*.*\.\w*(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
-'''(?i)(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:\\u[a-z0-9]{4})+[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?(?:%|\)s)|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\\?[\$%#]?\\?\{.+?\}[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\+.+?\+[\"\'].+?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
+'''(?i)(?:mock|example|fake)[\w-]+(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
+'''(?i)aws.{0,15}(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)''',
+'''jq\s+[\w\-\s]*.*\.\w*(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?[\"\']''',
+'''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:\\u[a-z0-9]{4})+[\"\']''',
 '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
 '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
 '''\bgithub_pat_\w{82}\b''',
@@ -452,7 +452,7 @@ regexes = [
 '''\bglpat-[\w\-]{20}\b''',
 '''\bglptt-[0-9a-f]{40}\b''',
 '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
-'''(?i)[\"\'][\s\w]+(?:(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?|api(?:_|-)?key):\s*?[\"\']''',
+'''(?i)[\"\'][\s\w]+(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key):\s*?[\"\']''',
 '''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
 ]
 [[rules]]
@@ -650,7 +650,7 @@ regexes = [
 id = 'rnWF160pWNg'
 description = 'Generic Secret'
 path='''\.ya?ml$'''
-regex = '''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
+regex = '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
 entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -764,21 +764,21 @@ regexes = [
 '''#\s*?nosec(?:\s+|$)''',
 '''#\s*?noqa(?::[\s\w]+)?$''',
 '''\/\/\s*?nolint:gosec(?:\s+|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[A-Z_]{5,}?\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?\\?[\$%]?\\?\{.+?\}\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(?:\.\.\.|\*\*\*|xxxxx)\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:(?-i)[A-Z_]{5,})?.?\$\{.{4,}?\}.*?\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?\s*?(?:\n|#|$)''',
-'''(?i)(?:password|secret|token)(?:_|-)?(?:access(?:_|-)?)?(?:key)?:[\t\x20]+?(?:\\u[a-z0-9]{4})+\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[A-Z_]{5,}?\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\\?[\$%]?\\?\{.+?\}\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(?:\.\.\.|\*\*\*|xxxxx)\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:(?-i)[A-Z_]{5,})?.?\$\{.{4,}?\}.*?\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?\s*?(?:\n|#|$)''',
+'''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:\\u[a-z0-9]{4})+\s*?(?:\n|#|$)''',
 '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
 '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
 '''\bgithub_pat_\w{82}\b''',
