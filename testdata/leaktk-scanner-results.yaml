@@ -2115,12 +2115,6 @@
   match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
 
-- rule.description: URL User and Password
-  rule.id: NoSStdj9pfY
-  location.path: semgrep-rules-examples/detected-username-and-password-in-uri.txt
-  match: https://{get_user_name}:pwdTest123+@github.com
-  secret: pwdTest123+
-
 #
 # Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)
 #
