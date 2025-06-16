@@ -1946,6 +1946,22 @@
   secret: 7ea869254117f250374ff4a60e254a076a102c47
 
 #
+# Sourcegraph Access Token
+#
+
+- rule.description: Sourcegraph Access Token
+  rule.id: 3jLtqqDiiZQ
+  location.path: sourcegraph/valid/cody.py
+  match: sgp_9bea5fb6370f0a6e01bc56b7a99c5b335f32a4c0
+  secret: sgp_9bea5fb6370f0a6e01bc56b7a99c5b335f32a4c0
+
+- rule.description: Sourcegraph Access Token
+  rule.id: 3jLtqqDiiZQ
+  location.path: sourcegraph/valid/cody_local_token.py
+  match: sgp_local_c9b508234270c7b563a06bf47ab91d038317811d
+  secret: sgp_local_c9b508234270c7b563a06bf47ab91d038317811d
+
+#
 # Square Access Token
 #
 

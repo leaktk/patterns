@@ -132,5 +132,13 @@
   id = 'X2X0u9K8QKY'
   description = 'SonarQube Token'
   regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
-  keywords = ["sonar"]
+  keywords = ['sonar']
   tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  id = '3jLtqqDiiZQ'
+  description = 'Sourcegraph Access Token'
+  regex = '''\bsgp_(?:local_)?[a-z0-9]{40}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3
+  keywords = ['sgp_']
