@@ -1184,7 +1184,7 @@
       # Data dirs that contain key headers to identify them
       '''\/usr\/share\/(?:mime|misc)''',
       # OpenJDK tests with private keys
-      '''(?:^|\/)test\/jdk\/sun\/security\/ssl\/''',
+      '''(?:^|\/)test\/jdk\/(?:sun\/security\/ssl\/|java\/security\/|javax\/crypto\/)''',
     ]
 
     regexTarget = 'line'
