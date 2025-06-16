@@ -1633,3 +1633,10 @@ regex = '''\bsgp_(?:local_)?[a-z0-9]{40}\b'''
 tags = ['type:secret', 'group:leaktk-testing']
 entropy = 3
 keywords = ['sgp_']
+[[rules]]
+id = 'Erxpc1eNAD0'
+description = 'Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)'
+regex = '''\bpull_request_target\b[\s\S]+\suses:\s+[\"\']?actions\/checkout@v\d+[\"\']?[\s\S]+github\.event\.pull_request\.head\.sha\b()'''
+secretGroup = 1
+keywords = ['github.event.pull_request.head.sha']
+tags = ['type:vuln', 'group:leaktk-testing']
