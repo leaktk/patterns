@@ -1,100 +1,6 @@
 # Use scripts/sort-and-group-in-place to sort this file
 
 #
-# (Env Var) Generic Secret
-#
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: azure/valid/ad-keys.env
-  match: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
-  secret: 3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: foo/libexec/sudo/sudoers.so
-  match: password=V1tXb7WBGlKIVAWqGw==
-  secret: V1tXb7WBGlKIVAWqGw==
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: api_key=1b3d576ba5a108c3b7374142bfd02992
-  secret: 1b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: api_key=2b3d576ba5a108c3b7374142bfd02992
-  secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: api_key=5b3d576ba5a108c3b7374142bfd02992
-  secret: 5b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=1b3d576ba5a108c3b7374142bfd02992
-  secret: 1b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=2b3d576ba5a108c3b7374142bfd02992
-  secret: 2b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=5b3d576ba5a108c3b7374142bfd02992
-  secret: 5b3d576ba5a108c3b7374142bfd02992
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: general-test
-  match: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: mailchimp
-  match: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
-  secret: ae54fcc23ade65fa404a65e78c56f898-us1
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: sendgrid
-  match: SENDGRID_API_KEY=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
-  secret: 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
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: sendgrid
-  match: SENDGRID_API_KEY=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
-  secret: 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
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: some-file
-  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
-  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
-
-- rule.description: (Env Var) Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: some.yaml
-  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
-  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
-
-#
 # AWS IAM Unique Identifier
 #
 
@@ -481,6 +387,12 @@
   secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
 
 - rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: azure/valid/ad-keys.env
+  match: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
+  secret: 3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
+
+- rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: dropbox/valid/legacy-long-lived-access-token
   match: 'token": "7rBynGOob1cAAAAAAAAAAe72L3T6rQK5ImB5a06ijnwRG9IdeTxvsqdZNAIxq8pZ"'
@@ -535,6 +447,12 @@
   secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: foo/libexec/sudo/sudoers.so
+  match: password=V1tXb7WBGlKIVAWqGw==
+  secret: V1tXb7WBGlKIVAWqGw==
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: general-test
   match: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword>
@@ -580,6 +498,30 @@
   rule.id: _-9w6-yrc-4
   location.path: general-test
   match: 'SecretAccessKey": "swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw"'
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: api_key=1b3d576ba5a108c3b7374142bfd02992
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: api_key=2b3d576ba5a108c3b7374142bfd02992
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: api_key=5b3d576ba5a108c3b7374142bfd02992
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: api_key=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
   secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule.description: Generic Secret
@@ -713,6 +655,30 @@
   location.path: general-test
   match: secret='aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}'
   secret: aOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ=${asdfae}
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: secret=1b3d576ba5a108c3b7374142bfd02992
+  secret: 1b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: secret=2b3d576ba5a108c3b7374142bfd02992
+  secret: 2b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: secret=5b3d576ba5a108c3b7374142bfd02992
+  secret: 5b3d576ba5a108c3b7374142bfd02992
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: general-test
+  match: secret=swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
+  secret: swke6BX0-14v3rYb2Ix32AIfTh9j_H_671dcf8gjpdTbsThiJfxapnAqFs8_kiW4ME-ZPxLmVEgmTxxwlb8Xvw
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -859,7 +825,7 @@
   secret: A6p!qR1@7Xv#9WtZk4F!xL
 
 - rule.description: Generic Secret
-  rule.id: RP7YygNHZcs
+  rule.id: _-9w6-yrc-4
   location.path: groq
   match: api_key="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"
   secret: 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
@@ -943,10 +909,16 @@
   secret: JdxWjqhjWLTB7wn9qtNH2TXwW4p
 
 - rule.description: Generic Secret
-  rule.id: RP7YygNHZcs
+  rule.id: _-9w6-yrc-4
   location.path: label-studio/valid/learn.ipynb
   match: API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0'
   secret: f05c3f9783427a18fc9382ba51197d615d85bec0
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: mailchimp
+  match: mailchimp_api_key=ae54fcc23ade65fa404a65e78c56f898-us1
+  secret: ae54fcc23ade65fa404a65e78c56f898-us1
 
 - rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
@@ -955,19 +927,19 @@
   secret: rr84lr6WKq73PDKhXJJOXFVggzj4
 
 - rule.description: Generic Secret
-  rule.id: RP7YygNHZcs
+  rule.id: _-9w6-yrc-4
   location.path: nvapi/valid/dash-on-the-end.ts
   match: API_KEY = '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'
   secret: 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
 
 - rule.description: Generic Secret
-  rule.id: RP7YygNHZcs
+  rule.id: _-9w6-yrc-4
   location.path: nvapi/valid/nvidia-integrate-api.py
   match: api_key="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"
   secret: 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
 
 - rule.description: Generic Secret
-  rule.id: RP7YygNHZcs
+  rule.id: _-9w6-yrc-4
   location.path: nvapi/valid/nvidia-ngc-in-var.ts
   match: API_KEY = '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'
   secret: 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
@@ -977,6 +949,18 @@
   location.path: semgrep-rules-examples/detected-google-oauth-access-token.txt
   match: 'token" : "ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ"'
   secret: ya29.AHES67zeEn-RDg9CA5gGKMLKuG4uVB7W4O4WjNr-NBfY6Dtad4vbIZ
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: sendgrid
+  match: SENDGRID_API_KEY=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
+  secret: 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
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1063,10 +1047,22 @@
   secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
 
 - rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: some-file
+  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
+  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
+
+- rule.description: Generic Secret
   rule.id: mC5kOxQ6kn4
   location.path: some.secret
   match: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
   secret: BMlZufZmtbiUX3CX3_d1NxhUWIH_cT6_nQ4J-rJRW6Q
+
+- rule.description: Generic Secret
+  rule.id: hG-qMjbXGro
+  location.path: some.yaml
+  match: secret=c007cd12-1fe7-4843-947e-ddecfc0d8913
+  secret: c007cd12-1fe7-4843-947e-ddecfc0d8913
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1524,16 +1520,6 @@
   secret: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
 
 #
-# OpenShift Login Token
-#
-
-- rule.description: OpenShift Login Token
-  rule.id: DaAdIBwZoGE
-  location.path: k8s/valid/oc-login
-  match: 'oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
-  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
-
-#
 # OpenShift User Token
 #
 
@@ -1648,24 +1634,6 @@
     PRIVATE KEY-----'
   secret: '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrZWq5zTKn2nSm\npwv3sAyYPSSjCtHoqEPnKCey7Yt/gjvA6R2EadmwrepDVo08DC1wMHoILH8skRqb\nly3CGB2T/b2G7sVN5OUFlQ2Gc8DRIVgUFMdWhNTk0zYSkDTaqro1e78pYHoLBmjI\ntcQhDtb8aPFamJHGLb+Mc2p/qQaT7F5F4ASOiIvdvqvuijAINvHxeTKIpEs0oNy6\n8msKbumv77y4AQswxdFwECUfCDRsUbD18/LR0Md5KvHGNkuyjFn+3lrWrxNBt7gj\nXZeMM9SJ14ovYgXRj6B0JCVUty1gUY4+xqlGarEJtq4I+VCO5piYNTCHYYZWKmhI\nqLKZGyRTAgMBAAECggEAOmts/zuj4nahgBQ8DgahpFpi3HfZqFWCH44eSeyRubpo\nJ47Nks6JdqEw0hb0ON1lt3Guho60IjqrORFEdX3GxySbrxw/gBdewJJXc9aMiDu3\nS9DxSNopvn0HVzhz63x5z7UIKVBLCOr8WD0sRqBKQup6KYkLVuNNANBuImk4Zr6A\nl2hXN6Oc/zjjTAVVOYhISe8Zuk7ojHeoRoUHj8u0XGqTzFHOKxYSB6I6bbrRm12B\nZYClbNElB6JtJm6OSlRQ2HEgTbyyGKp6bIHijPF2x2EaOLMmeCvC2ic70zvZ+3F3\nSqJKz0C1hYk1yzTsnHF/YNOiSIlYuepNt0gZbRVRsQKBgQDpif2P423/Yb7BlFYN\nCOihbWbtrP1DLzz9Fl3trBp4X+REXu2t2b0gZxGR/e8dO0u5G3TiGuAa112GkpSa\nSiXoE+DiHQaFDuVbP6zMDImDGYc7/h0BeZTVtoKW9vm5QaLw/h5ltKKzJp+NI/Nd\nDstJ+5YrmipW/aL3GRDeBzVIBQKBgQC74WUYjP/cpqf8cv8bbG+8GkbmBPiSrMD9\nzenvzS6lEONJsbysYgKa1Bc8jwikJqaEpKHqt+tQC//tPkUngedh+rykxMlPljjC\ncHE/Nxk76BkYJeKg4EklTQtP2zvkfBEeVxQQ2fax7Oo2Opm45lTLQA5mix6lPB5g\n3weDpY4idwKBgFjG1PXqvbjUHmCWE/QWi+A5p2P4W7o7bdLDuucLgnB5+1smPvHU\nkLmNlLdLsacKEGoIjvEYyFJLxkjO1eClCS3kyJsL75uLIxMB7J0QswF8JdVfbwVN\ng4+ONqxOrHWJBvjXkRSWizbRGtvba7rXUd4I3ngqvaed+WI3TBsq4E1FAoGATVHu\nRBNK/SjM+3TsDgIrXbNGuEUVc2+LISiL/PdpGd+AWoS+DAdt4QAl6/NFcCDD6NTE\nGg/E1LWLhrxYw3CPo+AHoJun6Yv+Ie8afBSV2vSi1zBIO0Lyd1pkrGGiHV79wIm/\npUu+Xe0NWnH1b4XDIb5j7smUPBYovl8q/X+1pfMCgYEAiisg+/l/cO80VvcZpeJ3\nZBCJ/N4xf/PU8cN5MsvSGDXiU8ylripGre78javrsInM38oZVxGyjR7BDKdpkWpi\nk8D0zAMwopOraNKuhFw+YDwbELPEc9AZABP+hgn709lJgM4KUD+7Fq7YxpeTAgYM\nN5o0tJt10SKwOXow4jLP8Fs=\n-----END
     PRIVATE KEY-----'
-
-- rule.description: Private Key
-  rule.id: ePK9whPQPpY
-  location.path: pki/invalid/ignored-by-config
-  __meta__:
-    comment: 'Fixed by: https://github.com/leaktk/scanner/pull/107'
-  match: |-
-    -----BEGIN EC PRIVATE KEY-----
-    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
-    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
-    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
-    -----END EC PRIVATE KEY-----
-  secret: |-
-    -----BEGIN EC PRIVATE KEY-----
-    MHcCAQEEINnyhtxs7rYHpRFDhKH3ibRyiP+/8XrtaEZI3L2h23NEoAoGCCqGSM49
-    AwEHoUQDQgAEhOSrxD/5agBU1cJxELa5BwACFjyVW1r2vXoJLZQzrgP1cnpz3+Ir
-    WusntkxlJTE857y3sFO54nBUVIfMZL1+AQ==
-    -----END EC PRIVATE KEY-----
 
 - rule.description: Private Key
   rule.id: ePK9whPQPpY
@@ -1978,6 +1946,22 @@
   secret: 7ea869254117f250374ff4a60e254a076a102c47
 
 #
+# Sourcegraph Access Token
+#
+
+- rule.description: Sourcegraph Access Token
+  rule.id: 3jLtqqDiiZQ
+  location.path: sourcegraph/valid/cody.py
+  match: sgp_9bea5fb6370f0a6e01bc56b7a99c5b335f32a4c0
+  secret: sgp_9bea5fb6370f0a6e01bc56b7a99c5b335f32a4c0
+
+- rule.description: Sourcegraph Access Token
+  rule.id: 3jLtqqDiiZQ
+  location.path: sourcegraph/valid/cody_local_token.py
+  match: sgp_local_c9b508234270c7b563a06bf47ab91d038317811d
+  secret: sgp_local_c9b508234270c7b563a06bf47ab91d038317811d
+
+#
 # Square Access Token
 #
 
@@ -2131,11 +2115,39 @@
   match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
 
-- rule.description: URL User and Password
-  rule.id: NoSStdj9pfY
-  location.path: semgrep-rules-examples/detected-username-and-password-in-uri.txt
-  match: https://{get_user_name}:pwdTest123+@github.com
-  secret: pwdTest123+
+#
+# Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)
+#
+
+- rule.description: Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)
+  rule.id: Erxpc1eNAD0
+  location.path: github/valid/github-workflows-vulnerable-pr-checkout.yml
+  match: |-
+    pull_request_target:
+        types: [opened, synchronize, reopened]
+
+    permissions:
+      # IMPORTANT: These permissions (e.g., contents: write) make the vulnerability more severe.
+      # A real-world attack could use this to push malicious code to the main branch.
+      # read all permissions, write to contents and pull-requests
+      contents: write
+      pull-requests: write
+      id-token: write # If OIDC is used, this could also be exploited
+      secrets: write # Allows access to repository secrets
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout PR Head (VULNERABLE STEP)
+            uses: actions/checkout@v4
+            with:
+              # This is the critical part of the vulnerability:
+              # Checking out the code from the untrusted PR's head SHA.
+              # The GITHUB_TOKEN used here has elevated permissions due to pull_request_target.
+              ref: ${{ github.event.pull_request.head.sha
+  secret: ''
 
 #
 # WP-Config

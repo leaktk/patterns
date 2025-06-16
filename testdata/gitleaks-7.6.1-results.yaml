@@ -1140,14 +1140,19 @@
   line: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
 
 #
-# OpenShift Login Token
+# OpenShift User Token
 #
 
-- rule: OpenShift Login Token
+- rule: OpenShift User Token
   file: k8s/valid/oc-login
-  offender: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  offender: 'sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw '
   line: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
     --foo --bar --baz
+
+- rule: OpenShift User Token
+  file: k8s/valid/openshift-user-token
+  offender: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
+  line: sha256~e4N3lZrymJbmJ6xvZFG2c_1RRfNhRlIiH3wP5Z7fqj0
 
 #
 # PKCS #12 File
