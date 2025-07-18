@@ -64,7 +64,7 @@ regexes = [
 [[rules]]
 id = 'QqS4RvI6Zmg'
 description = 'Authorization Header'
-regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+regex = '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.35
 secretGroup = 1
@@ -172,7 +172,7 @@ paths = [
 ]
 regexTarget = 'line'
 regexes = [
-'''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+'''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
 '''(?:example|description)''',
 ]
 [[rules]]
@@ -310,7 +310,7 @@ regexes = [
 [[rules]]
 id = '_-9w6-yrc-4'
 description = 'Generic Secret'
-regex = '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
+regex = '''(?i)[\w\-]*(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
 entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -436,7 +436,7 @@ regexes = [
 '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:(?-i)[A-Z_]{5,})?.?[\$#]\{.{4,}?\}.*?[\"\']''',
 '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}[\"\']''',
 '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
-'''(?i)(?:mock|example|fake)[\w-]+(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
+'''(?i)(?:public|mock|example|fake)[\w\-]*(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
 '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
 '''(?i)aws.{0,15}(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)''',
 '''jq\s+[\w\-\s]*.*\.\w*(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)''',
@@ -458,7 +458,7 @@ regexes = [
 [[rules]]
 id = 'hG-qMjbXGro'
 description = 'Generic Secret'
-regex = '''(?i)(?:^|\n)[#\/\s]*\w*(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\',]{6,})'''
+regex = '''(?i)(?:^|\n)[#\/\s]*[\w\-]*(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\',]{6,})'''
 entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -603,7 +603,7 @@ regexes = [
 [[rules]]
 id = 'eCOHX_SKGzA'
 description = 'Generic Secret'
-regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
+regex = '''(?i)<\s*?[\w\-]*(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
 entropy = 3.5
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -650,7 +650,7 @@ regexes = [
 id = 'rnWF160pWNg'
 description = 'Generic Secret'
 path='''\.ya?ml$'''
-regex = '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
+regex = '''(?i)[\w\-]*(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
 entropy = 3.35
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -993,7 +993,7 @@ entropy = 4
 [[rules]]
 id = "sOZiHxUBVFc"
 description = 'OpenShift User Token'
-regex = '''\b(sha256~[\w-]{43})(?:[^\w-]|\z)'''
+regex = '''\b(sha256~[\w\-]{43})(?:[^\w\-]|\z)'''
 tags = ['type:secret', 'alert:repo-owner']
 entropy = 3.5
 keywords = ["sha256~"]
@@ -1131,7 +1131,7 @@ regexes = [
 [[rules]]
 id = 'LSd2f7avYkQ'
 description = 'OpenAI API Key'
-regex = '''\b(sk-[\w-]{16,}T3BlbkFJ[\w-]{16,})(?:[^\w-]|$)'''
+regex = '''\b(sk-[\w\-]{16,}T3BlbkFJ[\w\-]{16,})(?:[^\w\-]|$)'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 't3blbkfj',

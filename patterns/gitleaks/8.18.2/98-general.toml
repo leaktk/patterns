@@ -52,7 +52,7 @@
 [[rules]]
   id = 'QqS4RvI6Zmg'
   description = 'Authorization Header'
-  regex = '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
+  regex = '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.35
   secretGroup = 1
@@ -72,7 +72,7 @@
     regexTarget = 'line'
     regexes = [
       # Vars for the values
-      '''(?:\A|[^\w-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+      '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
       # Indicating that the line is part of an example
       '''(?:example|description)''',
     ]
@@ -255,7 +255,7 @@
   #   config["secret"] = "value"
   #   token = "value"
   #   ...
-  regex = '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
+  regex = '''(?i)[\w\-]*(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']([^\"\s]+?)[\"\']'''
   entropy = 3.35
   secretGroup = 1
   tags = ['type:secret', 'alert:repo-owner']
@@ -339,7 +339,7 @@
       #   secret = "\$SOME_ENV_VARIABLE-optional-text"
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)\'?\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?[\"\']''',
       # Ignore these variable prefixes (add to this list as needed for different prefixes
-      '''(?i)(?:mock|example|fake)[\w-]+(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
+      '''(?i)(?:public|mock|example|fake)[\w\-]*(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:[^\"\s]+?)[\"\']''',
       # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?[\"\']''',
       # aws.* is already covered by a different rule
@@ -382,7 +382,7 @@
   # the value is unquoted and in the format secret=value and has nothing
   # infront of it other than spaces or starts the line or is a comment
   description = 'Generic Secret'
-  regex = '''(?i)(?:^|\n)[#\/\s]*\w*(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\',]{6,})'''
+  regex = '''(?i)(?:^|\n)[#\/\s]*[\w\-]*(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=([^\s\"\',]{6,})'''
   entropy = 3.35
   secretGroup = 1
   tags = ['type:secret', 'alert:repo-owner']
@@ -491,7 +491,7 @@
 [[rules]]
   id = 'eCOHX_SKGzA'
   description = 'Generic Secret'
-  regex = '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
+  regex = '''(?i)<\s*?[\w\-]*(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
   entropy = 3.5
   secretGroup = 1
   tags = ['type:secret', 'alert:repo-owner']
@@ -576,7 +576,7 @@
   # the value in a yaml file is unquoted
   description = 'Generic Secret'
   path='''\.ya?ml$'''
-  regex = '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
+  regex = '''(?i)[\w\-]*(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)\s*?(?:\n|#|$)'''
   entropy = 3.35
   secretGroup = 1
   tags = ['type:secret', 'alert:repo-owner']
@@ -912,7 +912,7 @@
 [[rules]]
   id = "sOZiHxUBVFc"
   description = 'OpenShift User Token'
-  regex = '''\b(sha256~[\w-]{43})(?:[^\w-]|\z)'''
+  regex = '''\b(sha256~[\w\-]{43})(?:[^\w\-]|\z)'''
   tags = ['type:secret', 'alert:repo-owner']
   entropy = 3.5
   keywords = ["sha256~"]
@@ -1092,7 +1092,7 @@
 [[rules]]
   id = 'LSd2f7avYkQ'
   description = 'OpenAI API Key'
-  regex = '''\b(sk-[\w-]{16,}T3BlbkFJ[\w-]{16,})(?:[^\w-]|$)'''
+  regex = '''\b(sk-[\w\-]{16,}T3BlbkFJ[\w\-]{16,})(?:[^\w\-]|$)'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     't3blbkfj',
