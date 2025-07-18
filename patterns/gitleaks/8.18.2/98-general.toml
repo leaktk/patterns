@@ -374,6 +374,8 @@
       # Ignore Bitnami Sealed Secrets - This has the potential to cause false
       # negatives but out of all of our data so far I haven't seen one.
       '''[^A-Za-z0-9+\/]Ag[A-Za-z0-9+\/]{256,}''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\']\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}[\"\']''',
     ]
 
 [[rules]]
@@ -486,6 +488,8 @@
       '''TESTING_FARM_API_TOKEN''',
       # Already covered by the Mailgun rule
       '''(?i)(?:mailgun|mg).{0,20}?\bkey-[0-9a-z]{32}\b''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?i)(?:^|\n)[#\/\s]*\w*(?:(?:password|secret|token)_?(?:access_?)?(?:key)?|api_?key)=\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
     ]
 
 [[rules]]
@@ -568,6 +572,8 @@
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
       # Ignore things that are just escaped unicode characters for now
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}(?:\]\]>)?<\/''',
     ]
 
 [[rules]]
@@ -672,6 +678,8 @@
       # Ignore Bitnami Sealed Secrets - This has the potential to cause false
       # negatives but out of all of our data so far I haven't seen one.
       '''\bAg[A-Za-z0-9+\/]{256,}''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
     ]
 
 [[rules]]
