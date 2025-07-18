@@ -2112,13 +2112,13 @@
 - rule.description: URL User and Password
   rule.id: NoSStdj9pfY
   location.path: k8s/valid/secret-stringdata-after-quotes-single.yaml
-  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
 
 - rule.description: URL User and Password
   rule.id: NoSStdj9pfY
   location.path: k8s/valid/secret-stringdata-before-quotes-single.yaml
-  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb
+  match: mongodb://gm6vx_gtfs:zCGp9*ghPmt#ezFjdrqo6nyI@mongo-gtfs-mongodb:27017
   secret: zCGp9*ghPmt#ezFjdrqo6nyI
 
 #

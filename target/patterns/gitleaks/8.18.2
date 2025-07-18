@@ -1481,9 +1481,9 @@ keywords = [
 [[rules]]
 id = 'NoSStdj9pfY'
 description = 'URL User and Password'
-regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+'''
+regex = '''[\w\+]*?:\/\/[^:\/\s\"\']*?:([^@\/\s\"]{3,})@[\w\.\-]+(:\d+)?'''
 tags = ['type:secret', 'alert:repo-owner']
-entropy = 2.4
+entropy = 2.8
 secretGroup = 1
 keywords = [
 '://',
