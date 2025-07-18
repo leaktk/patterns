@@ -320,7 +320,7 @@
       #   secret = "insert_your_password_here"
       #   secret = "some-ca.crt"
       #   token = "SOME.VALUE.HERE"
-      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
+      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)(?:[A-Za-z.]+|[a-z_\.\-]{0,32}|[A-Z_\.\-]{0,32})[\"\']''',
       #   secret = "Some...placeholder"
       #   secret = "Some***placeholder"
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\"\']*?(?:\.\.\.|\*\*\*|xxxxx).*?[\"\']''',
@@ -1557,6 +1557,8 @@
        ''':\/\/[^:\/\s\"\']*?:\"?(?:\\?\$|#)?(?:\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
+      # All lower or upper letters only passwords
+      ''':\/\/[^:\/\s\"\']*?:(?:[a-z]+|[A-Z]+)@[\w\.\-]+''',
       # Things like: https://host:port,org.java.stuff@commit
       ''':\/\/[^:\/\s\"\']*?:\d{3,4},[\w\.]+@[\w\.\-]+''',
       # Hostnaames to ignore (most hostnames that are just a-z are FPs and there\s example hosts and such)
