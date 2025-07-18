@@ -934,6 +934,12 @@
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
+  location.path: notion/get-db-pages.py
+  match: NOTION_API_KEY = "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"
+  secret: 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
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
   location.path: nvapi/valid/dash-on-the-end.ts
   match: NGC_API_KEY = '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'
   secret: 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
@@ -1484,6 +1490,16 @@
   location.path: nvapi/valid/nvidia-ngc-in-var.ts
   match: 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'
   secret: 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
+
+#
+# Notion API Token
+#
+
+- rule.description: Notion API Token
+  rule.id: fxBSpHpk7ZI
+  location.path: notion/get-db-pages.py
+  match: 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
+  secret: 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
 
 #
 # OpenAI API Key
