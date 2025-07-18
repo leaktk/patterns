@@ -595,6 +595,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
+      'cmVkaGF0Cg==', # b64('redhat\n')
     ]
 
     paths = [
