@@ -1502,6 +1502,16 @@
   secret: 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
 
 #
+# OIDC Client Secret
+#
+
+- rule.description: OIDC Client Secret
+  rule.id: OjplbNyeiXQ
+  location.path: oidc/valid/keycloak-test
+  match: CLIENT_SECRET="0557b061-6c3f-47f1-80f7-73ddd11ae2c9
+  secret: 0557b061-6c3f-47f1-80f7-73ddd11ae2c9
+
+#
 # OpenAI API Key
 #
 
