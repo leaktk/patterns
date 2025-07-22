@@ -1720,3 +1720,11 @@ regex = '''\bpull_request_target\b[\s\S]+\suses:\s+[\"\']?actions\/checkout@v\d+
 secretGroup = 1
 keywords = ['github.event.pull_request.head.sha']
 tags = ['type:vuln', 'group:leaktk-testing']
+[[rules]]
+id = 'OjplbNyeiXQ'
+description = "OIDC Client Secret"
+regex = '''(?i)[\w\-]*client[\-_]?secret\s*[\"\']?[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
+secretGroup = 1
+entropy = 3
+keywords = ['client']
+tags = ['type:secret', 'group:leaktk-testing']
