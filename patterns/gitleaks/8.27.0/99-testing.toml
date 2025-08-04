@@ -1,0 +1,171 @@
+# Testing Patterns
+#
+# These patterns are the lowest presidence (i.e. 99-) because they could
+# collide with other production patterns. Since secret leak uniquness is
+# currently being determined by line (combined with some other attrs), these
+# collisions were causing things to be missed. Putting them at the end should
+# resolve that.
+#
+# The Structure of This File
+#
+# This file is broken into multiple sections. Each section starts with # [file:
+# and the filename that the patterns in that section will go into once
+# production ready.
+#
+# Tags
+#
+# All rules in this should have the group:leaktk-testing tag set and no alert:*
+# tags set in addition to the other tags called out by the README.
+#
+# Promoting to Production
+#
+# The test patterns are deployed to the pattern server just like the other
+# patterns. The leaktk-testing group and lack of alert tags put them in a sort
+# of "test mode". The general process for making them production ready is:
+#
+# 1 Deploy the patterns
+# 2 Wait 30 days
+# 3 Review the scanner results during the monthly tuning
+# 4 Tune the patterns
+# 5 If there were too many false positives in the last 30 days, repeat 1-5
+# 6 Move the test patterns to the file called out by their section
+# 7 Remove the group:leatk-testing tag and add the appropriate alert tags
+# 8 Repeat
+#
+# Note About Moving Patterns
+#
+# Try to keep patterns roughly alphabetically and/or grouped together. Or rather
+# don't spread related patterns out. Spreading them out makes it harder to
+# notice when changes need to be made in multiple places with related patterns.
+#
+
+# [file:98-general.toml]
+
+[[rules]]
+  id = '-bDTAD8YMJg'
+  description = 'Auth0 OAuth Client Secret'
+  regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'client_secret',
+    'clientsecret',
+  ]
+
+[[rules]]
+  id = 'o3-Wm5oL1D4'
+  description = 'Auth0 JWT'
+  # Based on base64 shifted segments of: ".auth0.com/",
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:LmF1dGgwLmNvbS8iL|5hdXRoMC5jb20vIi|uYXV0aDAuY29tLyIs)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'lmf1dggwlmnvbs8il',
+    '5hdxromc5jb20vii',
+    'uyxv0adauy29tlyis',
+  ]
+
+[[rules]]
+  id = 'qUN8svLm9sk'
+  description = 'Dropbox Refresh Token'
+  regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'dropbox',
+  ]
+
+[[rules]]
+  id = 'tvqG--ROt7U'
+  description = 'Dropbox Short-Lived Offline Access Token'
+  regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'sl.u.',
+  ]
+
+[[rules]]
+  id = 'vtSSaD-DcYo'
+  description = 'Dropbox Short-Lived Access Token'
+  regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'sl.',
+  ]
+
+# This rule WAY WAY overmatches at the moment and can cause the scanner to
+# time out on large json files.
+#
+# TODO: fix the scoping
+#
+# [[rules]]
+#   id = 'lgA0jzBEvQo'
+#   description = 'Google Cloud Platform Service Account Credentials'
+#   # Should work multi line and require that at least 8 of the fields match
+#   # We may need to put allowlist items with regexTarget = 'match' for ignoring
+#   # example data. NOTE: This also currently doesn't handle any extra fields
+#   # added in the json. Also it supports random fields on either side of the
+#   # expected fields, but NOT mixed in the middle.
+#   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
+#   tags = ['type:secret', 'group:leaktk-testing']
+#   keywords = [
+#     '"type"',
+#     '"project_id"',
+#     '"private_key_id"',
+#     '"private_key"',
+#     '"client_email"',
+#     '"client_id"',
+#     '"auth_uri"',
+#     '"token_uri"',
+#     '"auth_provider_x509_cert_url"',
+#     '"client_x509_cert_url"',
+#     '"universe_domain"',
+#   ]
+
+[[rules]]
+  id = 'JH9jBKr63QI'
+  description = 'Label Studio API Key'
+  regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'label_studio_api_key',
+  ]
+
+[[rules]]
+  id = 'fxBSpHpk7ZI'
+  description = 'Notion API Token'
+  regex = '''\bntn_[0-9]{11}[A-Za-z0-9]{35}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ntn_',
+  ]
+
+[[rules]]
+  id = 'X2X0u9K8QKY'
+  description = 'SonarQube Token'
+  regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
+  keywords = ['sonar']
+  tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  id = '3jLtqqDiiZQ'
+  description = 'Sourcegraph Access Token'
+  regex = '''\bsgp_(?:local_)?[a-z0-9]{40}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3
+  keywords = ['sgp_']
+
+[[rules]]
+  id = 'Erxpc1eNAD0'
+  description = 'Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)'
+  # The empty secret group at the end is intentional because this doesn't capture a secret
+  regex = '''\bpull_request_target\b[\s\S]+\suses:\s+[\"\']?actions\/checkout@v\d+[\"\']?[\s\S]+github\.event\.pull_request\.head\.sha\b()'''
+  secretGroup = 1
+  keywords = ['github.event.pull_request.head.sha']
+  tags = ['type:vuln', 'group:leaktk-testing']
+
+[[rules]]
+  id = 'OjplbNyeiXQ'
+  description = "OIDC Client Secret"
+  regex = '''(?i)[\w\-]*client[\-_]?secret\s*[\"\']?[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
+  secretGroup = 1
+  entropy = 3
+  keywords = ['client']
+  tags = ['type:secret', 'group:leaktk-testing']
