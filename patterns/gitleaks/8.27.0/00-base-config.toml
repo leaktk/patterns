@@ -1,0 +1,52 @@
+title = "Gitleaks Config"
+
+[allowlist]
+  description = "Global Allowlist"
+  regexTarget = "line"
+  regexes = [
+      # Use 'notsecret' as the standard allow tag anywhere in the result
+      # context.
+      #
+      # Example:
+      #
+      #   some_secret="-VPUsquZ_RA" # notsecret
+      #
+      # Also currently ignores formats like:
+      #
+      #   - NOTSECRET
+      #   - NotSecret
+      #   - not_secret
+      #   - not-secret
+      #   - not secret
+      #
+      '''(?i)\bnot[\t\x20\-\_]*secret\b'''
+  ]
+
+  paths = [
+      # Ignore common binary file types
+      '''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?)$''',
+      # Ignore most quickstarts
+      '''quickstart''',
+      # Ignore vendor code
+      '''vendor''',
+      # Ignore things under node modules
+      '''(?:^|\/)node_modules\/''',
+      # Ignore checked-in ruby packages
+      '''(?:^|\/)gems\/''',
+      # Ignore checked-in go packages
+      '''(?:^|\/)Godeps\/''',
+      # Ignore go.mod and go.sum files
+      '''(?:^|\/)go\.(?:mod|sum)$''',
+      # Ignore gitleaks related stuff
+      '''(?:^|\/).?gitleaks''',
+      # Ignore checked-in python packages
+      '''(?:^|\/)lib\/python[^/]+\/site-packages''',
+      # Handle a lot of the github/docs cases
+      '''(?:^|\/)lib\/rest\/static\/.+\/(?:.*?github.+\.json|ghes.+\.json)''',
+      # Ignore aws secrets
+      '''(?:^|\/)\.?secrets.baseline$''',
+      # Ignore a github spec file
+      '''(?:^|\/)specs\/github\.(?:ya?ml|json)$''',
+      # Ignore yarn release files
+      '''(?:^|\/).yarn\/releases\/''',
+  ]

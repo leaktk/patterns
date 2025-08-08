@@ -1,2 +1,4 @@
 echo "7.6.1"  # supported
-echo "8.18.2" # Planned
+echo "8.18.2" # frozen
+echo "8.27.0" # supported
+

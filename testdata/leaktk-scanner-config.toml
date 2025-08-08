@@ -5,4 +5,4 @@ level = "DEBUG"
 autofetch = false
 
 [scanner.patterns.gitleaks]
-config_path = "target/patterns/gitleaks/8.18.2"
+config_path = "target/patterns/gitleaks/8.27.0"

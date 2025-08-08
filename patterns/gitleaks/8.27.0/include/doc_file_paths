@@ -1,0 +1,9 @@
+# vim: syntax=toml
+# Doc type files are often doc files and have a high FP rate
+#
+# Reference this in the file like:
+#
+# paths = [
+#   # pragma: include "doc_file_paths"
+# ]
+'''\.(?:html|md|adoc|rst)$''',

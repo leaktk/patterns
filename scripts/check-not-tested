@@ -26,4 +26,4 @@ function check {
 
 echo "Untested Patterns:"
 check "description" "target/patterns/gitleaks/7.6.1" "testdata/gitleaks-7.6.1-results.yaml"
-check "id" "target/patterns/gitleaks/8.18.2" "testdata/leaktk-scanner-results.yaml"
+check "id" "target/patterns/gitleaks/8.27.0" "testdata/leaktk-scanner-results.yaml"

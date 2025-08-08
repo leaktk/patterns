@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 set -euo pipefail
-patterns='target/patterns/gitleaks/8.18.2'
+patterns='target/patterns/gitleaks/8.27.0'
 
 for id in $(grep -Po "(?<=id = ').+?(?=')" < "${patterns}")
 do
