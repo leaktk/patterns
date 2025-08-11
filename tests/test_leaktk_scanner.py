@@ -26,7 +26,7 @@ class TestLeakTKScanner(TestCase):
                 "--id=test-scan",
                 "--kind=Files",
                 f"--config={CONFIG_PATH}",
-                f"--resource={FAKE_LEAKS_PATH}",
+                FAKE_LEAKS_PATH,
             ],
             capture_output=True,
             check=False,
