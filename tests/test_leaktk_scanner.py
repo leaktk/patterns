@@ -9,7 +9,18 @@ from .helpers import TESTDATA_PATH
 from .helpers import assert_equal_results
 
 EXPECTED_RESULTS_PATH = TESTDATA_PATH / "leaktk-scanner-results.yaml"
-CONFIG_PATH = TESTDATA_PATH / "leaktk-scanner-config.toml"
+GITLEAKS_CONFIG_PATH = TESTDATA_PATH.parent / "target/patterns/gitleaks/8.27.0"
+
+LEAKTK_CONFIG = f"""
+[logger]
+level = "DEBUG"
+
+[scanner.patterns]
+autofetch = false
+
+[scanner.patterns.gitleaks]
+config_path = "{GITLEAKS_CONFIG_PATH}"
+"""
 
 
 class TestLeakTKScanner(TestCase):
@@ -25,9 +36,11 @@ class TestLeakTKScanner(TestCase):
                 "scan",
                 "--id=test-scan",
                 "--kind=Files",
-                f"--config={CONFIG_PATH}",
-                f"--resource={FAKE_LEAKS_PATH}",
+                f"--config=/dev/stdin",
+                ".",
             ],
+            input=LEAKTK_CONFIG,
+            cwd=FAKE_LEAKS_PATH,
             capture_output=True,
             check=False,
             encoding="UTF-8",
