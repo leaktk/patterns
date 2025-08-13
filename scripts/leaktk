@@ -2,13 +2,17 @@
 set -euo pipefail
 
 declare -A ltk_dgst_map=(
-  ['leaktk-0.2.0-linux-x86_64.tar.xz']='9982ee62e625899098873c6c5bf2f309f56a76772f9c4b95b95e2ac82adcf8d2'
-  ['leaktk-0.2.0-linux-arm64.tar.xz']='0ff1d7c001d15890d62cdbdb6bcb7368f1266d00141b2a6a3b1a80d5f1381121'
-  ['leaktk-0.2.0-darwin-x86_64.tar.xz']='c139bc130d21e8c49dff002ad0b30ceb5d8a01944f0b4feff60f8e5cb641cda0'
   ['leaktk-0.2.0-darwin-arm6.tar.xz']='fe5ecdc1377aba76bedc36a5a72d2aa171636dfd40c188b7c879417ffc85c5fa'
+  ['leaktk-0.2.0-darwin-x86_64.tar.xz']='c139bc130d21e8c49dff002ad0b30ceb5d8a01944f0b4feff60f8e5cb641cda0'
+  ['leaktk-0.2.0-linux-arm64.tar.xz']='0ff1d7c001d15890d62cdbdb6bcb7368f1266d00141b2a6a3b1a80d5f1381121'
+  ['leaktk-0.2.0-linux-x86_64.tar.xz']='9982ee62e625899098873c6c5bf2f309f56a76772f9c4b95b95e2ac82adcf8d2'
+  ['leaktk-0.2.1-darwin-arm6.tar.xz']='695d20c4e2ebd4188e8e0bc2912ffbfa81d0c188af76982b7f36e287249bf65c'
+  ['leaktk-0.2.1-darwin-x86_64.tar.xz']='c615636ba3b81972c308ae4cefc1712df505a080a44169227f5209d9e95d3f9a'
+  ['leaktk-0.2.1-linux-arm64.tar.xz']='125e4e4ac9a770da108157812eaef69eab534664cddbfbca48881988a7459d09'
+  ['leaktk-0.2.1-linux-x86_64.tar.xz']='97787f2334f6889f8d7edb810608823778f57202c57ce2c3b0d350268a3a0865'
 )
 
-ltk_version="0.2.0"
+ltk_version="0.2.1"
 ltk_artifact="leaktk-${ltk_version}-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m | sed -e 's/^aarch/arm/').tar.xz"
 ltk_dl_url="https://github.com/leaktk/leaktk/releases/download/v${ltk_version}/${ltk_artifact}"
 ltk_bin_cache_dir="${XDG_CACHE_HOME:-"${HOME}/.cache"}/leaktk/patterns/testdata/bin"

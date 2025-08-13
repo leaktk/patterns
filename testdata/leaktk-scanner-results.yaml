@@ -771,6 +771,12 @@
   secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D
 
 - rule.description: Generic Secret
+  rule.id: rnWF160pWNg
+  location.path: generic/valid/b64-url-encoded.yaml
+  match: 'secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg=='
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: generic/valid/secret-access-key.xml
   match: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
@@ -2113,6 +2119,12 @@
 
 - rule.description: URL User and Password
   rule.id: NoSStdj9pfY
+  location.path: ftp/valid/username-with-dashes.yml
+  match: ftp://oc-ccl-data:ELaiWa)8ae@oceancolor.net
+  secret: ELaiWa)8ae
+
+- rule.description: URL User and Password
+  rule.id: NoSStdj9pfY
   location.path: general-test
   match: http://username:1d902de68e4113f5855a6c88314cec6a@foo.bar.leaktk.org
   secret: 1d902de68e4113f5855a6c88314cec6a
@@ -2225,6 +2237,12 @@
 - rule.description: WP-Config
   rule.id: FxXgdaIgf7Y
   location.path: general-test
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=[S>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=[S>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: FxXgdaIgf7Y
+  location.path: general-test
   match: define('NONCE_SALT',       '^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR')
   secret: ^[_9^w_,UPMuJ2-}7=y<|v=y$#xftY[klEW3zt,Y}bB tG4d):p9Fd;$imF[lGqR
 
@@ -2276,6 +2294,12 @@
   location.path: settings/wordpress/wp-config.php
   match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
   secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=%5bS>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
+
+- rule.description: WP-Config
+  rule.id: FxXgdaIgf7Y
+  location.path: settings/wordpress/wp-config.php
+  match: define('NONCE_KEY',        'f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=[S>GUu{04~#E*a~WdGX<%>Aa<Ke}K8')
+  secret: f54j6Auj0NT8g;5-^zk}yZ`vN^8/7!6=[S>GUu{04~#E*a~WdGX<%>Aa<Ke}K8
 
 - rule.description: WP-Config
   rule.id: FxXgdaIgf7Y
