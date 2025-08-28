@@ -19,6 +19,7 @@ paths = [
 '''(?:^|\/)\.?secrets.baseline$''',
 '''(?:^|\/)specs\/github\.(?:ya?ml|json)$''',
 '''(?:^|\/).yarn\/releases\/''',
+'''(?:^|\/)\.git$''',
 ]
 [[rules]]
 id = 'nPY_Rcj4gzY'
