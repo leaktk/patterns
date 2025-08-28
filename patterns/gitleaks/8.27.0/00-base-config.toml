@@ -49,4 +49,6 @@ title = "Gitleaks Config"
       '''(?:^|\/)specs\/github\.(?:ya?ml|json)$''',
       # Ignore yarn release files
       '''(?:^|\/).yarn\/releases\/''',
+      # Ignore .git file/folders
+      '''(?:^|\/)\.git$''',
   ]
