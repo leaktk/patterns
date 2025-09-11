@@ -1729,3 +1729,27 @@ secretGroup = 1
 entropy = 3
 keywords = ['client']
 tags = ['type:secret', 'group:leaktk-testing']
+[[rules]]
+id = 'B09tH8vORCw'
+description = 'Generic Secret'
+path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
+regex = '''[\S]{8,}'''
+entropy = 3.35
+tags = ['type:secret', 'group:leaktk-testing']
+[rules.allowlist]
+stopwords = [
+'change',
+'example',
+'insert',
+'passp',
+'passw',
+'placeholder',
+'test',
+]
+paths = [
+'''(?:^|\/)testdata\/''',
+]
+regexes = [
+'''^[a-z\-]+$''',
+'''^#!\s*\/''',
+]

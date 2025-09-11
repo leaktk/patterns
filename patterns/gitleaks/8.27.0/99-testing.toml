@@ -169,3 +169,39 @@
   entropy = 3
   keywords = ['client']
   tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  # TODO: merge with mC5kOxQ6kn4 after testing
+  id = 'B09tH8vORCw'
+  description = 'Generic Secret'
+  # This one looks for file names like
+  # - token
+  # - password
+  path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
+  regex = '''[\S]{8,}'''
+  entropy = 3.35
+  tags = ['type:secret', 'group:leaktk-testing']
+
+  [rules.allowlist]
+    stopwords = [
+      'change',
+      'example',
+      'insert',
+      'passp',
+      'passw',
+      'placeholder',
+      'test',
+    ]
+
+    paths = [
+      # Test data files are often false positives
+      '''(?:^|\/)testdata\/''',
+    ]
+
+    regexes = [
+      # Common placeholder values only have lower case letters and dashes
+      '''^[a-z\-]+$''',
+      # shebangs
+      '''^#!\s*\/''',
+    ]
+

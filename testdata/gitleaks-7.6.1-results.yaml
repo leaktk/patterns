@@ -364,21 +364,6 @@
   line: '  "access_token": "sl.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-",'
 
 - rule: General Secret
-  file: foo.clientSecret
-  offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-
-- rule: General Secret
-  file: foo.password
-  offender: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-
-- rule: General Secret
-  file: foo.sometoken
-  offender: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  line: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-
-- rule: General Secret
   file: general-test
   offender: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</
   line: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword><bar>baz</bar>
@@ -654,6 +639,21 @@
   line: 'secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D'
 
 - rule: General Secret
+  file: generic/valid/pattern-detects-ext.clientSecret
+  offender: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  line: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule: General Secret
+  file: generic/valid/pattern-detects-ext.password
+  offender: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  line: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule: General Secret
+  file: generic/valid/pattern-detects-ext.sometoken
+  offender: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  line: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule: General Secret
   file: generic/valid/secret-access-key.xml
   offender: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</
   line: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
@@ -774,6 +774,21 @@
   line: SECRET_KEY = "9XJcj90y!X%KvLh#cG!&$ra(L(isX-ee8wqr18wr)(s9k^3G%k"
 
 - rule: General Secret
+  file: settings/generic/config.env
+  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+
+- rule: General Secret
+  file: settings/generic/config.env
+  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+
+- rule: General Secret
+  file: settings/generic/config.env
+  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+
+- rule: General Secret
   file: settings/generic/config.ini
   offender: Password = "cd7b820459d36b9339b78afb23b8c631"
   line: Password = "cd7b820459d36b9339b78afb23b8c631"
@@ -816,21 +831,6 @@
 
 - rule: General Secret
   file: settings/generic/file with spaces
-  offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-
-- rule: General Secret
-  file: settings/generic/secret
-  offender: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  line: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-
-- rule: General Secret
-  file: settings/generic/secret
-  offender: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  line: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-
-- rule: General Secret
-  file: settings/generic/secret
   offender: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
   line: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
 
