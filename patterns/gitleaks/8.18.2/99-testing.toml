@@ -1,0 +1,312 @@
+# Testing Patterns
+#
+# These patterns are the lowest presidence (i.e. 99-) because they could
+# collide with other production patterns. Since secret leak uniquness is
+# currently being determined by line (combined with some other attrs), these
+# collisions were causing things to be missed. Putting them at the end should
+# resolve that.
+#
+# The Structure of This File
+#
+# This file is broken into multiple sections. Each section starts with # [file:
+# and the filename that the patterns in that section will go into once
+# production ready.
+#
+# Tags
+#
+# All rules in this should have the group:leaktk-testing tag set and no alert:*
+# tags set in addition to the other tags called out by the README.
+#
+# Promoting to Production
+#
+# The test patterns are deployed to the pattern server just like the other
+# patterns. The leaktk-testing group and lack of alert tags put them in a sort
+# of "test mode". The general process for making them production ready is:
+#
+# 1 Deploy the patterns
+# 2 Wait 30 days
+# 3 Review the scanner results during the monthly tuning
+# 4 Tune the patterns
+# 5 If there were too many false positives in the last 30 days, repeat 1-5
+# 6 Move the test patterns to the file called out by their section
+# 7 Remove the group:leatk-testing tag and add the appropriate alert tags
+# 8 Repeat
+#
+# Note About Moving Patterns
+#
+# Try to keep patterns roughly alphabetically and/or grouped together. Or rather
+# don't spread related patterns out. Spreading them out makes it harder to
+# notice when changes need to be made in multiple places with related patterns.
+#
+
+# [file:98-general.toml]
+
+[[rules]]
+  id = '-bDTAD8YMJg'
+  description = 'Auth0 OAuth Client Secret'
+  regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'client_secret',
+    'clientsecret',
+  ]
+
+[[rules]]
+  id = 'o3-Wm5oL1D4'
+  description = 'Auth0 JWT'
+  # Based on base64 shifted segments of: ".auth0.com/",
+  regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:LmF1dGgwLmNvbS8iL|5hdXRoMC5jb20vIi|uYXV0aDAuY29tLyIs)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'lmf1dggwlmnvbs8il',
+    '5hdxromc5jb20vii',
+    'uyxv0adauy29tlyis',
+  ]
+
+[[rules]]
+  id = 'qUN8svLm9sk'
+  description = 'Dropbox Refresh Token'
+  regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'dropbox',
+  ]
+
+[[rules]]
+  id = 'tvqG--ROt7U'
+  description = 'Dropbox Short-Lived Offline Access Token'
+  regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'sl.u.',
+  ]
+
+[[rules]]
+  id = 'vtSSaD-DcYo'
+  description = 'Dropbox Short-Lived Access Token'
+  regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'sl.',
+  ]
+
+# This rule WAY WAY overmatches at the moment and can cause the scanner to
+# time out on large json files.
+#
+# TODO: fix the scoping
+#
+# [[rules]]
+#   id = 'lgA0jzBEvQo'
+#   description = 'Google Cloud Platform Service Account Credentials'
+#   # Should work multi line and require that at least 8 of the fields match
+#   # We may need to put allowlist items with regexTarget = 'match' for ignoring
+#   # example data. NOTE: This also currently doesn't handle any extra fields
+#   # added in the json. Also it supports random fields on either side of the
+#   # expected fields, but NOT mixed in the middle.
+#   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
+#   tags = ['type:secret', 'group:leaktk-testing']
+#   keywords = [
+#     '"type"',
+#     '"project_id"',
+#     '"private_key_id"',
+#     '"private_key"',
+#     '"client_email"',
+#     '"client_id"',
+#     '"auth_uri"',
+#     '"token_uri"',
+#     '"auth_provider_x509_cert_url"',
+#     '"client_x509_cert_url"',
+#     '"universe_domain"',
+#   ]
+
+[[rules]]
+  id = 'JH9jBKr63QI'
+  description = 'Label Studio API Key'
+  regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'label_studio_api_key',
+  ]
+
+[[rules]]
+  id = 'X2X0u9K8QKY'
+  description = 'SonarQube Token'
+  regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
+  keywords = ['sonar']
+  tags = ['type:secret', 'group:leaktk-testing']
+
+[[rules]]
+  id = '3jLtqqDiiZQ'
+  description = 'Sourcegraph Access Token'
+  regex = '''\bsgp_(?:local_)?[a-z0-9]{40}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3
+  keywords = ['sgp_']
+
+[[rules]]
+  id = 'Erxpc1eNAD0'
+  description = 'Vulnerable GitHub Workflow (pull_request_target + PR Head Checkout)'
+  # The empty secret group at the end is intentional because this doesn't capture a secret
+  regex = '''\bpull_request_target\b[\s\S]+\suses:\s+[\"\']?actions\/checkout@v\d+[\"\']?[\s\S]+github\.event\.pull_request\.head\.sha\b()'''
+  secretGroup = 1
+  keywords = ['github.event.pull_request.head.sha']
+  tags = ['type:vuln', 'group:leaktk-testing']
+
+[[rules]]
+  id = 'OjplbNyeiXQ'
+  description = "OIDC Client Secret"
+  regex = '''(?i)[\w\-]*client[\s\S]{0,32}secret\s*[\"\']?\s*[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
+  secretGroup = 1
+  entropy = 3
+  keywords = ['client']
+  tags = ['type:secret', 'group:leaktk-testing']
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      # pragma: include "doc_file_paths"
+    ]
+
+[[rules]]
+  # TODO: merge with mC5kOxQ6kn4 after testing
+  id = 'B09tH8vORCw'
+  description = 'Generic Secret'
+  # This one looks for file names like
+  # - token
+  # - password
+  path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
+  regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
+  entropy = 3.35
+  tags = ['type:secret', 'group:leaktk-testing']
+
+  [rules.allowlist]
+    stopwords = [
+      'change',
+      'example',
+      'insert',
+      'passp',
+      'passw',
+      'placeholder',
+      'test',
+    ]
+
+    paths = [
+      # Test data files are often false positives
+      '''(?:^|\/)testdata\/''',
+    ]
+
+    regexes = [
+      # Common placeholder values only have lower case letters and dashes
+      '''^[a-z\-]+$''',
+      # shebangs
+      '''^#!\s*\/''',
+    ]
+
+[[rules]]
+  id = '6ZbcVhQ-dlQ'
+  # If this works well, merge this with the YAML rule by removing tye path restriction
+  description = 'Generic Secret'
+  regex = '''(?i)[\w\-]*(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)[\t\x20]*(?:\\n|\n|#|$)'''
+  entropy = 3.35
+  secretGroup = 1
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'password',
+    'secret',
+    'token',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+      'cmVkaGF0Cg==', # b64('redhat\n')
+    ]
+
+    paths = [
+      # Test data are often false positives
+      '''(?:^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # This doesn't apply to yaml files
+      '''\.ya?ml$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # Things like:
+      #   secret: asdfasdfas # nosec
+      '''#\s*?nosec(?:\s+|$)''',
+      #   secret: asdfasdfas # noqa: E501
+      '''#\s*?noqa(?::[\s\w]+)?$''',
+      #   secret: asdfasdfas //nolint:gosec
+      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
+      #   secret: _PLACEHOLDER_
+      #   secret: <PLACEHOLDER>
+      #   secret: @PLACEHOLDER@
+      #   secret: %PLACEHOLDER%
+      #   secret: $PLACEHOLDER$
+      #   secret: `PLACEHOLDER`
+      #   secret: [PLACEHOLDER]
+      #   secret: [%PLACEHOLDER%]
+      #   secret: $(PLACEHOLDER...
+      #   secret: \$(PLACEHOLDER...
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)\s*?(?:\\n|\n|#|$)''',
+      #   secret: ALL_UPPER_LETTERS_OR_UNDERSCORES
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[A-Z_]{5,}?\s*?(?:\\n|\n|#|$)''',
+      #   secret: {PLACEHOLDER}
+      #   secret: %{PLACEHOLDER}
+      #   secret: \%{PLACEHOLDER}
+      #   secret: ${PLACEHOLDER}
+      #   secret: $\{PLACEHOLDER}
+      #   secret: \${PLACEHOLDER}
+      #   secret: \${PLACEHOLDER}
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\\?[\$%]?\\?\{.+?\}\s*?(?:\\n|\n|#|$)''',
+      #   secret: Some...placeholder
+      #   secret: Some***placeholder
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(?:\.\.\.|\*\*\*|xxxxx)\s*?(?:\\n|\n|#|$)''',
+      #   secret: (optional char)${PLACEHOLDER}(optional text)
+      #   secret: (optional char)#{PLACEHOLDER}(optional text)
+      #   secret: FOO_BAR=${PLACEHOLDER}(optional text)
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:(?-i)[A-Z_]{5,})?.?\$\{.{4,}?\}.*?\s*?(?:\\n|\n|#|$)''',
+      #   secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   secret: /SOME/path:${PLACEHOLDER}
+      #   secret: /SOME/path:${PLACEHOLDER}${PLACEHOLDER}
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}\s*?(?:\\n|\n|#|$)''',
+      #   secret: $SOME_ENV_VARIABLE-optional-text
+      #   secret: \$SOME_ENV_VARIABLE-optional-text
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\\n|\n|#|$)''',
+      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\\n|\n|#|$)''',
+      # Secrets like SOME_PLACEHOLER_P1 or some_sneaky_password01
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\\n|\n|#|$)''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\\n|\n|#|$)''',
+      # Various words at the start and end that signify a placeholder
+      ## Starts with
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\\n|\n|#|$)''',
+      ## Ends with
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\\n|\n|#|$)''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\\n|\n|#|$)''',
+       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?\s*?(?:\\n|\n|#|$)''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:\\u[a-z0-9]{4})+\s*?(?:\\n|\n|#|$)''',
+      # Already covered by the Slack Token rule
+      '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
+      # Already covered by GitHub rules
+      '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+      '''\bgithub_pat_\w{82}\b''',
+      # Already covered byt GitLab rules
+      '''\bglpat-[\w\-]{20}\b''',
+      '''\bglptt-[0-9a-f]{40}\b''',
+      '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
+    ]
+
+
