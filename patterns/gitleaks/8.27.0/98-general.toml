@@ -213,7 +213,7 @@
   # - cluster.token
   # - user.password
   path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
-  regex = '''[\S]{8,}'''
+  regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
   entropy = 3.35
   tags = ['type:secret', 'alert:repo-owner']
 

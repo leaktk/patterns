@@ -761,25 +761,33 @@
 - rule.description: Generic Secret
   rule.id: B09tH8vORCw
   location.path: generic/valid/password
-  match: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  match: |-
+    # Client password
+    2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret
   rule.id: mC5kOxQ6kn4
   location.path: generic/valid/pattern-detects-ext.clientSecret
-  match: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  match: |-
+    # Some kind of secret file
+    0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   secret: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret
   rule.id: mC5kOxQ6kn4
   location.path: generic/valid/pattern-detects-ext.password
-  match: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  match: |-
+    # Some kind of secret file
+    1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   secret: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret
   rule.id: mC5kOxQ6kn4
   location.path: generic/valid/pattern-detects-ext.sometoken
-  match: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  match: |-
+    # Some kind of secret file
+    2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
   secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret

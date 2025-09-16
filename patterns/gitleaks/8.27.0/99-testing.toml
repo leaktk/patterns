@@ -164,7 +164,7 @@
 [[rules]]
   id = 'OjplbNyeiXQ'
   description = "OIDC Client Secret"
-  regex = '''(?i)[\w\-]*client[\-_]?secret\s*[\"\']?[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
+  regex = '''(?i)[\w\-]*client[\s\S]{0,32}secret\s*[\"\']?\s*[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
   secretGroup = 1
   entropy = 3
   keywords = ['client']
@@ -178,7 +178,7 @@
   # - token
   # - password
   path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
-  regex = '''[\S]{8,}'''
+  regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
   entropy = 3.35
   tags = ['type:secret', 'group:leaktk-testing']
 

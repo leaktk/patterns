@@ -290,7 +290,7 @@ keywords = [
 id = 'mC5kOxQ6kn4'
 description = 'Generic Secret'
 path = '''(?i)\.[\w\-]*(?:password|secret|token)$'''
-regex = '''[\S]{8,}'''
+regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
 entropy = 3.35
 tags = ['type:secret', 'alert:repo-owner']
 [rules.allowlist]
@@ -1724,7 +1724,7 @@ tags = ['type:vuln', 'group:leaktk-testing']
 [[rules]]
 id = 'OjplbNyeiXQ'
 description = "OIDC Client Secret"
-regex = '''(?i)[\w\-]*client[\-_]?secret\s*[\"\']?[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
+regex = '''(?i)[\w\-]*client[\s\S]{0,32}secret\s*[\"\']?\s*[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
 secretGroup = 1
 entropy = 3
 keywords = ['client']
@@ -1733,7 +1733,7 @@ tags = ['type:secret', 'group:leaktk-testing']
 id = 'B09tH8vORCw'
 description = 'Generic Secret'
 path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
-regex = '''[\S]{8,}'''
+regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
 entropy = 3.35
 tags = ['type:secret', 'group:leaktk-testing']
 [rules.allowlist]
