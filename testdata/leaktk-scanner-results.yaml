@@ -387,6 +387,18 @@
   secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
 
 - rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: aws/valid/b64-encoded-k8s-secret-with-aws-creds
+  match: 'aws_secret_access_key: P4lF4Pz6dgZabQt+pdRPP+k7vs9FatAVnthXK7c'
+  secret: P4lF4Pz6dgZabQt+pdRPP+k7vs9FatAVnthXK7c
+
+- rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: aws/valid/b64-encoded-k8s-secret-with-aws-creds
+  match: 'aws_secret_access_key: UDRsRjRQejZkZ1phYlF0K3BkUlBQK2s3dnM5RmF0QVZudGhYSzdjCg=='
+  secret: UDRsRjRQejZkZ1phYlF0K3BkUlBQK2s3dnM5RmF0QVZudGhYSzdjCg==
+
+- rule.description: Generic Secret
   rule.id: hG-qMjbXGro
   location.path: azure/valid/ad-keys.env
   match: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
@@ -427,24 +439,6 @@
   location.path: dropbox/valid/short-lived-token
   match: 'access_token": "sl.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-"'
   secret: sl.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-
-
-- rule.description: Generic Secret
-  rule.id: mC5kOxQ6kn4
-  location.path: foo.clientSecret
-  match: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  secret: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-
-- rule.description: Generic Secret
-  rule.id: mC5kOxQ6kn4
-  location.path: foo.password
-  match: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  secret: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-
-- rule.description: Generic Secret
-  rule.id: mC5kOxQ6kn4
-  location.path: foo.sometoken
-  match: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
-  secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
 
 - rule.description: Generic Secret
   rule.id: hG-qMjbXGro
@@ -777,6 +771,50 @@
   secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==
 
 - rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: generic/valid/inlined-yaml.json
+  match: 'nsecret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D\n'
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D
+
+- rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: generic/valid/inlined-yaml.json
+  match: 'nsecret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==\n'
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==
+
+- rule.description: Generic Secret
+  rule.id: B09tH8vORCw
+  location.path: generic/valid/password
+  match: |-
+    # Client password
+    2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule.description: Generic Secret
+  rule.id: mC5kOxQ6kn4
+  location.path: generic/valid/pattern-detects-ext.clientSecret
+  match: |-
+    # Some kind of secret file
+    0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  secret: 0dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule.description: Generic Secret
+  rule.id: mC5kOxQ6kn4
+  location.path: generic/valid/pattern-detects-ext.password
+  match: |-
+    # Some kind of secret file
+    1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  secret: 1dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule.description: Generic Secret
+  rule.id: mC5kOxQ6kn4
+  location.path: generic/valid/pattern-detects-ext.sometoken
+  match: |-
+    # Some kind of secret file
+    2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+  secret: 2dyKPI359SlFVIEKoL9qakPlP5xuQDxZ9aGP45xAc5NI
+
+- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: generic/valid/secret-access-key.xml
   match: <SecretAccessKey>e9aA-H81DWuDFboK3MCVa7diQYQchBx4MKQO02CYnRRUH5B1Q6fI-aGqAA-eX9UP7gbMnvsyVvU84xHUwnP7RA</SecretAccessKey>
@@ -841,6 +879,18 @@
   location.path: groq
   match: groq_api_key="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"
   secret: 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
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: k8s/valid/base64-encoded-yaml-with-username-password-inside-secret.yaml
+  match: 'password: "t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic"'
+  secret: t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: k8s/valid/base64-encoded-yaml-with-username-password-inside-secret.yaml
+  match: 'password: "t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic"'
+  secret: t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -994,6 +1044,24 @@
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
+  location.path: settings/generic/config.env
+  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: settings/generic/config.env
+  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
+  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: settings/generic/config.env
+  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
+  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
   location.path: settings/generic/config.ini
   match: Password = "cd7b820459d36b9339b78afb23b8c631"
   secret: cd7b820459d36b9339b78afb23b8c631
@@ -1043,24 +1111,6 @@
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: settings/generic/file with spaces
-  match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: settings/generic/secret
-  match: password="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
-  secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: settings/generic/secret
-  match: secret="XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g"
-  secret: XdnBsJWJ9yS6bG10hXa5+KkGCr1HKMv5g
-
-- rule.description: Generic Secret
-  rule.id: _-9w6-yrc-4
-  location.path: settings/generic/secret
   match: secret_key="5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg=="
   secret: 5MkjTjmfxnYgEdcLAB+dJPlqvdVEf9GCS9bseM+kegnhTjDridJU2cGQfy8jfP5nKxx2tmAGCRA+8EeGAw4QOg==
 
