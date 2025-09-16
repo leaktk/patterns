@@ -129,15 +129,6 @@
   ]
 
 [[rules]]
-  id = 'fxBSpHpk7ZI'
-  description = 'Notion API Token'
-  regex = '''\bntn_[0-9]{11}[A-Za-z0-9]{35}\b'''
-  tags = ['type:secret', 'group:leaktk-testing']
-  keywords = [
-    'ntn_',
-  ]
-
-[[rules]]
   id = 'X2X0u9K8QKY'
   description = 'SonarQube Token'
   regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
@@ -169,6 +160,12 @@
   entropy = 3
   keywords = ['client']
   tags = ['type:secret', 'group:leaktk-testing']
+
+  [rules.allowlist]
+    paths = [
+      # High FP rate from example docs
+      # pragma: include "doc_file_paths"
+    ]
 
 [[rules]]
   # TODO: merge with mC5kOxQ6kn4 after testing

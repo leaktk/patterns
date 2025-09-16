@@ -884,6 +884,15 @@
   ]
 
 [[rules]]
+  id = 'fxBSpHpk7ZI'
+  description = 'Notion API Token'
+  regex = '''\bntn_[0-9]{11}[A-Za-z0-9]{35}\b'''
+  tags = ['type:secret', 'alert:repo-owner']
+  keywords = [
+    'ntn_',
+  ]
+
+[[rules]]
   id = 'tBcMT24UjGQ'
   description = 'NPM Access Token'
   regex = '''\bnpm_[A-Za-z0-9]{36}\b'''
