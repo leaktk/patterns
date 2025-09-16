@@ -205,3 +205,111 @@
       '''^#!\s*\/''',
     ]
 
+[[rules]]
+  id = '6ZbcVhQ-dlQ'
+  # If this works well, merge this with the YAML rule by removing tye path restriction
+  description = 'Generic Secret'
+  regex = '''(?i)[\w\-]*(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)[\t\x20]*(?:\\n|\n|#|$)'''
+  entropy = 3.35
+  secretGroup = 1
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'password',
+    'secret',
+    'token',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+      'cmVkaGF0Cg==', # b64('redhat\n')
+    ]
+
+    paths = [
+      # Test data are often false positives
+      '''(?:^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # This doesn't apply to yaml files
+      '''\.ya?ml$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # Things like:
+      #   secret: asdfasdfas # nosec
+      '''#\s*?nosec(?:\s+|$)''',
+      #   secret: asdfasdfas # noqa: E501
+      '''#\s*?noqa(?::[\s\w]+)?$''',
+      #   secret: asdfasdfas //nolint:gosec
+      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
+      #   secret: _PLACEHOLDER_
+      #   secret: <PLACEHOLDER>
+      #   secret: @PLACEHOLDER@
+      #   secret: %PLACEHOLDER%
+      #   secret: $PLACEHOLDER$
+      #   secret: `PLACEHOLDER`
+      #   secret: [PLACEHOLDER]
+      #   secret: [%PLACEHOLDER%]
+      #   secret: $(PLACEHOLDER...
+      #   secret: \$(PLACEHOLDER...
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:_.+?_|<.+?>|@.+?@|%.+?%|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)\s*?(?:\\n|\n|#|$)''',
+      #   secret: ALL_UPPER_LETTERS_OR_UNDERSCORES
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[A-Z_]{5,}?\s*?(?:\\n|\n|#|$)''',
+      #   secret: {PLACEHOLDER}
+      #   secret: %{PLACEHOLDER}
+      #   secret: \%{PLACEHOLDER}
+      #   secret: ${PLACEHOLDER}
+      #   secret: $\{PLACEHOLDER}
+      #   secret: \${PLACEHOLDER}
+      #   secret: \${PLACEHOLDER}
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\\?[\$%]?\\?\{.+?\}\s*?(?:\\n|\n|#|$)''',
+      #   secret: Some...placeholder
+      #   secret: Some***placeholder
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(?:\.\.\.|\*\*\*|xxxxx)\s*?(?:\\n|\n|#|$)''',
+      #   secret: (optional char)${PLACEHOLDER}(optional text)
+      #   secret: (optional char)#{PLACEHOLDER}(optional text)
+      #   secret: FOO_BAR=${PLACEHOLDER}(optional text)
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:(?-i)[A-Z_]{5,})?.?\$\{.{4,}?\}.*?\s*?(?:\\n|\n|#|$)''',
+      #   secret: SOME_CONSTANT_PREFIX_${PLACEHOLDER}
+      #   secret: /SOME/path:${PLACEHOLDER}
+      #   secret: /SOME/path:${PLACEHOLDER}${PLACEHOLDER}
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}\s*?(?:\\n|\n|#|$)''',
+      #   secret: $SOME_ENV_VARIABLE-optional-text
+      #   secret: \$SOME_ENV_VARIABLE-optional-text
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)\\?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\s*(?:\\n|\n|#|$)''',
+      # Secrets that are allow lower case and optionally contain dashes are most often placeholders
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[a-z\-]+\s*?(?:\\n|\n|#|$)''',
+      # Secrets like SOME_PLACEHOLER_P1 or some_sneaky_password01
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)(?:[A-Z0-9]{2,32}_[A-Z0-9_]{2,32}|[a-z0-9]{2,32}_[a-z0-9_]{2,32})\s*?(?:\\n|\n|#|$)''',
+      # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\\n|\n|#|$)''',
+      # Various words at the start and end that signify a placeholder
+      ## Starts with
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?(?:\\n|\n|#|$)''',
+      ## Ends with
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:.*?(\.(jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?\s*?(?:\\n|\n|#|$)''',
+      # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}\s*?(?:\\n|\n|#|$)''',
+       # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?-i).+?[a-z]{2,}-[a-z]{2,}-[a-z]{2,}.+?\s*?(?:\\n|\n|#|$)''',
+      # Ignore things that are just escaped unicode characters for now
+      '''(?i)(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?(?:\\u[a-z0-9]{4})+\s*?(?:\\n|\n|#|$)''',
+      # Already covered by the Slack Token rule
+      '''xox[baprs]-[0-9a-zA-Z-]{10,48}''',
+      # Already covered by GitHub rules
+      '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+      '''\bgithub_pat_\w{82}\b''',
+      # Already covered byt GitLab rules
+      '''\bglpat-[\w\-]{20}\b''',
+      '''\bglptt-[0-9a-f]{40}\b''',
+      '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
+      # Ignore Bitnami Sealed Secrets - This has the potential to cause false
+      # negatives but out of all of our data so far I haven't seen one.
+      '''\bAg[A-Za-z0-9+\/]{256,}''',
+      # Ignore Password Hashes - those are handled elsewhere
+      '''(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
+    ]
+
+

@@ -387,6 +387,18 @@
   secret: WtiyWPt2NEYSqyPiM4_ej0y92Ca55KZurnvGrNccMAhh1GcgNJTEnfqDWmmP1mlV
 
 - rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: aws/valid/b64-encoded-k8s-secret-with-aws-creds
+  match: 'aws_secret_access_key: P4lF4Pz6dgZabQt+pdRPP+k7vs9FatAVnthXK7c'
+  secret: P4lF4Pz6dgZabQt+pdRPP+k7vs9FatAVnthXK7c
+
+- rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: aws/valid/b64-encoded-k8s-secret-with-aws-creds
+  match: 'aws_secret_access_key: UDRsRjRQejZkZ1phYlF0K3BkUlBQK2s3dnM5RmF0QVZudGhYSzdjCg=='
+  secret: UDRsRjRQejZkZ1phYlF0K3BkUlBQK2s3dnM5RmF0QVZudGhYSzdjCg==
+
+- rule.description: Generic Secret
   rule.id: hG-qMjbXGro
   location.path: azure/valid/ad-keys.env
   match: AZURE_CLIENT_SECRET=3~K7Q~yxHSpLEt8z5YsP~pMcmAMOPlwxG4JcXbT
@@ -756,6 +768,18 @@
   rule.id: rnWF160pWNg
   location.path: generic/valid/b64-url-encoded.yaml
   match: 'secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg=='
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==
+
+- rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: generic/valid/inlined-yaml.json
+  match: 'nsecret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D\n'
+  secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi%2F3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR%2BUSnzxWSg%3D%3D
+
+- rule.description: Generic Secret
+  rule.id: 6ZbcVhQ-dlQ
+  location.path: generic/valid/inlined-yaml.json
+  match: 'nsecret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==\n'
   secret: 1c48c63zVGOGKBxVr5XR52KDllup9rYfQmi/3uzL9OjJwVnyJRn6XQO0W5ldLp2gTcuH0H05s8iAIhiHR+USnzxWSg==
 
 - rule.description: Generic Secret
