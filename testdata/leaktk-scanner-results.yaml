@@ -850,6 +850,18 @@
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
+  location.path: k8s/valid/base64-encoded-yaml-with-username-password-inside-secret.yaml
+  match: 'password: "t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic"'
+  secret: t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
+  location.path: k8s/valid/base64-encoded-yaml-with-username-password-inside-secret.yaml
+  match: 'password: "t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic"'
+  secret: t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
   location.path: k8s/valid/secret-after-quotes-double.yml
   match: 'password: "S!B\*d$zDsb="'
   secret: S!B\*d$zDsb=
