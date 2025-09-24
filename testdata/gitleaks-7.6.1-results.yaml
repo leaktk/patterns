@@ -344,11 +344,6 @@
   line: '  "access_token": "sl.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-",'
 
 - rule: General Secret
-  file: dropbox/valid/oidc-request
-  offender: 'token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkRUVXpsY3Nw"'
-  line: '  "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkRUVXpsY3Nw",'
-
-- rule: General Secret
   file: dropbox/valid/short-lived-offline-access-token
   offender: 'token": "sl.u.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-"'
   line: '  "access_token": "sl.u.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-",'
