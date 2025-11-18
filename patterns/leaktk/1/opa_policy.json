@@ -1,0 +1,5 @@
+{
+    "opa_policy": {
+        "rego": "package analyst\nresponse := input\nfindings := response.results\nanalyzed_finding_ids := {f.id | some f in analyzed_findings}\nunanalyzed_findings := {\n  object.union(finding, {\"valid\": null, \"analysis\": null})\n  | some finding in findings; not analyzed_finding_ids[finding.id]\n}\n# GitHub Tokens\nanalyzed_findings contains analyzed_finding if {\n  some finding in findings\n  contains(lower(finding.rule.description), \"github\")\n  regex.match(\"^(?:gh[porsu]_|github_pat_)\", finding.secret)\n  analyzed_finding := object.union(finding, {\n    \"valid\": http.send({\n      \"url\": \"https://api.github.com/rate_limit\",\n      \"method\": \"GET\",\n          \"headers\": {\"Authorization\": sprintf(\"Bearer %s\", [finding.secret])},\n    }).status_code < 300,\n    \"analysis\": {\"todo\": \"some real analysis here\"},\n  })\n}\nanalyzed_response := object.union(response, {\n  \"results\": analyzed_findings | unanalyzed_findings,\n})"
+    }
+}
