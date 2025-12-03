@@ -7,6 +7,8 @@ Patterns leveraged by LeakTK
 - gitleaks
   - `7.6.1` actively maintained
   - `>=8.27.0,<9.0.0` actively maintained
+- leaktk
+  - `1` experimental
 - considering patterns to include for other types of scans
 
 ## Structure
