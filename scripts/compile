@@ -2,34 +2,44 @@
 
 import sys
 import re
+import json
 
+from collections import OrderedDict
 from pathlib import Path
+from argparse import ArgumentParser
 
 
-include_re = re.compile(r"[\t\x20]*#[\t\x20]*pragma:[\t\x20]*include[\t\x20]*[\"\']([^\"\']+)[\"\']")
-pattern_dir = Path(sys.argv[1])
-include_dir = pattern_dir / "include"
-pattern_file_paths = [p for p in sorted(pattern_dir.iterdir()) if p.is_file()]
-include_cache = {}
+PRAGMA_INCLUDE_RE = re.compile(
+    r"[\t\x20]*#[\t\x20]*pragma:[\t\x20]*include[\t\x20]*[\"\']([^\"\']+)[\"\']"
+)
+INCLUDE_CACHE = {}
 
 
-def _sub_include(match):
-    include_target = match.group(1)
-
-    if include_target not in include_cache:
-        with (include_dir / include_target).open() as include_file:
-            include_cache[include_target] = clean(include_file.read())
-
-    return include_cache[include_target]
-
-
-def apply_includes(data):
+def new_apply_includes(include_dir):
     """
-    Replace `# pragma: include "file_name"` with content from:
-
-        pattern_dir / "include" / "file_name"
+    Create a new apply_include function that looks in include_dir for the content
+    needed for the includes.
     """
-    return include_re.sub(_sub_include, data)
+
+    def sub_include(match):
+        include_target = match.group(1)
+
+        if include_target not in INCLUDE_CACHE:
+            with (include_dir / include_target).open() as include_file:
+                INCLUDE_CACHE[include_target] = clean(include_file.read())
+
+        return INCLUDE_CACHE[include_target]
+
+    def apply_includes(data):
+        """
+        Replace `# pragma: include "file_name"` with content from:
+
+            pattern_dir / "include" / "file_name"
+        """
+
+        return PRAGMA_INCLUDE_RE.sub(sub_include, data)
+
+    return apply_includes
 
 
 def clean(data):
@@ -46,19 +56,89 @@ def clean(data):
     )
 
 
-stages = [
-    apply_includes,
-    clean,
-    # TODO: add step to optimize regexes
-]
+def parse_args():
+    parser = ArgumentParser(
+        description="compile leaktk patterns",
+    )
+    parser.add_argument(
+        "--provider",
+        choices=("gitleaks", "leaktk"),
+        help="select which provider you're compiling patterns for",
+    )
+    parser.add_argument(
+        "patterns_dir",
+        type=Path,
+        help="path to the directory containing the patterns",
+    )
+    return parser.parse_args()
 
-for path in pattern_file_paths:
-    with path.open() as file:
-        data = file.read()
 
-    for stage in stages:
-        data = stage(data)
+def compile_gitleaks(args):
+    patterns_dir = args.patterns_dir
+    include_dir = patterns_dir / "include"
+    pattern_file_paths = [p for p in sorted(patterns_dir.iterdir()) if p.is_file()]
 
-    sys.stdout.write(data)
+    stages = [
+        new_apply_includes(include_dir),
+        clean,
+        # TODO: add step to optimize regexes
+    ]
 
-sys.stdout.flush()
+    for path in pattern_file_paths:
+        with path.open() as file:
+            data = file.read()
+
+        for stage in stages:
+            data = stage(data)
+
+        sys.stdout.write(data)
+
+    sys.stdout.flush()
+
+
+def sort_dict(obj):
+    if isinstance(obj, dict):
+        return OrderedDict(
+            (key, sort_dict(obj[key]))
+            for key in sorted(obj)
+        )
+    elif isinstance(obj, list):
+        return list(map(sort_dict, obj))
+    else:
+        return obj
+
+
+def compile_leaktk(args):
+    patterns_dir = args.patterns_dir
+    leaktk_config = {}
+
+    for path in patterns_dir.iterdir():
+        # Splat json files as is
+        if path.name.endswith(".json"):
+            with path.open("rb") as f:
+                leaktk_config.update(json.load(f))
+        # Place rego polices at a key matching their file name
+        elif path.name.endswith(".rego"):
+            with path.open("r", encoding="UTF-8") as f:
+                leaktk_config[path.name[: -len(".rego")]] = clean(f.read())
+        else:
+            raise ValueError(f"unexpected item in leaktk patterns dir: {path.name}")
+
+    json.dump(sort_dict(leaktk_config), sys.stdout)
+    sys.stdout.flush()
+
+
+def main():
+    args = parse_args()
+
+    match args.provider:
+        case "leaktk":
+            compile_leaktk(args)
+        case "gitleaks":
+            compile_gitleaks(args)
+        case provider:
+            raise ValueError(f"unexpected provider {provider}")
+
+
+if __name__ == "__main__":
+    main()
