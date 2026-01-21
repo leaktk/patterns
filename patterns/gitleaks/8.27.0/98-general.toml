@@ -795,6 +795,13 @@
       'xxxxx',
       # The google analytics API key
       'AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM',
+      # Keys embeded into chrome binaries
+      ## Windows
+      'AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE',
+      ## Linux
+      'AIzaSyBqJZh-7pA44blAaAkH6490hUFOwX0KCYM',
+      ## Mac
+      'AIzaSyDr2UxVnv_U85AbhhY8XSHSIavUW0DC-sY',
     ]
 
 [[rules]]

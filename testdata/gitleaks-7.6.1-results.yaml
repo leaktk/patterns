@@ -985,6 +985,11 @@
   line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
 
 - rule: Google API Key
+  file: google/benign/google-chrome-windows-platform-key
+  offender: AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE
+  line: AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE
+
+- rule: Google API Key
   file: semgrep-rules-examples/detected-google-api-key.txt
   offender: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI=
   line: AIzaSyBGJlWlxZEnJ2yUape3AjqmNyo5xxh6xtI==
