@@ -71,6 +71,7 @@ These are the supported, predefined `type` tags:
 * `type:ioc` - an indicator of compromise
 * `type:pii` - personally identifiable information
 * `type:vuln` - a CVE, vulnerable dep, or known flaw
+* `type:phi` - protected health information
 
 Custom `type` tags should be namespaced to avoid collisions with future tags.
 For example if you were writing tags for a company called WidgetCorp and you
