@@ -893,9 +893,19 @@
 #
 
 - rule: GitHub OAuth Access Token
-  file: github/valid/oauth-access-token
+  file: github/invalid/token-from-the-docs
   offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
-  line: token='gho_16C7e42F292c6912E7710c838347Ae178B4a'
+  line: '  "access_token":"gho_16C7e42F292c6912E7710c838347Ae178B4a",'
+
+- rule: GitHub OAuth Access Token
+  file: github/invalid/token-from-the-docs
+  offender: gho_16C7e42F292c6912E7710c838347Ae178B4a
+  line: '  <access_token>gho_16C7e42F292c6912E7710c838347Ae178B4a</access_token>'
+
+- rule: GitHub OAuth Access Token
+  file: github/valid/oauth-access-token
+  offender: gho_16C7e42F292c6912E7710c839357Ae278B4a
+  line: token='gho_16C7e42F292c6912E7710c839357Ae278B4a'
 
 #
 # GitHub Personal Access Token
@@ -952,6 +962,11 @@
   offender: glpat-LwnfdsSHX1aSGxsqsPUX
   line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
 
+- rule: GitLab Access Token
+  file: gitlab/valid/new-routable-pats
+  offender: glpat-7x0v4iGtKgqAeS5I5xxR
+  line: '    private_token = "glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"'
+
 #
 # GitLab Pipeline Trigger Token
 #
@@ -983,6 +998,11 @@
   file: general-test
   offender: 'AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ '
   line: Some google key yo AIzaOObST8cGSeh3cYNvEGXEXY9BShQx1EtRdfZ yep here it be!
+
+- rule: Google API Key
+  file: google/benign/google-chrome-windows-platform-key
+  offender: AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE
+  line: AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE
 
 - rule: Google API Key
   file: semgrep-rules-examples/detected-google-api-key.txt

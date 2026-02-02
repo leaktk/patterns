@@ -566,6 +566,9 @@
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
       # $ gen-base64-search-regex example EXAMPLE change 12345 token hello world passw secret
       '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\]\]>)?<\/''',
+      # Already covered by the GitHub rules
+      '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+      '''\bgithub_pat_\w{82}\b''',
       # Various words at the start and end that signify a placeholder
 
       ## Starts with
@@ -707,6 +710,12 @@
     'gho_',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '''gho_16C7e42F292c6912E7710c838347Ae178B4a''',
+    ]
+
+
 [[rules]]
   id = 'gODCNuGzuKQ'
   description = 'GitHub Personal Access Token'
@@ -749,8 +758,8 @@
 
 [[rules]]
   id = 'KJX2Vbp6_jY'
-  description = 'GitLab Access Token'
-  regex = '''\b(glpat-[\w\-]{20})(?:[^\w\-]|\z)'''
+  description = 'GitLab Personal Access Token'
+  regex = '''\b(glpat-(?:[\w\-]{20}|[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}))(?:[^\w\-]|\z)'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
@@ -795,6 +804,13 @@
       'xxxxx',
       # The google analytics API key
       'AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM',
+      # Keys embeded into chrome binaries
+      ## Windows
+      'AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE',
+      ## Linux
+      'AIzaSyBqJZh-7pA44blAaAkH6490hUFOwX0KCYM',
+      ## Mac
+      'AIzaSyDr2UxVnv_U85AbhhY8XSHSIavUW0DC-sY',
     ]
 
 [[rules]]
@@ -1567,7 +1583,9 @@
       # Things like: https://user:{pass}@host
       # Things like: https://user:#{pass}@host
       # Things like: https://user:$(pass)@host
-       ''':\/\/[^:\/\s\"\']*?:\"?(?:\\?\$|#)?(?:\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+      ''':\/\/[^:\/\s\"\']*?:\"?(?:\\?\$|#)?(?:\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+      # Things like invalid mailto links
+      ''':\/\/mailto:([^@\/\s\"]{3,})@[\w\.\-]+(:\d+)?''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
       # All lower or upper letters only passwords

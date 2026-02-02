@@ -821,16 +821,10 @@
   secret: GrWTm5k2jtWy9CeOVbOjlREt-10NmpePFKxv4Fml89YLwn002kF1cy4LQ1cXs9d2PGx37zOUPQk1yViMhhIdHlhw
 
 - rule.description: Generic Secret
-  rule.id: eCOHX_SKGzA
-  location.path: github/valid/fine-grained-personal-access-token
-  match: <access-token>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</
-  secret: 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
-
-- rule.description: Generic Secret
-  rule.id: eCOHX_SKGzA
-  location.path: github/valid/personal-access-token-in-xml
-  match: <access-token>ghp_16C7e42F292c6912E7710c838347Ae178B4a</
-  secret: ghp_16C7e42F292c6912E7710c838347Ae178B4a
+  rule.id: _-9w6-yrc-4
+  location.path: gitlab/valid/new-routable-pats
+  match: private_token = "glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"
+  secret: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
@@ -1185,8 +1179,8 @@
 - rule.description: GitHub OAuth Access Token
   rule.id: 3J1l0v_MrA0
   location.path: github/valid/oauth-access-token
-  match: gho_16C7e42F292c6912E7710c838347Ae178B4a
-  secret: gho_16C7e42F292c6912E7710c838347Ae178B4a
+  match: gho_16C7e42F292c6912E7710c839357Ae278B4a
+  secret: gho_16C7e42F292c6912E7710c839357Ae278B4a
 
 #
 # GitHub Personal Access Token
@@ -1247,14 +1241,20 @@
   secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
-# GitLab Access Token
+# GitLab Personal Access Token
 #
 
-- rule.description: GitLab Access Token
+- rule.description: GitLab Personal Access Token
   rule.id: KJX2Vbp6_jY
   location.path: general-test
   match: glpat-LwnfdsSHX1aSGxsqsPUX
   secret: glpat-LwnfdsSHX1aSGxsqsPUX
+
+- rule.description: GitLab Personal Access Token
+  rule.id: KJX2Vbp6_jY
+  location.path: gitlab/valid/new-routable-pats
+  match: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"
+  secret: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk
 
 #
 # GitLab Pipeline Trigger Token
