@@ -1583,7 +1583,9 @@
       # Things like: https://user:{pass}@host
       # Things like: https://user:#{pass}@host
       # Things like: https://user:$(pass)@host
-       ''':\/\/[^:\/\s\"\']*?:\"?(?:\\?\$|#)?(?:\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+      ''':\/\/[^:\/\s\"\']*?:\"?(?:\\?\$|#)?(?:\([^@\/\s\"]+\)|{[^@\/\s\"]+\})\"?@[\w\.\-]+''',
+      # Things like invalid mailto links
+      ''':\/\/mailto:([^@\/\s\"]{3,})@[\w\.\-]+(:\d+)?''',
       # Things like: https://user:$SOME_ENV_VARIABLE-optional-text@host
       ''':\/\/[^:\/\s\"\']*?:\"?\$[A-Z][0-9A-Z_]{4,}[\w\-]*?\"?@[\w\.\-]+''',
       # All lower or upper letters only passwords
