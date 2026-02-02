@@ -652,6 +652,8 @@ regexes = [
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\]\]>)?<\/''',
+'''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
+'''\bgithub_pat_\w{82}\b''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(?:my)?secret|self|ssh|spec\.|str:|(?:my)?te?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-demo|-encryption|-tls|_id|_private|client|(?:change|fix)me|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|default|devel(?:opment)|hash|here|json|key|[_-]pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
 '''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
@@ -821,6 +823,10 @@ tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'gho_',
 ]
+[rules.allowlist]
+stopwords = [
+'''gho_16C7e42F292c6912E7710c838347Ae178B4a''',
+]
 [[rules]]
 id = 'gODCNuGzuKQ'
 description = 'GitHub Personal Access Token'
@@ -900,6 +906,9 @@ stopwords = [
 '***',
 'xxxxx',
 'AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM',
+'AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE',
+'AIzaSyBqJZh-7pA44blAaAkH6490hUFOwX0KCYM',
+'AIzaSyDr2UxVnv_U85AbhhY8XSHSIavUW0DC-sY',
 ]
 [[rules]]
 id = 'F8ySDDFvEPA'
