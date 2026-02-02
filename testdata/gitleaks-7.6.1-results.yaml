@@ -962,6 +962,11 @@
   offender: glpat-LwnfdsSHX1aSGxsqsPUX
   line: my_cred=glpat-LwnfdsSHX1aSGxsqsPUX
 
+- rule: GitLab Access Token
+  file: gitlab/valid/new-routable-pats
+  offender: glpat-7x0v4iGtKgqAeS5I5xxR
+  line: '    private_token = "glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"'
+
 #
 # GitLab Pipeline Trigger Token
 #

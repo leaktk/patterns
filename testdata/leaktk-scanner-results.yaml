@@ -822,6 +822,12 @@
 
 - rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
+  location.path: gitlab/valid/new-routable-pats
+  match: private_token = "glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"
+  secret: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk
+
+- rule.description: Generic Secret
+  rule.id: _-9w6-yrc-4
   location.path: gradle/valid/build-aws.gradle.kts
   match: secretKey = "H5l@N8!9p#Yq"
   secret: H5l@N8!9p#Yq
@@ -1235,14 +1241,20 @@
   secret: ghu_16C7e42F292c6912E7710c838347Ae178B4a
 
 #
-# GitLab Access Token
+# GitLab Personal Access Token
 #
 
-- rule.description: GitLab Access Token
+- rule.description: GitLab Personal Access Token
   rule.id: KJX2Vbp6_jY
   location.path: general-test
   match: glpat-LwnfdsSHX1aSGxsqsPUX
   secret: glpat-LwnfdsSHX1aSGxsqsPUX
+
+- rule.description: GitLab Personal Access Token
+  rule.id: KJX2Vbp6_jY
+  location.path: gitlab/valid/new-routable-pats
+  match: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk"
+  secret: glpat-7x0v4iGtKgqAeS5I5xxRHG86MQp1OjEH.01.0w0nzy6lk
 
 #
 # GitLab Pipeline Trigger Token

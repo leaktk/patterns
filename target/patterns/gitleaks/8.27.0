@@ -865,8 +865,8 @@ keywords = [
 ]
 [[rules]]
 id = 'KJX2Vbp6_jY'
-description = 'GitLab Access Token'
-regex = '''\b(glpat-[\w\-]{20})(?:[^\w\-]|\z)'''
+description = 'GitLab Personal Access Token'
+regex = '''\b(glpat-(?:[\w\-]{20}|[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}))(?:[^\w\-]|\z)'''
 entropy = 2
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
