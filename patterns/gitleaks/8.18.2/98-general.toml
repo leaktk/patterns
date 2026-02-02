@@ -712,6 +712,7 @@
 
   [rules.allowlist]
     stopwords = [
+      # Example value from GitHub's docs
       '''gho_16C7e42F292c6912E7710c838347Ae178B4a''',
     ]
 
@@ -758,8 +759,8 @@
 
 [[rules]]
   id = 'KJX2Vbp6_jY'
-  description = 'GitLab Access Token'
-  regex = '''\b(glpat-[\w\-]{20})(?:[^\w\-]|\z)'''
+  description = 'GitLab Personal Access Token'
+  regex = '''\b(glpat-(?:[\w\-]{20}|[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}))(?:[^\w\-]|\z)'''
   entropy = 2
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
