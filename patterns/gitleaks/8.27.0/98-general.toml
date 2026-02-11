@@ -152,6 +152,8 @@
     regexes = [
       # Ignore redacted secrets
       '''\"auth\\*\"\s*:\s*\\*\"[^"]*(?:\.\.\.|\*\*\*)[^"]*\\?\"''',
+      # Ignore placeholder values
+      '''\"auth\\*\"\s*:\s*\\*\"[^"]*(?i)(?:replace|password|example)[^"]*\\*\"''',
       # Ignore emails containing example
       '''\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
     ]

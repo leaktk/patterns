@@ -242,6 +242,7 @@ keywords = [
 regexTarget = 'match'
 regexes = [
 '''\"auth\\*\"\s*:\s*\\*\"[^"]*(?:\.\.\.|\*\*\*)[^"]*\\?\"''',
+'''\"auth\\*\"\s*:\s*\\*\"[^"]*(?i)(?:replace|password|example)[^"]*\\*\"''',
 '''\"email\\*\"\s*:\s*\\*\"[^"]*(?i)example[^"]*\\*\"''',
 ]
 [[rules]]
