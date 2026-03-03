@@ -1061,7 +1061,7 @@
 #
 
 - rule: Hugging Face API Token
-  file: huggingface-api-keys
+  file: huggingface/valid/api-key
   offender: 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
   line: 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
 

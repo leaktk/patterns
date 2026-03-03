@@ -1419,7 +1419,7 @@
 
 - rule.description: Hugging Face API Token
   rule.id: ROB1tToGkqM
-  location.path: huggingface-api-keys
+  location.path: huggingface/valid/api-key
   match: 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
   secret: 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
 

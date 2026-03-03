@@ -262,6 +262,11 @@
   regex = '''\bhf_[a-zA-Z]{34}\b'''
   tags = ['type:secret', 'alert:repo-owner']
 
+  [[rules.entropies]]
+    Min = "3"
+    Max = "8"
+    Group = "0"
+
 [[rules]]
   # base64 shifted versions of '"sub":"system:serviceaccount:'
   description = "Kubernetes System Service Account JWT"
