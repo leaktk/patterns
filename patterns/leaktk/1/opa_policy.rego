@@ -1,4 +1,5 @@
-package analyst
+package leaktk.analyst
+
 response := input
 findings := response.results
 analyzed_finding_ids := {f.id | some f in analyzed_findings}
@@ -6,6 +7,7 @@ unanalyzed_findings := {
   object.union(finding, {"valid": null, "analysis": null})
   | some finding in findings; not analyzed_finding_ids[finding.id]
 }
+
 # GitHub Tokens
 analyzed_findings contains analyzed_finding if {
   some finding in findings
