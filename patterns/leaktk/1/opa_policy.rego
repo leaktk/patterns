@@ -11,7 +11,6 @@ object.union(finding, {"valid": null, "analysis": null}) |
 
 analyzed_response := object.union(response, {"results": analyzed_findings | unanalyzed_findings})
 
-
 # Utils
 auth_bearer_token_valid(opts) if {
   http.send({
@@ -75,4 +74,18 @@ analyzed_findings contains analyzed_finding if {
     "valid": resp.body.ok,
     "analysis": resp.body,
   })
+}
+
+# Slack Webhook URLs
+analyzed_findings contains analyzed_finding if {
+  some finding in findings
+  contains(lower(finding.rule.description), "slack")
+  regex.match("^(?:https?:\/\/)?hooks.slack.com\/(?:services|workflows|triggers)", finding.secret)
+  resp := http.send({
+    "url": finding.secret,
+    "method": "POST",
+    "raw_body": "junk-data",
+    "headers": {"Content-Type": "application/json"},
+  })
+  analyzed_finding := object.union(finding, {"valid": resp.status_code == 400})
 }
