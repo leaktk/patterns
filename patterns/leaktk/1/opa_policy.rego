@@ -155,7 +155,7 @@ analyzed_findings contains analyzed_finding if {
 analyzed_findings contains analyzed_finding if {
 	some finding in findings
 	contains(lower(finding.rule.description), "mailchimp")
-	regex.match("^[0-9a-f]{32}-us[0-9]{1,2}$", finding.secret)
+	regex.match(`^[0-9a-f]{32}-us[0-9]{1,2}$`, finding.secret)
 	dc := split(finding.secret, "-")[1]
 	analyzed_finding := object.union(finding, {"valid": auth_bearer_token_valid({
 		"url": sprintf("https://%s.api.mailchimp.com/3.0/ping", [dc]),
@@ -167,9 +167,20 @@ analyzed_findings contains analyzed_finding if {
 analyzed_findings contains analyzed_finding if {
 	some finding in findings
 	contains(lower(finding.rule.description), "stripe")
-	regex.match("(?i)^[sr]k_live_[0-9a-zA-Z]{24}$", finding.secret)
+	regex.match(`(?i)^[sr]k_live_[0-9a-zA-Z]{24}$`, finding.secret)
 	analyzed_finding := object.union(finding, {"valid": auth_bearer_token_valid({
 		"url": "https://api.stripe.com/v1/account",
+		"token": finding.secret,
+	})})
+}
+
+# SendGrid API Keys
+analyzed_findings contains analyzed_finding if {
+	some finding in findings
+	contains(lower(finding.rule.description), "sendgrid")
+	regex.match(`^SG\.[\w\-]{16,32}\.[\w\-]{16,64}$`, finding.secret)
+	analyzed_finding := object.union(finding, {"valid": auth_bearer_token_valid({
+		"url": "https://api.sendgrid.com/v3/scopes",
 		"token": finding.secret,
 	})})
 }
