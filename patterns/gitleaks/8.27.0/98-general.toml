@@ -1495,20 +1495,30 @@
 [[rules]]
   id = 'fZHzd4gAHrs'
   description = 'Square Access Token'
-  regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
+  regex = '''\bsq0atp-[\w\-]{22}'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'sq0atp-',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
 [[rules]]
   id = 'YX55Boo0gwk'
   description = 'Square OAuth Secret'
-  regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
+  regex = '''\bsq0csp-[\w\-]{43}'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'sq0csp-',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
 
 [[rules]]
   id = 'CSHGj8J1lUs'
@@ -1540,10 +1550,11 @@
 [[rules]]
   id = 'hRAjGfP0Zao'
   description = 'Twilio API Key'
-  regex = '''\bSK(?i)[0-9a-f]{32}\b'''
+  regex = '''\b(?:SK|AC)[0-9a-fA-F]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'sk',
+    'ac',
   ]
 
 [[rules]]
