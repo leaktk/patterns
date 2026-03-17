@@ -15,6 +15,7 @@ format:
 	grep -lPR '\t' patterns/ | xargs -r sed -i 's/\t/  /g'
 	./scripts/sort-and-group-in-place ./testdata/leaktk-scanner-results.yaml
 	./scripts/sort-and-group-in-place ./testdata/gitleaks-7.6.1-results.yaml
+	if command -v opa > /dev/null 2> /dev/null; then find . -name '*.rego' -type f | xargs opa fmt -w; fi
 
 .PHONY: test
 test: clean build
