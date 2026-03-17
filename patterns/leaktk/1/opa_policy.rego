@@ -91,11 +91,11 @@ analyzed_findings contains analyzed_finding if {
 	analyzed_finding := object.union(finding, {"valid": valid})
 }
 
-# Slack User Tokens
+# Slack API Tokens
 analyzed_findings contains analyzed_finding if {
 	some finding in findings
 	contains(lower(finding.rule.description), "slack")
-	regex.match("^xox[pe](?:-[0-9]{10,13}){3}-[a-zA-Z0-9-]{28,34}$", finding.secret)
+	regex.match(`^xox[pe](?:-[0-9]{10,13}){3}-[a-zA-Z0-9-]{28,34}|xoxb-[0-9]{8,14}-[a-zA-Z0-9]{18,26}$`, finding.secret)
 	resp := http.send({
 		"url": "https://slack.com/api/auth.test",
 		"method": "POST",
