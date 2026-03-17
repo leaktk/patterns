@@ -12,6 +12,8 @@ object.union(finding, {"valid": null, "analysis": null}) |
 analyzed_response := object.union(response, {"results": analyzed_findings | unanalyzed_findings})
 
 # Utils
+default auth_bearer_token_valid(opts) := false
+
 auth_bearer_token_valid(opts) if {
 	http.send({
 		"url": opts.url,
@@ -147,4 +149,27 @@ analyzed_findings contains analyzed_finding if {
 		"valid": count(valid_auths) > 0,
 		"analysis": {"valid_auths": valid_auths},
 	})
+}
+
+# MailChimp API Tokens
+analyzed_findings contains analyzed_finding if {
+	some finding in findings
+	contains(lower(finding.rule.description), "mailchimp")
+	regex.match("^[0-9a-f]{32}-us[0-9]{1,2}$", finding.secret)
+	dc := split(finding.secret, "-")[1]
+	analyzed_finding := object.union(finding, {"valid": auth_bearer_token_valid({
+		"url": sprintf("https://%s.api.mailchimp.com/3.0/ping", [dc]),
+		"token": finding.secret,
+	})})
+}
+
+# Stripe API Tokens
+analyzed_findings contains analyzed_finding if {
+	some finding in findings
+	contains(lower(finding.rule.description), "stripe")
+	regex.match("(?i)^[sr]k_live_[0-9a-zA-Z]{24}$", finding.secret)
+	analyzed_finding := object.union(finding, {"valid": auth_bearer_token_valid({
+		"url": "https://api.stripe.com/v1/account",
+		"token": finding.secret,
+	})})
 }
