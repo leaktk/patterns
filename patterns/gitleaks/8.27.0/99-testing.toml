@@ -310,3 +310,164 @@
     ]
 
 
+## Pulling in some test secrets from https://github.com/ibm/detect-secrets and tweaking them
+
+[[rules]]
+  id = 'FatqB1Yj2mw'
+  description = 'JFrog Reference Token'
+  # https://docs.jfrog.com/user-management/docs/identity-tokens
+  regex = '''\bcmVmd[0-9a-zA-Z]{59}\b'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'cmvmd',
+  ]
+
+[[rules]]
+  id = 'mlFILXs1UvI'
+  description = 'JFrog API Key'
+  # https://docs.jfrog.com/user-management/docs/identity-tokens
+  regex = '''\bAKCp[0-9a-zA-Z]{69}\b'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'akcp',
+  ]
+
+[[rules]]
+  id = 'J4rqQ0Yj3mx'
+  description = 'JFrog Cloud Domain'
+  regex = '''(?i)\b[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]\.jfrog\.io\b'''
+  tags = ['type:infra', 'group:leaktk-testing']
+  keywords = [
+    'jfrog.io',
+  ]
+
+[[rules]]
+  id = 'YzS2V8VFHGc'
+  description = 'Azure Storage Account Access Key'
+  regex = '''(?:\A|[:=>,\+\(\]\x20\t\'\"])([a-zA-Z0-9+\/]{86}==)'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'azure',
+  ]
+
+[[rules]]
+  # TODO: see if a validator would work better and if this should just be picked up by the generic secret rule
+  # or if box has a fixed format we can look for
+  id = 'gil1vJdjLX8'
+  description = 'Box Credential'
+  regex = '''(?i)client[_-]?secret[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9]{32})\b'''
+  entropy = 2
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'box',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+[[rules]]
+  # TODO: see look up this key format and see if it makes sense to only do this as an analyzer instead of a special rule and set entropy
+  id = 'KLjNyfRdTds'
+  description = 'IBM Cloudant Legacy Credential'
+  regex = '''\bapikey-v2-[\w\-]{30,60}\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  entropy = 3
+  keywords = [
+    'cloudant',
+  ]
+
+[[rules]]
+  # TODO: see look up this key format and see if it makes sense to only do this as an analyzer instead of a special rule and set entropy
+  id = 'LuM6ju8-bhw'
+  description = 'IBM Cloudant Domain'
+  regex = '''(?i)\b[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]\.(?:cloudantnosqldb\.appdomain\.cloud|cloudant\.com)'''
+  tags = ['type:infra', 'group:leaktk-testing']
+  keywords = [
+    'cloudant',
+  ]
+
+[[rules]]
+  # TODO: check if this is valid and set entropy
+  id = '66er8vrJfek'
+  description = 'IBM Cloud IAM Key'
+  regex = '''(?i)(?:ibm|bluemix)[a-z0-9_ .\-]{0,40}[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9_\-]{44,64})(?:[^\w\-\+\/]|\z)'''
+  entropy = 2
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ibm',
+    'bluemix',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+[[rules]]
+  id = 'jAvVLUuPci4'
+  description = 'IBM COS HMAC Credential'
+  regex = '''(?i)[\w\-]{0,32}(?:secret[-_]?(?:access)?[-_]?key)[:=>,\+\(\]\x20\t\'\"]+([a-f0-9]{48})\b'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'cos',
+    'hmac',
+    'ibm',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+[[rules]]
+  id = 'hiXy21ky-0g'
+  description = 'JSON Web Token'
+  regex = '''\bey[\w\-]{16,}\.ey[\w\-]{16,}\.[\w\-]{8,}'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ey',
+  ]
+
+[[rules]]
+  id = '_RRN9Zvxarw'
+  description = 'PuTTY Private Key'
+  regex = '''PuTTY-User-Key-File-2:\s*.*\s+(?:[0-9a-zA-Z\-]+:\s*.+\s+|[0-9a-zA-Z\+\/]{64}\s+|[0-9a-zA-Z\+\/]{1,63}={0,2}\s+)+'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'putty-user-key-file-2',
+  ]
+
+[[rules]]
+  # TODO: check if this is valid and set entropy
+  id = '_aphOtzsw1M'
+  description = 'SoftLayer Credential'
+  regex = '''(?i)(?:softlayer|sl[_-]?api)[\w\-]{0,32}[:=>,\+\(\]\x20\t\'\"]+([0-9a-f]{64})\b'''
+  entropy = 3
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'softlayer',
+    'sl',
+  ]
+
+  [rules.allowlist]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+[[rules]]
+  id = '4aEKDYoZvaw'
+  description = 'SoftLayer Credential'
+  regex = '''(?i)https?:\/\/api\.softlayer\.com\/soap\/v[^\/]+\/([a-z0-9]{64})'''
+  entropy = 2
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'api.softlayer.com',
+  ]
