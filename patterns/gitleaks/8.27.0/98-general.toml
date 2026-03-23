@@ -306,7 +306,8 @@
       #   secret = "[%PLACEHOLDER%]"
       #   secret = "$(PLACEHOLDER..."
       #   secret = "\$(PLACEHOLDER..."
-      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?(?:%|\)s)|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|\\?\$\(.*)[\"\']''',
+      #   secret = "SOME_FUNC({{PLACEHOLDER}})"
+      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:_.+?_|<.+?>|@.+?@|\).+?\(|%.+?(?:%|\)s)|\$.+?\$|`.+?`|\[.+?\]|\[%.+?%\]|[A-Z]+\(\{\{[^\}]{0,32}\}\}\)|\\?\$\(.*)[\"\']''',
       #   secret = "ALL_UPPER_LETTERS_OR_UNDERSCORES"
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[A-Z_]{5,}?[\"\']''',
       #   secret = "{PLACEHOLDER}"
