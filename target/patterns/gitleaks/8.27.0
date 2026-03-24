@@ -1468,18 +1468,214 @@ keywords = [
 [[rules]]
 id = 'fZHzd4gAHrs'
 description = 'Square Access Token'
-regex = '''\bsq0atp-[0-9A-Za-z\-_]{22}'''
+regex = '''\bsq0atp-[\w\-]{22}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'sq0atp-',
 ]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
 [[rules]]
 id = 'YX55Boo0gwk'
 description = 'Square OAuth Secret'
-regex = '''\bsq0csp-[0-9A-Za-z\\-_]{43}'''
+regex = '''\bsq0csp-[\w\-]{43}'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'sq0csp-',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
 ]
 [[rules]]
 id = 'CSHGj8J1lUs'
@@ -1508,10 +1704,11 @@ keywords = [
 [[rules]]
 id = 'hRAjGfP0Zao'
 description = 'Twilio API Key'
-regex = '''\bSK(?i)[0-9a-f]{32}\b'''
+regex = '''\b(?:SK|AC)[0-9a-fA-F]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'sk',
+'ac',
 ]
 [[rules]]
 id = 'NoSStdj9pfY'
@@ -1914,4 +2111,515 @@ regexes = [
 '''\b(?:glrt-|GR1348941)[\w\-]{20}\b''',
 '''\bAg[A-Za-z0-9+\/]{256,}''',
 '''(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
+]
+[[rules]]
+id = 'FatqB1Yj2mw'
+description = 'JFrog Reference Token'
+regex = '''\bcmVmd[0-9a-zA-Z]{59}\b'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'cmvmd',
+]
+[[rules]]
+id = 'mlFILXs1UvI'
+description = 'JFrog API Key'
+regex = '''\bAKCp[0-9a-zA-Z]{69}\b'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'akcp',
+]
+[[rules]]
+id = 'J4rqQ0Yj3mx'
+description = 'JFrog Cloud Domain'
+regex = '''(?i)\b[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]\.jfrog\.io\b'''
+tags = ['type:infra', 'group:leaktk-testing']
+keywords = [
+'jfrog.io',
+]
+[[rules]]
+id = 'YzS2V8VFHGc'
+description = 'Azure Storage Account Access Key'
+regex = '''(?:\A|[:=>,\+\(\]\x20\t\'\"])([a-zA-Z0-9+\/]{86}==)'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'azure',
+]
+[[rules]]
+id = 'gil1vJdjLX8'
+description = 'Box Credential'
+regex = '''(?i)client[_-]?secret[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9]{32})\b'''
+entropy = 2
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'box',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
+[[rules]]
+id = 'KLjNyfRdTds'
+description = 'IBM Cloudant Legacy Credential'
+regex = '''\bapikey-v2-[\w\-]{30,60}\b'''
+tags = ['type:secret', 'group:leaktk-testing']
+entropy = 3
+keywords = [
+'cloudant',
+]
+[[rules]]
+id = 'LuM6ju8-bhw'
+description = 'IBM Cloudant Domain'
+regex = '''(?i)\b[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]\.(?:cloudantnosqldb\.appdomain\.cloud|cloudant\.com)'''
+tags = ['type:infra', 'group:leaktk-testing']
+keywords = [
+'cloudant',
+]
+[[rules]]
+id = '66er8vrJfek'
+description = 'IBM Cloud IAM Key'
+regex = '''(?i)(?:ibm|bluemix)[a-z0-9_ .\-]{0,40}[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9_\-]{44,64})(?:[^\w\-\+\/]|\z)'''
+entropy = 2
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'ibm',
+'bluemix',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
+[[rules]]
+id = 'jAvVLUuPci4'
+description = 'IBM COS HMAC Credential'
+regex = '''(?i)[\w\-]{0,32}(?:secret[-_]?(?:access)?[-_]?key)[:=>,\+\(\]\x20\t\'\"]+([a-f0-9]{48})\b'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'cos',
+'hmac',
+'ibm',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
+[[rules]]
+id = 'hiXy21ky-0g'
+description = 'JSON Web Token'
+regex = '''\bey[\w\-]{16,}\.ey[\w\-]{16,}\.[\w\-]{8,}'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'ey',
+]
+[[rules]]
+id = '_RRN9Zvxarw'
+description = 'PuTTY Private Key'
+regex = '''PuTTY-User-Key-File-2:\s*.*\s+(?:[0-9a-zA-Z\-]+:\s*.+\s+|[0-9a-zA-Z\+\/]{64}\s+|[0-9a-zA-Z\+\/]{1,63}={0,2}\s+)+'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'putty-user-key-file-2',
+]
+[[rules]]
+id = '_aphOtzsw1M'
+description = 'SoftLayer Credential'
+regex = '''(?i)(?:softlayer|sl[_-]?api)[\w\-]{0,32}[:=>,\+\(\]\x20\t\'\"]+([0-9a-f]{64})\b'''
+entropy = 3
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'softlayer',
+'sl',
+]
+[rules.allowlist]
+stopwords = [
+'***',
+'...',
+'/etc/',
+'/run/',
+'/var/',
+'1234',
+'_key',
+'abc123',
+'abcd',
+'admin',
+'ansible',
+'auth',
+'base',
+'bearer',
+'bool',
+'bucket',
+'candlepin',
+'categories',
+'cert',
+'change',
+'client',
+'conf',
+'cont',
+'cred',
+'curl',
+'data',
+'default',
+'demo',
+'dissem',
+'django',
+'enter',
+'entry',
+'environ',
+'everyone',
+'example',
+'fake',
+'gitops',
+'hash',
+'header',
+'here',
+'insert',
+'invalid',
+'java',
+'json',
+'keylime',
+'local',
+'login',
+'manager',
+'name',
+'oauth-basic',
+'opens',
+'passp',
+'passw',
+'pass123',
+'path',
+'pbench',
+'place',
+'placeholder',
+'postgres',
+'principal',
+'prisma',
+'private',
+'profile',
+'provide',
+'quickstart',
+'rabbitmq',
+'redacted',
+'redhat',
+'registry',
+'replace',
+'required',
+'resource',
+'role',
+'sample',
+'schema',
+'secret',
+'serv',
+'service',
+'session',
+'slack',
+'snip',
+'some',
+'spec',
+'string',
+'telemetry',
+'test',
+'theblurstoftimes',
+'todo',
+'token',
+'update',
+'user',
+'uuid',
+'value',
+'xxxxx',
+'your',
+]
+[[rules]]
+id = '4aEKDYoZvaw'
+description = 'SoftLayer Credential'
+regex = '''(?i)https?:\/\/api\.softlayer\.com\/soap\/v[^\/]+\/([a-z0-9]{64})'''
+entropy = 2
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'api.softlayer.com',
 ]
