@@ -471,3 +471,13 @@
   keywords = [
     'api.softlayer.com',
   ]
+
+[[rules]]
+  id = 'xRAjGfP0Zao'
+  description = 'Twilio Account SID'
+  regex = '''\bAC[0-9a-f]{32}\b'''
+  entropy = 2
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ac',
+  ]

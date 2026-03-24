@@ -1710,11 +1710,10 @@ keywords = [
 [[rules]]
 id = 'hRAjGfP0Zao'
 description = 'Twilio API Key'
-regex = '''\b(?:SK|AC)[0-9a-fA-F]{32}\b'''
+regex = '''\bSK[0-9a-f]{32}\b'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 'sk',
-'ac',
 ]
 [[rules]]
 id = 'NoSStdj9pfY'
@@ -2634,4 +2633,13 @@ entropy = 2
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'api.softlayer.com',
+]
+[[rules]]
+id = 'xRAjGfP0Zao'
+description = 'Twilio Account SID'
+regex = '''\bAC[0-9a-f]{32}\b'''
+entropy = 2
+tags = ['type:secret', 'group:leaktk-testing']
+keywords = [
+'ac',
 ]

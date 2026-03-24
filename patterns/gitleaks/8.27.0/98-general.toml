@@ -1551,11 +1551,10 @@
 [[rules]]
   id = 'hRAjGfP0Zao'
   description = 'Twilio API Key'
-  regex = '''\b(?:SK|AC)[0-9a-fA-F]{32}\b'''
+  regex = '''\bSK[0-9a-f]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'sk',
-    'ac',
   ]
 
 [[rules]]
