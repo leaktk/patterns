@@ -2230,10 +2230,10 @@
   secret: https://goofy-cat-1984.tines.com/webhook/019cd913e7056ad466a9af156a8244cd/4f4980a83eb96af5085f6cfcdafe6bd0
 
 #
-# Twilio API Key
+# Twilio API Key SID
 #
 
-- rule.description: Twilio API Key
+- rule.description: Twilio API Key SID
   rule.id: hRAjGfP0Zao
   location.path: semgrep-rules-examples/detected-twilio-api-key.txt
   match: SK575796bb721246b5fe003bcc32ebde77

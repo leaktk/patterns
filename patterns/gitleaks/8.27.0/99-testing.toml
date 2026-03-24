@@ -474,8 +474,9 @@
 
 [[rules]]
   id = 'xRAjGfP0Zao'
+  # https://www.twilio.com/docs/glossary/what-is-a-sid
   description = 'Twilio Account SID'
-  regex = '''\bAC[0-9a-f]{32}\b'''
+  regex = '''\bAC[0-9a-fA-F]{32}\b'''
   entropy = 2
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [

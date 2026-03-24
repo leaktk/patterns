@@ -1550,8 +1550,9 @@
 
 [[rules]]
   id = 'hRAjGfP0Zao'
-  description = 'Twilio API Key'
-  regex = '''\bSK[0-9a-f]{32}\b'''
+  # https://www.twilio.com/docs/glossary/what-is-a-sid
+  description = 'Twilio API Key SID'
+  regex = '''\bSK[0-9a-fA-F]{32}\b'''
   tags = ['type:secret', 'alert:repo-owner']
   keywords = [
     'sk',
