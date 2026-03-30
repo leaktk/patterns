@@ -50,16 +50,6 @@
     ]
 
 [[rules]]
-  id = '9eKXOSk_IL5'
-  description = 'AWS API Gateway pattern'
-  regex = '''[0-9a-z]+.execute-api.[0-9a-z.-_]+.amazonaws.com'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'amazonaws',
-    'execute-api'
-  ]
-
-[[rules]]
   id = 'QqS4RvI6Zmg'
   description = 'Authorization Header'
   regex = '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?([^\s\"\'<]{18,})'''
@@ -827,23 +817,6 @@
       'AIzaSyDr2UxVnv_U85AbhhY8XSHSIavUW0DC-sY',
     ]
 
-[[rules]]
-  id = '9lFJvq24U9i'
-  description = 'Google Cloud Platform OAuth'
-  regex = '''[0-9]+-[0-9A-Za-z_]{32}\.apps\.googleusercontent\.com'''
-  tags = ['type:secret', 'alert:repo-owner']
-  keywords = [
-    'apps',
-    'googleusercontent',
-  ]
-
-[[rules]]
-  id = '24HsNTZRb7o'
-  description = 'Google OAuth Access Token'
-  regex = '''ya29\.[0-9A-Za-z\-_]+'''
-  keywords = [
-    'ya29'
-  ]
 [[rules]]
   id = 'F8ySDDFvEPA'
   description = 'Groq API Key'

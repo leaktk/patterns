@@ -64,6 +64,16 @@
   ]
 
 [[rules]]
+  id = '9eKXOSk_IL5'
+  description = 'AWS API Gateway pattern'
+  regex = '''[0-9a-z]+.execute-api.[0-9a-z.-_]+.amazonaws.com'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'amazonaws',
+    'execute-api'
+  ]
+
+[[rules]]
   id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
   regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
@@ -88,6 +98,14 @@
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
     'sl.',
+  ]
+
+[[rules]]
+  id = 'dX1904tMEXk'
+  description = 'Docker Swarm Token'
+  regex = '''SWMTKN-1-[a-z0-9]{50}-[a-z0-9]{25}'''
+  keywords = [
+    'SWMTKN'
   ]
 
 # This rule WAY WAY overmatches at the moment and can cause the scanner to
@@ -118,6 +136,25 @@
 #     '"client_x509_cert_url"',
 #     '"universe_domain"',
 #   ]
+
+[[rules]]
+  id = '9lFJvq24U9i'
+  description = 'Google Cloud Platform OAuth'
+  regex = '''[0-9]+-[0-9A-Za-z_]{32}\.apps\.googleusercontent\.com'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'apps',
+    'googleusercontent',
+  ]
+
+[[rules]]
+  id = '24HsNTZRb7o'
+  description = 'Google OAuth Access Token'
+  regex = '''ya29\.[0-9A-Za-z\-_]+'''
+  ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ya29'
+  ]
 
 [[rules]]
   id = 'JH9jBKr63QI'
