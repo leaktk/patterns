@@ -22,6 +22,23 @@ auth_bearer_token_valid(opts) if {
   }).status_code < 300
 }
 
+default valid_status_code(status_code, valid_range, invalid_range) := null
+
+valid_status_code(status_code, valid_range, invalid_range) := false if {
+  status_code >= invalid_range[0]
+  status_code <= invalid_range[1]
+}
+
+valid_status_code(status_code, valid_range, invalid_range) := true if {
+  status_code >= valid_range[0]
+  status_code <= valid_range[1]
+}
+
+# Helper for accessing a field if a condition is true
+default get_if(object, field, condition) := null
+
+get_if(object, field, condition) := object[field] if condition
+
 container_registry_auth_opts(hostname) := opts if {
   lower(hostname) == "docker.io"
   opts := {
