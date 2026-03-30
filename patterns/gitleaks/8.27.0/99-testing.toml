@@ -104,6 +104,7 @@
   id = 'dX1904tMEXk'
   description = 'Docker Swarm Token'
   regex = '''SWMTKN-1-[a-z0-9]{50}-[a-z0-9]{25}'''
+  tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
     'SWMTKN'
   ]
