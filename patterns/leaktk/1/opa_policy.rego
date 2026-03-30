@@ -219,58 +219,27 @@ analyzed_findings contains analyzed_finding if {
 
 # GitLab Personal Access Tokens
 analyzed_findings contains analyzed_finding if {
-  some finding in findings
-  contains(lower(finding.rule.description), "gitlab")
-  contains(lower(finding.rule.description), "personal")
-  regex.match(`^glpat-[\w\-]{20}$|^glpat-[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}$`, finding.secret)
-  token_resp := http.send({
-    "url": "https://gitlab.com/api/v4/personal_access_tokens/self",
-    "method": "GET",
-    "headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
-  })
+	some finding in findings
+	contains(lower(finding.rule.description), "gitlab")
+	regex.match(`^glpat-[\w\-]{20}$|^glpat-[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}$`, finding.secret)
 
-  # GitLab can return 200 with active:false for expired tokens, so we need to check both the status code and the active field
-  token_resp.status_code == 200
-  token_resp.body.active == true
-  
-  user_id := token_resp.body.user_id
+	user_resp := http.send({
+		"url": "https://gitlab.com/api/v4/user",
+		"method": "GET",
+		"headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
+	})
 
-  # Second request to get user details for the token owner
-  user_resp := http.send({
-    "url": sprintf("https://gitlab.com/api/v4/users/%d", [user_id]),
-    "method": "GET",
-    "headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
-  })
+	token_resp := http.send({
+		"url": "https://gitlab.com/api/v4/personal_access_tokens/self",
+		"method": "GET",
+		"headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
+	})
 
-  analyzed_finding := object.union(finding, {
-    "valid": true,
-    "analysis": {
-      "token_name": token_resp.body.name,
-      "scopes": token_resp.body.scopes,
-      "expires_at": token_resp.body.expires_at,
-      "user_id": user_id,
-      "username": user_resp.body.username,
-      "is_admin": user_resp.body.is_admin,
-    },
-  })
-}
-
-# GitLab Personal Access Tokens
-# Fallback rule to explicitly mark invalid/expired tokens as valid: false
-# rather than falling through to unanalyzed_findings
-analyzed_findings contains analyzed_finding if {
-  some finding in findings
-  contains(lower(finding.rule.description), "gitlab")
-  contains(lower(finding.rule.description), "personal")
-  regex.match(`^glpat-[\w\-]{20}$|^glpat-[\w\-]{32,235}\.[0-9a-z]{2}\.[0-9a-z]{9}$`, finding.secret)
-  token_resp := http.send({
-    "url": "https://gitlab.com/api/v4/personal_access_tokens/self",
-    "method": "GET",
-    "headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
-  })
-  token_resp.status_code != 200
-  analyzed_finding := object.union(finding, {
-    "valid": false,
-    "analysis": {"status_code": token_resp.status_code},
-  })
+	analyzed_finding := object.union(finding, {
+		"valid": user_resp.status_code == 200,
+		"analysis": {
+			"user": get_if(user_resp, "body", user_resp.status_code == 200),
+			"token": get_if(token_resp, "body", token_resp.status_code == 200),
+		},
+	})
 }
