@@ -212,7 +212,7 @@ analyzed_findings contains analyzed_finding if {
     "headers": {"Authorization": sprintf("Bearer %s", [finding.secret])},
   })
   analyzed_finding := object.union(finding, {
-    "valid": resp.status_code == 200,
+    "valid": valid_status_code(resp.status_code, [200, 200], [400, 499]),
     "analysis": {"status_code": resp.status_code},
   })
 }
