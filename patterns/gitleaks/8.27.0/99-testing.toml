@@ -109,6 +109,17 @@
     'SWMTKN'
   ]
 
+[[rules]]
+  id = 'SgR9ek_sCbS'
+  description = 'Firefox Login Cookies File"
+  regex = '''Firefox\/Profiles\/.*\/cookies\.sqlite'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'Firefox',
+    'cookies',
+  ]
+
+
 # This rule WAY WAY overmatches at the moment and can cause the scanner to
 # time out on large json files.
 #
