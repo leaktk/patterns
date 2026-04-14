@@ -11,6 +11,15 @@ object.union(finding, {"valid": null, "analysis": null}) |
 
 analyzed_response := object.union(response, {"results": analyzed_findings | unanalyzed_findings})
 
+analyzed_findings contains analyzed_finding if {
+    some finding in findings
+    prediction := leaktk.ai.RunModel("LogisticRegression", finding)
+    finding_with_score := object.union(finding, {"analysis": {
+        "probability": prediction.probability
+    }})
+    analyzed_finding := run_specific_analyzers(finding_with_score)
+}
+
 # Utils
 default auth_bearer_token_valid(opts) := false
 
