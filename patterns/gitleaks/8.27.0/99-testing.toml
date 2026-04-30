@@ -64,6 +64,23 @@
   ]
 
 [[rules]]
+  id = '9eKXOSk_IL5'
+  description = 'AWS API Gateway pattern'
+  regex = '''[0-9a-z]+.execute-api.[0-9a-z.-_]+.amazonaws.com'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'amazonaws',
+    'execute-api'
+  ]
+
+[[rules]]
+  id = SA2NjlmbpmX
+  description = 'Generic Credentials'
+  regex = '''(?i)(credentials|creds|password|passwd)\s*[:=]\s*['"]([a-zA-Z0-9!@#$%^&*()_+]{8,})['"]'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = ["credentials"]
+
+[[rules]]
   id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
   regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
@@ -88,6 +105,25 @@
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
     'sl.',
+  ]
+
+[[rules]]
+  id = 'dX1904tMEXk'
+  description = 'Docker Swarm Token'
+  regex = '''SWMTKN-1-[a-z0-9]{50}-[a-z0-9]{25}'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'SWMTKN'
+  ]
+
+[[rules]]
+  id = 'SgR9ek_sCbS'
+  description = 'Firefox Login Cookies File"
+  regex = '''Firefox\/Profiles\/.*\/cookies\.sqlite'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'Firefox',
+    'cookies',
   ]
 
 # This rule WAY WAY overmatches at the moment and can cause the scanner to
@@ -120,12 +156,60 @@
 #   ]
 
 [[rules]]
+  id = '9lFJvq24U9i'
+  description = 'Google Cloud Platform OAuth'
+  regex = '''[0-9]+-[0-9A-Za-z_]{32}\.apps\.googleusercontent\.com'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'apps',
+    'googleusercontent',
+  ]
+
+[[rules]]
+  id = '24HsNTZRb7o'
+  description = 'Google OAuth Access Token'
+  regex = '''ya29\.[0-9A-Za-z\-_]+'''
+  ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'ya29'
+  ]
+
+[[rules]]
+  id = '9yP9XJQPzZv'
+  description = 'Jira Token'
+  regex = ```(?i)jira[-_]?token\s*[:=]\s*["']?([a-zA-Z0-9\/=+]{24})["']?```
+  ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'jira'
+    'token'
+  ]
+
+[[rules]]
   id = 'JH9jBKr63QI'
   description = 'Label Studio API Key'
   regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
   tags = ['type:secret', 'group:leaktk-testing']
   keywords = [
     'label_studio_api_key',
+  ]
+
+#Smartsheets and Sonar patterns result in a lot of FPs, need further tuning
+[[rules]]
+  id = 'GoeSKUlQf0Q'
+  description = 'Smartsheets Token"
+  regex = '''smartsheets.{0,40}\b([a-zA-Z0-9]{37})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'smartsheets'
+  ]
+
+[[rules]]
+  id = 'o1MeiRAJuCr'
+  description = 'Sonar Token"
+  regex = '''sonar.{0,40}\b([a-zA-Z0-9]{37})\b'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'sonar'
   ]
 
 [[rules]]
