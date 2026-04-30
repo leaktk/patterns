@@ -76,7 +76,7 @@ def parse_args():
 def compile_gitleaks(args):
     patterns_dir = args.patterns_dir
     include_dir = patterns_dir / "include"
-    pattern_file_paths = [p for p in sorted(patterns_dir.iterdir()) if p.is_file()]
+    pattern_file_paths = [p for p in sorted(patterns_dir.glob("*.toml")) if p.is_file()]
 
     stages = [
         new_apply_includes(include_dir),

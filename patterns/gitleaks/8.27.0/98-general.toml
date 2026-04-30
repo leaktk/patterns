@@ -73,6 +73,7 @@
     regexes = [
       # Vars for the values
       '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
+      '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?[^\s\"\'<]*(?:MTIzNDU2Nzg5M|EyMzQ1Njc4OT|xMjM0NTY3ODkw)[^\s\"\'<]*''',
       # Indicating that the line is part of an example
       '''(?:example|description)''',
     ]
@@ -803,9 +804,7 @@
 
   [rules.allowlist]
     stopwords = [
-      '...',
-      '***',
-      'xxxxx',
+      # pragma: include "common_stopwords"
       # The google analytics API key
       'AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM',
       # Keys embeded into chrome binaries
