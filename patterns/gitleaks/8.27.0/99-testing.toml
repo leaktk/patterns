@@ -175,6 +175,16 @@
   ]
 
 [[rules]]
+  id = '9yP9XJQPzZv'
+  description = 'Jira Token'
+  regex = ```(?i)jira[-_]?token\s*[:=]\s*["']?([a-zA-Z0-9\/=+]{24})["']?```
+  ['type:secret', 'group:leaktk-testing']
+  keywords = [
+    'jira'
+    'token'
+  ]
+
+[[rules]]
   id = 'JH9jBKr63QI'
   description = 'Label Studio API Key'
   regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
