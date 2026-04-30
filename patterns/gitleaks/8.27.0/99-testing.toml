@@ -74,6 +74,13 @@
   ]
 
 [[rules]]
+  id = SA2NjlmbpmX
+  description = 'Generic Credentials'
+  regex = '''(?i)(credentials|creds|password|passwd)\s*[:=]\s*['"]([a-zA-Z0-9!@#$%^&*()_+]{8,})['"]'''
+  tags = ['type:secret', 'group:leaktk-testing']
+  keywords = ["credentials"]
+
+[[rules]]
   id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
   regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
