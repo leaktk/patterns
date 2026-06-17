@@ -6,6 +6,8 @@ import future.keywords.in
 
 response := input
 findings := response.results
+_ := print("--- Starting Policy Evaluation. Total findings found:", count(findings))
+
 analyzed_finding_ids := {f.id | some f in analyzed_findings}
 
 unanalyzed_findings := {
