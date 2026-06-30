@@ -625,7 +625,7 @@ regexes = [
 [[rules]]
 id = 'eCOHX_SKGzA'
 description = 'Generic Secret'
-regex = '''(?i)<\s*?[\w\-]*(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?([^\"\s]+?)(?:\]\]>)?<\/(?:[\s\w\"\'=]*?>)?'''
+regex = '''(?i)<\s*[\w\-]*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?([^<\"\s]+)(?:\]\]>)?<\/(?:[\s\w\"\'=]+>)?'''
 entropy = 3.5
 secretGroup = 1
 tags = ['type:secret', 'alert:repo-owner']
@@ -657,19 +657,19 @@ regexTarget = 'line'
 regexes = [
 '''(?:\s+|--)nosec(?:\s+|$)''',
 '''(?:\s+|--)noqa(?::[\s\w]+)?$''',
-'''\/\/\s*?nolint:gosec(?:\s+|$)''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?(?-i)[A-Z][0-9A-Z_]{4,}.*?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(?:\.\.\.|\*\*\*|xxxxx).*?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*?(?:\]\]>)?<\/''',
+'''\/\/\s*nolint:gosec(?:\s+|$)''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?\\?[\$%]?(?-i)[A-Z][0-9A-Z_]{4,}.*(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?\\?[\$%]?\\?(?:\{.+?\}|\$\w+?\$|\([\w\.]+\)|<\w+>|@.+?@|%\w+%|_\w+_|<%=.+?%>|\[%\w+%\]|\[.+?\]|`.+?`)(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?[a-z\-\_\/\:]{4,}\$\{[a-z\_\.\$\{\}]{4,}?\}(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?[^<\"\s]+(?:\.\.\.|\*\*\*|xxxxx).*(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?[^<\"\s]*?(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF|Y2hhbmdl|NoYW5nZ|jaGFuZ2|MTIzND|EyMzQ1|xMjM0N|dG9rZW|Rva2Vu|0b2tlb|aGVsbG|hlbGxv|oZWxsb|d29ybG|dvcmxk|3b3JsZ|cGFzc3|Bhc3N3|wYXNzd|c2VjcmV0|NlY3Jld|zZWNyZX).*(?:\]\]>)?<\/''',
 '''\bgh[oupsr]_[0-9A-Za-z]{36}\b''',
 '''\bgithub_pat_\w{82}\b''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(?:my)?secret|self|ssh|spec\.|str:|(?:my)?te?mp|test|this|update|value|your_).*?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?[^\"\s]+?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-demo|-encryption|-tls|_id|_private|client|(?:change|fix)me|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|default|devel(?:opment)|hash|here|json|key|[_-]pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
-'''(?i)<\s*?\w*?(?:password|secret|token)[\s\w\"\'=]*?>(?:<!\[CDATA\[)?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?(?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|\/etc\/|data\/|\/path\/|(?:\/var)?\/run\/|abc(?:d|12)|ask|admin|ansible|auto|bool:|capi-openstack|change|client|confirm|contrase|demo|dict|django-insecure-|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|enter_|fake|false|file:|fixme|grub|https?:\/\/|installation_prefix|invalid|libvirt|none|not|placeholder|provide|path|quickstart|replace|sample|(?:my)?secret|self|ssh|spec\.|str:|(?:my)?te?mp|test|this|update|value|your_).*(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?[^<\"\s]+(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-demo|-encryption|-tls|_id|_private|client|(?:change|fix)me|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|default|devel(?:opment)|hash|here|json|key|[_-]pwd|placeholder|principal|raw\(|registry|required|secret(?:s|_v\d)?|string|test|uuid|value|xxxxx|ya?ml)(?:&gt;|\\u003e)?(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?(?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?(?:\\u[a-z0-9]{4})+(?:\]\]>)?<\/''',
+'''(?i)<\s*\w*(?:password|secret|token)[\s\w\"\'=]*>(?:<!\[CDATA\[)?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}(?:\]\]>)?<\/''',
 ]
 [[rules]]
 id = 'rnWF160pWNg'
