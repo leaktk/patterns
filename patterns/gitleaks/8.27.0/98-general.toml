@@ -702,6 +702,14 @@
     'github_pat_',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+    ]
+
 [[rules]]
   id = '3J1l0v_MrA0'
   description = 'GitHub OAuth Access Token'
@@ -715,7 +723,12 @@
   [rules.allowlist]
     stopwords = [
       # Example value from GitHub's docs
-      '''gho_16C7e42F292c6912E7710c838347Ae178B4a''',
+      'gho_16C7e42F292c6912E7710c838347Ae178B4a',
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
     ]
 
 
@@ -729,6 +742,16 @@
     'ghp_',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
+
+
 [[rules]]
   id = 'ReSYq_S3Ou0'
   description = 'GitHub Refresh Token'
@@ -738,6 +761,15 @@
   keywords = [
     'ghr_',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
 
 [[rules]]
   id = 'YmXj5Lk-jw4'
@@ -749,6 +781,16 @@
     'ghs_',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
+
+
 [[rules]]
   id = 'MMuUwURWAhM'
   description = 'GitHub User to Server Token'
@@ -758,6 +800,15 @@
   keywords = [
     'ghu_',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
 
 [[rules]]
   id = 'KJX2Vbp6_jY'
@@ -769,6 +820,15 @@
     'glpat-',
   ]
 
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
+
 [[rules]]
   id = 'IOimnsNGyvw'
   description = 'GitLab Pipeline Trigger Token'
@@ -778,6 +838,15 @@
   keywords = [
     'glptt-',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
 
 [[rules]]
   id = '5eH7BIYmpNo'
@@ -789,6 +858,15 @@
     'glrt-',
     'gr1348941',
   ]
+
+  [rules.allowlist]
+    stopwords = [
+      '****',
+      '....',
+      '1234',
+      'abcd',
+      'xxxx',
+    ]
 
 [[rules]]
   id = 'HysINeDft8k'
