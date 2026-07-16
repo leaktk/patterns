@@ -163,7 +163,7 @@
   id = '12NI0Yd57gc'
   description = 'Controlled Unclassified Information'
   regex = '''\b(?:CONTROLLED|CUI)\/(?:\/[A-Z-]{2,16})+(?:\/\/[A-Z]{0,16})?\b'''
-  tags = ['type:secret', 'alert:repo-owner']
+  tags = ['type:secret', 'alert:repo-owner', 'alert:analyst']
   keywords = [
     'cui',
     'controlled',
