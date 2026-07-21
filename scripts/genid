@@ -1,0 +1,2 @@
+#!/bin/sh
+openssl rand 8 | basenc --base64url | tr -d '='
