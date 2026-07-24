@@ -222,6 +222,7 @@
 
   [rules.allowlist]
     stopwords = [
+      # pragma: include "nonsecret_creds"
       'change',
       'example',
       'insert',
@@ -272,6 +273,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
+      # pragma: include "nonsecret_creds"
     ]
 
     paths = [
@@ -406,6 +408,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
+      # pragma: include "nonsecret_creds"
     ]
 
     paths = [
@@ -523,6 +526,7 @@
     ]
 
     stopwords = [
+      # pragma: include "nonsecret_creds"
       '1234',
       'client-secret',
       'clientsecret',
@@ -603,6 +607,7 @@
 
   [rules.allowlist]
     stopwords = [
+      # pragma: include "nonsecret_creds"
       # pragma: include "common_stopwords"
       'cmVkaGF0Cg==', # b64('redhat\n')
     ]
@@ -722,8 +727,7 @@
 
   [rules.allowlist]
     stopwords = [
-      # Example value from GitHub's docs
-      'gho_16C7e42F292c6912E7710c838347Ae178B4a',
+      # pragma: include "nonsecret_creds"
       '****',
       '....',
       '1234',
@@ -881,15 +885,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
-      # The google analytics API key
-      'AIzaSyA65lEHUEizIsNtlbNo-l2K18dT680nsaM',
-      # Keys embeded into chrome binaries
-      ## Windows
-      'AIzaSyA2KlwBX3mkFo30om9LUFYQhpqLoa_BNhE',
-      ## Linux
-      'AIzaSyBqJZh-7pA44blAaAkH6490hUFOwX0KCYM',
-      ## Mac
-      'AIzaSyDr2UxVnv_U85AbhhY8XSHSIavUW0DC-sY',
+      # pragma: include "nonsecret_creds"
     ]
 
 [[rules]]
