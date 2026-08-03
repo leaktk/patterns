@@ -222,7 +222,7 @@
 
   [rules.allowlist]
     stopwords = [
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/all"
       'change',
       'example',
       'insert',
@@ -273,7 +273,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/all"
     ]
 
     paths = [
@@ -408,7 +408,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/all"
     ]
 
     paths = [
@@ -526,7 +526,7 @@
     ]
 
     stopwords = [
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/all"
       '1234',
       'client-secret',
       'clientsecret',
@@ -607,7 +607,7 @@
 
   [rules.allowlist]
     stopwords = [
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/all"
       # pragma: include "common_stopwords"
       'cmVkaGF0Cg==', # b64('redhat\n')
     ]
@@ -727,7 +727,7 @@
 
   [rules.allowlist]
     stopwords = [
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/github"
       '****',
       '....',
       '1234',
@@ -885,7 +885,7 @@
   [rules.allowlist]
     stopwords = [
       # pragma: include "common_stopwords"
-      # pragma: include "nonsecret_creds"
+      # pragma: include "nonsecret_creds/google"
     ]
 
 [[rules]]

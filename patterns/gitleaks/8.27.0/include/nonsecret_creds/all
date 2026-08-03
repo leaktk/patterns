@@ -1,0 +1,12 @@
+# vim: syntax=toml
+# Master file for nonsecret credentials
+#
+# Reference this in a file like this:
+#
+# stopwords = [
+#   # pragma: include "nonsecret_creds/all"
+# ]
+
+# pragma: include "nonsecret_creds/minio"
+# pragma: include "nonsecret_creds/github"
+# pragma: include "nonsecret_creds/google"
