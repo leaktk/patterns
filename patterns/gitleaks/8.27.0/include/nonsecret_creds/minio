@@ -1,0 +1,10 @@
+# vim: syntax=toml
+# Known MinIO secrets
+#
+# Reference this in a file like this:
+#
+# stopwords = [
+#   # pragma: include "nonsecret_creds/minio"
+# ]
+'Q3AM3UQ867SPQQA43P2F',
+'zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG',
