@@ -9,9 +9,6 @@
         "gitleaks": {
             "8.27.0": "https://raw.githubusercontent.com/leaktk/patterns/refs/heads/main/patterns/gitleaks/8.27.0"
         },
-        "leaktk": {
-            "1": "https://raw.githubusercontent.com/leaktk/patterns/refs/heads/main/patterns/leaktk/1"
-          }
     }
 }
 
