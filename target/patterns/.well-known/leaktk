@@ -1,13 +1,13 @@
 {
     "bundles": {
         "latest": {
-            "bundle.tar.gz": "https://github.com/leaktk/patterns/releases/download/v0.0.0/bundle.tar.gz",
+            "bundle.tar.gz": "https://github.com/leaktk/patterns/raw/refs/heads/well-known/patterns/releases/download/v0.0.0/bundle.tar.gz",
             "signature.pub": ""
         }
     },
     "patterns": {
         "gitleaks": {
-            "8.27.0": "https://raw.githubusercontent.com/leaktk/patterns/refs/heads/main/patterns/gitleaks/8.27.0"
+            "8.27.0": "https://raw.githubusercontent.com/leaktk/patterns/refs/heads/main/patterns/target/patterns/gitleaks/8.27.0"
         }
     }
 }
