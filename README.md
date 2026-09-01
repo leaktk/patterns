@@ -72,11 +72,34 @@ These are the supported, predefined `type` tags:
 * `type:pii` - personally identifiable information
 * `type:vuln` - a CVE, vulnerable dep, or known flaw
 * `type:phi` - protected health information
+* `type:flag` - A "LeakTK Flag" for testing (see "Flags" below)
 
 Custom `type` tags should be namespaced to avoid collisions with future tags.
 For example if you were writing tags for a company called WidgetCorp and you
 wanted to search for internal only information, you could create a
 `type:widgetcorp-internal` tag.
+
+## Flags
+
+These patterns include a special rule for
+[CTF-style](https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity))
+flags formatted:
+
+```
+LTKF{value}
+```
+
+Where value can be any `[a-z]{2,16}` except `public` which is ignored to act as
+a false positive flag.
+
+The values generarlly should corrispond to the types above e.g.:
+
+```
+LTKF{secret}
+LTKF{cui}
+LTKF{infra}
+...
+```
 
 ## Ignoring false positives
 

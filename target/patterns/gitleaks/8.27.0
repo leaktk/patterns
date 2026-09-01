@@ -2019,6 +2019,7 @@ regexes = [
 ''':\/\/(?:[^:\/\s\"\']+)?:(?:[^@\/\s\"]{3,})@(?:[a-z]+|127\.0.\0\.1|[\w\.\-]*?examples?(?:\.com|\.net)?)(?:[^\w\.\-]|$)''',
 ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(?:ip|host):port''',
 '''re\.compile\(\s*?r?[\'\"]''',
+''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(?:sha\d+|blake3)(:?\+b64u)?:[\w\-]{40,256}''',
 ]
 [[rules]]
 id = 'FxXgdaIgf7Y'
@@ -2830,4 +2831,13 @@ entropy = 2
 tags = ['type:secret', 'group:leaktk-testing']
 keywords = [
 'ac',
+]
+[[rules]]
+id = 'KWxkfMbO7cM'
+description = 'LeakTK Flag'
+regex = '''\bLTKF\{([a-z]{2,16})\}'''
+tags = ['type:flag', 'group:leaktk-testing']
+[rules.allowlist]
+stopwords = [
+'public',
 ]
