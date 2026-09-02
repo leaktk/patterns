@@ -482,3 +482,21 @@
   keywords = [
     'ac',
   ]
+
+[[rules]]
+  id = 'KWxkfMbO7cM'
+  description = 'LeakTK Flag'
+  # Things like:
+  #   LTKF{secret}
+  #   LTKF{cui}
+  #   LTKF{vuln}
+  #   ...
+  #
+  # See the "Flags" section of the README for more info
+  regex = '''\bLTKF\{([a-z]{2,16})\}'''
+  tags = ['type:flag', 'group:leaktk-testing']
+
+  [rules.allowlist]
+    stopwords = [
+      'public',
+    ]

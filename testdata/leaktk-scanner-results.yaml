@@ -435,6 +435,12 @@
   secret: sl.AbX9y6Fe3AuH5o66-gmJpR032jwAwQPIVVzWXZNkdzcYT02akC2de219dZi6gxYPVnYPrpvISRSf9lxKWJzYLjtMPH-d9fo_0gXex7X37VIvpty4-G8f4-WX45AcEPfRnJJDwzv-
 
 - rule.description: Generic Secret
+  rule.id: B09tH8vORCw
+  location.path: flags/valid/secret
+  match: LTKF{secret}
+  secret: LTKF{secret}
+
+- rule.description: Generic Secret
   rule.id: hG-qMjbXGro
   location.path: foo/libexec/sudo/sudoers.so
   match: password=V1tXb7WBGlKIVAWqGw==
@@ -1572,6 +1578,52 @@
   location.path: label-studio/valid/learn.ipynb
   match: LABEL_STUDIO_API_KEY = 'f05c3f9783427a18fc9382ba51197d615d85bec0
   secret: f05c3f9783427a18fc9382ba51197d615d85bec0
+
+#
+# LeakTK Flag
+#
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/cui
+  match: LTKF{cui}
+  secret: cui
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/infra
+  match: LTKF{infra}
+  secret: infra
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/ioc
+  match: LTKF{ioc}
+  secret: ioc
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/phi
+  match: LTKF{phi}
+  secret: phi
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/pii
+  match: LTKF{pii}
+  secret: pii
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/secret
+  match: LTKF{secret}
+  secret: secret
+
+- rule.description: LeakTK Flag
+  rule.id: KWxkfMbO7cM
+  location.path: flags/valid/vuln
+  match: LTKF{vuln}
+  secret: vuln
 
 #
 # MailChimp API Key

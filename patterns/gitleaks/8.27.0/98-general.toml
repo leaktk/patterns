@@ -1689,6 +1689,8 @@
       ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(?:ip|host):port''',
       # Is regex
       '''re\.compile\(\s*?r?[\'\"]''',
+      # Container registry ref: https://github.com/opencontainers/image-spec/blob/main/descriptor.md
+      ''':\/\/[^:\/\s\"\']*?:[^@\/\s\"]{3,}@(?:sha\d+|blake3)(:?\+b64u)?:[\w\-]{40,256}''',
     ]
 
 
