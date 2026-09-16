@@ -1,19 +1,15 @@
-title = "Gitleaks Config"
-[allowlist]
+[[allowlists]]
 description = "Global Allowlist"
 regexTarget = "line"
 regexes = [
 '''(?i)\bnot[\t\x20\-\_]*secret\b'''
 ]
 paths = [
-'''\.(?i)(?:bin|css|docx?|gif|jpe?g|pdf|png|pyc|socket|svg|xlsx?)$''',
+'''(?i)\.(?:[sk]?o|a|bin|bmp|class|css|dat|deb|dll|docx?|ear|exe|gif|img|iso|jar|jpe?g|lib|mp4|pcap|pdf|png|py[co]|pyc|qcow2|raw|rpm|socket|svg|war|xlsx?)$''',
 '''quickstart''',
-'''vendor''',
-'''(?:^|\/)node_modules\/''',
-'''(?:^|\/)gems\/''',
-'''(?:^|\/)Godeps\/''',
+'''vendor|(?:^|\/)(?:gems|node_modules|GoDeps)\/''',
 '''(?:^|\/)go\.(?:mod|sum)$''',
-'''(?:^|\/).?gitleaks''',
+'''(?:^|\/).?(?:better|git)leaks''',
 '''(?:^|\/)lib\/python[^/]+\/site-packages''',
 '''(?:^|\/)lib\/rest\/static\/.+\/(?:.*?github.+\.json|ghes.+\.json)''',
 '''(?:^|\/)\.?secrets.baseline$''',
@@ -61,6 +57,41 @@ regexTarget = 'line'
 regexes = [
 '''X-Amz-Signature|WC1BbXotU2lnbmF0dXJl|gtQW16LVNpZ25hdHVyZ|YLUFtei1TaWduYXR1cm''',
 '''(?i)(?:sample|example).{0,128}\b(?:A3T[A-Z0-9]|ACCA|ABIA|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)(?:[A-Z0-9]{16})\b''',
+]
+[[rules]]
+id = '9j_rmwDeioM'
+description = 'AWS Secret Access Key'
+regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})(?:[^a-z0-9\/+]|\z)'''
+tags = ['type:secret', 'alert:repo-owner']
+entropy = 4
+secretGroup = 1
+keywords = [
+'aws',
+]
+[rules.allowlist]
+stopwords = [
+'abcdef',
+'cert',
+'conf',
+'cont',
+'curl',
+'example',
+'fake',
+'get',
+'name',
+'profile',
+'resource',
+'role',
+'sample',
+'serv',
+'spec',
+'test',
+'xxxxx',
+]
+regexTarget = 'line'
+regexes = [
+'''arn:aws:iam:''',
+'''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
 ]
 [[rules]]
 id = 'QqS4RvI6Zmg'
@@ -181,41 +212,6 @@ regexes = [
 '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?\$\{?[A-Z][A-Z0-9_]{2,16}''',
 '''(?:\A|[^\w\-])Authorization:[\t\x20]*(?:\w+[\t\x20]+)?[^\s\"\'<]*(?:MTIzNDU2Nzg5M|EyMzQ1Njc4OT|xMjM0NTY3ODkw)[^\s\"\'<]*''',
 '''(?:example|description)''',
-]
-[[rules]]
-id = '9j_rmwDeioM'
-description = 'AWS Secret Access Key'
-regex = '''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?([a-z0-9\/+]{40})(?:[^a-z0-9\/+]|\z)'''
-tags = ['type:secret', 'alert:repo-owner']
-entropy = 4
-secretGroup = 1
-keywords = [
-'aws',
-]
-[rules.allowlist]
-stopwords = [
-'abcdef',
-'cert',
-'conf',
-'cont',
-'curl',
-'example',
-'fake',
-'get',
-'name',
-'profile',
-'resource',
-'role',
-'sample',
-'serv',
-'spec',
-'test',
-'xxxxx',
-]
-regexTarget = 'line'
-regexes = [
-'''arn:aws:iam:''',
-'''(?i)aws[\w\-]{0,32}[\'\"]?\s*?[:=\(]\s*?[\'\"]?[a-z0-9\/+]*(?-i)(?:ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF)''',
 ]
 [[rules]]
 id = 'zl044yuux24'
@@ -1346,6 +1342,27 @@ regex = '''\b(sk-[\w\-]{16,}T3BlbkFJ[\w\-]{16,})(?:[^\w\-]|$)'''
 tags = ['type:secret', 'alert:repo-owner']
 keywords = [
 't3blbkfj',
+]
+[[rules]]
+id = 'DLYxFORrl_U'
+description = 'OpenSSH Private key'
+regex = '''(?:-----BEGIN OPENSSH PRIVATE KEY-----(?:\s+|\\*n)+)?b3BlbnNzaC1rZXktdjEA[0-9A-Za-z\"\',\s\+\/\\]{256,}={0,2}(?:(?:\s+|\\*n)+-----END OPENSSH PRIVATE KEY-----)?'''
+tags = ['type:secret', 'alert:repo-owner']
+keywords = [
+'b3blbnnzac1rzxktdjea',
+]
+[rules.allowlist]
+paths = [
+'''\.(?:html|md|adoc|rst)$''',
+'''(?:^|\/)testdata\/''',
+'''tests?\/.*.(?:txt|der|key|pem)$''',
+'''[^\/]+test[^\/]+(?:txt|der|key|pem)$''',
+'''(?:dummy|example).*(?:key|pem)''',
+'''\/s?bin\/ssh(?:-add|-agent|-autoproxy|-copy-id|-keygen|-keyscan|-sign-request|d)?$''',
+'''\/lib\w+\/lib(?:gnutls|ssh).so''',
+'''\/lib\w+\/(?:cockpit-|openssh\/ssh-)''',
+'''\/usr\/share\/(?:mime|misc)''',
+'''(?:^|\/)test\/jdk\/(?:sun\/security\/ssl\/|java\/security\/|javax\/crypto\/)''',
 ]
 [[rules]]
 id = 'RVee3wT2Z4I'
