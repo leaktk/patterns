@@ -881,6 +881,12 @@
   secret: t2zO:25BY-Skvlyx8rZtxmyYX4bSjiic
 
 - rule.description: Generic Secret
+  rule.id: SW7cCS4-5S0
+  location.path: k8s/valid/oc-login
+  match: oc login --some-opt --token=sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+  secret: sha256~CL9vOGM0koa67eipnogHwP6KmfeAOd6ZwMo88Qo3-Kw
+
+- rule.description: Generic Secret
   rule.id: _-9w6-yrc-4
   location.path: k8s/valid/secret-after-quotes-double.yml
   match: 'password: "S!B\*d$zDsb="'

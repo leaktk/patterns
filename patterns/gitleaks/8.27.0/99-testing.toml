@@ -500,3 +500,68 @@
     stopwords = [
       'public',
     ]
+
+[[rules]]
+  id = 'SW7cCS4-5S0'
+  description = 'Generic Secret'
+  regex = '''[\w\-]{1,32}[\x20\t]{1,32}login(?:[\x20\t\S]+|\\\n)+--(?i)[\w\-]{0,32}(?:secret|token|(?:access|api)[_-]?key|password)[\x20\t=]{1,32}[\'\"]?([^\'\"\s]{8,})'''
+  entropy = 3.35
+  tags = ['type:secret', 'group:leaktk-testing']
+
+  [[rules.allowlists]]
+    stopwords = [
+      # pragma: include "common_stopwords"
+    ]
+
+    paths = [
+      # pragma: include "doc_file_paths"
+
+      # Test data are often false positives
+      '''(?:^|\/)testdata\/''',
+      # Usually a project not owned by the user that has a lot of FPs for us when
+      # folks fork it. But make sure to include the azure-cli aro modules
+      '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
+      # Ignore OpenAPI spec files
+      '''(?:^|\/)openapi\.json$''',
+      '''(?i)openapi.*github[^\/]*\.json$''',
+    ]
+
+    regexTarget = 'line'
+    regexes = [
+      # Things like:
+      #   secret=asdfasdfas # nosec
+      '''#\s*?nosec(?:\s+|$)''',
+      #   secret=asdfasdfas # noqa: E501
+      '''#\s*?noqa(?::[\s\w]+)?$''',
+      #   secret = "asdfasdfas" //nolint:gosec
+      '''\/\/\s*?nolint:gosec(?:\s+|$)''',
+    ]
+
+  [[rules.allowlists]]
+    regexTarget = 'secret'
+    regexes = [
+      #   "_PLACEHOLDER_"
+      #   "<PLACEHOLDER>"
+      #   "@PLACEHOLDER@"
+      #   "%PLACEHOLDER%"
+      #   "%(PLACEHOLDER)%"
+      #   "%(PLACEHOLDER)s"
+      #   "$PLACEHOLDER$"
+      #   "`PLACEHOLDER`"
+      #   "[%PLACEHOLDER%]"
+      '''(?:_[\w\-]+_|<[\w\-]+>|@[\w\-]+@|%[\w\-]+%|\$[\w\-]+\$|`.+`)$''',
+      #   "ALL_UPPER_LETTERS_OR_UNDERSCORES"
+      #   "{PLACEHOLDER}"
+      #   "%{PLACEHOLDER}"
+      #   "\%{PLACEHOLDER}"
+      #   "${PLACEHOLDER}"
+      #   "$\{PLACEHOLDER}"
+      #   "\${PLACEHOLDER}"
+      #   "#{PLACEHOLDER}"
+      #   "\#{PLACEHOLDER}"
+      #   "\${PLACEHOLDER}"
+      '''\\*[\$%#]?\\*(?:\{[\w\-]+\}|\([\w\-]+\)|\[[\w\-]+\]|[A-Z_]+)$''',
+      #   "Some...placeholder"
+      #   "Some***placeholder"
+      '''\.\.\.|\*\*\*|xxxxx''',
+    ]
