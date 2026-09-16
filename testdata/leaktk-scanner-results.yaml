@@ -441,12 +441,6 @@
   secret: LTKF{secret}
 
 - rule.description: Generic Secret
-  rule.id: hG-qMjbXGro
-  location.path: foo/libexec/sudo/sudoers.so
-  match: password=V1tXb7WBGlKIVAWqGw==
-  secret: V1tXb7WBGlKIVAWqGw==
-
-- rule.description: Generic Secret
   rule.id: eCOHX_SKGzA
   location.path: general-test
   match: <FooPassword id="new" >$A3ae68d9f8ccfc898ee2555a5f8f228b9</FooPassword>
@@ -1764,6 +1758,74 @@
   location.path: openai-api-keys
   match: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
   secret: sk-xN93diMvdzhoYXQ6n_CovPMMxJPuE5UHH90n8QC4SAT3BlbkFJP1ZIyIyMyfhguXzRU0E-jomb9uozZO4O9uUGaXFCl4
+
+#
+# OpenSSH Private key
+#
+
+- rule.description: OpenSSH Private key
+  rule.id: DLYxFORrl_U
+  location.path: pki/valid/b64-encoded-openssh-private-key
+  match: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxAYU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOOGLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfMzLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrTYB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
+    -----END OPENSSH PRIVATE KEY-----
+  secret: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxAYU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOOGLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfMzLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrTYB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
+    -----END OPENSSH PRIVATE KEY-----
+
+- rule.description: OpenSSH Private key
+  rule.id: DLYxFORrl_U
+  location.path: pki/valid/inline-openssh-key
+  match: '-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBLJRcyw4\nUacchG66A5xxhzAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB8CSDIKG8VNj2+O\nR6bChx99Rfev7Jnnw5mVcoSZD9/qAAAAoDasFmlcpXIXig64bM6DFGPM3iAO4fKPAD/bgp\njmqZ2vKBLKcDghsZ9EI5C1amSkv6/yv6HscHC1jvo6RJrFJFpKa4UNU0cypMolXLrcQAqo\ndMSgh8nmvK1neWv8VvB89yxIgKLevn8WxyVnj3rgTVcDO8b2ypn8f/lkgb3/ka8nRMVbAo\nfg1lDLLDjYNdoYK6gY5TA3zuLVQBhSHSGKNLE=\n-----END
+    OPENSSH PRIVATE KEY-----'
+  secret: '-----BEGIN OPENSSH PRIVATE KEY-----\nb3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABBLJRcyw4\nUacchG66A5xxhzAAAAGAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB8CSDIKG8VNj2+O\nR6bChx99Rfev7Jnnw5mVcoSZD9/qAAAAoDasFmlcpXIXig64bM6DFGPM3iAO4fKPAD/bgp\njmqZ2vKBLKcDghsZ9EI5C1amSkv6/yv6HscHC1jvo6RJrFJFpKa4UNU0cypMolXLrcQAqo\ndMSgh8nmvK1neWv8VvB89yxIgKLevn8WxyVnj3rgTVcDO8b2ypn8f/lkgb3/ka8nRMVbAo\nfg1lDLLDjYNdoYK6gY5TA3zuLVQBhSHSGKNLE=\n-----END
+    OPENSSH PRIVATE KEY-----'
+
+- rule.description: OpenSSH Private key
+  rule.id: DLYxFORrl_U
+  location.path: pki/valid/multi-line-b64-encoded-openssh-private-key
+  match: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAA
+    AAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxA
+    YU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOO
+    GLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfM
+    zLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5
+    mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrT
+    YB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl
+    7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
+  secret: |-
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAA
+    AAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDfAWg7OU
+    ODOzoxA
+    YU0qeXEAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIB2pcWakOO
+    GLUh+0
+    NbwdWO8zPi6c4yBTJ/JqXC3gc85cAAAAoPtVmMKZj8GG5JMkfM
+    zLJyQYrcKV0R83zY3FHE
+    Kk0rtct/O09gCLkohtTbao9hYpRiycI4Jqu5
+    mB+zLiUt9CegjGg2m9ULk8Ws94BqxVAZRO
+    srRgWjU9icNQAnI0bNDZrT
+    YB8XBSCiXvG7WzfNDSss9QT2cADAZEfya01qoGX9/V8LMSSN
+    U0w9fLwl
+    7aMsIdFgpvYjyqoJg7UW0xvAv9Z4g=
 
 #
 # OpenShift User Token
