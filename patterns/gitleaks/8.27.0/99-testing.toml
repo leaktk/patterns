@@ -45,7 +45,8 @@
   id = '-bDTAD8YMJg'
   description = 'Auth0 OAuth Client Secret'
   regex = '''(?i)auth0[\s\S]{0,128}client_?secret[\"\']?\s*\]?\s*[:=]\s*[\"\']?([a-zA-Z0-9_-]{64,})[\"\']?'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
+  entropy = 3
   keywords = [
     'client_secret',
     'clientsecret',
@@ -56,7 +57,7 @@
   description = 'Auth0 JWT'
   # Based on base64 shifted segments of: ".auth0.com/",
   regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:LmF1dGgwLmNvbS8iL|5hdXRoMC5jb20vIi|uYXV0aDAuY29tLyIs)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'lmf1dggwlmnvbs8il',
     '5hdxromc5jb20vii',
@@ -67,7 +68,7 @@
   id = 'qUN8svLm9sk'
   description = 'Dropbox Refresh Token'
   regex = '''(?:[^A-Za-z0-9]|\A)([A-Za-z0-9]{11}AAAAAAAAAA[A-Za-z0-9\-_=]{43})(?:[^A-Za-z0-9\-=_]|$)'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'dropbox',
   ]
@@ -76,7 +77,7 @@
   id = 'tvqG--ROt7U'
   description = 'Dropbox Short-Lived Offline Access Token'
   regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.u.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'sl.u.',
   ]
@@ -85,7 +86,7 @@
   id = 'vtSSaD-DcYo'
   description = 'Dropbox Short-Lived Access Token'
   regex = '''(?i)(?:[^a-z0-9\-=_]|\A)(sl\.[a-z0-9\-=_]{136})(?:[^a-z0-9\-=_]|$)'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'sl.',
   ]
@@ -104,7 +105,7 @@
 #   # added in the json. Also it supports random fields on either side of the
 #   # expected fields, but NOT mixed in the middle.
 #   regex = '''\{[\s\S]*?(?:\"(?:type|project_id|private_key_id|private_key|client_email|client_id|auth_uri|token_uri|auth_provider_x509_cert_url|client_x509_cert_url|universe_domain)\"\s*:\s*\".+?",?\s*){8,}[\s\S]*?\}'''
-#   tags = ['type:secret', 'group:leaktk-testing']
+#   tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 #   keywords = [
 #     '"type"',
 #     '"project_id"',
@@ -123,7 +124,7 @@
   id = 'JH9jBKr63QI'
   description = 'Label Studio API Key'
   regex = '''LABEL_STUDIO_API_KEY[\"\']?\s*[=:]\s*[\"\']?([a-z0-9]{40})\b'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'label_studio_api_key',
   ]
@@ -133,13 +134,13 @@
   description = 'SonarQube Token'
   regex = '''(?i)(?:sonar[_.-]?(?:login|token))[\'\"]?[\x20\t]*[:=][\x20\t]*[\'\"]?(?-i)([a-z0-9]{40})\b'''
   keywords = ['sonar']
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 
 [[rules]]
   id = '3jLtqqDiiZQ'
   description = 'Sourcegraph Access Token'
   regex = '''\bsgp_(?:local_)?[a-z0-9]{40}\b'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   entropy = 3
   keywords = ['sgp_']
 
@@ -154,17 +155,20 @@
 
 [[rules]]
   id = 'OjplbNyeiXQ'
-  description = "OIDC Client Secret"
+  description = 'OIDC Client Secret'
   regex = '''(?i)[\w\-]*client[\s\S]{0,32}secret\s*[\"\']?\s*[:=]\s*[\"\']?([0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12})\b'''
   secretGroup = 1
   entropy = 3
   keywords = ['client']
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 
   [rules.allowlist]
     paths = [
       # High FP rate from example docs
       # pragma: include "doc_file_paths"
+
+      # Test folder common in the keycloak repo
+      '''\/resources\/org\/keycloak\/tests\/''',
     ]
 
 [[rules]]
@@ -177,7 +181,7 @@
   path = '''(?i)(?:^|\/)(?:password|secret|token)$'''
   regex = '''\A(?:\s*(?:(?:#|\/\/)[\t\x20\S]*|\/\*[\s\S]*\*\/)\s)*([\S]{8,})\s*\z'''
   entropy = 3.35
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 
   [rules.allowlist]
     stopwords = [
@@ -209,7 +213,7 @@
   regex = '''(?i)[\w\-]*(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?([^\"\'\s]+?)[\t\x20]*(?:\\n|\n|#|$)'''
   entropy = 3.35
   secretGroup = 1
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'password',
     'secret',
@@ -318,7 +322,7 @@
   # https://docs.jfrog.com/user-management/docs/identity-tokens
   regex = '''\bcmVmd[0-9a-zA-Z]{59}\b'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'cmvmd',
   ]
@@ -329,18 +333,9 @@
   # https://docs.jfrog.com/user-management/docs/identity-tokens
   regex = '''\bAKCp[0-9a-zA-Z]{69}\b'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'akcp',
-  ]
-
-[[rules]]
-  id = 'J4rqQ0Yj3mx'
-  description = 'JFrog Cloud Domain'
-  regex = '''(?i)\b[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]\.jfrog\.io\b'''
-  tags = ['type:infra', 'group:leaktk-testing']
-  keywords = [
-    'jfrog.io',
   ]
 
 [[rules]]
@@ -348,7 +343,7 @@
   description = 'Azure Storage Account Access Key'
   regex = '''(?:\A|[:=>,\+\(\]\x20\t\'\"])([a-zA-Z0-9+\/]{86}==)'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'azure',
   ]
@@ -360,7 +355,7 @@
   description = 'Box Credential'
   regex = '''(?i)client[_-]?secret[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9]{32})\b'''
   entropy = 2
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'box',
   ]
@@ -375,7 +370,7 @@
   id = 'KLjNyfRdTds'
   description = 'IBM Cloudant Legacy Credential'
   regex = '''\bapikey-v2-[\w\-]{30,60}\b'''
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   entropy = 3
   keywords = [
     'cloudant',
@@ -397,7 +392,7 @@
   description = 'IBM Cloud IAM Key'
   regex = '''(?i)(?:ibm|bluemix)[a-z0-9_ .\-]{0,40}[:=>,\+\(\]\x20\t\'\"]+([a-zA-Z0-9_\-]{44,64})(?:[^\w\-\+\/]|\z)'''
   entropy = 2
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'ibm',
     'bluemix',
@@ -413,7 +408,7 @@
   description = 'IBM COS HMAC Credential'
   regex = '''(?i)[\w\-]{0,32}(?:secret[-_]?(?:access)?[-_]?key)[:=>,\+\(\]\x20\t\'\"]+([a-f0-9]{48})\b'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'cos',
     'hmac',
@@ -430,7 +425,7 @@
   description = 'JSON Web Token'
   regex = '''\bey[\w\-]{16,}\.ey[\w\-]{16,}\.[\w\-]{8,}'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'ey',
   ]
@@ -440,7 +435,7 @@
   description = 'PuTTY Private Key'
   regex = '''PuTTY-User-Key-File-2:\s*.*\s+(?:[0-9a-zA-Z\-]+:\s*.+\s+|[0-9a-zA-Z\+\/]{64}\s+|[0-9a-zA-Z\+\/]{1,63}={0,2}\s+)+'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'putty-user-key-file-2',
   ]
@@ -451,7 +446,7 @@
   description = 'SoftLayer Credential'
   regex = '''(?i)(?:softlayer|sl[_-]?api)[\w\-]{0,32}[:=>,\+\(\]\x20\t\'\"]+([0-9a-f]{64})\b'''
   entropy = 3
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'softlayer',
     'sl',
@@ -467,20 +462,9 @@
   description = 'SoftLayer Credential'
   regex = '''(?i)https?:\/\/api\.softlayer\.com\/soap\/v[^\/]+\/([a-z0-9]{64})'''
   entropy = 2
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
   keywords = [
     'api.softlayer.com',
-  ]
-
-[[rules]]
-  id = 'xRAjGfP0Zao'
-  # https://www.twilio.com/docs/glossary/what-is-a-sid
-  description = 'Twilio Account SID'
-  regex = '''\bAC[0-9a-fA-F]{32}\b'''
-  entropy = 2
-  tags = ['type:secret', 'group:leaktk-testing']
-  keywords = [
-    'ac',
   ]
 
 [[rules]]
@@ -506,7 +490,7 @@
   description = 'Generic Secret'
   regex = '''[\w\-]{1,32}[\x20\t]{1,32}login(?:[\x20\t\S]+|\\\n)+--(?i)[\w\-]{0,32}(?:secret|token|(?:access|api)[_-]?key|password)[\x20\t=]{1,32}[\'\"]?([^\'\"\s]{8,})'''
   entropy = 3.35
-  tags = ['type:secret', 'group:leaktk-testing']
+  tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 
   [[rules.allowlists]]
     stopwords = [
