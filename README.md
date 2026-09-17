@@ -2,7 +2,7 @@
 
 Patterns leveraged by LeakTK
 
-## Pattern Support
+## Support
 
 | Provider      | Version   | State          |
 | ------------- | --------- | -------------- |
@@ -36,7 +36,7 @@ prefix, prepend `ext:` to avoid collisions with future prefixes.
 | `sev:<level>`          | Indicate the severity of the finding               |
 | `ext:<prefix>:<value>` | User defined prefixes ignored by LeakTK            |
 
-#### Alert Tags
+### Alert Tags
 
 > **Note**: These will be removed from the rules in the future. They will
 > remain valid tags, but will added to a finding by a tool's policy instead of
@@ -55,7 +55,7 @@ Currently supported values:
 | `alert:analyst`    | Incident response analyst if supported by the tool     |
 
 
-#### Group Tags
+### Group Tags
 
 Groups serves as a way to mark tags for testing and for restricting rule access
 by scenario or access control.
@@ -66,32 +66,32 @@ to rules and open sourcing it is on the road-map.
 Patterns tagged `group:leaktk-testing` are in their test phase and are not
 ready for production.
 
-#### Type Tags
+### Type Tags
 
 These are the supported, predefined `type` tags:
 
 | Tag           | Finding Indicates                                           |
 | ------------- | ----------------------------------------------------------- |
-| `type:secret` | [Secret / Sensitive Information][secret_def]                |
-| `type:infra`  | [Infrastructure Details][infra_def]                         |
-| `type:crd`    | [Credential][cred_def]                                      |
+| `type:secret` | [Secret / Sensitive Information][sec_def]                   |
+| `type:infra`  | [Infrastructure Details][inf_def]                           |
+| `type:crd`    | [Credential][crd_def]                                       |
 | `type:cid`    | Credential Identifier[^2]                                   |
 | `type:cui`    | [Controlled Unclassified Information][cui_def]              |
-| `type:flg`    | [LeakTK Test Flags][#flags]                                 |
+| `type:flg`    | [LeakTK Test Flags](#flags)                                 |
 | `type:ioc`    | [Indicator of Compromise][ioc_def]                          |
 | `type:phi`    | [Protected Health Information][phi_def]                     |
 | `type:pii`    | [Personally Identifiable Information][pii_def]              |
-| `type:vln`    | [Vulnerability][vuln_def]                                   |
+| `type:vln`    | [Vulnerability][vln_def]                                    |
 
 Custom `type` tags should be namespaced to avoid collisions with future tags.
 For example if you were writing tags for a company called WidgetCorp and you
 wanted to search for internal only information, you could create a
 `type:widgetcorp-internal` tag.
 
-#### Visibility Tags
+### Visibility Tags
 
-These tags can be set by the tooling to indicate the finding's visibility rather
-than adding them directly to a rule.
+These tags can be set by the tooling to indicate the finding's visibility.
+They are generally not added directly to a rule.
 
 Current values:
 
@@ -103,7 +103,7 @@ Current values:
 | `vis:prv`  | Requires authentication and specific privileges to access it   |
 
 
-#### Severity Tags
+### Severity Tags
 
 These tags can be set by the tooling to indicate the finding's severity. They
 may also be set on a rule to indicate the default assumed severity.
@@ -147,19 +147,20 @@ LTKF{infra}
 
 | Target     | Description                                                    |
 | ---------- | ---------------------------------------------------------------|
-| `build`    | Compile patterns into the provided formats                     |
+| `build`    | Compile patterns into the supported formats                    |
 | `clean`    | Deletes compiled patterns and removes git ignored files        |
 | `format`   | Format tests, test results, and pattern sources                |
 | `test`     | Run pattern tests and checks                                   |
 
-[cred_def]: https://github.com/secret-scanning-sig/glossary/blob/main/C/Credential.md
+[crd_def]: https://github.com/secret-scanning-sig/glossary/blob/main/C/Credential.md
 [ctf_def]: https://en.wikipedia.org/wiki/Capture_the_flag_(cybersecurity)
 [cui_def]: https://en.wikipedia.org/wiki/Controlled_Unclassified_Information
-[vuln_def]: https://en.wikipedia.org/wiki/Vulnerability_(computer_security)
-[infra_def]: https://attack.mitre.org/tactics/TA0043/
+[inf_def]: https://attack.mitre.org/tactics/TA0043/
 [ioc_def]: https://en.wikipedia.org/wiki/Indicator_of_compromise
+[phi_def]: https://en.wikipedia.org/wiki/Protected_health_information
 [pii_def]: https://en.wikipedia.org/wiki/Personal_data
-[secret_def]: https://github.com/secret-scanning-sig/glossary/blob/main/S/Secret.md
+[sec_def]: https://github.com/secret-scanning-sig/glossary/blob/main/S/Secret.md
+[vln_def]: https://en.wikipedia.org/wiki/Vulnerability_(computer_security)
 
 [^1]: This will probably change in the future to something like `author` or
       similar.
