@@ -2180,7 +2180,7 @@ description = 'Vulnerable GitHub Workflow (pull_request_target + PR Head Checkou
 regex = '''\bpull_request_target\b[\s\S]+\suses:\s+[\"\']?actions\/checkout@v\d+[\"\']?[\s\S]+github\.event\.pull_request\.head\.sha\b()'''
 secretGroup = 1
 keywords = ['github.event.pull_request.head.sha']
-tags = ['type:vuln', 'group:leaktk-testing']
+tags = ['type:vln', 'group:leaktk-testing']
 [[rules]]
 id = 'OjplbNyeiXQ'
 description = "OIDC Client Secret"
@@ -2931,7 +2931,7 @@ keywords = [
 id = 'KWxkfMbO7cM'
 description = 'LeakTK Flag'
 regex = '''\bLTKF\{([a-z]{2,16})\}'''
-tags = ['type:flag', 'group:leaktk-testing']
+tags = ['type:flg', 'group:leaktk-testing']
 [rules.allowlist]
 stopwords = [
 'public',
