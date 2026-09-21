@@ -1242,6 +1242,11 @@ regex = '''\b(sha256~[\w\-]{43})(?:[^\w\-]|\z)'''
 tags = ['type:secret', 'type:crd', 'alert:repo-owner']
 entropy = 3.5
 keywords = ["sha256~"]
+[rules.allowlist]
+regexTarget = 'line'
+regexes = [
+'''Deleted\s+\{oauth\.openshift\.io\/v1, Resource=oauth(?:accesstokens|clients)\s+sha256~[\w\-]{43}\}''',
+]
 [[rules]]
 id = 'bYudTkTa56I'
 description = 'Password Hash'

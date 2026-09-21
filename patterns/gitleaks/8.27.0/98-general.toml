@@ -1045,6 +1045,15 @@
   entropy = 3.5
   keywords = ["sha256~"]
 
+  [rules.allowlist]
+    regexTarget = 'line'
+    regexes = [
+      # This is the format of a `resourceRef` from openshift CI tests and the
+      # actual token here _shouldn't_ be sensitive.
+      # The "Deleted" prefix is an extra precaution for now to help scope the
+      # rule more.
+      '''Deleted\s+\{oauth\.openshift\.io\/v1, Resource=oauth(?:accesstokens|clients)\s+sha256~[\w\-]{43}\}''',
+    ]
 
 [[rules]]
   id = 'bYudTkTa56I'
