@@ -2,7 +2,7 @@
     "bundles": {
         "latest": {
             "bundle.tar.gz": "https://github.com/leaktk/patterns/raw/refs/heads/well-known/patterns/releases/download/v0.0.0/bundle.tar.gz",
-            "signature.pub": ""
+            "minisign.pub": "https://raw.githubusercontent.com/Red-Hat-Information-Security/trust-anchors/refs/heads/main/leaktk/bundles/minisign.pub"
         }
     },
     "patterns": {
