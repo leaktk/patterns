@@ -18,6 +18,15 @@ paths = [
 '''(?:^|\/)\.git$''',
 ]
 [[rules]]
+id = 'KWxkfMbO7cM'
+description = 'LeakTK Flag'
+regex = '''\bLTKF\{([a-z]{2,16})\}'''
+tags = ['type:flg']
+[rules.allowlist]
+stopwords = [
+'public',
+]
+[[rules]]
 id = 'nPY_Rcj4gzY'
 description = 'ArgoCD JWT'
 regex = '''[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+(?:ImlzcyI6ImFyZ29jZC|Jpc3MiOiJhcmdvY2Qi|iaXNzIjoiYXJnb2NkI)[a-zA-Z0-9-_]+\.[a-zA-Z0-9-_]+'''
@@ -2959,15 +2968,6 @@ entropy = 2
 tags = ['type:secret', 'type:crd', 'group:leaktk-testing']
 keywords = [
 'api.softlayer.com',
-]
-[[rules]]
-id = 'KWxkfMbO7cM'
-description = 'LeakTK Flag'
-regex = '''\bLTKF\{([a-z]{2,16})\}'''
-tags = ['type:flg', 'group:leaktk-testing']
-[rules.allowlist]
-stopwords = [
-'public',
 ]
 [[rules]]
 id = 'SW7cCS4-5S0'

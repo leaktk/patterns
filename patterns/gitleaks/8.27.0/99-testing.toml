@@ -468,24 +468,6 @@
   ]
 
 [[rules]]
-  id = 'KWxkfMbO7cM'
-  description = 'LeakTK Flag'
-  # Things like:
-  #   LTKF{secret}
-  #   LTKF{cui}
-  #   LTKF{vuln}
-  #   ...
-  #
-  # See the "Flags" section of the README for more info
-  regex = '''\bLTKF\{([a-z]{2,16})\}'''
-  tags = ['type:flg', 'group:leaktk-testing']
-
-  [rules.allowlist]
-    stopwords = [
-      'public',
-    ]
-
-[[rules]]
   id = 'SW7cCS4-5S0'
   description = 'Generic Secret'
   regex = '''[\w\-]{1,32}[\x20\t]{1,32}login(?:[\x20\t\S]+|\\\n)+--(?i)[\w\-]{0,32}(?:secret|token|(?:access|api)[_-]?key|password)[\x20\t=]{1,32}[\'\"]?([^\'\"\s]{8,})'''
