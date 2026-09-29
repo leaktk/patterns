@@ -321,6 +321,7 @@ regexes = [
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*.*(\.((jp(e)?g)|png|svg|txt|tmpl)|-auth(entication)?|-cert(ification)?(s)?|-demo|-encryption|-tls|_id|_private|(change|fix)me|conf(ig(uration)?)?|cred(ential)?(s)?|data|default|devel(opment)|hash|here|json|key|(_|-)pwd|placeholder|pass((w)?(o|0)?(r)?(d|t)(\d*?)(!)?)?|principal|raw\(|registry|required|secret(s|_v\d)?|string|test|token|uuid|value|xxxxx|y(a)?ml)(&gt;|\\u003e)?\s*(#|$)''',
 '''(?i)(secret|password|token)(_|-)?(access)?(_|-)?(key)?[\"\']?\s*:\s*(\\u[a-z0-9]{4})+\s*(#|$)''',
 '''\bAg[A-Za-z0-9+\/]{256,}''',
+'''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s+?(?:[\w\/\+]{0,24}(?:Ynl0ZXMgbG9uZw==|J5dGVzIGxvbmc=|ieXRlcyBsb25n))\s*?(?:#|$)''',
 ]
 [[rules]]
 description = "GitHub Fine-Grained Personal Access Token"

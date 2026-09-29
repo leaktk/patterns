@@ -602,7 +602,7 @@
     'token',
   ]
 
-  [rules.allowlist]
+  [[rules.allowlists]]
     stopwords = [
       # pragma: include "common_stopwords"
       'cmVkaGF0Cg==', # b64('redhat\n')
@@ -691,6 +691,16 @@
       '''\bAg[A-Za-z0-9+\/]{256,}''',
       # Ignore Password Hashes - those are handled elsewhere
       '''(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?:[\t\x20]+?\$(?:1\$[^$:\n]{1,8}|md5(?:,rounds=[1-9][0-9]+)?\$[.\/0-9A-Za-z]{8}|2[abxy]\$[0-9]{2}|[56]\$(?:rounds=[1-9][0-9]+\$)?[^$:\n]{1,16}|g?y\$[.\/A-Za-z0-9]+\$[.\/A-Za-z0-9]{0,86}|7\$[.\/A-Za-z0-9]{11,97})\$[.\/A-Za-z0-9]{22}''',
+    ]
+
+  # TODO: Remove this after changes are made to "gather" tools
+  [[rules.allowlists]]
+    regexTarget = 'secret'
+    # These are "x bytes long" placeholders in openshift ci gather files
+    # Want to make a change upstream to have this changed to a more "universal"
+    # placeholder to make it easier to ignore more broadly
+    regexes = [
+        '''^[\w\/\+]{0,24}(?:Ynl0ZXMgbG9uZw==|J5dGVzIGxvbmc=|ieXRlcyBsb25n)$''',
     ]
 
 [[rules]]

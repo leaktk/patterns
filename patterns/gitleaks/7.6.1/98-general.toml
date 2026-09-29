@@ -565,6 +565,8 @@
       # Ignore Bitnami Sealed Secrets - This has the potential to cause false
       # negatives but out of all of our data so far I haven't seen one.
       '''\bAg[A-Za-z0-9+\/]{256,}''',
+      # Ignore placeholder from must-gather tools
+      '''(?i)(?:password|secret|token)(?:_|-)?(?:access)?(?:_|-)?(?:key)?[\"\']?\s*?:\s+?(?:[\w\/\+]{0,24}(?:Ynl0ZXMgbG9uZw==|J5dGVzIGxvbmc=|ieXRlcyBsb25n))\s*?(?:#|$)''',
     ]
 
 [[rules]]
