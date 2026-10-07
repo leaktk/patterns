@@ -1,0 +1,13 @@
+# vim: ft=toml
+# Common stopwords that should be ignored
+[[rules.allowlists]]
+    stopwords = [
+        # pragma: include "common_stopwords"
+    ]
+    regexTarget = 'secret'
+    regexes = [
+        # variations on super[_-]?secret
+        '''c3VwZX.(?:zZWNyZX|.c2VjcmV0)|N1cGVy(?:c2VjcmV0|..NlY3Jld)|zdXBlc.(?:NlY3Jld|.zZWNyZX)''',
+        # variations on example
+        '''ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF''',
+    ]

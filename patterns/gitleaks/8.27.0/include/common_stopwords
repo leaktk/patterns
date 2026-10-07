@@ -1,11 +1,5 @@
-# vim: syntax=toml
+# vim: ft=toml
 # Common stopwords that should be ignored
-#
-# Reference this in a file like this:
-#
-# stopwords = [
-#   # pragma: include "common_stopwords"
-# ]
 '***',
 '...',
 '/etc/',

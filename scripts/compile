@@ -26,7 +26,7 @@ def new_apply_includes(include_dir):
 
         if include_target not in INCLUDE_CACHE:
             with (include_dir / include_target).open() as include_file:
-                INCLUDE_CACHE[include_target] = clean(include_file.read())
+                INCLUDE_CACHE[include_target] = include_file.read()
 
         return INCLUDE_CACHE[include_target]
 
@@ -37,7 +37,10 @@ def new_apply_includes(include_dir):
             pattern_dir / "include" / "file_name"
         """
 
-        return PRAGMA_INCLUDE_RE.sub(sub_include, data)
+        while PRAGMA_INCLUDE_RE.search(data):
+            data = PRAGMA_INCLUDE_RE.sub(sub_include, data)
+
+        return data
 
     return apply_includes
 

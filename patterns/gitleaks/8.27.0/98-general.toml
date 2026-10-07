@@ -100,11 +100,9 @@
     'authorization',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      # pragma: include "common_stopwords"
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
+  [[rules.allowlists]]
     paths = [
       # pragma: include "doc_file_paths"
     ]
@@ -221,17 +219,9 @@
   entropy = 3.35
   tags = ['type:secret', 'type:crd', 'alert:repo-owner']
 
-  [rules.allowlist]
-    stopwords = [
-      'change',
-      'example',
-      'insert',
-      'passp',
-      'passw',
-      'placeholder',
-      'test',
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
+  [[rules.allowlists]]
     paths = [
       # Test data files are often false positives
       '''(?:^|\/)testdata\/''',
@@ -270,11 +260,9 @@
     'token',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      # pragma: include "common_stopwords"
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
+  [[rules.allowlists]]
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
@@ -359,7 +347,7 @@
       ## Starts with
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?:&lt;|\\u201c|\\u003c|\$)?(?:#!\/|ask|auto|dict|ENC(?:RYPTED)?[\[\(]|RU5DW|VOQ|FTk|false|file:|fixme|grub|https?:\/\/|installation_prefix|libvirt|none|not|self|ssh|spec\.|str:|(?:my)?te?mp|this).*?[\"\']''',
       ## Ends with
-      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|conf(?:ig(?:uration)?)?|cred(?:ential)?s?|data|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
+      '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'][^\'\"]*?(\.(?:jpe?g|png|svg|txt|tmpl)|-auth(?:entication)?|-cert(?:ification)?s?|-encryption|-tls|_id|devel(?:opment)|key|[_-]pwd|raw\(|ya?ml)(?:&gt;|\\u003e)?[\"\']''',
       # Ignore things that look like UUIDs (So far these have more often referenced secrets rather than being them)
       '''(?i)(?:(?:password|secret|token)[_-]?(?:access[_-]?)?(?:key)?|api[_-]?key)[\"\']?\s*?\]?\s*?[:=]\s*?[\"\'](?-i)[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}[\"\']''',
        # A common false positive for passwords and secrets (e.g. password = "update-your-postgres-pass-here")
@@ -404,11 +392,9 @@
     'token',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      # pragma: include "common_stopwords"
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
+  [[rules.allowlists]]
     paths = [
       # pragma: include "doc_file_paths"
 
@@ -514,7 +500,9 @@
     'token',
   ]
 
-  [rules.allowlist]
+  # pragma: include "common_placeholder_allowlist"
+
+  [[rules.allowlists]]
     paths = [
       # Test data are often false positives
       '''(?:^|\/)testdata\/''',
@@ -524,18 +512,7 @@
     ]
 
     stopwords = [
-      '1234',
-      'client-secret',
-      'clientsecret',
-      'example',
-      'java',
       'newseveryone',
-      'passp',
-      'passw',
-      'redhat',
-      'schema',
-      'test',
-      'token',
     ]
 
     regexTarget = 'line'
@@ -602,9 +579,9 @@
     'token',
   ]
 
+  # pragma: include "common_placeholder_allowlist"
   [[rules.allowlists]]
     stopwords = [
-      # pragma: include "common_stopwords"
       'cmVkaGF0Cg==', # b64('redhat\n')
     ]
 
@@ -1638,10 +1615,7 @@
     'sq0atp-',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      # pragma: include "common_stopwords"
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
 [[rules]]
   id = 'YX55Boo0gwk'
@@ -1652,10 +1626,7 @@
     'sq0csp-',
   ]
 
-  [rules.allowlist]
-    stopwords = [
-      # pragma: include "common_stopwords"
-    ]
+  # pragma: include "common_placeholder_allowlist"
 
 [[rules]]
   id = 'CSHGj8J1lUs'
@@ -1666,6 +1637,8 @@
     'k_live_',
   ]
 
+  # pragma: include "common_placeholder_allowlist"
+
 [[rules]]
   id = 'lSFsU9hapFQ'
   description = 'Testing Farm API Token'
@@ -1674,6 +1647,7 @@
   keywords = [
     'testing_farm_api_token',
   ]
+
 
 [[rules]]
   id = 'TiwMt5e05g4'
@@ -1716,15 +1690,13 @@
     '://',
   ]
 
-  [rules.allowlist]
+  # pragma: include "common_placeholder_allowlist"
+
+  [[rules.allowlists]]
     paths = [
       # Usually a project not owned by the user that has a lot of FPs for us when
       # folks fork it. But make sure to include the azure-cli aro modules
       '''/azure-(?:cli.+\/command_modules\/(?:[^a]|a[^r])|sdk-for-python\/|rest-api-specs\/|docs\/)''',
-    ]
-
-    stopwords = [
-      # pragma: include "common_stopwords"
     ]
 
     regexTarget = 'line'
