@@ -9,6 +9,7 @@ build: $(PATTERN_FILES)
 .PHONY: clean
 clean:
 	rm -rf target
+	git clean -dfX
 
 format:
 	black tests

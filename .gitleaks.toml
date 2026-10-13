@@ -1,6 +1,7 @@
 [allowlist]
 description = "Global Allowlist"
 paths = [
+  '''^README\.md$''',
   '''patterns/gitleaks''',
   '''testdata''',
 ]

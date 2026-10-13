@@ -1,0 +1,20 @@
+# This file is for finding things that aren't secrets but are used for the
+# scanner for testing or similar "markers" that might be placed in files.
+
+[[rules]]
+  id = 'KWxkfMbO7cM'
+  description = 'LeakTK Flag'
+  # Things like:
+  #   LTKF{secret}
+  #   LTKF{cui}
+  #   LTKF{vuln}
+  #   ...
+  #
+  # See the "Flags" section of the README for more info
+  regex = '''\bLTKF\{([a-z]{2,16})\}'''
+  tags = ['type:flg']
+
+  [rules.allowlist]
+    stopwords = [
+      'public',
+    ]
