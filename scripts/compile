@@ -130,6 +130,15 @@ def compile_leaktk(args):
     json.dump(sort_dict(leaktk_config), sys.stdout)
     sys.stdout.flush()
 
+def compile_well_known(args):
+    source_dir = args.source_dir
+    for path in source_dir.iterdir():
+        if path.is_file():
+            with path.open("r", encoding="UTF-8") as f:
+                sys.stdout.write(f.read())
+
+    sys.stdout.flush()
+
 
 def main():
     args = parse_args()
@@ -139,6 +148,8 @@ def main():
             compile_leaktk(args)
         case "gitleaks":
             compile_gitleaks(args)
+        case "well-known":
+            compile_well_known(args)
         case provider:
             raise ValueError(f"unexpected provider {provider}")
 
