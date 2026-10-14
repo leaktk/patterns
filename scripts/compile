@@ -65,7 +65,7 @@ def parse_args():
     )
     parser.add_argument(
         "--provider",
-        choices=("gitleaks", "leaktk", "well_known"),
+        choices=("gitleaks", "leaktk", "well-known"),
         help="select which provider you're compiling patterns for",
     )
     parser.add_argument(
@@ -148,7 +148,7 @@ def main():
             compile_leaktk(args)
         case "gitleaks":
             compile_gitleaks(args)
-        case "well_known":
+        case "well-known":
             compile_well_known(args)
         case provider:
             raise ValueError(f"unexpected provider {provider}")

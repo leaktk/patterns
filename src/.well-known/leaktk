@@ -1,0 +1,13 @@
+{
+    "bundles": {
+        "latest": {
+            "bundle.tar.gz": "https://github.com/leaktk/patterns/raw/refs/heads/well-known/src/patterns/releases/latest/download/bundle.tar.gz",
+            "minisign.pub": "https://raw.githubusercontent.com/leaktk/trust-anchors/refs/heads/main/leaktk/bundles/minisign.pub"
+        }
+    },
+    "patterns": {
+        "gitleaks": {
+            "8.27.0": "https://raw.githubusercontent.com/leaktk/patterns/refs/heads/main/target/patterns/gitleaks/8.27.0"
+        }
+    }
+}

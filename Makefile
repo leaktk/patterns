@@ -32,20 +32,20 @@ target/patterns/leaktk:
 target/.well-known:
 	mkdir -p $@
 
-target/patterns/gitleaks/7.6.1: target/patterns/gitleaks $(wildcard source/patterns/gitleaks/7.6.1/*)
-	./scripts/compile --provider=gitleaks source/patterns/gitleaks/7.6.1 > $@
+target/patterns/gitleaks/7.6.1: target/patterns/gitleaks $(wildcard src/patterns/gitleaks/7.6.1/*)
+	./scripts/compile --provider=gitleaks src/patterns/gitleaks/7.6.1 > $@
 
-target/patterns/gitleaks/8.18.2: target/patterns/gitleaks $(wildcard source/patterns/gitleaks/8.27.0/*)
-	./scripts/compile --provider=gitleaks source/patterns/gitleaks/8.27.0 > $@
+target/patterns/gitleaks/8.18.2: target/patterns/gitleaks $(wildcard src/patterns/gitleaks/8.27.0/*)
+	./scripts/compile --provider=gitleaks src/patterns/gitleaks/8.27.0 > $@
 
-target/patterns/gitleaks/8.27.0: target/patterns/gitleaks $(wildcard source/patterns/gitleaks/8.27.0/*)
-	./scripts/compile --provider=gitleaks source/patterns/gitleaks/8.27.0 > $@
+target/patterns/gitleaks/8.27.0: target/patterns/gitleaks $(wildcard src/patterns/gitleaks/8.27.0/*)
+	./scripts/compile --provider=gitleaks src/patterns/gitleaks/8.27.0 > $@
 
-target/patterns/leaktk/1: target/patterns/leaktk $(wildcard source/patterns/leaktk/1/*)
-	./scripts/compile --provider=leaktk source/patterns/leaktk/1 > $@
+target/patterns/leaktk/1: target/patterns/leaktk $(wildcard src/patterns/leaktk/1/*)
+	./scripts/compile --provider=leaktk src/patterns/leaktk/1 > $@
 
-target/.well-known/leaktk: target/.well-known $(wildcard source/.well-known/*)
-	./scripts/compile --provider=well_known source/.well-known > $@
+target/.well-known/leaktk: target/.well-known $(wildcard src/.well-known/*)
+	./scripts/compile --provider=well-known src/.well-known > $@
 
 update-fake-leaks:
 	cd testdata/fake-leaks && git checkout main && git pull
