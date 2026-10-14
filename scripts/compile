@@ -65,19 +65,19 @@ def parse_args():
     )
     parser.add_argument(
         "--provider",
-        choices=("gitleaks", "leaktk"),
+        choices=("gitleaks", "leaktk", "well_known"),
         help="select which provider you're compiling patterns for",
     )
     parser.add_argument(
-        "patterns_dir",
+        "source_dir",
         type=Path,
-        help="path to the directory containing the patterns",
+        help="path to the source directory",
     )
     return parser.parse_args()
 
 
 def compile_gitleaks(args):
-    patterns_dir = args.patterns_dir
+    patterns_dir = args.source_dir
     include_dir = patterns_dir / "include"
     pattern_file_paths = [p for p in sorted(patterns_dir.glob("*.toml")) if p.is_file()]
 
@@ -112,7 +112,7 @@ def sort_dict(obj):
 
 
 def compile_leaktk(args):
-    patterns_dir = args.patterns_dir
+    patterns_dir = args.source_dir
     leaktk_config = {}
 
     for path in patterns_dir.iterdir():
@@ -148,7 +148,7 @@ def main():
             compile_leaktk(args)
         case "gitleaks":
             compile_gitleaks(args)
-        case "well-known":
+        case "well_known":
             compile_well_known(args)
         case provider:
             raise ValueError(f"unexpected provider {provider}")
