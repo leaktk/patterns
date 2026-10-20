@@ -9,7 +9,7 @@ build: $(PATTERN_FILES)
 
 .PHONY: clean
 clean:
-	rm -rf target
+	rm -rf target build
 	git clean -dfX
 
 format:

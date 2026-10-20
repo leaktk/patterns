@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+: "${OPA_VERSION:=v1.21.3}"
+: "${OPA_DIGEST:=add7c9dcf56e1ce1538426a6ee595ea1cc7ee830bbedd4c23219825b02b19a79}"
+
+opa_bin_url="https://github.com/open-policy-agent/opa/releases/download/${OPA_VERSION}/opa_linux_amd64_static"
+bundle_files_dir="${PWD}/src/patterns"
+build_dir="${PWD}/build"
+
+function verify_opa {
+    local bin_path
+    bin_path="$1"
+    printf 'verifying opa: bin_path="%s"\n' "${bin_path}"
+    test -x "${bin_path}" && echo "${OPA_DIGEST}  ${bin_path}" | sha256sum -c
+}
+
+function fetch_opa {
+    local bin_dir
+    bin_dir="$1"
+    printf 'fetching opa: bin_path="%s/opa" url="%s"\n' "${bin_dir}" "${opa_bin_url}"
+    curl -fLSs -o "${bin_dir}/opa" "${opa_bin_url}"
+}
+
+function install_opa {
+    local bin_dir
+    bin_dir="$1"
+    printf 'installing opa: bin_path="%s/opa"\n' "${bin_dir}"
+    fetch_opa "${bin_dir}"
+    verify_opa "${bin_dir}/opa"
+    printf 'making opa executable: bin_path="%s/opa"\n' "${bin_dir}"
+    chmod +x "${bin_dir}/opa"
+}
+
+mkdir -p "${build_dir}"
+
+if ! verify_opa "${build_dir}/opa"
+then
+    echo existing version invalid
+    if ! install_opa "${build_dir}"
+    then
+        echo "opa install failed"
+        exit 1
+    fi
+fi
+
+echo configuring opa capabilities
+"${build_dir}/opa" capabilities --current | jq '.builtins +=
+[
+  {
+    "name": "leaktk.ai.RunModel",
+    "decl": {
+      "type": "function",
+      "args": [
+        {"type": "string"},
+        {"type": "any"}
+      ],
+      "result": {"type": "any"}
+    }
+  }
+]' > "${build_dir}/capabilities.json"
+
+echo building bundle
+rm -f "${build_dir}/bundle.tar.gz"
+env -C "${bundle_files_dir}" "${build_dir}/opa" build . \
+    --bundle \
+    --capabilities="${build_dir}/capabilities.json" \
+    --output="${build_dir}/bundle.tar.gz"

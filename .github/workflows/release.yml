@@ -1,0 +1,52 @@
+name: Build and Release OPA Bundle
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/patterns/**'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # pin@v7.0.1
+
+      - name: Get signing secrets
+        # https://bitwarden.com/help/github-actions-integration/
+        uses: bitwarden/sm-action@1238aae8fc64b212641190a9227c8a734ab1a793 # pin@v3.0.1
+        with:
+          access_token: ${{ secrets.LEAKTK_BUNDLES_RELEASE_BW_ACCESS_TOKEN }}
+          base_url: https://vault.bitwarden.com
+          secrets: |
+            6f512d52-43e2-4fa0-9fc8-b4c200e318c7 > LEAKTK_BUNDLES_MINISIGN_PRIVATE_KEY
+            4543f27a-2245-4213-a8cd-b4c200e3421c > LEAKTK_BUNDLES_MINISIGN_PRIVATE_KEY_PASSWORD
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y minisign jq curl
+
+      - name: Build bundle
+        run: |
+          ./scripts/build-bundle
+
+      - name: Sign bundle
+        run: |
+          minisign -S \
+            -s <(printf '%s' "${LEAKTK_BUNDLES_MINISIGN_PRIVATE_KEY}") \
+            -m build/bundle.tar.gz <<< "$LEAKTK_BUNDLES_MINISIGN_PRIVATE_KEY_PASSWORD"
+
+      - name: Release artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          release_tag="$(date +'%Y%m%d')-$(git rev-parse --short=7 HEAD)"
+          gh release create "${release_tag}" \
+            --title="Bundle Release ${release_tag}" \
+            --latest \
+            build/bundle.tar.gz*
