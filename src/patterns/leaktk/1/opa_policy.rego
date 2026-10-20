@@ -15,28 +15,27 @@ validate_github_token(token) := is_valid if {
 			"Authorization": sprintf("Bearer %s", [token]),
 			"User-Agent": "LeakTK-Validator",
 		},
-    "raise_error": false,
+		"raise_error": false,
 	})
 	is_valid := res.status_code == 200
 }
 
 analyzed_response := {
-	"results": ai_processed_findings
+	"results": ai_processed_findings,
 }
 
-ai_processed_findings := [ ai_finding |
+ai_processed_findings := [ai_finding |
 	some finding in findings
 	prediction := leaktk.ai.RunModel("LogisticRegression", finding)
 
-  github_token_valid := validate_github_token(finding.secret)
-	
+	github_token_valid := validate_github_token(finding.secret)
+
 	ai_finding := object.union(finding, {
 		"valid": prediction.probability > 0.8,
 		"analysis": {
 			"ai_model": "Logistic Regression",
 			"probability": prediction.probability,
-      "github_api_valid": github_token_valid,
+			"github_api_valid": github_token_valid,
 		},
 	})
-
 ]

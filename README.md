@@ -30,7 +30,8 @@ prefix, prepend `ext:` to avoid collisions with future prefixes.
 | Tag                    | Meaning                                            |
 | ---------------------- | -------------------------------------------------- |
 | `alert:<audience>`     | Identifies who should be alerted for a finding     |
-| `group:<group-name>`   | Group rules for access control and release phases  |
+| `grp:<group-name>`     | Group rules for access control and release phases  |
+| `group:<group-name>`   | The same as `grp:<name>` but is being phased out   |
 | `type:<finding-type>`  | Categorize findings                                |
 | `vis:<src-visibility>` | Indicate the visibility of the source if known     |
 | `sev:<level>`          | Indicate the severity of the finding               |
@@ -63,7 +64,7 @@ by scenario or access control.
 We have an internal pattern server implementation that provides scoped access
 to rules and open sourcing it is on the road-map.
 
-Patterns tagged `group:leaktk-testing` are in their test phase and are not
+Patterns tagged `grp:test` are in their test phase and are not
 ready for production.
 
 ### Type Tags
