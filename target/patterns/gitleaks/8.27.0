@@ -1,3 +1,4 @@
+minVersion = '8.27.0'
 [[allowlists]]
 description = "Global Allowlist"
 regexTarget = "line"

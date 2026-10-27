@@ -1,0 +1,4 @@
+#!/bin/sh
+set -xeu
+rm -rf target build
+git clean -dfX

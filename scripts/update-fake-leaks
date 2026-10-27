@@ -1,0 +1,8 @@
+#!/bin/sh
+set -xeu
+cd testdata/fake-leaks && git checkout main && git pull
+if [[ -n "$$(git status -s)" ]]
+then
+    git add testdata/fake-leaks
+    git commit -m "Update fake-leaks commit"
+fi
