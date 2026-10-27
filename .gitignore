@@ -2,4 +2,4 @@
 *.swp
 *~
 __pycache__/
-build
+/build

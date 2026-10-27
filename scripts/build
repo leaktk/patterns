@@ -1,0 +1,16 @@
+#!/bin/sh
+set -xeu
+for src_dir in src/patterns/*/*
+do
+    version=$(basename "$src_dir")
+    provider=$(basename "$(dirname "$src_dir")")
+    target_dir="target/patterns/${provider}"
+    target_path="${target_dir}/${version}"
+
+    mkdir -p "${target_dir}"
+    ./scripts/compile --provider="${provider}" "${src_dir}" > "${target_path}"
+done
+
+# Build Well-Known
+mkdir -p target/.well-known
+./scripts/compile --provider=well-known src/.well-known > target/.well-known/leaktk
