@@ -1,0 +1,10 @@
+# vim: ft=toml
+
+# This is meant to ignore common false positives that were actually
+# literal regex in the source that was mistaken for a secret
+[[rules.allowlists]]
+    regexTarget = 'secret'
+    regexes = [
+        # things like [0-9], [a-zA-Z], etc..
+        '''\[\w\-\w.{0,8}\]''',
+    ]

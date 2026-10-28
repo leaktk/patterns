@@ -101,6 +101,7 @@
   ]
 
   # pragma: include "common_placeholder_allowlist"
+  # pragma: include "common_regex_allowlist"
 
   [[rules.allowlists]]
     paths = [
@@ -1691,6 +1692,7 @@
   ]
 
   # pragma: include "common_placeholder_allowlist"
+  # pragma: include "common_regex_allowlist"
 
   [[rules.allowlists]]
     paths = [

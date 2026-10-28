@@ -230,6 +230,11 @@ regexes = [
 '''ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF''',
 ]
 [[rules.allowlists]]
+regexTarget = 'secret'
+regexes = [
+'''\[\w\-\w.{0,8}\]''',
+]
+[[rules.allowlists]]
 paths = [
 '''\.(?:html|md|adoc|rst)$''',
 ]
@@ -2504,6 +2509,11 @@ regexTarget = 'secret'
 regexes = [
 '''c3VwZX.(?:zZWNyZX|.c2VjcmV0)|N1cGVy(?:c2VjcmV0|..NlY3Jld)|zdXBlc.(?:NlY3Jld|.zZWNyZX)''',
 '''ZXhhbXBsZ|V4YW1wbG|leGFtcGxl|RVhBTVBMR|VYQU1QTE|FWEFNUExF''',
+]
+[[rules.allowlists]]
+regexTarget = 'secret'
+regexes = [
+'''\[\w\-\w.{0,8}\]''',
 ]
 [[rules.allowlists]]
 paths = [
